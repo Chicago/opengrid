@@ -1,0 +1,248 @@
+/*
+ * ogrid.css
+ * Root namespace styles
+*/
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+#ogrid-nav {
+  z-index: 3001;
+}
+
+#ogrid-content {
+  position: absolute;
+  padding-left: 0;
+  padding-right: 0;
+  top: 50px;
+  left: 0;
+  bottom: 22px;
+  right: 0;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  left:0;
+  top:0;
+  bottom: 50px;
+
+  /*-box-shadow: 0 0 10px rgba(0,0,0,0.5);*/
+}
+
+#ogrid-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 0;
+
+  /* should be on top of Leaflet's attribution text */
+  z-index: 3000;
+}
+
+
+.flyover {
+  left: 150%;
+  overflow: hidden;
+  position: fixed;
+  width: 50%;
+  opacity: 0.9;
+  z-index: 1050;
+  transition: left 0.6s ease-out 0s;
+}
+
+.flyover-centered {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.flyover.in {
+  left: 50%;
+}
+
+.flyover-bottom {
+  bottom: 10px;
+}
+
+
+
+.panel-default > .panel-heading{
+  /*background: #00B4FF;*/
+}
+
+.ogrid-footer-panel-heading {
+  padding: 0;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.ogrid-footer-panel-group .ogrid-footer-panel {
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.ogrid-footer-panel-title a {
+  color: #FFFFFF;
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding: 10px 15px;
+  /*font-size: 24px;
+  font-family: Helvetica,Arial,sans-serif;*/
+  outline: none;
+}
+
+/*.panel-title a:hover, .panel-title a:focus, .panel-title a:active {
+  text-decoration: none;
+  outline: none;
+}*/
+
+#panel-caret {
+  margin-top: 4px;
+  margin-right: 2px;
+}
+
+.ogrid-task-pane {
+  background-color: #E8E8E8;
+  position: fixed;
+  right: -800px;
+  top: 50px;
+  width: 700px;
+  height:100%;
+
+  /* should be on top of Leaflet's attribution text */
+  /*z-index: 2500;*/
+}
+
+.ogrid-table {
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/*.dataTables_wrapper {
+  min-height: 300px;
+}
+*/
+
+.ogrid-nav-btn {
+  margin-left: 5px;
+}
+
+.ogrid-tab-link {
+}
+
+.flyover {
+  /* bumped up due to leaflet z-index */
+  z-index: 5000;
+}
+
+
+
+.glyphicon-refresh-animate {
+  -animation: spin .7s infinite linear;
+  -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg);}
+  to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+  from { transform: scale(1) rotate(0deg);}
+  to { transform: scale(1) rotate(360deg);}
+}
+
+.center {
+  position: absolute;
+  /*height: 50px;
+  width: 50px;*/
+  /*8background:red;*/
+  top:calc(50% - 46px/2); /* height divided by 2*/
+  left:calc(50% - 130px/2); /* width divided by 2*/
+  z-index: 5000;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.tab-content {
+  padding-top: 10px;
+}
+
+.panel-body {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.form-in-panel {
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.spinner {
+  width: 100px;
+}
+.spinner input {
+  text-align: right;
+}
+.input-group-btn-vertical {
+  position: relative;
+  white-space: nowrap;
+  width: 1%;
+  vertical-align: middle;
+  display: table-cell;
+}
+.input-group-btn-vertical > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  margin-left: -1px;
+  position: relative;
+  border-radius: 0;
+}
+.input-group-btn-vertical > .btn:first-child {
+  border-top-right-radius: 4px;
+}
+.input-group-btn-vertical > .btn:last-child {
+  margin-top: -2px;
+  border-bottom-right-radius: 4px;
+}
+.input-group-btn-vertical i{
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+#build-query {
+  /*max-height: 1000px;
+  overflow-y: auto;*/
+}
+
+
+.navbar .navbar-form{
+  padding: 0 15px;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+td, th {
+  white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+}
+
+/* For Bootstrap responsive table to work in Firefox */
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}

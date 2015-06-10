@@ -1,0 +1,40 @@
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ogridNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">OpenGrid</a>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group has-feedback">
+                    <span class="twitter-typeahead" style="position: static; display: block; direction: ltr;">
+                        <input id="searchbox" type="text" placeholder="Quick search" class="form-control tt-input" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;">
+                    <span id="searchicon" class="fa fa-search form-control-feedback"></span>
+                </div>
+            </form>
+        </div>
+        <div class="navbar-collapse collapse" id="ogridNavBar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">John Smith
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">My Subscriptions...</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav nav-pills navbar-right">
+                <li class="active"><a href="#">Advanced Find</a></li>
+                <li class="disabled"><a href="#">Reset Search</a></li>
+                <li><a href="#">Manage</a></li>
+            </ul>
+            <div class="nav-divider"></div>
+        </div>
+    </div>
+</div>
+<div id="container">
+    <div id="map"></div>
+</div>
