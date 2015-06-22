@@ -25,7 +25,7 @@ ogrid.Alert = {
             } catch (e) {
                 //do nothing
             }
-        }, 3500);
+        }, ogrid.Config.alerts.autoCloseDuration);
     },
 
     //publics
@@ -66,8 +66,33 @@ ogrid.Alert = {
     },
 
 
-    busy: function (msgTxt) {
-        //$( "p" ).hide( "slow" );
+    busy: function (msgTxt, context, callback) {
+        try {
+            $('#btn-busy').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> ' + msgTxt);
+
+            //auto-center the busy div
+            $("#ogrid-busy").css('left', ( ($(window).width() - $("#ogrid-busy").width()) /2 ));
+
+            $("#ogrid-busy").show();
+            setTimeout(function() {
+                //if callback is specified, we reset the busy div; otherwise, it is expected that the caller will reset it
+                if (callback) {
+                    callback.call(context);
+                    //$("#ogrid-busy").hide();
+                }
+            }, 500);
+        } catch (ex) {
+            //this used to be in 'finally' block but timing in 'finally' isn't what we're expecting
+            $("#ogrid-busy").hide();
+
+            //bubble up exception
+            throw ex;
+        }
+    },
+
+
+    idle: function () {
+        $("#ogrid-busy").hide();
     },
 
     init: function(container, txt){
@@ -84,10 +109,15 @@ ogrid.Alert = {
         $("#ogrid-busy").hide();
         $.ajaxSetup({
             beforeSend:function(){
+                /*$('#ogrid-busy > span').text(' Working...');
+                $('#btn-busy').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> ' + msgTxt);
                 $("#ogrid-busy").show();
+                */
+                ogrid.Alert.busy('Working...');
             },
             complete:function(){
-                $("#ogrid-busy").hide();
+                //$("#ogrid-busy").hide();
+                ogrid.Alert.idle();
             }
         });
     }

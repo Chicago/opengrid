@@ -68,12 +68,6 @@ html, body {
   bottom: 10px;
 }
 
-
-
-.panel-default > .panel-heading{
-  /*background: #00B4FF;*/
-}
-
 .ogrid-footer-panel-heading {
   padding: 0;
   border-top-left-radius: 0px;
@@ -85,14 +79,11 @@ html, body {
   margin-bottom: 0;
 }
 
-.ogrid-footer-panel-title a {
-  color: #FFFFFF;
-  text-align: center;
+h6 > a {
+  background-color: #E8E8E8;
   width: 100%;
   display: block;
   padding: 10px 15px;
-  /*font-size: 24px;
-  font-family: Helvetica,Arial,sans-serif;*/
   outline: none;
 }
 
@@ -102,7 +93,7 @@ html, body {
 }*/
 
 #panel-caret {
-  margin-top: 4px;
+  margin-top: 2px;
   margin-right: 2px;
 }
 
@@ -119,7 +110,7 @@ html, body {
 }
 
 .ogrid-table {
-  padding-top: 10px;
+  padding-top: 0px;
   padding-left: 5px;
   padding-right: 5px;
 }
@@ -158,7 +149,7 @@ html, body {
   to { transform: scale(1) rotate(360deg);}
 }
 
-.center {
+#ogrid-busy {
   position: absolute;
   /*height: 50px;
   width: 50px;*/
@@ -173,7 +164,7 @@ html, body {
 }
 
 .tab-content {
-  padding-top: 10px;
+  /*padding-top: 10px;*/
 }
 
 .panel-body {
@@ -224,9 +215,9 @@ html, body {
   left: 4px;
 }
 
-#build-query {
-  /*max-height: 1000px;
-  overflow-y: auto;*/
+#build-query:hover {
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 
@@ -246,3 +237,9 @@ td, th {
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
+
+.nav-tabs > li .close {
+  margin: -2px 0 0 10px;
+  font-size: 18px;
+}
+

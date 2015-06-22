@@ -96,6 +96,45 @@ ogrid.Util = {
 
 	guid: function() {
 		return (ogrid.Util._s4() + ogrid.Util._s4() + "-" + ogrid.Util._s4() + "-4" + ogrid.Util._s4().substr(0,3) + "-" + ogrid.Util._s4() + "-" + ogrid.Util._s4() + ogrid.Util._s4() + ogrid.Util._s4()).toLowerCase();
+	},
+
+	ajax: function(context, success, options) {
+		var opt = options; //default but override for some values
+		$.ajax({
+			//append relative url
+			url: ogrid.Config.service.endpoint + opt.url,
+			type: opt.type,
+			async: true,
+			contentType: 'application/json',
+			timeout: ogrid.Config.service.timeout,
+			xhrFields: {
+				withCredentials: false
+			},
+			headers: {
+				// Set any custom headers here.
+				// If you set any non-simple headers, your server must include these
+				// headers in the 'Access-Control-Allow-Headers' response header.
+			},
+			success: function(data) {
+				success.call(context, data);
+			},
+			error: function(jqXHR, txtStatus, errorThrown) {
+				if (txtStatus === 'timeout') {
+					console.log('Search has timed out.')
+					//ogrid.Alert.error('Search has timed out.');
+				} else {
+					console.log( (jqXHR.responseText) ? jqXHR.responseText : txtStatus);
+					//ogrid.Alert.error( (jqXHR.responseText) ? jqXHR.responseText : txtStatus);
+				}
+			},
+			statusCode: {
+				//placeholder
+				404: function() {
+					console.log("Page not found" );
+					//ogrid.Alert.error( "Page not found" );
+				}
+			}
+		});
 	}
 };
 
@@ -109,3 +148,4 @@ ogrid.splitWords = ogrid.Util.splitWords;
 ogrid.isNull = ogrid.Util.isNull;
 ogrid.error = ogrid.Util.error;
 ogrid.guid = ogrid.Util.guid;
+ogrid.ajax = ogrid.Util.ajax;

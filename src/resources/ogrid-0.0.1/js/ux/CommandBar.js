@@ -50,7 +50,7 @@ ogrid.CommandBar = ogrid.Class.extend({
 
     //private methods
     _onClearClick: function() {
-        console.log("Clear clicked");
+        //console.log("Clear clicked");
         ogrid.Event.raise(ogrid.Event.types.CLEAR);
     }
 

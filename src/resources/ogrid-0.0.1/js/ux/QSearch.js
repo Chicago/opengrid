@@ -56,13 +56,13 @@ ogrid.QSearch = ogrid.Class.extend({
     },
 
     _onSearch: function() {
-        console.log("Quick Search clicked");
+        //console.log("Quick Search clicked");
 
         this._execSearch(this._input.val());
     },
 
     _execSearch: function ( searchInput ) {
-        console.log('Quick search entered:' + searchInput);
+        //console.log('Quick search entered:' + searchInput);
 
         try {
             //parse and exec async
@@ -74,7 +74,7 @@ ogrid.QSearch = ogrid.Class.extend({
     },
 
     _onExecDone: function (results) {
-        ogrid.Event.raise(ogrid.Event.types.REFRESH_DATA, results);
+        ogrid.Event.raise(ogrid.Event.types.REFRESH_DATA, {data: results, options: {clear:true}} );
     },
 
     _onExecError: function (e) {

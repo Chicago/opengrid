@@ -6,19 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href=resources/bootstrap-3.3.2/css/bootstrap.min.css>
   <link rel="stylesheet" href=resources/font-awesome-4.3.0/css/font-awesome.min.css>
-  <link rel="stylesheet" href="resources/datatables-1.10.7/css/dataTables.bootstrap.css">
-  <link rel="stylesheet" href="resources/datatables-1.10.7/css/dataTables.responsive.css">
-  <link rel="stylesheet" href="resources/datatables-1.10.7/css/dataTables.colReorder.css">
-  <link rel="stylesheet" href="resources/datatables-1.10.7/css/dataTables.scroller.css">
-  
+
   <link rel="stylesheet" href="resources/bootstrap-3.3.2/css/bootstrap-datetimepicker.css">
   <link rel="stylesheet" href="resources/bootstrap-3.3.2/css/bootstrap-colorselector.css">
+  <link rel="stylesheet" href="resources/bootstrap-3.3.2/css/bootstrap-datepicker.css">
 
+
+  <link rel="stylesheet" href="resources/bootstrap-table-1.8.1/css/bootstrap-table.css">
+  <link rel="stylesheet" href="resources/bootstrap-table-1.8.1/css/dragtable.css">
+  <link rel="stylesheet" href="resources/jquery-1.11.2/query-builder.default.css">
 
   <!--<link rel="stylesheet" href=resources/ogrid-0.0.1/css/style.css>-->
   <link rel="stylesheet" href=resources/ogrid-0.0.1/css/ogrid.css>
 
   <script src="resources/jquery-1.11.2/jquery.min.js"></script>
+  <script src="resources/jquery-1.11.2/jquery-ui.js"></script>
+
   <script src="resources/bootstrap-3.3.2/js/bootstrap.min.js"></script>
   <script src="resources/json2/js/json2.min.js"></script>
   <script src="resources/misc/js/bootbox.js"></script>
@@ -26,20 +29,53 @@
   <script src="resources/bootstrap-3.3.2/js/bootstrap-datetimepicker.js"></script>
   <script src="resources/bootstrap-3.3.2/js/bootstrap-colorselector.js"></script>
 
-  <!-- datatables -->
-  <script src="resources/datatables-1.10.7/js/jquery.dataTables.js"></script>
-  <script src="resources/datatables-1.10.7/js/dataTables.responsive.js"></script>
-  <script src="resources/datatables-1.10.7/js/dataTables.bootstrap.js"></script>
-  <script src="resources/datatables-1.10.7/js/dataTables.colReorder.js"></script>
-  <script src="resources/datatables-1.10.7/js/dataTables.scroller.js"></script>
+  <!-- Boostrap Table -->
+  <script src="resources/bootstrap-table-1.8.1/js/bootstrap-table.js"></script>
+  <script src="resources/bootstrap-table-1.8.1/js/bootstrap-table-reorder-columns.js"></script>
+  <script src="resources/bootstrap-table-1.8.1/js/bootstrap-table-resizable.js"></script>
+  <script src="resources/bootstrap-table-1.8.1/js/colResizable-1.5.source.js"></script>
+  <script src="resources/bootstrap-table-1.8.1/js/jquery.dragtable.js"></script>
+  <script src="resources/bootstrap-table-1.8.1/js/bootstrap-table-export.js"></script>
+  <script src="resources/bootstrap-table-1.8.1/js/tableExport.js"></script>
+  <script src="resources/bootstrap-table-1.8.1/js/bootstrap-table-flat-json.js"></script>
+  <script src="resources/bootstrap-3.3.2/js/bootstrap-datepicker.js"></script>
+  <script src="resources/misc/js/moment.js"></script>
+
+  <script src="resources/bootstrap-table-1.8.1/js/jquery.base64.min.js"></script>
+  <script src="resources/jquery-1.11.2/jquery.tmpl.js"></script>
+  <script src="resources/jquery-1.11.2/jQuery.extendext.js"></script>
+  <script src="resources/jquery-1.11.2/query-builder.js"></script>
+  <script src="resources/jquery-1.11.2/query-builder-mongo.js"></script>
+
+  <!--<script src="resources/jspdf-1.1.135/js/require.js"></script> -->
+  <script src="resources/jspdf-1.1.135/js/jspdf.debug.js"></script>
+  <script src="resources/jspdf-1.1.135/js/canvas.js"></script>
+  <script src="resources/jspdf-1.1.135/js/jspdf.plugin.autotable.js"></script>
+  <script src="resources/jspdf-1.1.135/js/from_html.js"></script>
+  <script src="resources/jspdf-1.1.135/js/split_text_to_size.js"></script>
+  <script src="resources/jspdf-1.1.135/js/standard_fonts_metrics.js"></script>
+
+  <!-- this causes the standard leaflet marker to disappear (bad image ref) -->
+  <script src="resources/jspdf-1.1.135/js/leaflet-image.js"></script>
+
+  <script src="resources/jspdf-1.1.135/js/libs/FileSaver.js/FileSaver.js"></script>
+  <script src="resources/jspdf-1.1.135/js/libs/png_support/zlib.js"></script>
+  <script src="resources/jspdf-1.1.135/js/libs/png_support/png.js"></script>
+  <script src="resources/jspdf-1.1.135/js/plugins/addimage.js"></script>
+  <script src="resources/jspdf-1.1.135/js/plugins/png_support.js"></script>
 
   <!--leaflet and plug-ins -->
   <link rel="stylesheet" href=resources/leaflet-0.7.3/css/leaflet.css>
   <link rel="stylesheet" href=resources/leaflet-0.7.3/css/l.geosearch.css>
+  <link rel="stylesheet" href=resources/leaflet-0.7.3/css/leaflet.contextmenu.css>
+
   <script src="resources/leaflet-0.7.3/js/leaflet.js"></script>
   <script src="resources/leaflet-0.7.3/js/esri-leaflet.js"></script>
-  <script src="resources/leaflet-0.7.3/js/l.control.geosearch.js"></script>
-  <script src="resources/leaflet-0.7.3/js/l.geosearch.provider.google.js"></script>
+  <script src="resources/leaflet-0.7.3/js/leaflet-heat.js"></script>
+  <script src="resources/leaflet-0.7.3/js/leaflet-pip.js"></script>
+  <script src="resources/leaflet-0.7.3/js/leaflet.contextmenu.js"></script>
+  <script src="resources/misc/js/chroma.min.js"></script>
+
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
@@ -108,7 +144,7 @@
       <div id="ogrid-task-advanced-search" class="ogrid-task-pane">
         <div id="ogrid-advanced-find" class="panel-body">
           <ul id="ogrid-adv-tabs" class="nav nav-tabs" role="tablist">
-            <li   class="active">
+            <li class="active">
               <a  href="#build-query" role="tab" data-toggle="tab">Build Query</a>
             </li>
             <li>
@@ -124,28 +160,21 @@
                     <div class="row">
                       <form class="form-horizontal">
                         <div class="form-group">
-                          <label for="commonlyUsed" class="control-label col-xs-3">Commonly used queries:</label>
+                          <label for="commonlyUsedQueries" class="control-label col-xs-3">Commonly used queries:</label>
                           <div class="col-xs-9">
-                            <select id="commonlyUsed" class="form-control">
+                            <select id="commonlyUsedQueries" class="form-control">
                               <option value=""></option>
-                              <option value="one">One</option>
-                              <option value="two">Two</option>
-                              <option value="three">Three</option>
-                              <option value="four">Four</option>
-                              <option value="five">Five</option>
+                              <script type="text/x-jquery-tmpl" id="queryOptionTemplate">
+                                  <option data-qspec="${spec}">${name}</option>
+                               </script>
                             </select>
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="lastSaved" class="control-label col-xs-3">Load saved query:</label>
+                          <label for="lastSavedQueries" class="control-label col-xs-3">Load saved query:</label>
                           <div class="col-xs-9">
-                            <select id="lastSaved" class="form-control">
+                            <select id="lastSavedQueries" class="form-control">
                               <option value=""></option>
-                              <option value="one">One</option>
-                              <option value="two">Two</option>
-                              <option value="three">Three</option>
-                              <option value="four">Four</option>
-                              <option value="five">Five</option>
                             </select>
                           </div>
                         </div>
@@ -154,101 +183,84 @@
                   </div>
                 </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading">Datasets and standard filters<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
+                  <div class="panel-heading">Datasets and standard filters<span class="pull-right clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
                   <div class="panel-body" style="display:none">
                     <ul id="ogrid-ds-tabs" class="nav nav-tabs nav-pills" role="tablist">
-                      <li   class="active">
-                        <a  href="#ds-tab1" role="tab" data-toggle="tab">311</a>
-                      </li>
+                      <!-- JQuery template -->
+                      <script type="text/x-jquery-tmpl" id="newDTTemplate">
+                                    <li class="active regtab"><a href="#${tabName}" role="tab" data-toggle="tab"><button class="close closeTab" type="button" >×</button>${label}</a></li>
+                                </script>
                       <li>
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">Add dataset <span class="glyphicon glyphicon-plus-sign"></span></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="#">CTA</a></li>
-                          <li><a href="#">911 Fire</a></li>
-                          <li><a href="#">911 Police</a></li>
-                          <li><a href="#">Building Permits</a></li>
-                        </ul>
+                        <ul id="ogrid-dtlist" class="dropdown-menu"></ul>
+                        <!-- JQuery template -->
+                        <script type="text/x-jquery-tmpl" id="dtTemplate">
+                                        <li><a data-type-id="${id}" href="#">${displayName}</a></li>
+                                    </script>
                       </li>
                     </ul>
                     <div id="ogrid-ds-content" class="tab-content">
-                      <div class="tab-pane active" id="ds-tab1">
-                        <div class="row">
-                          <div class="radio col-xs-12">
-                            <label><input type="radio" name="optAny" checked="true"><b>Any </b></label>
-                            <label><input type="radio" name="optAll"><b>All </b></label>
-                            &nbsp&nbsp of the following conditions must be met:
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="panel panel-default col-xs-12">
-                            <form class="form-inline form-in-panel">
-                              <select id="selectColumn" class="form-control">
-                                <option value="one">Service Request #</option>
-                                <option value="two">Type</option>
-                                <option value="three">Address</option>
-                              </select>
-                              <select id="selectOp" class="form-control">
-                                <option value="one">Equals</option>
-                                <option value="two">Contains</option>
-                                <option value="three">Starts with</option>
-                              </select>
-                              <input type="text" class="form-control" id="val">
-                              <button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-minus-sign"></span></button>
-                              <button type="button" class="btn btn-primary"> <span class="glyphicon glyphicon-plus-sign"></span></button>
-                            </form>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="panel panel-default col-xs-12">
-                            <form class="form-inline form-in-panel">
-                              <div class="form-group">
-                                <label for="colorPicker" class="control-label">Color</label>
-                                <div class="input-group">
-                                  <select id="colorPicker">
-                                    <option value="106" data-color="#A0522D">sienna</option>
-                                    <option value="47" data-color="#CD5C5C" selected="selected">indianred</option>
-                                    <option value="87" data-color="#FF4500">orangered</option>
-                                    <option value="17" data-color="#008B8B">darkcyan</option>
-                                    <option value="18" data-color="#B8860B">darkgoldenrod</option>
-                                    <option value="68" data-color="#32CD32">limegreen</option>
-                                    <option value="42" data-color="#FFD700">gold</option>
-                                    <option value="77" data-color="#48D1CC">mediumturquoise</option>
-                                    <option value="107" data-color="#87CEEB">skyblue</option>
-                                    <option value="46" data-color="#FF69B4">hotpink</option>
-                                    <option value="47" data-color="#CD5C5C">indianred</option>
-                                    <option value="64" data-color="#87CEFA">lightskyblue</option>
-                                    <option value="13" data-color="#6495ED">cornflowerblue</option>
-                                    <option value="15" data-color="#DC143C">crimson</option>
-                                    <option value="24" data-color="#FF8C00">darkorange</option>
-                                    <option value="78" data-color="#C71585">mediumvioletred</option>
-                                    <option value="123" data-color="#000000">black</option>
-                                  </select>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label for="sizeSpin" class="control-label">Size</label>
-                                <div class="input-group spinner">
-                                  <input id="sizeSpin" type="text" class="form-control" value="10">
-                                  <div class="input-group-btn-vertical">
-                                    <button id="sizeSpinUp" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                                    <button id="sizeSpinDn" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label for="opacitySpin" class="control-label">Opacity</label>
-                                <div class="input-group spinner">
-                                  <input id="opacitySpin" type="text" class="form-control" value="80">
-                                  <div class="input-group-btn-vertical">
-                                    <button id="opacitySpinUp" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                                    <button id="opacitySpinDn" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
+                      <!-- JQuery templates -->
+                      <script type="text/x-jquery-tmpl" id="dtOptionTemplate">
+                                    {{if filter}}
+                                    <option value="${id}">${displayName}</option>
+                                    {{/if}}
+                                </script>
+                      <script type="text/x-jquery-tmpl" id="dtTabTemplate">
+                                    <div class="tab-pane active" id="${tabName}">
+                                        <div id="builder_${tabName}"></div>
+                                        <div class="row">
+                                            <div class="panel panel-default col-xs-12">
+                                                <form class="form-inline form-in-panel">
+                                                    <div class="form-group">
+                                                        <label for="colorPicker" class="control-label">Color</label>
+                                                        <div class="input-group">
+                                                            <select id="colorPicker_${tabName}">
+                                                                <option value="106" data-color="#A0522D">sienna</option>
+                                                                <option value="47" data-color="#CD5C5C" selected="selected">indianred</option>
+                                                                <option value="87" data-color="#FF4500">orangered</option>
+                                                                <option value="17" data-color="#008B8B">darkcyan</option>
+                                                                <option value="18" data-color="#B8860B">darkgoldenrod</option>
+                                                                <option value="68" data-color="#32CD32">limegreen</option>
+                                                                <option value="42" data-color="#FFD700">gold</option>
+                                                                <option value="77" data-color="#48D1CC">mediumturquoise</option>
+                                                                <option value="107" data-color="#87CEEB">skyblue</option>
+                                                                <option value="46" data-color="#FF69B4">hotpink</option>
+                                                                <option value="47" data-color="#CD5C5C">indianred</option>
+                                                                <option value="64" data-color="#87CEFA">lightskyblue</option>
+                                                                <option value="13" data-color="#6495ED">cornflowerblue</option>
+                                                                <option value="15" data-color="#DC143C">crimson</option>
+                                                                <option value="24" data-color="#FF8C00">darkorange</option>
+                                                                <option value="78" data-color="#C71585">mediumvioletred</option>
+                                                                <option value="123" data-color="#000000">black</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="sizeSpin" class="control-label">Size</label>
+                                                        <div class="input-group spinner">
+                                                            <input id="sizeSpin_${tabName}" type="text" class="form-control" value="6">
+                                                            <div class="input-group-btn-vertical">
+                                                                <button id="sizeSpinUp_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                                                                <button id="sizeSpinDn_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="opacitySpin" class="control-label">Opacity</label>
+                                                        <div class="input-group spinner">
+                                                            <input id="opacitySpin_${tabName}" type="text" class="form-control" value="85">
+                                                            <div class="input-group-btn-vertical">
+                                                                <button id="opacitySpinUp_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                                                                <button id="opacitySpinDn_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </script>
                     </div>
                   </div>
                 </div>
@@ -300,18 +312,18 @@
                           <label for="beginDate" class="control-label col-xs-3">Begin date</label>
                           <div class='col-xs-9 input-group date' id='beginDate'>
                             <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="endDate" class="control-label col-xs-3">End date</label>
                           <div class='col-xs-9 input-group date' id='endDate'>
                             <input type='text' class="form-control" />
-                              <span class="input-group-addon">
-                                  <span class="glyphicon glyphicon-calendar"></span>
-                              </span>
+                                  <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"></span>
+                                  </span>
                           </div>
                         </div>
                       </form>
@@ -328,8 +340,7 @@
                             <input type="text" class="form-control" id="saveQueryAs">
                           </div>
                           <div class="col-xs-4">
-                            <button type="button" class="btn btn-default">Save</button>
-                            <button type="button" class="btn btn-default">Reset</button>
+                            <button id="advSearchSave" type="button" class="btn btn-default">Save</button>
                           </div>
                         </div>
                       </form>
@@ -355,20 +366,23 @@
                   </div>
                 </div>
               </div>
-              <button id="advQuerySubmit" type="button" class="btn btn-primary">Submit</button>
+              <div class="pull-right">
+                <button id="advSearchSubmit" type="button" class="btn btn-primary">Submit</button>
+                <button id="advSearchReset" type="button" class="btn btn-default">Reset</button>
+              </div>
             </div>
             <div class="tab-pane" id="save-queries">
               <h3>Placeholder content for saved queries</h3>
             </div>
           </div>
-        </div>
+          </div>
       </div>
     </div>
     <div id="ogrid-footer" class="panel-group">
       <div class="panel panel-default ogrid-footer-panel ogrid-footer-panel-default">
         <div class="panel-heading ogrid-footer-panel-heading">
           <i id="panel-caret" class="glyphicon glyphicon-chevron-up pull-right"></i>
-          <h6 class="panel-title ogrid-footer-panel-title">
+          <h6 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#tableview"></a>
           </h6>
         </div>
@@ -387,8 +401,8 @@
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <div id="ogrid-alert-text"></div>
   </div>
-  <div id="ogrid-busy" class="center">
-    <button class="btn btn-lg btn-default"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Working...</button>
+  <div id="ogrid-busy">
+    <button id="btn-busy" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Working...</button>
   </div>
 
   <!-- our app's javascript Leaflet code should always come after the map div is created -->
@@ -400,11 +414,18 @@
   <script src="resources/ogrid-0.0.1/js/core/Util.js"></script>
 
   <script src="resources/ogrid-0.0.1/js/data/Mock.js"></script>
+  <script src="resources/ogrid-0.0.1/js/data/Search.js"></script>
   <script src="resources/ogrid-0.0.1/js/custom/Config.js"></script>
   <script src="resources/ogrid-0.0.1/js/custom/qsearch/Tweet.js"></script>
   <script src="resources/ogrid-0.0.1/js/custom/qsearch/Weather.js"></script>
   <script src="resources/ogrid-0.0.1/js/custom/qsearch/LatLng.js"></script>
   <script src="resources/ogrid-0.0.1/js/custom/qsearch/Place.js"></script>
+
+  <!--extensions to 3rd party libraries -->
+  <script src="resources/ogrid-0.0.1/js/custom/ext/ogrid-bootstrap-table-heatmap.js"></script>
+  <script src="resources/ogrid-0.0.1/js/custom/ext/ogrid-bootstrap-table-tilemap.js"></script>
+  <script src="resources/ogrid-0.0.1/js/custom/ext/ogrid-bootstrap-table-graph.js"></script>
+  <script src="resources/ogrid-0.0.1/js/custom/ext/leaflet-pdf.js"></script>
 
   <script src="resources/ogrid-0.0.1/js/ux/Main.js"></script>
   <script src="resources/ogrid-0.0.1/js/ux/Map.js"></script>
@@ -414,6 +435,11 @@
   <script src="resources/ogrid-0.0.1/js/ux/CommandBar.js"></script>
   <script src="resources/ogrid-0.0.1/js/ux/TableView.js"></script>
   <script src="resources/ogrid-0.0.1/js/ux/AdvancedSearch.js"></script>
+
+  <script src="resources/ogrid-0.0.1/js/ux/TileMapByBoundary.js"></script>
+  <script src="resources/ogrid-0.0.1/js/data/ShapeMap.js"></script>
+  <script src="resources/ogrid-0.0.1/js/data/ChicagoZipShapeMap.js"></script>
+
 
   <script>
     $(function () {

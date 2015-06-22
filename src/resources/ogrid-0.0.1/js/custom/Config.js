@@ -12,12 +12,20 @@ ogrid.Config = {
         logo:''
     },
 
+    alerts: {
+        autoCloseDuration: 15000 //in ms
+    },
+
+    table: {
+        height: '33%' //height of the table in px or %, if px, just use value without 'px' at the end
+    },
+
     map: {
         baseMapUrl: 'http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer',
         baseLayers:[],
         center: [41.88432, -87.65211],
         zoom: 14,
-        minZoom: 8,
+        minZoom: 5,
 
         //indicator to use Esri's Leaflet plug-in
         useEsri: true
@@ -30,6 +38,8 @@ ogrid.Config = {
             'ogrid.QSearchProcessor.LatLng',
             'ogrid.QSearchProcessor.Weather',
             'ogrid.QSearchProcessor.Tweet'
+
+            //Place/Address search is built-in
         ]
     },
 
@@ -44,7 +54,7 @@ ogrid.Config = {
 
     service: {
         endpoint: 'http://localhost:8080/opengridservice/rest',
-        //endpoint: 'https://webapps1int.cityofchicago.org/opengridservice/rest',
-        timeout: 60000 //timeout in ms
+        timeout: 60000,  //timeout in ms
+        maxresults: 6000
     }
 }

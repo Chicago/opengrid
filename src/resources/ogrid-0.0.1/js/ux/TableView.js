@@ -26,8 +26,8 @@ ogrid.TableView = ogrid.Class.extend({
         this._tabViewPanel = tabViewPanel;
 
         this._tabViewPanel.on('show.bs.collapse', function () {
-            $('.panel-heading').animate({
-                backgroundColor: "#515151"
+            $('.ogrid-footer-panel-heading').animate({
+                backgroundColor: "#E8E8E8"
             }, 500);
             //$('#panel-caret').removeClass('fa-caret-square-o-up').addClass('fa-caret-square-o-down');
             //glyphicon glyphicon-chevron-down
@@ -35,8 +35,8 @@ ogrid.TableView = ogrid.Class.extend({
         });
 
         this._tabViewPanel.on('hide.bs.collapse', function () {
-            $('.panel-heading').animate({
-                backgroundColor: "#00B4FF"
+            $('.ogrid-footer-panel-heading').animate({
+                backgroundColor: "#E8E8E8"
             }, 500);
             $('#panel-caret').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
         });
@@ -44,23 +44,46 @@ ogrid.TableView = ogrid.Class.extend({
         ogrid.Event.on(ogrid.Event.types.REFRESH_DATA, $.proxy(this._onRefreshData, this));
         ogrid.Event.on(ogrid.Event.types.CLEAR, $.proxy(this._onClear, this));
 
-
-        //temp for testing
-        //var id = this.loadData(ogrid.Mock.data.tweet, true);
-        //this.loadData(ogrid.Mock.data.weather);
-        //this.activateTab(id);
+        this._setupWindowResizeHandler();
     },
 
 
     //private methods
+    _getTableHeight: function() {
+        //check if pct
+        var s = ogrid.Config.table.height.trim();
+        var i = s.indexOf('%');
+        if ( i > -1) {
+            return ( $(window).height() *
+                ( ogrid.Config.table.height.substr(0, ogrid.Config.table.height.length -1 ) / 100 )
+            );
+        } else {
+            return s;
+        }
+    },
+
+    _setupWindowResizeHandler: function() {
+        var me = this;
+
+        $(window).resize(function () {
+            //dynamically assign height of the table, and refresh header row column alignments
+            //$('#table').bootstrapTable('resetView');
+            var t = $('#ogrid-tab-content .bootstrap-table table');
+            t.bootstrapTable('getOptions').height = me._getTableHeight();
+            t.bootstrapTable('resetView');
+        });
+    },
+
     _onRefreshData: function (evtData) {
         try {
-            console.log('map refresh: ' + JSON.stringify(evtData));
-            var data = evtData.message;
+            //console.log('map refresh: ' + JSON.stringify(evtData));
+            var data = evtData.message.data;
 
-            //auto-clear grid for now every new data
-            this._onClear();
-
+            //clear map if clear flag is on
+            if (!ogrid.isNull(evtData.message.options.clear) && evtData.message.options.clear) {
+                this._onClear();
+            }
+            //load data on new tab
             this.loadData(data, true);
         } catch (e) {
             ogrid.Alert.error(e.message);
@@ -80,18 +103,39 @@ ogrid.TableView = ogrid.Class.extend({
     _populateTableRows: function(tableId, columns, data) {
         //$('#' + tableId).addClass('no-wrap');
 
-        $('#' + tableId).DataTable( {
-            "aaData": data,
-            "aoColumns": columns,
-            "pageLength": 10, //make part of config later
-            "responsive": true,
-            //"scrollY": "200px",
-            "dom": 'Rlfrtip', //does not seem to work
-            //"dom": 'ftip',
-            "lengthChange": false
-            //"deferRender": true
-            //"paging": false
+        var t = $('#' + tableId).bootstrapTable( {
+            //our geoJson data in its original structure (data attribute is flattened post table creation)
+            origData: data,
+            data: data,
+            classes: 'table table-hover table-condensed',
+
+            reorderableColumns: true,
+            maxMovingRows: 5,
+            columns: columns,
+            height: this._getTableHeight(),
+            pagination: true,
+            flat: true,
+
+            //toolbar
+            search: true,
+            showColumns: true,
+            showExport: true,
+            exportTypes: ['csv', 'excel', 'pdf'],
+
+            showHeatmap: true,
+            heatmapOptions: {map: ogrid.App.map()},
+
+            showTilemap: true,
+            tilemapOptions: {map: ogrid.App.map()},
+
+            showGraph: true,
+            resizable: true
         });
+
+        //add tooltip to Export extension
+        $('div.export').attr('title', 'Export');
+
+        //console.log(t.bootstrapTable('getData'));
     },
 
     _getTabLinkName: function(id) {
@@ -110,6 +154,7 @@ ogrid.TableView = ogrid.Class.extend({
 
     //loads new data on new tab
     //data is in geojson format
+    //convert to use jQuery templates later (using string + now)
     loadData: function(data, activate) {
         var id = ogrid.guid();
         var o = {
@@ -119,30 +164,30 @@ ogrid.TableView = ogrid.Class.extend({
             tableId: this._getTableName(id)
         };
 
+        //color based on the same map rendition color
+        var c = 'black';
+        if (!ogrid.isNull(data.meta.view.options.rendition.color)) {
+            c = data.meta.view.options.rendition.color;
+        }
+        var sp = '&nbsp<i class="fa fa-circle-o" style="color:' + c + '"></i>';
+
         //controller tab
-        $('<li id="' + o.linkId + '" class="ogrid-tab-link"><a href=#' + o.tabId + ' role="tab" data-toggle="tab">' + data.meta.view.displayName + '</a></li>').appendTo(this._tabs);
+        $('<li id="' + o.linkId + '" class="ogrid-tab-link"><a href=#' + o.tabId + ' role="tab" data-toggle="tab">' + data.meta.view.displayName +  sp + '</a></li>').appendTo(this._tabs);
 
         //tab content panel
         var s = '<div id="' + o.tabId + '" class="tab-pane ogrid-table table-responsive">';
-        //var s = '<div id="' + o.tabId + '" class="tab-pane ogrid-table">';
-        s += '<table id="' + o.tableId +  '" class="table table-hover table-striped table-bordered table-condensed" cellspacing="0" width="100%">';
-        //s += '<table id="' + o.tableId +  '" class="display" cellspacing="0" width="100%">';
-        s += '<thead>';
-
-        //generate header row
-        s += '<tr>';
+        s += '<table id="' + o.tableId + '"></table>';
 
         //sort later using sortOrder view attribute
         var a=[];
         for (var i in data.meta.view.columns) {
             if (data.meta.view.columns[i].list) {
-                s += '<th>' + data.meta.view.columns[i].displayName + '</th>';
+                //s += '<th>' + data.meta.view.columns[i].displayName + '</th>';
                 //build datatables column map at the same time
-                a.push({ mDataProp: "properties." + data.meta.view.columns[i].id});
+                a.push( {field: 'properties.' + data.meta.view.columns[i].id, title: data.meta.view.columns[i].displayName, sortable:true} );
             }
         }
-
-        s += '</tr>';
+        s+= '</div>';
         $(s).appendTo(this._tabContent);
 
         //populate datatable objects
@@ -155,13 +200,19 @@ ogrid.TableView = ogrid.Class.extend({
 
         this._tableRefs.push(o);
 
+        //not needed now
+        /*$('#' + o.linkId  + ' a[href="#' + o.tabId + '"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+            alert(target);
+        });*/
+
         //return tab id
         return o.id;
     },
 
     activateTab: function(id) {
-        $(".ogrid-tab-link").find(".active").removeClass("active");
-        $(".ogrid-table").find(".active").removeClass("active");
+        $("#ogrid-nav-tabs li").removeClass("active");
+        $("#ogrid-tab-content .ogrid-table").removeClass("active");
 
         $('#' + this._getTabLinkName(id) ).addClass('active');
         $('#' + this._getTabName(id) ).addClass('active');
@@ -171,6 +222,9 @@ ogrid.TableView = ogrid.Class.extend({
     updateData: function(data) {
 
     }
+
+
+
 
 
 });

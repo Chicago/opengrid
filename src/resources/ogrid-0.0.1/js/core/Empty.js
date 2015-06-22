@@ -17,8 +17,7 @@ ogrid.Empty = ogrid.Class.extend({
     //constructor
     init: function(options) {
         if (options) {
-            //ogrid.mixin(this._options);
-            this._options = options;
+            this._options = ($.extend(this._options, options));
         }
     }
 

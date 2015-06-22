@@ -33,7 +33,7 @@ ogrid.QSearchProcessor.Tweet = ogrid.QSearchProcessor.extend({
         }
     },
 
-    _getBuildParams: function() {
+    _getParams: function() {
         var matches = this._pattern.exec(this._input);
 
         if (!matches) {
@@ -41,13 +41,16 @@ ogrid.QSearchProcessor.Tweet = ogrid.QSearchProcessor.extend({
         }
         //match group 5 captures bare keyword
         //match group 8 captures quoted phrase
+        var n = 'n=' + ogrid.Config.service.maxresults;
+
         if (!matches[5] && !matches[8]) {
             //no match will return most recent
             //for now, we are returning all with no filter
             //throw ogrid.error('Quick Search Error', 'Twitter quick search parameter is invalid. Syntax: tweet &lt;keyword&gt; or &quot;key phrase&quot;.');
-            return '';
+            return {};
         } else {
-            return 'q=' + encodeURI('{"text" : {$regex : ".*' + (matches[8] ? matches[8] : matches[5]) + '.*"}}');
+            //return 'q=' + encodeURI('{"text" : {$regex : ".*' + (matches[8] ? matches[8] : matches[5]) + '.*"}}') + '&' + n;
+            return {"text" : {$regex : '.*' + (matches[8] ? matches[8] : matches[5]) + '.*'}};
         }
         //{"text" : {$regex : ".*son.*"}}
 
@@ -61,13 +64,22 @@ ogrid.QSearchProcessor.Tweet = ogrid.QSearchProcessor.extend({
 
 
     exec: function(onSuccess, onError) {
+        ogrid.Search.exec( {
+            dataSetId: 'twitter',
+            filter: this._getParams(),
+            success: onSuccess,
+            error: onError
+        });
+
+    },
+
+    execOld: function(onSuccess, onError) {
         //call opengrid service
         var me = this;
-        var q = this._getBuildParams();
+        var q = this._getParams();
 
         if (!ogrid.Config.quickSearch.mock) {
             $.ajax({
-                //should really be datasets/twitter/query/filter...
                 url: ogrid.Config.service.endpoint + '/datasets/twitter/query?' + q,
                 type: 'GET',
                 async: true,

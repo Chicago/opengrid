@@ -10,7 +10,18 @@ ogrid.Map = ogrid.Class.extend({
     _map: null,
     _baseLayer: null,
 
-    _options:{},
+    _options: {
+            contextmenu: true,
+            contextmenuWidth: 140,
+            contextmenuItems: [
+                {
+                    text: 'Export to PDF',
+                    callback: $.proxy(this._exportToPDF, this)
+                }
+            ] },
+
+    _heatmapTypes: {},
+    _zipShapeMap: null,
 
     //public attributes
 
@@ -19,10 +30,11 @@ ogrid.Map = ogrid.Class.extend({
     init: function(mapContainer, options) {
         if (options) {
             //ogrid.setOptions(options);
-            this._options = options;
+            this._options = $.extend(this._options, options);
         }
         this._mapContainer = mapContainer;
 
+        this._options.contextmenuItems[0].callback = $.proxy(this._exportToPDF, this);
         this._map = L.map(this._mapContainer.attr('id'), this._options);
 
         //try other base maps later
@@ -32,20 +44,91 @@ ogrid.Map = ogrid.Class.extend({
         //subscribe to applicable opengrid client events
         ogrid.Event.on(ogrid.Event.types.REFRESH_DATA, $.proxy(this._onRefreshData, this));
         ogrid.Event.on(ogrid.Event.types.CLEAR, $.proxy(this._onClear, this));
+
+        /*new L.Control.Button({
+                'text': 'MyButton',  // string
+                'iconUrl': 'images/myButton.png',  // string
+                'onClick': $.proxy(this._printClick, this),  // callback function
+                'hideText': true,  // bool
+                'maxWidth': 30,  // number
+                'doToggle': false,  // bool
+                'toggleStatus': false  // bool
+            }
+        ).addTo(map);*/
+
+        this._initHeatMapTypes();
     },
 
     //private methods
+    _initHeatMapTypes: function() {
+        var thermalScale = chroma.scale(['#fee5d9', '#a50f15']);
+        var wrbScale = chroma.scale(['white', 'blue', 'red']);
+        var steps = [0.2, 0.4, 0.6, 0.8, 1];
+
+        this._heatmapTypes= {
+            rainbow: null, //default rendering
+            thermal: this._getGradient(steps, thermalScale),
+            wrb: this._getGradient(steps, wrbScale)
+        };
+    },
+
+    _getGradient: function(steps, scale) {
+        var g = {};
+        $.each(steps, function(i, v) {
+            g[v] = scale(v).hex();
+        });
+        return g;
+    },
+
+
+    _exportToPDF: function() {
+        try {
+            ogrid.Alert.busy('Generating PDF...', this, function() {
+                leafletImage(this._map, $.proxy(this._doImagePDF, this));
+            });
+
+        } catch (e) {
+            ogrid.Alert.error(e.message);
+            ogrid.Alert.idle();
+        }
+
+    },
+
+
+    _doImagePDF: function (err, canvas) {
+        ogrid.Alert.busy('Generating PDF...', this, function() {
+            try {
+                var img = document.createElement('img');
+                var dimensions = this._map.getSize();
+                img.width = dimensions.x;
+                img.height = dimensions.y;
+                img.src = canvas.toDataURL();
+                imgData = canvas.toDataURL("image/png");
+
+                doc = new jsPDF('landscape');
+                doc.addImage(imgData, "JPG", 15, 15, 270, 180);
+                doc.save('map.pdf');
+                ogrid.Alert.idle();
+            } catch (e) {
+                ogrid.Alert.error(e.message);
+                ogrid.Alert.idle();
+            }
+        });
+
+    },
+
     _onRefreshData: function (evtData) {
     	try {
-            console.log('map refresh: ' + JSON.stringify(evtData));
+            //console.log('map refresh: ' + JSON.stringify(evtData));
 
-            var data = evtData.message;
+            var data = evtData.message.data;
 
             //will only render GeoJson FeatureCollections, for now
             this._validateData(data);
 
-            //auto-clear map for now every new data
-            this._onClear();
+            //clear map if clear flag is on
+            if (!ogrid.isNull(evtData.message.options.clear) && evtData.message.options.clear)
+                this._onClear();
 
             if (data.features.length > 0) {
                 ogrid.Alert.info( data.features.length + ' records(s) found.');
@@ -143,6 +226,22 @@ ogrid.Map = ogrid.Class.extend({
         });
     },
 
+    _clearLayers: function(layers) {
+        var me = this;
+        $.each(layers, function(i, v) {
+            me._clearLayerById(v);
+        });
+    },
+
+
+    _clearLayerById: function(leafletId) {
+        var me = this;
+        this._map.eachLayer(function (layer) {
+            //remove all layers except base layer (add more exceptions later)
+            if (layer._leaflet_id === leafletId)
+                me._map.removeLayer(layer);
+        });
+    },
 
     //public methods
     getMapCenter: function () {
@@ -151,5 +250,75 @@ ogrid.Map = ogrid.Class.extend({
 
     getMap: function () {
         return this._map();
+    },
+
+
+    addHeatMapLayerFromExistingLayer: function(layer) {
+
+    },
+
+    //adds a heatmap layer from LatLng array
+    addHeatMapLayerFromData: function(prevHeatmapId, data, heatmapType) {
+        /*var options =  {
+            //     minOpacity: 0.05,
+            //     maxZoom: 18,
+            //     radius: 25,
+            //     blur: 15,
+            //     max: 1.0
+            // }; */
+        //if there is a previous heatmap id, clear and replace with this one
+        if (prevHeatmapId)
+            this._clearLayerById(prevHeatmapId);
+
+        if (heatmapType !='none') {
+            var options = {minOpacity: 0.25};
+
+            if (this._heatmapTypes[heatmapType]) {
+                options = $.extend(options, {gradient: this._heatmapTypes[heatmapType]});
+            }
+
+            var l = L.heatLayer(data, options);
+            l.addTo(this._map);
+            //l.bringToFront();
+            //this._map.addLayer(l);
+
+            return l._leaflet_id;
+        }
+    },
+
+    addTileMapLayerFromData: function(data, existingLayers) {
+        if (existingLayers)
+            this._clearLayers(existingLayers);
+
+        if (data) {
+            if (!this._zipShapeMap)
+                this._zipShapeMap = new ogrid.ChicagoZipShapeMap();
+
+            var keys = $.map(this._zipShapeMap.getData(), function (v, i) {
+                return i;
+            });
+
+            var t = new ogrid.TileMapByBoundary(this._map, data, {
+                    //keys to tile, make zip code boundary params configurable
+                    //we can really leave the boundary keys null as the TileMapByBoundary gets the keys from the raw geoJson by default
+                    //only here to show that there is such an option
+                    boundaryKeys: keys,
+
+                    shapeMap: this._zipShapeMap,
+
+                    shapeServiceUrl: null,
+
+                    //colors same as default for now
+                    chromaColors: ['#f7fcf5', '#00441b']
+                }
+            );
+            //need to return layer group Id later (multiple layers of geoJson layers)
+            var o = t.generate();
+
+            //o has colorMap and layerIds attributes
+            return o.layerIds;
+        } else {
+            return null;
+        }
     }
 });
