@@ -1,0 +1,14 @@
+language: node_js
+sudo: required
+warnings_are_errors: true
+
+node_js:
+	- '0.10'
+
+script:
+	- gulp release
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
