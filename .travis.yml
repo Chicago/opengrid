@@ -3,10 +3,13 @@ sudo: required
 warnings_are_errors: true
 
 node_js:
-	- '0.10'
+    - "0.10"
+
+before_script:
+    - npm install -g gulp
 
 script:
-	- gulp release
+    - gulp release
 
 notifications:
   email:
