@@ -1,0 +1,105 @@
+.ogrid-chart {
+}
+
+/*modal styles */
+.ogrid-chart-modal {
+    max-width: 665px;
+    max-height: 400px;
+    height: 100%;
+    width: 100%;
+
+    /* should be on top of Leaflet's attribution text and layer control */
+    z-index: 2500;
+}
+
+.ogrid-chart .modal-dialog {
+    margin-top: 80px;
+}
+
+.ogrid-chart-modal .modal-header {
+    font-weight: bold;
+}
+
+.ogrid-chart-modal .modal-header .close {
+    margin-top: -10px;
+}
+
+
+/* chart styles */
+.ogrid-chart-body {
+    /* dark gray */
+    background-color: #696969;
+    width: 100%;
+    height: 100%;
+}
+
+/* canvas where graph is drawn */
+.ogrid-chart-canvas {
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 300px;
+    height: 300px;
+}
+
+/* styles for legend */
+.ogrid-chart-legend {
+    position:absolute;
+
+    /* canvas width + 70px */
+    left: 370px;
+    top: 60px;
+    color: white;
+    /* parent width - canvas width and margins*/
+    width: calc(100% - 300px - 120px);
+
+    /*parent height - top and bottom margins*/
+    height: calc(100% - 120px);
+}
+
+.ogrid-chart-legend .pie-legend {
+    position: relative;
+    top: 10px;
+    left: 0px;
+    overflow-x: hidden;
+    padding-left: 0;
+    width: 100%;
+    height: calc(100% - 20px);
+    overflow: auto;
+}
+
+
+.ogrid-chart-legend .pie-legend li:hover {
+    background-color: #969696;
+}
+
+
+/* with media queries
+    max-widths were derived by testing how the chart behaves at runtime while resizing the browser window
+*/
+@media (max-width: 675px) {
+    .ogrid-chart-modal {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
+
+@media (max-width: 522px) {
+    .ogrid-chart-canvas {
+        top: 5px;
+        /*center horizontally*/
+       left: calc( 50% - 300px / 2);
+
+        width: 100%;
+        height: 100%;
+
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    /* hide the legend at this size */
+    .ogrid-chart-legend {
+        visibility: hidden;
+    }
+}
+

@@ -1,0 +1,22 @@
+.ogrid-admin-ui {
+    background-color: #E8E8E8;
+    position: fixed;
+    right: -700px;
+    top: 50px;
+    width: 700px;
+    height:100%;
+
+    /* should be on top of Leaflet's attribution text and layer control */
+    z-index: 2500;
+}
+
+
+.ogrid-admin-ui.visible {
+    right: 0px;
+}
+
+@media (max-width: 700px) {
+    .ogrid-admin-ui {
+        width: 100%;
+    }
+}
