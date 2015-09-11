@@ -5,7 +5,7 @@ warnings_are_errors: true
 node_js:
     - "0.12"
 
-before_install:
+install:
     - sudo rm -rf /usr/local/phantomjs
     - curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-x86_64.tar.bz2
     - tar xjf phantomjs-1.9.7-linux-x86_64.tar.bz2
