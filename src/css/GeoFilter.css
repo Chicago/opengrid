@@ -1,0 +1,19 @@
+/*
+ * GeoFilter.css
+ * Styles used by ogrid.GeoFilter
+*/
+@media (min-width: 700px) {
+    .form-inline .form-control {
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+    }
+}
+
+
+.adv-search-geofilter > .form-inline {
+    padding:4px;
+}
+.adv-search-geofilter > .form-inline > * {
+    margin:2px 2px !important;
+}

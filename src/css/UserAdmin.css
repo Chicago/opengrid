@@ -1,0 +1,21 @@
+#ogrid-manage-users {
+    height: 100%;
+}
+
+.ogrid-manage-users .bootstrap-table {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    background-color: #fff;
+    height: 100%;
+}
+
+#user-edit-modal .modal-dialog {
+    margin-top: 80px;
+}
+
+
+.ogrid-manage-users .fixed-table-body {
+    overflow-x: hidden;
+}
