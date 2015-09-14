@@ -11,7 +11,7 @@ The next step would be to create a fork within the original project and clone to
 - To be able to work on the project and experiment with changes you will need to clone the fork repo to your computer.
 
 ### Clone the fork repo:
-- If using the GitHub desktop application simply click on the button called “Clone in Desktop”. 
+- If using the GitHub desktop application simply click on the button called **“Clone in Desktop”**. 
 - Save the clone repository to a relevant location on your computer.
 
 <div align="center"><b> Example: git clone https://github.com/YOUR-USERNAME/cloned repository</div></b>
@@ -32,7 +32,7 @@ The next step would be to create a fork within the original project and clone to
 
 - Describe the bug.
 - Perform unit test and create a test script with step by step instructions explaining how to duplicate the bug; with an error message if displayed.
-- Provide screenshots
+- Provide screenshots.
 - Provide the Version, Operating System, Browser specification from which the bug was detected.
 - What were the expected results?
 - What were the actual results after the initial reproduction?
