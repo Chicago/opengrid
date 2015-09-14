@@ -14,9 +14,7 @@ The next step would be to create a fork within the original project and clone to
 - If using the GitHub desktop application simply click on the button called “Clone in Desktop”. 
 - Save the clone repository to a relevant location on your computer.
 
-<p align="center"><b> Example: git clone https://github.com/YOUR-USERNAME/cloned repository</p></b>
-
-<p><b> Submit a Pull Request:</b></p>
+## Submit a Pull Request:
 <p>Pull request allows users to convey changes that’s been added to a repository.  Pull request can only be initialized if there is a distinction between either the branches or repository.  To collaborate new changes or submit ideas:</p>
 - Always specify what branch you’ll like to merge your changes into. 
 - Test your theory before submittal; provide steps of implementation and documentation.  
@@ -24,10 +22,10 @@ The next step would be to create a fork within the original project and clone to
 
 <p>Once a pull request is created other users can review the changes or provide feedback.</p>
 
-#  Create an Issue:
+##Create an Issue:
 <p>Issues consist of bug, enhancement or a feature submittal. In creating an issue, first check to make sure there isn’t a duplicate issue already documented. Provide screenshot/s of the issue. Create documentation of the issue. Make sure to document the browser specification, the operating system and script you are using. Provide efficient steps on how to reproduce the issue. Provide a detail description of what happened and what you expect to happen.</p>
 
-##  Bug Submittal- 
+### Bug Submittal- 
 <p>Be specific and to the point in explaining the bug make sure to report the bug with a descriptive detail, programmers will most likely reject the bug if it cannot be replicated.Try reproducing the issue more than once for validation. Once replication is validated proceed to submitting an Issue.</p> 
 
 - Describe the bug.
@@ -37,11 +35,11 @@ The next step would be to create a fork within the original project and clone to
 - What were the expected results?
 - What were the actual results after the initial reproduction?
 
-## Enhancement/Feature Request -
+### Enhancement/Feature Request -
 <p>If a new feature, explain the use case with suggestions or a specification.
 Who will be the target audience? What would be the functionality of the new feature, offer illustrations? Why is it needed? How will it add significance to our work?</p>
 
-#  Ready to Commit:
+##Ready to Commit:
 <p>When contributing to a project make sure to write a descriptive and clean commit message; a clear commit message should answer the questions of <b>WHAT</b>, <b>WHY</b> and <b>HOW</b>.<p> 
 <p>Examples:</p>
 - What was the problem
@@ -52,11 +50,11 @@ Who will be the target audience? What would be the functionality of the new feat
 <p>The first line should be the subject (50 chars or less) with capitalization at the beginning of the subject line. The style must be imperative and should not end with a period. The second line should be blank. (Note: any new paragraph starts after a blank line.) The body of the message should be limited to 72 characters.  Make sure to manually wrap text as Git doesn’t wrap text automatically.</p>   
 
 
-#  Milestones:
+##Milestones:
 <p>Milestones are used to track progress of issues and pull requests. 
 They add significant value to project scheduling and monitoring. Milestones associate issues with specific features.</p>
 
-#  <p> <font color="blue"> OpenGrid Quick JS Coding Guide</font></p>
+# <p> <font color="blue"> OpenGrid Quick JS Coding Guide</font></p>
 - Use jQuery’s proxy method if you want to maintain the “this” context on your event handler
 - Use jQuery’s extend method to mix-in property values of 2 objects
 - Prefix private methods with “_” (underscore) e.g. _myPrivateMethod
