@@ -14,6 +14,8 @@ The next step would be to create a fork within the original project and clone to
 - If using the GitHub desktop application simply click on the button called “Clone in Desktop”. 
 - Save the clone repository to a relevant location on your computer.
 
+<p align="center"><b> Example: git clone https://github.com/YOUR-USERNAME/cloned repository</p></b>
+
 ## Submit a Pull Request:
 <p>Pull request allows users to convey changes that’s been added to a repository.  Pull request can only be initialized if there is a distinction between either the branches or repository.  To collaborate new changes or submit ideas:</p>
 - Always specify what branch you’ll like to merge your changes into. 
