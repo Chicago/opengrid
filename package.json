@@ -23,7 +23,7 @@
     "gulp-uglify": "^1.2.0",
     "mocha": "^2.2.5",
     "mocha-phantomjs": "^3.6.0",
-    "phantomjs": "^1.9.7-15",
+    "phantomjs": "^1.9.8",
     "rimraf": "^2.4.2",
     "run-sequence": "^1.1.2",
     "stream-series": "^0.1.1"
