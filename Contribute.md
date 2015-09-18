@@ -55,21 +55,3 @@ Who will be the target audience? What would be the functionality of the new feat
 ##Milestones:
 <p>Milestones are used to track progress of issues and pull requests. 
 They add significant value to project scheduling and monitoring. Milestones associate issues with specific features.</p>
-
-# <p> <font color="blue"> OpenGrid Quick JS Coding Guide</font></p>
-- Use jQuery’s proxy method if you want to maintain the “this” context on your event handler
-- Use jQuery’s extend method to mix-in property values of 2 objects
-- Prefix private methods with “_” (underscore) e.g. _myPrivateMethod
-- Prefer multiple shorter methods than 1 long method. Makes code self-documenting
-- Enclose method/function code in try-catch block when you are expecting something to go wrong within the block, unless expectation is set that the caller (one which calls this function) will need to handle generated exceptions (you want the exception to be bubbled up to the caller so it can deal with it accordingly i.e. clean up, conditionals, etc.) 
-- Use K&R (Kerrigan & Ritchie ‘C’ language) convention when using begin/end curly brackets.
-- When creating a new class, copy src/js/core/Empty.js into your own file, renaming appropriately. On your new class file, customize the template content with your specific class name, constructor parameters, description, etc.
-- Use ogrid.Util static functions where applicable. Commonly used ones are isNull, guid and error.
-- When creating a new class, copy and paste from core/Empty.js then customize class definition.
-- Use ogrid.Alert static methods for any notification needs i.e. showing error/informational messages, busy message, system modal message box, etc.
-- When applicable, use an _options private variable to pass user options to a class’s constructor (init method). This _options attribute can have default values, then mixed in using jQuery extend with the options passed to the constructor. 
-
-#### <p><b>Other references:</b></p>
-- https://github.com/airbnb/javascript - Take note that some of the guidelines do not apply to ECMAScript 5.1 which we used for OpenGrid.
-
-
