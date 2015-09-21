@@ -1,4 +1,4 @@
-# Open Grid Contributing Guide
+# OpenGrid Contributing Guide
 
 Open Grid follows the open source concept where as any new ideas and information is very helpful in advancing a project.  To contribute code to a project it must first be approved by project leader. Also there are licensing and agreements that needs to take effect.
 
