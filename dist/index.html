@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>OpenGrid</title>
+  <meta charset="utf-8"><meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <!-- To be injected by gulp inject plug-in at build time -->
+  <!-- inject:head:css -->
+  <link rel="stylesheet" href="css/lib.css">
+  <link rel="stylesheet" href="css/login-custom.css">
+  <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+  <!-- endinject -->
+
+  <!-- inject:head:js -->
+  <script src="js/lib-bundle.min.js"></script>
+  <!-- endinject -->
+
+</head>
+
+<body>
+  <div id="ogrid-container" class="hide">
+    <div id="ogrid-nav" class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#ogrid-menu" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">OpenGrid</a>
+            <div id="ogrid-search" class="pull-left">
+                <form class="navbar-form " role="search">
+                    <div class="form-group has-feedback input-group" id="qsearch">
+                        <input autocapitalize="off" type="text" class="form-control" id="qsearch-input" placeholder="Quick search" />
+                        <span id="ogrid-qsearch-hint" class="glyphicon glyphicon-question-sign" data-toggle="popover" tabindex="0" data-trigger="focus" data-placement="bottom" title="Quick Search Help"></span>
+                        <span class="input-group-addon" id="qsearch-button">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="ogrid-menu" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <p class="navbar-btn ogrid-nav-btn">
+                <a id="ogrid-advanced-btn" href="#" class="btn btn-default">Advanced Search</a>
+              </p>
+            </li>
+            <li>
+              <p class="navbar-btn ogrid-nav-btn">
+                <a id="ogrid-clear-btn" href="#" class="btn btn-default">Clear Data</a>
+              </p>
+            </li>
+            <li>
+              <p class="navbar-btn ogrid-nav-btn">
+                <a id="ogrid-manage-btn" href="#" class="btn btn-default">Manage</a>
+              </p>
+            </li>
+            <li class="dropdown">
+              <a id="ogrid-user-name" class="dropdown-toggle" data-toggle="dropdown" href="#">John Smith
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">My Subscriptions...</a></li>
+                <li class="divider"></li>
+                <li><a id="ogrid-logout-item" href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="ogrid-content" class="container-fluid">
+      <div id="map"></div>
+      <!-- management panel container div -->
+      <div id="ogrid-admin-ui"></div>
+
+      <!--chart modal -->
+      <div id="table-chart"></div>
+
+      <!-- advanced search container, modularize later -->
+      <div id="ogrid-task-advanced-search" class="ogrid-task-pane">
+        <div id="ogrid-advanced-find" class="panel-body">
+          <ul id="ogrid-adv-tabs" class="nav nav-tabs" role="tablist">
+            <li class="active">
+              <a  href="#build-query" role="tab" data-toggle="tab">Search</a>
+            </li>
+            <li>
+              <a href="#save-queries" role="tab" data-toggle="tab">Manage Queries</a>
+            </li>
+          </ul>
+          <div id="ogrid-adv-content" class="tab-content">
+            <div class="tab-pane active" id="build-query">
+              <div class="panel-group">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Existing queries <span class="clickable"><i class="glyphicon glyphicon-chevron-up"></i></span></div>
+                  <div class="panel-body">
+                    <div class="row">
+                      <form class="form-horizontal">
+                        <div class="form-group">
+                          <label for="commonlyUsedQueries" class="control-label col-xs-4">Commonly used queries:</label>
+                          <div class="col-xs-8 cmnqry">
+                            <select id="commonlyUsedQueries" class="form-control">
+                              <option value="">SELECT COMMONLY USED QUERY</option>
+                              <script type="text/x-jquery-tmpl" id="queryOptionTemplate">
+                                  <option data-query-id="${_id}" data-qspec="${spec}" data-geo-filter="${geoFilter}" data-auto-refresh="${autoRefresh}" data-refresh-interval="${refreshInterval}" >${name}</option>
+                               </script>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="lastSavedQueries" class="control-label col-xs-4">Load saved query:</label>
+                          <div class="col-xs-8 svdqry">
+                            <select id="lastSavedQueries" class="form-control">
+                              <option value="">SELECT SAVED QUERY</option>
+                            </select>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading panel-collapsed">Datasets and standard filters <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
+                  <div class="panel-body" style="display:none">
+                    <ul id="ogrid-ds-tabs" class="nav nav-tabs nav-pills" role="tablist">
+                      <!-- JQuery template -->
+                      <script type="text/x-jquery-tmpl" id="newDTTemplate">
+                                    <li class="active regtab"><a href="#${tabName}" role="tab" data-toggle="tab"><button class="close closeTab" type="button" ><i class="fa fa-times-circle"></i></button>${label}</a></li>
+                                </script>
+                      <li>
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Add dataset <span class="glyphicon glyphicon-plus-sign"></span></a>
+                        <ul id="ogrid-dtlist" class="dropdown-menu"></ul>
+                        <!-- JQuery template -->
+                        <script type="text/x-jquery-tmpl" id="dtTemplate">
+                            <li><a data-type-id="${id}" href="#">${displayName}</a></li>
+                        </script>
+                      </li>
+                    </ul>
+                    <div id="ogrid-ds-content" class="tab-content">
+                      <!-- JQuery templates -->
+                      <script type="text/x-jquery-tmpl" id="dtOptionTemplate">
+                                    {{if filter}}
+                                    <option value="${id}">${displayName}</option>
+                                    {{/if}}
+                      </script>
+                      <script type="text/x-jquery-tmpl" id="dtTabTemplate">
+                                    <div class="tab-pane active" id="${tabName}">
+                                        <div id="builder_${tabName}"></div>
+                                        <div class="row">
+                                            <div class="panel panel-default col-xs-12">
+                                                <form class="form-inline form-in-panel">
+                                                    <div class="form-group">
+                                                        <label for="colorPicker" class="control-label">Color</label>
+                                                        <div class="input-group">
+                                                            <select id="colorPicker_${tabName}">
+                                                                <option value="106" data-color="#A0522D">sienna</option>
+                                                                <option value="47" data-color="#CD5C5C" selected="selected">indianred</option>
+                                                                <option value="87" data-color="#FF4500">orangered</option>
+                                                                <option value="17" data-color="#008B8B">darkcyan</option>
+                                                                <option value="18" data-color="#B8860B">darkgoldenrod</option>
+                                                                <option value="68" data-color="#32CD32">limegreen</option>
+                                                                <option value="42" data-color="#FFD700">gold</option>
+                                                                <option value="77" data-color="#48D1CC">mediumturquoise</option>
+                                                                <option value="107" data-color="#87CEEB">skyblue</option>
+                                                                <option value="46" data-color="#FF69B4">hotpink</option>
+                                                                <option value="47" data-color="#CD5C5C">indianred</option>
+                                                                <option value="64" data-color="#87CEFA">lightskyblue</option>
+                                                                <option value="13" data-color="#6495ED">cornflowerblue</option>
+                                                                <option value="15" data-color="#DC143C">crimson</option>
+                                                                <option value="24" data-color="#FF8C00">darkorange</option>
+                                                                <option value="78" data-color="#C71585">mediumvioletred</option>
+                                                                <option value="123" data-color="#000000">black</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="sizeSpin" class="control-label">Size</label>
+                                                        <div class="input-group spinner">
+                                                            <input id="sizeSpin_${tabName}" type="text" class="form-control" value="6">
+                                                            <div class="input-group-btn-vertical">
+                                                                <button id="sizeSpinUp_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                                                                <button id="sizeSpinDn_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="opacitySpin" class="control-label">Opacity</label>
+                                                        <div class="input-group spinner">
+                                                            <input id="opacitySpin_${tabName}" type="text" class="form-control" value="85">
+                                                            <div class="input-group-btn-vertical">
+                                                                <button id="opacitySpinUp_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                                                                <button id="opacitySpinDn_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </script>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading panel-collapsed">Additional/Geo-spatial filters <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
+                  <div class="panel-body" style="display:none">
+                    <div id="geo-filter"></div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="row">
+                      <form class="form-horizontal">
+                        <div class="form-group">
+                          <label for="saveQueryAs" class="control-label col-xs-3">Save query as:</label>
+                          <div class="col-xs-12 col-pdng-lft-0">
+                            <input type="text" class="form-control" id="saveQueryAs" placeholder="ENTER QUERY NAME">
+                          </div>
+                          <div class="col-xs-12 text-left">
+                            <button id="advSearchSave" type="button" class="btn btn-default">Save</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-body">
+                    <div class="row">
+                      <form class="form-inline">
+                        <div class="form-group">
+                          <label for="autoRefreshInterval" class="control-label col-xs-8"><input id="autoRefreshCheckbox" type="checkbox" value=""> Auto-refresh every (seconds)</label>
+                          <div class="input-group spinner col-xs-3">
+                            <input id="autoRefreshInterval" type="text" class="form-control" value="30">
+                            <div class="input-group-btn-vertical">
+                              <button id="autoRefreshSpinUp" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                              <button id="autoRefreshSpinDn" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pull-right">
+                <button id="advSearchSubmit" type="button" class="btn btn-primary">Submit</button>
+                <button id="advSearchReset" type="button" class="btn btn-default">Reset</button>
+              </div>
+            </div>
+            <div class="tab-pane" id="save-queries">
+              <div id="ogrid-admin-queries"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="ogrid-footer" class="panel-group">
+      <div class="panel panel-default ogrid-footer-panel ogrid-footer-panel-default">
+        <div class="panel-heading ogrid-footer-panel-heading">
+          <i id="ogrid-panel-caret" class="glyphicon glyphicon-chevron-up pull-right"></i>
+          <h6 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#tableview"></a>
+          </h6>
+        </div>
+        <div id="tableview" class="panel-collapse collapse">
+          <div class="panel-body">
+            <ul id="ogrid-nav-tabs" class="nav nav-tabs" role="tablist">
+            </ul>
+            <div id="ogrid-tab-content" class="tab-content">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="ogrid-alert" class="alert flyover flyover-bottom">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <div id="ogrid-alert-text"></div>
+  </div>
+  <div id="ogrid-busy">
+    <button id="btn-busy" class="btn btn-lg btn-info"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Working...</button>
+  </div>
+  <div id="loginForm"></div>
+
+  <!-- To be injected by gulp inject plug-in at build time -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/ogrid-theme-blue.css">
+  <!-- endinject -->
+
+  <!-- inject:js -->
+  <script src="js/app.min.js"></script>
+  <script src="config/EnvSettings.js"></script>
+  <!-- endinject -->
+
+  <script>
+    $(function () {
+      var app = new ogrid.Main(
+              {
+                //pass UI elements to our main class as part of dependencies
+
+                map: $('#map'),
+                qsearch_div: $('#qsearch'),
+                qsearch_input: $('#qsearch-input'),
+                qsearch_button: $('#qsearch-button'),
+                commandbar: $('#ogrid-clear-btn'),
+                alert_div: $('#ogrid-alert'),
+                alert_txt:  $('#ogrid-alert-text')
+              }
+      );
+      //our global ogrid.Main object
+      ogrid.App = app;
+      app.run();
+    });
+  </script>
+</body>
+</html>

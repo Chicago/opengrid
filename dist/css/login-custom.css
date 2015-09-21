@@ -1,0 +1,37 @@
+#loginForm {
+	position: fixed;
+	background-image: url("../images/background_lake_east.jpg");
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+}
+
+.panel {
+	background-color: transparent;
+}
+
+.panel-default {
+	border-color: transparent;
+}
+
+.panel-default>.panel-heading {
+	color: #fff;
+	background-color: transparent;
+	border-color: transparent;
+	text-align: center;
+}
+
+.login-panel input {
+	background: rgba(255,255,255,0.7);
+	border: 0px;
+}
+
+h2 {
+	font-family: 'Raleway', sans-serif;
+	font-size: 5em;
+}
+
+.alert-danger{
+	color: #fff;
+	background-color: #2b323a;
+	border-color: #46576d;
+}

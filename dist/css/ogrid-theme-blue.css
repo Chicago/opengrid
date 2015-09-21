@@ -1,0 +1,123 @@
+html, body {
+
+    font-size: 12px !important;
+}
+
+/* crez css styles */
+#ogrid-qsearch-hint {
+  position: relative;
+  top: -34px;
+  left: calc(100% - 32px);
+}
+
+
+#qsearch .popover {
+  top: 35px !important;
+}
+
+/* override bootstrap default to avoid having a 'fat' nav bar*/
+#ogrid-search .input-group {
+  display: block;
+}
+
+#ogrid-search .form-group {
+  margin-bottom: 0px;
+}
+
+.col-pdng-lft-0 { padding-left:0;}
+#ogrid-container #ogrid-nav { background:#2b323c;}
+#ogrid-container #ogrid-nav.navbar-default { border-color:#2b323c;}
+#ogrid-menu .btn-default { background-color:transparent; color:#dfe6ec;}
+#ogrid-menu .btn{border: 2px solid #e0e5eb; border-radius: 10px;}
+.navbar-default .navbar-nav > li > a { color:#dfe6ec;}
+.navbar-default .navbar-nav > li > a:hover { color:#FFFFFF;}
+#qsearch-input { border-radius:9px;}
+#ogrid-task-advanced-search.ogrid-task-pane { background-color:#73c4e1; opacity:0.92;}
+#ogrid-adv-tabs.nav-tabs > li > a { border:none; background-color:transparent; font-size:152%; color:#1a3f59;}
+#ogrid-adv-tabs.nav-tabs > li.active > a { border:none; background-color:transparent; font-size:152%; color:#FFFFFF;}
+#ogrid-content .leaflet-popup-content-wrapper { background:#464e61; color:#DFE6EC;}
+#ogrid-content .leaflet-popup-tip {background:#464e61;}
+#ogrid-content .nav-tabs { border:none;}
+#ogrid-content .panel-default { border:none;}
+#ogrid-content .panel { background-color:transparent; box-shadow:none; border:none;}
+#ogrid-content .panel-default > .panel-heading { background-color:transparent; color:#FFF;}
+#ogrid-adv-content .form-control { background-color:transparent; border:none; box-shadow:none; color:#4984a2; font-weight:bold;}
+#ogrid-adv-content .control-label label { color:#FFFFFF; text-align:left;}
+#ogrid-adv-content label { color:#FFFFFF; text-align:left;}
+#ogrid-adv-content .btn-primary {background-color:#28303d}
+#ogrid-adv-content .form-control::-webkit-input-placeholder {color: #4984a2;}
+#ogrid-adv-content .form-control:-moz-placeholder { /* Firefox 18- */ color: #4984a2; }
+#ogrid-adv-content .form-control::-moz-placeholder {  /* Firefox 19+ */ color: #4984a2; }
+#ogrid-adv-content .form-control:-ms-input-placeholder { color: #4984a2; }
+
+#ogrid-adv-content .panel-heading {
+    cursor: pointer;
+    padding:5px 10px!important;
+}
+
+
+/* select box CSS */
+#commonlyUsedQueries, #lastSavedQueries {padding:3px; margin: 0; -webkit-border-radius:4px; -moz-border-radius:4px;    border-radius:4px; -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset; -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset; background: #f8f8f8; color:#888; border:none; outline:none; display: inline-block; -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer;}
+/* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
+@media screen and (-webkit-min-device-pixel-ratio:0) { #commonlyUsedQueries, #lastSavedQueries {padding-right:18px} }
+#ogrid-adv-content div.cmnqry:after {content:'..'; color:#4984a2; -webkit-transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); transform:rotate(90deg); right:22px; top:0px; position:absolute; pointer-events:none; font-size:30px; font-weight:bold;}
+#ogrid-adv-content div.svdqry:after {content:'..'; color:#4984a2; -webkit-transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); transform:rotate(90deg); right:22px; top:0px; position:absolute; pointer-events:none; font-size:30px; font-weight:bold;}
+
+
+.query-builder .rules-group-container {
+    padding: 10px 10px 6px;
+    border:none !important;
+    background: none !important;
+}
+.query-builder .rules-group-container .btn-success {background-color: #28303D !important; border-color:#73C4E1 !important;}
+#ogrid-ds-tabs .regtab a {background-color:transparent !important; border:1px #FFFFFF solid !important; border-radius: 10px; }
+.query-builder .rules-group-container .btn-danger {color: #28303D; background-color:transparent !important; border-color: #28303D;}
+#advSearchSave {color:#fff !important; background-color:#28303D !important; border-color:#2E6DA4 !important;}
+
+.ogrid-task-pane .panel-body { text-transform:uppercase;}
+
+	::-webkit-scrollbar-button:start:decrement,
+    ::-webkit-scrollbar-button:end:increment { height: 0px; display: block; background-color: black;}
+        
+    ::-webkit-scrollbar-track-piece {
+        background-color: #73c4e1;          /*Global Track Peice(the slider noob.)*/
+        -webkit-border-radius: 6px;		
+    }       
+    ::-webkit-scrollbar-thumb:vertical {
+        height: 50px;
+        background-color: #2b323c;            /* Up/Down slider background*/
+        -webkit-border-radius: 6px;
+    }        
+    ::-webkit-scrollbar-thumb:horizontal {
+        width: 50px;
+        background-color: #666;            /* Side/Side slider background*/
+        -webkit-border-radius: 3px;
+    }
+	
+
+	::-moz-scrollbar {width: 10px;height: 6px;}
+    ::-webkit-scrollbar {width: 10px;height: 6px;}
+	
+    ::-moz-scrollbar-button:start:decrement,
+    ::-moz-scrollbar-button:start:decrement { height: 0px; display: block; background-color: black;}
+	
+	::-moz-scrollbar-track-piece {
+        background-color: #2b323c;          /*Global Track Peice(the slider noob.)*/
+        -webkit-border-radius: 6px;
+    }
+	::-moz-scrollbar-thumb:vertical {
+        height: 50px;
+        background-color: #666;            /* Up/Down slider background*/
+        -webkit-border-radius: 6px;
+    } 
+	::-moz-scrollbar-thumb:horizontal {
+        width: 50px;
+        background-color: #666;            /* Side/Side slider background*/
+        -webkit-border-radius: 3px;
+    }
+
+
+    /* hide search button */
+    #qsearch-button {
+      display: none;
+    }
