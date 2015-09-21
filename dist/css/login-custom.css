@@ -21,7 +21,7 @@
 }
 
 .login-panel input {
-	background: rgba(255,255,255,0.7);
+	background: rgba(107,107,107,0.25);
 	border: 0px;
 }
 
@@ -34,4 +34,20 @@ h2 {
 	color: #fff;
 	background-color: #2b323a;
 	border-color: #46576d;
+}
+
+.login-panel span.glyphicon {
+	color: #fff;
+	position: absolute;
+	left: 0;
+	padding: 10px 0 0 27px;
+}
+
+.form-control {
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
