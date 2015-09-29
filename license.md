@@ -382,7 +382,7 @@ Copyright &copy; 2015, City of Chicago - OpenGrid Project
 Copyright &copy; 2007, Eclipse Foundation, Inc. and its licensors.
 </p>
 
-<https://eclipse.org/org/documents/edl-v10.php>
+<center><https://eclipse.org/org/documents/edl-v10.php></center>
 
 <p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
 
@@ -402,7 +402,7 @@ Neither the name of the Eclipse Foundation, Inc. nor the names of its contributo
 Copyright &copy; 2015, City of Chicago - Opengrid Project
 
 All rights reserved.<br>
-<https://eclipse.org/org/documents/epl-v10.php>
+<center><https://eclipse.org/org/documents/epl-v10.php></center>
 
 THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE PUBLIC LICENSE ("AGREEMENT"). ANY USE, REPRODUCTION OR DISTRIBUTION OF THE PROGRAM CONSTITUTES RECIPIENT'S ACCEPTANCE OF THIS AGREEMENT.
 <ol>
