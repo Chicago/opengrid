@@ -41,6 +41,17 @@ The next step would be to create a fork within the original project and clone to
 <p>If a new feature, explain the use case with suggestions or a specification.
 Who will be the target audience? What would be the functionality of the new feature, offer illustrations? Why is it needed? How will it add significance to our work?</p>
 
+### Assigning Labels to Issues or Pull Request -
+<p>Labels are used within an issue or a pull request as a determining factor to establish priority and categorization to help organize a project.<br>There is a total of seven default labels within the github repository that one can use as a starter; if there are other creative labels that needs to be added there is an option to create or deleted labels within a repository.  Make sure each label matches your issue description subject wise.</p>
+<p>Default Labels:</p>
+- bug
+- duplicate
+- enhancement
+- help wanted
+- invalid
+- question
+- wontfix
+
 ##Ready to Commit
 <p>When contributing to a project make sure to write a descriptive and clean commit message; a clear commit message should answer the questions of <b>WHAT</b>, <b>WHY</b> and <b>HOW</b>.<p> 
 <p>Examples:</p>
