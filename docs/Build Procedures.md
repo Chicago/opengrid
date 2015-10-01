@@ -17,7 +17,7 @@ npm install
 # Customize/Configure
 Edit the `src/js/custom/Config.js` and `config/EnvSettings.js` files. `EnvSettings.js` overrides default settings specified in `Config.js` (build system can be configured later to pull a different copy of `EnvSettings.js` depending on the application environment i.e. Test, Production, etc). At a minimum, the *service endpoint* setting in `EnvSettings.js` must be edited to point to the correct location of the OpenGrid-compliant service.
 
-Refer to the [Customizing OpenGrid](./Customizing-OpenGrid) wiki for more details on OpenGrid customization points.
+Refer to the [Customizing OpenGrid](https://github.com/Chicago/opengrid/wiki/Customizing-OpenGrid) wiki for more details on OpenGrid customization points.
 
 # Run Gulp Tasks
 The application uses [Gulp](http://gulpjs.com/) as its build system and [Mocha](https://mochajs.org/) for its test framework.
