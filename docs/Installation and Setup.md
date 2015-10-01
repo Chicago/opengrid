@@ -15,7 +15,10 @@ Instructions for building the release packages can be found below:
 ### Installation
 #### Service Layer
 ##### Installation and Setup
+* TODO: Add steps to deploy WAR file
+
 ##### Database Configuration (MongoDB)
+* TODO: add steps to import sample data into Mongo DB
 
 #### User Interface
 * Update service URL to point to service URL configured above.
