@@ -104,7 +104,8 @@ ogrid.Alert = {
 
     busy: function (msgTxt, context, callback) {
         try {
-            $('#btn-busy').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> ' + msgTxt);
+            //$('#btn-busy').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> ' + msgTxt);
+            $('#btn-busy').html('<span class="fa fa-refresh fa-spin"></span> ' + msgTxt);
 
             //auto-center the busy div
             $("#ogrid-busy").css('left', ( ($(window).width() - $("#ogrid-busy").width()) /2 ));

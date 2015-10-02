@@ -16,11 +16,10 @@ ogrid.QSearchProcessor.LatLng = ogrid.QSearchProcessor.extend({
 
 
     //constructor
-    init: function(inputString, options) {
+    init: function(options) {
         if (options) {
             this._options = ($.extend(this._options, options));
         }
-        this._input = inputString;
     },
 
 
@@ -82,10 +81,6 @@ ogrid.QSearchProcessor.LatLng = ogrid.QSearchProcessor.extend({
 
 
 //support syntax without 'new' keyword (note: Camel-cased name)
-ogrid.QSearchProcessor.latLng = function (inputString, options) {
-    return new ogrid.QSearchProcessor.LatLng(inputString, options);
+ogrid.QSearchProcessor.latLng = function (options) {
+    return new ogrid.QSearchProcessor.LatLng(options);
 };
-
-//supported syntax (regex)
-//RegEx pattern by which the QuickSearch Prcoessor factory can recognize this
-//ogrid.QSearchProcessor.LatLng.pattern = /^(-?\d+(\.\d+)?)\s*,\s*(-?\d+(\.\d+)?)$/i;

@@ -56,11 +56,35 @@ ogrid.QSearch = ogrid.Class.extend({
 
 
     //private methods
+    _findQSearchFlexDataPlugin: function() {
+        var o = null;
+        $.each(ogrid.Config.quickSearch.plugins, function(i,v) {
+            if (v instanceof ogrid.QSearchProcessor.FlexData) {
+                o = v;
+                return false; //break
+            }
+        });
+        return o;
+    },
+
+
     _onLoggedIn: function(e) {
         //set initial focus to Quick Search input
+        var me = this;
         try {
-            //avoid annoying keyboard popup when on mobile mode
-            if (!ogrid.App.mobileView()) this._input.focus();
+            this._input.prop('disabled', true);
+            //set datasets option of FlexData quick search processor after login
+            var o = this._findQSearchFlexDataPlugin();
+            if (o) {
+                var dsCall = $.ajax(ogrid.Config.service.endpoint + '/datasets');
+                dsCall.then(function (dataTypes) {
+                    o.setOptions({datasets: dataTypes});
+                    me._input.prop('disabled', false);
+
+                    //avoid annoying keyboard popup when on mobile mode
+                    if (!ogrid.App.mobileView()) me._input.focus();
+                });
+            }
         } catch (ex) {
             console.log(ex.message);
         }

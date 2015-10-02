@@ -61,9 +61,13 @@ ogrid.Search.exec = function(options, passThroughData) {
     var me = this;
     var q = this._getParams(options.filter);
 
+    var url = ogrid.Config.service.endpoint + '/datasets/' + options.dataSetId + '/query?' + q  +
+        '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults);
+    if (!ogrid.isNull(options.sort)) {
+        url +='&s=' + encodeURI(options.sort);
+    }
     $.ajax({
-        url: ogrid.Config.service.endpoint + '/datasets/' + options.dataSetId + '/query?' + q  +
-            '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults),
+        url:  url,
         type: 'GET',
         async: true,
         contentType: 'application/json',

@@ -150,7 +150,7 @@ ogrid.TableView = ogrid.Class.extend({
         this._tabContent.empty();
     },
 
-    _populateTableRows: function(resultSetId, tableId, columns, data, showAutorefresh, lastRefreshed) {
+    _populateTableRows: function(resultSetId, tableId, columns, data, showAutorefresh, lastRefreshed, creationTSColumn) {
         //$('#' + tableId).addClass('no-wrap');
 
         this._tableOptions = $.extend(ogrid.Config.table.bootstrapTableOptions, {
@@ -170,7 +170,10 @@ ogrid.TableView = ogrid.Class.extend({
             height: this._getTableHeight(),
             showAutorefresh: showAutorefresh,
             cardView: ogrid.App.mobileView(),
-            pagination: !ogrid.App.mobileView() || data.features.length >= this._options.maxMobileRowsNoPagination
+            pagination: !ogrid.App.mobileView() || data.features.length >= this._options.maxMobileRowsNoPagination,
+
+            //for coloring new rows on auto-reresh
+            rowStyle: this._getRowStyler(tableId, creationTSColumn)
         });
 
         var $t = $('#' + tableId).bootstrapTable(this._tableOptions);
@@ -178,8 +181,11 @@ ogrid.TableView = ogrid.Class.extend({
         //add tooltip to Export extension
         $('div.export').attr('title', 'Export');
 
-        if (showAutorefresh)
-            $('div.autorefresh').attr('title', 'Last auto-refreshed: ' + lastRefreshed);
+        if (showAutorefresh) {
+            $('div.autorefresh').attr('title', 'Last auto-refreshed: ' + lastRefreshed.format('MM/DD/YYYY hh:mm:ss a'));
+            //update lastRefresh
+            $('#' + tableId).data('lastRefreshed', lastRefreshed);
+        }
 
         //console.log($t.bootstrapTable('getData'));
         var me = this;
@@ -264,6 +270,28 @@ ogrid.TableView = ogrid.Class.extend({
         return a;
     },
 
+    _getRowStyler:function(tableId, creationTSColumn) {
+        return function(row, index) {
+            var lastRefreshed = $('#' + tableId).data('lastRefreshed');
+            if (lastRefreshed) {
+                //highlight new rows on auto-refresh using Bootstrap's success style
+                if (creationTSColumn && moment(row[creationTSColumn], ogrid.Config.service.dateFormat) > lastRefreshed) {
+                    return {
+                        classes: 'success'
+                    };
+                }
+            }
+            return {};
+        };
+    },
+
+    _getCreationTsColumn: function(data) {
+        if (data.meta.view.options.creationTimestamp) {
+            return 'properties.' + data.meta.view.options.creationTimestamp;
+        }
+        return null;
+    },
+
     //public methods
 
     //loads new data on new tab
@@ -311,8 +339,11 @@ ogrid.TableView = ogrid.Class.extend({
             s+= '</div>';
             $(s).appendTo(this._tabContent);
 
+            //we need to send this along now for the auto-highlighting to work
+            var creationTSColumn = this._getCreationTsColumn(data);
+
             //populate datatable objects
-            this._populateTableRows(resultSetId, o.tableId, a, data, enableAutoRefresh, lastRefreshed);
+            this._populateTableRows(resultSetId, o.tableId, a, data, enableAutoRefresh, lastRefreshed, creationTSColumn);
             if (activate) {
                 this.activateTab(o.id);
                 /*$('#' + o.tabId).addClass('active');
@@ -343,7 +374,11 @@ ogrid.TableView = ogrid.Class.extend({
 
         var $t = $('#' + tableId).bootstrapTable('refreshOptions', this._tableOptions);
 
-        if (showAutorefresh)
-            $('div.autorefresh').attr('title', 'Last auto-refreshed: ' + lastRefreshed);
+        if (showAutorefresh) {
+            $('div.autorefresh').attr('title', 'Last auto-refreshed: ' + lastRefreshed.format('MM/DD/YYYY hh:mm:ss a'));
+
+            //update lastRefresh
+            $('#' + tableId).data('lastRefreshed', lastRefreshed);
+        }
     }
 });

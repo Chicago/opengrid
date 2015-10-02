@@ -20,13 +20,9 @@ ogrid.QSearchProcessor.Tweet = ogrid.QSearchProcessor.extend({
 
 
     //constructor
-    init: function(inputString, options) {
+    init: function(options) {
         if (options) {
             this._options = ($.extend(this._options, options));
-        }
-
-        if (inputString) {
-            this._input = inputString;
         }
     },
 
@@ -127,11 +123,6 @@ ogrid.QSearchProcessor.Tweet = ogrid.QSearchProcessor.extend({
 });
 
 //support syntax without 'new' keyword (note: Camel-cased name)
-ogrid.QSearchProcessor.tweet = function (inputString, options) {
-    return new ogrid.QSearchProcessor.Tweet(inputString, options);
+ogrid.QSearchProcessor.tweet = function (options) {
+    return new ogrid.QSearchProcessor.Tweet(options);
 };
-
-
-//supported syntax (regex)
-//RegEx pattern by which the QuickSearch Prcoessor factory can recognize this
-//ogrid.QSearchProcessor.Tweet.pattern = /^(tweet|twe).*$/i;

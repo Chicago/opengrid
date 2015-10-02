@@ -15,6 +15,8 @@ ogrid.Map = ogrid.Class.extend({
     _locateControl: null,
 
     _options: {
+        //lime
+        newDataHighLightColor: '#00FF00'
     },
 
     _heatmapTypes: {},
@@ -228,6 +230,19 @@ ogrid.Map = ogrid.Class.extend({
 
     },
 
+    _getBorderColor: function(renditionColor, feature, options, lastRefreshed) {
+        //check if there is a column designated as creation time whose value we can use to compare with last refresh timestamp
+        //   for auto-highlighting
+        if (options.creationTimestamp && lastRefreshed) {
+            //highlight new rows on auto-refresh using Bootstrap's success style
+            if (moment(feature.properties[options.creationTimestamp], ogrid.Config.service.dateFormat) > lastRefreshed) {
+                return this._options.newDataHighLightColor;
+            }
+        }
+        //default
+        return renditionColor;
+    },
+
     _onRefreshData: function (evtData) {
     	try {
             //console.log('map refresh: ' + JSON.stringify(evtData));
@@ -245,6 +260,9 @@ ogrid.Map = ogrid.Class.extend({
                 this._announceRecordCount(evtData.message,data.features.length);
                 var me = this;
 
+                //if data is from a monitoring query, use that as our resultSetId as that remains constant through out the monitoring/timer session
+                var rsId = this._isMonitored(evtData.message) ? evtData.message.options.passthroughData.monitorData.monitorId : evtData.message.resultSetId;
+
                 var resultsLayer = L.geoJson(data, {
                     style: function (feature) {
                         //can't use feature.properties.marker-color due to the dash on the name
@@ -260,14 +278,14 @@ ogrid.Map = ogrid.Class.extend({
                                 feature.id = ogrid.guid();
                         }
 
-                        if (!me._markers[evtData.message.resultSetId])
-                            me._markers[evtData.message.resultSetId] = {};
+                        if (!me._markers[rsId])
+                            me._markers[rsId] = {};
 
                         //use meta view info to format display
                         if (data.meta.view.options.rendition.icon==='marker') {
                             //default marker
                             var m = new L.marker(latlng);
-                            me._markers[evtData.message.resultSetId][ogrid.oid(feature)] = m;
+                            me._markers[rsId][ogrid.oid(feature)] = m;
                             return m;
                         } else {
                             //default point rendering
@@ -276,11 +294,16 @@ ogrid.Map = ogrid.Class.extend({
 
                             var cm =  new L.CircleMarker(latlng, {
                                 radius:       o.size,
-                                color:        o.color,
+                                color:        me._getBorderColor(
+                                    o.color,
+                                    feature,
+                                    data.meta.view.options,
+                                    me._markers[rsId].lastRefreshed
+                                ),
                                 fillOpacity:  (o.opacity/100), //pct
                                 fillColor:    o.fillColor
                             });
-                            me._markers[evtData.message.resultSetId][ogrid.oid(feature)] = cm;
+                            me._markers[rsId][ogrid.oid(feature)] = cm;
                             return cm;
                         }
                     },
@@ -306,11 +329,10 @@ ogrid.Map = ogrid.Class.extend({
                 resultsLayer.isOpenGridQueryResults = true;
 
                 //we'll use the resultset Id to see if a layer for the same query needs to be replaced on our layer control
-                resultsLayer.opengridResultsetId = evtData.message.resultSetId;
+                resultsLayer.opengridResultsetId = rsId;
 
-                //if data is from a monitoring query, use that as our resultSetId as that remains constant through out the monitoring/timer session
-                if (this._isMonitored(evtData.message))
-                    resultsLayer.opengridResultsetId = evtData.message.options.passthroughData.monitorData.monitorId;
+                //store lastRefreshed
+                this._markers[rsId].lastRefreshed = data.lastRefreshed;
 
                 //add query results to layer control
                 this._addLayerToControl(resultsLayer, data.meta.view, 'Data', this._GENERATED_LAYERS_LABEL);
@@ -352,6 +374,18 @@ ogrid.Map = ogrid.Class.extend({
         }
     },
 
+    _linkify: function(txt) {
+        // looks for urls and makes them links
+        var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+
+       try {
+           //open URL in new window or tab
+           return txt.replace(exp, "<a href='$1' target=\"_blank\">$1</a>");
+       } catch (ex) {
+           return txt;
+       }
+    },
+
     _popupText: function (feature, view) {
         var txt ="";
         //iterate through geojson feature properties
@@ -365,7 +399,7 @@ ogrid.Map = ogrid.Class.extend({
                         //graphic data types will be rendered differently on popup later
                         //other types to be supported later are link, etc.
                         txt += '<b>' + m.displayName + ': </b>';
-                        txt += feature.properties[p] + '<br />';
+                        txt += this._linkify(feature.properties[p]) + '<br />';
                     }
                 }
             }

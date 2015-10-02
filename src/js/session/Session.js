@@ -100,7 +100,7 @@ ogrid.Session = ogrid.Class.extend({
     _inputKeypress: function (e) {
         var me = this;
 
-        if (e.which == 13) {
+        if ( (e.which == 13) && ( !$('.login-panel .btn').hasClass('disabled')) )  {
             me._doLogin();
             return false;
         }

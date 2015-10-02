@@ -395,53 +395,62 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
     },
 
     _saveCurrentQuery: function(queryId) {
-        var me = this;
-        var q = {
-            name: this._getQueryName(),
-            owner: ogrid.App.getSession().getCurrentUser().getProfile().loginId,
-            spec: [],
-            sharedWith: {users:[], groups:[]}, //no sharing implemented for Sprint 2
-            isCommon: false,
-            autoRefresh: $('#autoRefreshCheckbox').prop('checked'),
-            refreshInterval: $("#autoRefreshInterval").val()
-        };
+        try {
+            var me = this;
+            var q = {
+                name: this._getQueryName(),
+                owner: ogrid.App.getSession().getCurrentUser().getProfile().loginId,
+                spec: [],
+                sharedWith: {users:[], groups:[]}, //no sharing implemented for Sprint 2
+                isCommon: false,
+                autoRefresh: $('#autoRefreshCheckbox').prop('checked'),
+                refreshInterval: $("#autoRefreshInterval").val()
+            };
 
-        if (queryId)
-            q._id = queryId;
+            if (queryId)
+                q._id = queryId;
 
-        //get all query builders
-        $.each($('#ogrid-ds-content').find('.query-builder'), function(i,v) {
-            //for each data type selected, build query to save
-            var typeId = $(v).data('typeId');
-
-            //get mongo-specific query
-            var f = $(v).queryBuilder('getMongo');
-            if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
-                console.log(JSON.stringify($(v).queryBuilder('getRules')));
-                //alert(JSON.stringify($(v).queryBuilder('getRules')));
-                //execute query
+            //get all query builders
+            $.each($('#ogrid-ds-content').find('.query-builder'), function(i,v) {
+                //for each data type selected, build query to save
+                var typeId = $(v).data('typeId');
                 var tabId = $(v).data('parentId');
-
                 var r = me._getRendition(tabId);
                 delete r.fillColor; //fillColor is calculated, no need to save
-                q.spec.push({
-                    dataSetId: typeId,
-                    filters: $(v).queryBuilder('getRules'),
-                    rendition: r
-                });
-            } else {
-                throw ogrid.error('Search Error', 'No search criteria specified or search criteria is invalid.');
-            }
-        });
 
-        //get geo-filter settings
-        q.geoFilter = this._geoFilter.getSettings();
+                $(v)[0].queryBuilder.setOptions({display_errors: !me._hasEmptyFilter(v)});
+                //get mongo-specific query
+                var f = $(v).queryBuilder('getMongo');
+                if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
+                    console.log(JSON.stringify($(v).queryBuilder('getRules')));
+                    //alert(JSON.stringify($(v).queryBuilder('getRules')));
+                    q.spec.push({
+                        dataSetId: typeId,
+                        filters: $(v).queryBuilder('getRules'),
+                        rendition: r
+                    });
+                } else if (me._hasEmptyFilter(v)) {
+                    q.spec.push({
+                        dataSetId: typeId,
+                        filters: {},
+                        rendition: r
+                    });
+                } else {
+                    throw ogrid.error('Search Error', 'Search criteria is invalid.');
+                }
+            });
 
-        ogrid.Search.save({
-            query: q,
-            success: $.proxy(me._onSaveSuccess, me),
-            error: $.proxy(me._onSaveError, me)
-        });
+            //get geo-filter settings
+            q.geoFilter = this._geoFilter.getSettings();
+
+            ogrid.Search.save({
+                query: q,
+                success: $.proxy(me._onSaveSuccess, me),
+                error: $.proxy(me._onSaveError, me)
+            });
+        } catch (ex) {
+            ogrid.Alert.error(ex.message);
+        }
     },
 
     _onSaveSuccess: function(data) {
@@ -489,27 +498,31 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
     },
 
     _checkQueryExistence: function(name, cb) {
-        var me = this;
-        if (this._activeQueryId && !this._savedAsNewName(name)) {
-            //existing query, let it through as this will get handled as an update
-            cb(this._activeQueryId);
-        } else {
-            //check if the same query name exists for this user, if so prompt the user if he wants to overlay it
-            this._findQueryWithName(name, function(queryId) {
-                if (queryId) {
-                    //pop dialog box
-                    ogrid.Alert.modalPrompt('Query Save', 'A query with name \'' + name + '\' already exists. This will overwrite the existing query. Continue?', function(selected) {
-                        //'ok' or 'cancel'
-                        if (selected === 'ok') {
-                            //force an update by passing existing query Id to the callback (instead of deleting and adding a new one)
-                            //call callback to actually save current query definition
-                            cb(queryId);
-                        }
-                    });
-                } else {
-                    cb(null);
-                }
-            });
+        try {
+            var me = this;
+            if (this._activeQueryId && !this._savedAsNewName(name)) {
+                //existing query, let it through as this will get handled as an update
+                cb(this._activeQueryId);
+            } else {
+                //check if the same query name exists for this user, if so prompt the user if he wants to overlay it
+                this._findQueryWithName(name, function(queryId) {
+                    if (queryId) {
+                        //pop dialog box
+                        ogrid.Alert.modalPrompt('Query Save', 'A query with name \'' + name + '\' already exists. This will overwrite the existing query. Continue?', function(selected) {
+                            //'ok' or 'cancel'
+                            if (selected === 'ok') {
+                                //force an update by passing existing query Id to the callback (instead of deleting and adding a new one)
+                                //call callback to actually save current query definition
+                                cb(queryId);
+                            }
+                        });
+                    } else {
+                        cb(null);
+                    }
+                });
+            }
+        } catch (ex) {
+            ogrid.Alert.error(ex.message);
         }
     },
 
@@ -549,9 +562,12 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             this._pendingQueries = 0; //re-init list
             $.each($('#ogrid-ds-content').find('.query-builder'), function(i,v) {
                 var f = $(v).queryBuilder('getMongo');
-                if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
+
+                //allow empty filters
+                //Issue #118
+                //if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
                     me._pendingQueries++;
-                }
+                //}
             });
 
             //get all query builders
@@ -559,29 +575,52 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 //for each data type selected, build query
                 var typeId = $(v).data('typeId');
 
+                //do not show error on UI if empty (Issue #118)
+                $(v)[0].queryBuilder.setOptions({display_errors: !me._hasEmptyFilter(v)});
+
                 //get mongo-specific query
                 var f = $(v).queryBuilder('getMongo');
+                var tabId = $(v).data('parentId');
+
+                //allow empty filters
+                //Issue #118
+                var search = {
+                    dataSetId: typeId,
+                    //default to no filter
+                    filter: {},
+                    rendition: me._getRendition(tabId),
+                    success: $.proxy(me._onSubmitSuccess, me),
+                    error: $.proxy(me._onSubmitError, me)
+                };
+
                 if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
                     console.log(JSON.stringify($(v).queryBuilder('getRules')));
-                    //alert(JSON.stringify($(v).queryBuilder('getRules')));
+
                     //execute query
-                    var tabId = $(v).data('parentId');
-                    var search = {
-                        dataSetId: typeId,
-                        filter: f,
-                        rendition: me._getRendition(tabId),
-                        success: $.proxy(me._onSubmitSuccess, me),
-                        error: $.proxy(me._onSubmitError, me)
-                    };
-                    //immediate execution
-                    ogrid.Search.exec(search, {origin: 'advancedSearch', search: search});
-                } else {
-                    throw ogrid.error('Search Error', 'No search criteria specified or search criteria is invalid.');
+                    search.filter = f;
+                } else if (!me._hasEmptyFilter(v)) {
+                    //not blank condition and in error state
+                    throw ogrid.error('Search Error', 'Search criteria is invalid.');
                 }
+                //immediate execution
+                ogrid.Search.exec(search, {origin: 'advancedSearch', search: search});
             });
         } catch (ex) {
             ogrid.Alert.error(ex.message);
         }
+    },
+
+    _hasEmptyFilter: function(qbuilder) {
+        var r = true;
+        //if operator container is empty, it must be an empty filter
+        $.each($(qbuilder).find('.rule-operator-container'), function(i, v) {
+            //loop through each rule container, in case there are more than 1
+            if ($(v).html() !== '') {
+                r = false;
+                return false;
+            }
+        });
+        return r;
     },
 
     _onSubmitSuccess: function(data, passThroughData) {
@@ -748,6 +787,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             b.rules = qspec.filters;
         }
         $('#builder_' + tabId).queryBuilder(b);
+        $('#builder_' + tabId)[0].queryBuilder.setOptions({display_errors: false});
 
         //store reference to the data set type for easily building actual query later
         $('#builder_' + tabId).data('typeId', qspec.dataSetId);

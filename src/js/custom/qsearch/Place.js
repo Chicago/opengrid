@@ -16,11 +16,10 @@ ogrid.QSearchProcessor.Place = ogrid.QSearchProcessor.extend({
 
 
     //constructor
-    init: function(inputString, options) {
+    init: function(options) {
         if (options) {
             this._options = ($.extend(this._options, options));
         }
-        this._input = inputString;
     },
 
 
@@ -128,11 +127,6 @@ ogrid.QSearchProcessor.Place = ogrid.QSearchProcessor.extend({
 });
 
 //support syntax without 'new' keyword (note: Camel-cased name)
-ogrid.QSearchProcessor.place = function (inputString, options) {
-    return new ogrid.QSearchProcessor.Place(inputString, options);
+ogrid.QSearchProcessor.place = function (options) {
+    return new ogrid.QSearchProcessor.Place(options);
 };
-
-
-//supported syntax (regex)
-//dummy value
-//ogrid.QSearchProcessor.Place.pattern = null;

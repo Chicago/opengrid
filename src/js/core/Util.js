@@ -154,7 +154,7 @@ ogrid.Util = {
 
 	//current current day and time
 	now: function() {
-		Date.prototype.today = function () {
+		/*Date.prototype.today = function () {
 			//mm/dd/yyyy
 			return (((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) + "/"  + ((this.getDate() < 10)?"0":"") + this.getDate() + "/"+ this.getFullYear();
 		};
@@ -164,7 +164,8 @@ ogrid.Util = {
 			return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 		};
 
-		return new Date().today() + " " + new Date().timeNow();
+		return new Date().today() + " " + new Date().timeNow();*/
+		return moment();
 	}
 };
 
