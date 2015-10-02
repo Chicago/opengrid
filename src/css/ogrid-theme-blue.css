@@ -1,6 +1,6 @@
 html, body {
 
-    font-size: 12px !important;
+    /*font-size: 12px !important;*/
 }
 
 /* crez css styles */
@@ -33,8 +33,8 @@ html, body {
 .navbar-default .navbar-nav > li > a:hover { color:#FFFFFF;}
 #qsearch-input { border-radius:9px;}
 #ogrid-task-advanced-search.ogrid-task-pane { background-color:#73c4e1; opacity:0.92;}
-#ogrid-adv-tabs.nav-tabs > li > a { border:none; background-color:transparent; font-size:152%; color:#1a3f59;}
-#ogrid-adv-tabs.nav-tabs > li.active > a { border:none; background-color:transparent; font-size:152%; color:#FFFFFF;}
+#ogrid-adv-tabs.nav-tabs > li > a { border:none; background-color:transparent; color:#1a3f59;}
+#ogrid-adv-tabs.nav-tabs > li.active > a { border:none; background-color:transparent; color:#FFFFFF;}
 #ogrid-content .leaflet-popup-content-wrapper { background:#464e61; color:#DFE6EC;}
 #ogrid-content .leaflet-popup-tip {background:#464e61;}
 #ogrid-content .nav-tabs { border:none;}
@@ -60,8 +60,8 @@ html, body {
 #commonlyUsedQueries, #lastSavedQueries {padding:3px; margin: 0; -webkit-border-radius:4px; -moz-border-radius:4px;    border-radius:4px; -webkit-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset; -moz-box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset;    box-shadow: 0 3px 0 #ccc, 0 -1px #fff inset; background: #f8f8f8; color:#888; border:none; outline:none; display: inline-block; -webkit-appearance:none; -moz-appearance:none; appearance:none; cursor:pointer;}
 /* Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding. */
 @media screen and (-webkit-min-device-pixel-ratio:0) { #commonlyUsedQueries, #lastSavedQueries {padding-right:18px} }
-#ogrid-adv-content div.cmnqry:after {content:'..'; color:#4984a2; -webkit-transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); transform:rotate(90deg); right:22px; top:0px; position:absolute; pointer-events:none; font-size:30px; font-weight:bold;}
-#ogrid-adv-content div.svdqry:after {content:'..'; color:#4984a2; -webkit-transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); transform:rotate(90deg); right:22px; top:0px; position:absolute; pointer-events:none; font-size:30px; font-weight:bold;}
+#ogrid-adv-content div.cmnqry:after {content:'..'; color:#4984a2; -webkit-transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); transform:rotate(90deg); right:25px; top:0px; position:absolute; pointer-events:none; font-size:30px; font-weight:bold;}
+#ogrid-adv-content div.svdqry:after {content:'..'; color:#4984a2; -webkit-transform:rotate(90deg); -moz-transform:rotate(90deg); -ms-transform:rotate(90deg); transform:rotate(90deg); right:25px; top:0px; position:absolute; pointer-events:none; font-size:30px; font-weight:bold;}
 
 
 .query-builder .rules-group-container {
@@ -73,8 +73,6 @@ html, body {
 #ogrid-ds-tabs .regtab a {background-color:transparent !important; border:1px #FFFFFF solid !important; border-radius: 10px; }
 .query-builder .rules-group-container .btn-danger {color: #28303D; background-color:transparent !important; border-color: #28303D;}
 #advSearchSave {color:#fff !important; background-color:#28303D !important; border-color:#2E6DA4 !important;}
-
-.ogrid-task-pane .panel-body { text-transform:uppercase;}
 
 	::-webkit-scrollbar-button:start:decrement,
     ::-webkit-scrollbar-button:end:increment { height: 0px; display: block; background-color: black;}
@@ -95,8 +93,8 @@ html, body {
     }
 	
 
-	::-moz-scrollbar {width: 10px;height: 6px;}
-    ::-webkit-scrollbar {width: 10px;height: 6px;}
+	::-moz-scrollbar {width: 8px;height: 6px;}
+    ::-webkit-scrollbar {width: 8px;height: 6px;}
 	
     ::-moz-scrollbar-button:start:decrement,
     ::-moz-scrollbar-button:start:decrement { height: 0px; display: block; background-color: black;}
@@ -121,3 +119,174 @@ html, body {
     #qsearch-button {
       display: none;
     }
+
+html, body {
+    /*font-size: 12px !important;*/
+    font-family: 'Open Sans', sans-serif;
+    /*font-size: 12px;*/
+    /*font-weight: 300;*/
+    /*font-family: 'Lato', sans-serif;*/
+}
+
+.ogrid-task-pane .control-label {
+    text-transform:uppercase;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.ogrid-task-pane .panel-heading {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.ogrid-task-pane .panel-body {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+
+.ogrid-task-pane .nav-tabs a {
+    font-weight: 600;
+    padding-left: 10px;
+}
+
+
+.ogrid-task-pane .nav-tabs a:hover {
+    text-decoration: underline;
+}
+
+.ogrid-task-pane {
+    width: 550px;
+}
+
+.ogrid-task-pane .form-group {
+    margin-bottom: 0px;
+}
+
+.ogrid-task-pane .col-xs-7 {
+    padding-left: 0px;
+}
+
+.ogrid-task-pane .panel {
+    padding-top: 10px;
+}
+
+.ogrid-task-pane .nav {
+    padding-top: 15px;
+}
+
+#ogrid-adv-content .form-control  {
+    font-weight: 300;
+    color: rgb(51, 51, 51);
+}
+
+#advSearchSubmit, #advSearchReset, #advSearchSave {
+    width: 100px;
+}
+
+#advSearchSubmit {
+    margin-left: 10px;
+}
+
+
+
+#autorefresh-panel .control-label {
+    padding-left: 0px;
+}
+
+#autorefresh-panel .spinner {
+    width: 80px;
+}
+
+#savequery-panel  .panel-body {
+    margin-left: 0px;
+    padding-left: 10px;
+}
+
+@media (max-width: 550px) {
+    .ogrid-task-pane {
+        width: 100%;
+        opacity: 1;
+    }
+
+    .ogrid-task-pane .form-control {
+        padding-left: 0px;
+    }
+}
+
+/*make app name consistent with the command bar text color */
+.navbar-default .navbar-brand {
+    color: #dfe6ec;
+}
+
+.ogrid-task-pane .glyphicon-chevron-up, .glyphicon-chevron-down  {
+    font-size: 12px;
+}
+
+#ogrid-ds-tabs a {
+    font-weight:400;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+}
+
+.query-builder .form-control ::-webkit-input-placeholder  {
+
+}
+
+.ogrid-task-pane ::-webkit-input-placeholder  {
+    font-weight: 600;
+}
+
+.ogrid-task-pane ::-moz-placeholder  {
+    font-weight: 600;
+}
+
+
+.ogrid-task-pane :-ms-input-placeholder   {
+    font-weight: 600;
+}
+
+.ogrid-task-pane .rule-value-container .form-control {
+    font-weight: 300;
+}
+
+
+div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.adv-search-geofilter label {
+    text-transform:uppercase;
+    font-weight: 400;
+    font-size: 13px;
+    width: auto;
+}
+
+#ogrid-adv-tabs a {
+    font-size: 152%;
+}
+
+/* Size when the advanced tabs header breaks */
+@media (max-width: 342px) {
+    #ogrid-adv-tabs a {
+        font-weight: 800;
+        font-size: 130%;
+    }
+}
+
+/* distnguish between active and inactive AND/OR selection for dataset rule/filter */
+#ogrid-adv-content .rules-group-container .btn-primary {
+    background-color: #e6e6e6;
+    color: #28303d;
+}
+
+#ogrid-adv-content .rules-group-container .btn-primary.active {
+    background-color: #28303d;
+    color: #e6e6e6;
+}
+
+.leaflet-popup-content a {
+    color: lightskyblue;
+}

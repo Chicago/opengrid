@@ -6,6 +6,24 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
 
+  <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="./images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="./images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
+
   <!-- To be injected by gulp inject plug-in at build time -->
   <!-- inject:head:css -->
   <!-- endinject -->
@@ -61,8 +79,8 @@
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <li><a href="#">My Subscriptions...</a></li>
-                <li class="divider"></li>
+                <!--<li><a href="#">My Subscriptions...</a></li>
+                <li class="divider"></li>-->
                 <li><a id="ogrid-logout-item" href="#">Logout</a></li>
               </ul>
             </li>
@@ -93,13 +111,13 @@
             <div class="tab-pane active" id="build-query">
               <div class="panel-group">
                 <div class="panel panel-default">
-                  <div class="panel-heading">Existing queries <span class="clickable"><i class="glyphicon glyphicon-chevron-up"></i></span></div>
+                  <div class="panel-heading">Existing Queries <span class="clickable"><i class="glyphicon glyphicon-chevron-up"></i></span></div>
                   <div class="panel-body">
                     <div class="row">
                       <form class="form-horizontal">
                         <div class="form-group">
-                          <label for="commonlyUsedQueries" class="control-label col-xs-4">Commonly used queries:</label>
-                          <div class="col-xs-8 cmnqry">
+                          <label for="commonlyUsedQueries" class="control-label col-xs-5">Commonly used queries</label>
+                          <div class="col-xs-7 cmnqry">
                             <select id="commonlyUsedQueries" class="form-control">
                               <option value="">SELECT COMMONLY USED QUERY</option>
                               <script type="text/x-jquery-tmpl" id="queryOptionTemplate">
@@ -109,8 +127,8 @@
                           </div>
                         </div>
                         <div class="form-group">
-                          <label for="lastSavedQueries" class="control-label col-xs-4">Load saved query:</label>
-                          <div class="col-xs-8 svdqry">
+                          <label for="lastSavedQueries" class="control-label col-xs-5">Load saved query</label>
+                          <div class="col-xs-7 svdqry">
                             <select id="lastSavedQueries" class="form-control">
                               <option value="">SELECT SAVED QUERY</option>
                             </select>
@@ -121,8 +139,8 @@
                   </div>
                 </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading panel-collapsed">Datasets and standard filters <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
-                  <div class="panel-body" style="display:none">
+                  <div class="panel-heading panel-collapsed">Datasets and Standard Filters <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
+                  <div id="ogrid-dataset-filters" class="panel-body" style="display:none">
                     <ul id="ogrid-ds-tabs" class="nav nav-tabs nav-pills" role="tablist">
                       <!-- JQuery template -->
                       <script type="text/x-jquery-tmpl" id="newDTTemplate">
@@ -174,6 +192,7 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    &nbsp;
                                                     <div class="form-group">
                                                         <label for="sizeSpin" class="control-label">Size</label>
                                                         <div class="input-group spinner">
@@ -184,6 +203,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    &nbsp;
                                                     <div class="form-group">
                                                         <label for="opacitySpin" class="control-label">Opacity</label>
                                                         <div class="input-group spinner">
@@ -203,35 +223,30 @@
                   </div>
                 </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading panel-collapsed">Additional/Geo-spatial filters <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
-                  <div class="panel-body" style="display:none">
+                  <div class="panel-heading panel-collapsed">Additional/Geo-spatial Filters <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
+                  <div id="ogrid-geo-filters" class="panel-body" style="display:none">
                     <div id="geo-filter"></div>
                   </div>
                 </div>
-                <div class="panel panel-default">
+                <div id="savequery-panel" class="panel panel-default">
                   <div class="panel-body">
-                    <div class="row">
-                      <form class="form-horizontal">
+                      <form class="form-inline">
                         <div class="form-group">
-                          <label for="saveQueryAs" class="control-label col-xs-3">Save query as:</label>
-                          <div class="col-xs-12 col-pdng-lft-0">
+                          <label for="saveQueryAs" class="control-label">Save query as</label>
                             <input type="text" class="form-control" id="saveQueryAs" placeholder="ENTER QUERY NAME">
-                          </div>
-                          <div class="col-xs-12 text-left">
+                            <br>
                             <button id="advSearchSave" type="button" class="btn btn-default">Save</button>
-                          </div>
                         </div>
                       </form>
-                    </div>
                   </div>
                 </div>
-                <div class="panel panel-default">
+                <div id="autorefresh-panel" class="panel panel-default">
                   <div class="panel-body">
                     <div class="row">
                       <form class="form-inline">
                         <div class="form-group">
-                          <label for="autoRefreshInterval" class="control-label col-xs-8"><input id="autoRefreshCheckbox" type="checkbox" value=""> Auto-refresh every (seconds)</label>
-                          <div class="input-group spinner col-xs-3">
+                          <label for="autoRefreshInterval" class="control-label"><input id="autoRefreshCheckbox" type="checkbox" value=""> Auto-refresh every (seconds)</label>
+                          <div class="input-group spinner">
                             <input id="autoRefreshInterval" type="text" class="form-control" value="30">
                             <div class="input-group-btn-vertical">
                               <button id="autoRefreshSpinUp" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
@@ -244,7 +259,7 @@
                   </div>
                 </div>
               </div>
-              <div class="pull-right">
+              <div class="pull-left">
                 <button id="advSearchSubmit" type="button" class="btn btn-primary">Submit</button>
                 <button id="advSearchReset" type="button" class="btn btn-default">Reset</button>
               </div>

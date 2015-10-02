@@ -83,13 +83,13 @@ ogrid.Chart = ogrid.Class.extend({
             if (counts.hasOwnProperty(fieldVal)) {
                 counts[fieldVal].value++;
             } else {
-                var color = chroma.random();
+                var color = chroma.random().hex();
 
                 //not in our map yet, initialize
                 counts[fieldVal] = {
                     value: 1,
                     color: color,
-                    highlight: chroma(color).luminance(0.5),
+                    highlight: chroma(color).luminance(0.5).hex(),
                     label: fieldVal
                 };
             }
