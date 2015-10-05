@@ -19,6 +19,7 @@ var gulp = require('gulp'),
 //add path of CSS files to inject last into the HTML file
 var injectLastCss=[
     //example: src/css/somefile.css
+    'src/css/login-custom.css'
 ];
 
 //select theme to use
@@ -250,7 +251,6 @@ gulp.task('html-release', function(){
             ignorePath: '/dist/',
             addRootSlash: false
         }))
-
         .pipe(inject(gulp.src(
                 ['./dist/**/app*', '!./dist/**/app.js', 'config/EnvSettings.js'].concat(
                     //add our injectLastCss files from dist folder
