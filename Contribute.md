@@ -2,20 +2,6 @@
 
 Open Grid follows the open source concept where as any new ideas and information is very helpful in advancing a project.  To contribute code to a project it must first be approved by project leader. Also there are licensing and agreements that needs to take effect.
 
-
-## Fork and Clone
-The next step would be to create a fork within the original project and clone to your computer. A fork produces a copy of the original project this copy will allow you to easily modify changes without affecting the origin project. 
-
-###Fork a repository:
-- Click on the Fork Button in the header of the repository. After its finish, you’ll be taken to a copy of the repository that was created.
-- To be able to work on the project and experiment with changes you will need to clone the fork repo to your computer.
-
-### Clone the fork repo:
-- If using the GitHub desktop application simply click on the button called **“Clone in Desktop”**. 
-- Save the clone repository to a relevant location on your computer.
-
-<div align="center"><b> Example: git clone https://github.com/YOUR-USERNAME/cloned repository</div></b>
-
 ## Submit a Pull Request
 <p>Pull request allows users to convey changes that’s been added to a repository.  Pull request can only be initialized if there is a distinction between either the branches or repository.  To collaborate new changes or submit ideas:</p>
 - Always specify what branch you’ll like to merge your changes into. 
