@@ -5,32 +5,32 @@
 	background-repeat: no-repeat;
 }
 
-.panel {
+.ogrid-login .panel {
 	background-color: transparent;
 }
 
-.panel-default {
+.ogrid-login .panel-default {
 	border-color: transparent;
 }
 
-.panel-default>.panel-heading {
+.ogrid-login .panel-default>.panel-heading {
 	color: #fff;
 	background-color: transparent;
 	border-color: transparent;
 	text-align: center;
 }
 
-.login-panel input {
+.ogrid-login .login-panel input {
 	background: rgba(107,107,107,0.25);
 	border: 0px;
 }
 
-h2 {
+.ogrid-login h2 {
 	font-family: 'Raleway', sans-serif;
 	font-size: 5em;
 }
 
-.alert-danger{
+.ogrid-login .alert-danger{
 	color: #fff;
 	background-color: #2b323a;
 	border-color: #46576d;
@@ -43,10 +43,9 @@ h2 {
 	padding: 10px 0 0 27px;
 }
 
-.form-control {
+.ogrid-login .form-control {
     width: 100%;
     height: 34px;
-    padding: 6px 12px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
