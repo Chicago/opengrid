@@ -13,7 +13,7 @@ Open Grid follows the open source concept where as any new ideas and information
 ##Create an Issue
 <p>Issues consist of bug, enhancement or a feature submittal. In creating an issue, first check to make sure there isn’t a duplicate issue already documented. Provide screenshot/s of the issue. Create documentation of the issue. Make sure to document the browser specification, the operating system and script you are using. Provide efficient steps on how to reproduce the issue. Provide a detail description of what happened and what you expect to happen.</p>
 
-### Bug Submittal- 
+### Bug Submittal - 
 <p>Be specific and to the point in explaining the bug make sure to report the bug with a descriptive detail, programmers will most likely reject the bug if it cannot be replicated.Try reproducing the issue more than once for validation. Once replication is validated proceed to submitting an Issue.</p> 
 
 - Describe the bug.
@@ -55,8 +55,7 @@ Labels that are considered a low priority; has no immediate impact based on urge
 - <b>Backlog Feature:</b><br>
 Doesn’t have a significant impact on the project but will need to be addressed in the future.
 
-
-##Ready to Commit
+## Ready to Commit
 <p>When creating a commit make sure to write a descriptive and clean message. The subject line should be 50 chars or less, convey an imperative mood with capitalization at the beginning of the subject line and should not end with a period. The subsequent line should be blank. (Note: Any new paragraph should starts after a blank line.) The body of the message should be limited to 72 characters. Make sure to manually wrap the text as GitHub doesn’t wrap text automatically. A clear commit message should answer the questions of <b>WHAT</b>, <b>WHY</b> and <b>HOW</b>.</p> 
 <b>Commit Message Syntax:</b><br>
 Subject line (50 chars or less)<br><br>
@@ -70,7 +69,7 @@ The body of the message (limited to 72 characters) should answer the questions b
 Provide a source such as a url and/or a Bug Id for tracking and reference
 
 
-##Milestones
+## Milestones
 <p>Milestones are used to track progress of issues and pull requests. 
 They add significant value to project scheduling and monitoring. Milestones associate issues with specific features.</p>
 
