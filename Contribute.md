@@ -40,6 +40,21 @@ Open Grid follows the open source concept where as any new ideas and information
 - invalid
 - question
 - wontfix
+ 
+OpenGrid has additional labels besides the default GitHub labels that corresponds to the project.
+
+- <b>High Priority:</b><br>
+Label thats considered a high priority. Issues have greater impact and needs to be addressed immediately. 
+
+- <b>Medium Priority:</b><br>
+Label that is considered a medium priority needs to be addressed after the high priority issue. This label could have minimal impact or could escalate to a high priority status. 
+
+- <b>Low Priority:</b><br>
+Labels that are considered a low priority; has no immediate impact based on urgency. A low priority label could be a new enhancement, question/s or an added feature.
+
+- <b>Backlog Feature:</b><br>
+Doesn’t have a significant impact on the project but will need to be addressed in the future.
+
 
 ##Ready to Commit
 <p>When contributing to a project make sure to write a descriptive and clean commit message; a clear commit message should answer the questions of <b>WHAT</b>, <b>WHY</b> and <b>HOW</b>.<p> 
