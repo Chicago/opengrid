@@ -71,7 +71,13 @@ Provide a source such as a url and/or a Bug Id for tracking and reference
 
 ## Milestones
 <p>Milestones are used to track progress of issues and pull requests. 
-They add significant value to project scheduling and monitoring. Milestones associate issues with specific features.</p>
+They add significant value to project scheduling and monitoring. Milestones associate issues with specific features and help increase overall quality.</p>
+Other factors about milestones:
+- Milestones gives an overall visual of the lifespan of the project.
+- Ability to set due dates to send notifications of approaching deadlines.
+- Track percentage of task completion and provide breakdowns of open or closed issues.
+
+<p>OpenGrid defines milestones as sprints each sprint has a combination of issues and pull request that are labeled by importance and given due dates to meet any assigned deadlines. Milestones can be viewed in the issues tab.</p>
 
 # <font color="blue"> OpenGrid Quick Javascript Coding Guidline</font>
 - Use jQuery’s proxy method if you want to maintain the “this” context on your event handler
