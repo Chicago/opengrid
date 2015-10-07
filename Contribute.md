@@ -67,7 +67,7 @@ The body of the message (limited to 72 characters) should answer the questions b
 - How is it being handled?
 <br>
 
-Provide a source such as a url and/or a Bug Id
+Provide a source such as a url and/or a Bug Id for tracking and reference
 
 
 ##Milestones
