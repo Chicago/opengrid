@@ -57,14 +57,17 @@ Doesn’t have a significant impact on the project but will need to be addressed
 
 
 ##Ready to Commit
-<p>When contributing to a project make sure to write a descriptive and clean commit message; a clear commit message should answer the questions of <b>WHAT</b>, <b>WHY</b> and <b>HOW</b>.<p> 
-<p>Examples:</p>
-- What was the problem
-- What was changed or added  
-- Why was it changed or added
-- How is it being handled
+<p>When creating a commit make sure to write a descriptive and clean message. The subject line should be 50 chars or less, convey an imperative mood with capitalization at the beginning of the subject line and should not end with a period. The subsequent line should be blank. (Note: Any new paragraph should starts after a blank line.) The body of the message should be limited to 72 characters. Make sure to manually wrap the text as GitHub doesn’t wrap text automatically. A clear commit message should answer the questions of <b>WHAT</b>, <b>WHY</b> and <b>HOW</b>.</p> 
+<b>Commit Message Syntax:</b><br>
+Subject line (50 chars or less)<br><br>
+The body of the message (limited to 72 characters) should answer the questions below of:
+- What was the problem?
+- What was changed or added?  
+- Why was it changed or added?
+- How is it being handled?
+<br>
 
-<p>The first line should be the subject (50 chars or less) with capitalization at the beginning of the subject line. The style must be imperative and should not end with a period. The second line should be blank. (Note: any new paragraph starts after a blank line.) The body of the message should be limited to 72 characters.  Make sure to manually wrap text as Git doesn’t wrap text automatically.</p>   
+Provide a source such as a url and/or a Bug Id
 
 
 ##Milestones
