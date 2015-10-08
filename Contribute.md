@@ -9,7 +9,9 @@ There are steps to have your pull request moved from the Dev branch to the Maste
 <p>The pull requester should:</p>
 - Provide a reason for the new feature and/or bug fix.
 - Add unit test to offer evidence for reasoning.
-- Provide examples of functionality of the new feature or the bug fix. 
+- Provide examples of functionality of the new feature or the bug fix.
+- Convey any new dependencies introduced in the pull request.
+- Reference any issues that are affiliated with pull request. 
 - Test your theory before submittal; provide steps of implementation.
 - Make sure to elaborate on how the submitted idea could be an asset to the project.  
 - Make sure to provide a descriptive title. 
