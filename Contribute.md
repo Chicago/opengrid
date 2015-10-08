@@ -5,7 +5,7 @@ Open Grid follows the open source concept where as any new ideas and information
 ## Submit a Pull Request
 <p>Pull request is design to start a discussion about a probable changed to a project whether it's a bug fix or a new feature. Pull request allows users to convey changes that’s been added to a repository. It can only be initialized if there is a distinction between either the branches or repository.</p>
 When creating a pull request submit any ideas or bugs to the Dev branch to be reviewed, discussed, elaborated, tested and possibly merged.
-There are steps to have your pull request moved from the Dev branch to the master branch. In order to have your idea approved for submission and merged into the master branch.  It must pass integration testing. 
+There are steps to have your pull request moved from the Dev branch to the master branch. In order to have your idea approved for submission and merged into the Master branch.  It must pass integration testing. 
 <p>The pull requester should:</p>
 - Provide a reason for the new feature and/or bug fix.
 - Add unit test to offer evidence for reasoning.
