@@ -3,12 +3,20 @@
 Open Grid follows the open source concept where as any new ideas and information is very helpful in advancing a project.  To contribute code to a project it must first be approved by project leader. Also there are licensing and agreements that needs to take effect.
 
 ## Submit a Pull Request
-<p>Pull request allows users to convey changes that’s been added to a repository.  Pull request can only be initialized if there is a distinction between either the branches or repository.  To collaborate new changes or submit ideas:</p>
-- Always specify what branch you’ll like to merge your changes into. 
-- Test your theory before submittal; provide steps of implementation and documentation.  
-- Submission of a detail description is required.  
+<p>Pull request is design to start a discussion about a probable changed to a project whether it is a bug fix or a new feature. Pull request allows users to convey changes that’s been added to a repository. It can only be initialized if there is a distinction between either the branches or repository.</p>
+When creating a pull request submit any ideas or bugs to the Dev branch to be reviewed, discussed, elaborated, tested and possibly merged.
+There are steps to have your pull request moved from the Dev branch to the master branch. In order to have your idea approved for submission and merged into the master branch.  It must pass integration testing. 
+<p>The pull requester should:</p>
+- Provide a reason for the new feature and/or bug fix.
+- Add unit test to offer evidence for reasoning.
+- Provide examples of functionality of the new feature or the bug fix. 
+- Test your theory before submittal; provide steps of implementation.
+- Make sure to elaborate on how the submitted idea could be an asset to the project.  
+- Make sure to provide a descriptive title. 
+- Comment on the pull request this will improve the quality of the work.
 
-<p>Once a pull request is created other users can review the changes or provide feedback.</p>
+<p>
+The unit test will give the collaborators the ability to test and validate the purpose for the pull request.  Open Grid will perform a continuously integration test through a platform called Travis CI.  Travis CI will build and run pull request with results of either a pass or failed outcome this will also be a determining factor of getting your pull request merged into the master branch. </p>
 
 ##Create an Issue
 <p>Issues consist of bug, enhancement or a feature submittal. In creating an issue, first check to make sure there isn’t a duplicate issue already documented. Provide screenshot/s of the issue. Create documentation of the issue. Make sure to document the browser specification, the operating system and script you are using. Provide efficient steps on how to reproduce the issue. Provide a detail description of what happened and what you expect to happen.</p>
