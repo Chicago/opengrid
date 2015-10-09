@@ -164,8 +164,7 @@ ogrid.Config = {
         mock: false,
         plugins: [
             ogrid.QSearchProcessor.latLng(),
-            ogrid.QSearchProcessor.weather(),
-            ogrid.QSearchProcessor.tweet()
+            ogrid.QSearchProcessor.flexData() //this replaces the Tweet and Weather Quick Search processors
 
             //Place/Address search is built-in
         ],
@@ -208,6 +207,10 @@ ogrid.Config = {
 
         //object for detecting and extracting error info from service response
         //this one is specific to our template service implementation
-        errorHandler: ogrid.templateServiceErrorHandler()
+        errorHandler: ogrid.templateServiceErrorHandler(),
+
+        //used for converting string to data value for comparing dates on auto-refresh highlighting
+        //date format is determined by the service
+        dateFormat: 'MM/DD/YYYY hh:mm:ss aa'
     }
 };

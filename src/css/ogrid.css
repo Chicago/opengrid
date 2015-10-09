@@ -317,6 +317,10 @@ h6 > a {
   background-color: #deebf7;
 }
 
+#tableview tbody tr.new-data-highlight td {
+  background-color: #d9f0a3;
+}
+
 #qsearch-input {
   padding-right: 25px;
 }
@@ -410,5 +414,19 @@ h6 > a {
   .leaflet-zoom-box-control {
     display: none;
   }
+  .leaflet-control-fullscreen  {
+    display: none;
+  }
 }
 
+/* make Columns menu always left aligned to prevent going over the left edge on mobile */
+/* override table view */
+.bootstrap-table .fixed-table-toolbar .columns div[title='Columns'] .dropdown-menu {
+  left: 0px;
+  right: auto;
+}
+
+/*widen heatmap dropdown menu to avoid wrapping of text */
+.bootstrap-table .fixed-table-toolbar .columns div[title='Heat Map'] .dropdown-menu {
+  width: 165px;
+}

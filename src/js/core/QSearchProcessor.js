@@ -16,18 +16,27 @@ ogrid.QSearchProcessor = ogrid.Class.extend({
 
 
     //constructor
-    init: function(inputString, options) {
+    init: function(options) {
         if (options) {
             this._options = ($.extend(this._options, options));
         }
-        this._input = inputString;
     },
+
+
 
 
     //private methods
 
 
     //public methods
+
+    //merge options with current
+    setOptions: function(options) {
+        if (options) {
+            this._options = ($.extend(this._options, options));
+        }
+    },
+
     test: function(input) {
 
     },

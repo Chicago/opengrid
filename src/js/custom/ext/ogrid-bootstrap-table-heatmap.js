@@ -39,7 +39,7 @@
                     '<div class="heatmap btn-group" title="Heat Map">',
                     '<button class="btn btn-default dropdown-toggle" ' +
                     'data-toggle="dropdown" type="button">',
-                    '<i class="glyphicon glyphicon-map-marker"></i> ',
+                    '<i class="glyphicon glyphicon-fire"></i> ',
                     '<span class="caret"></span>',
                     '</button>',
                     '<ul class="dropdown-menu dropdown-menu-form" role="menu">',
