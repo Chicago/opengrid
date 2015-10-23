@@ -1,0 +1,5 @@
+site_name: OpenGrid Projects
+pages:
+- User Documentation: Index.md
+- Administration: Administration.md
+theme: readthedocs
