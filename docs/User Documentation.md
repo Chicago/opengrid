@@ -97,8 +97,6 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 ## Measure distances and areas
 <p>Measuring distances and areas is a function within OpenGrid that allows the user to perform measurements between any given point to another. Once the measurement tool is selected the user will be prompt to start creating measurements by adding points on the map.</p>
 
-## Frequently Asked Questions
-
 
 
 
