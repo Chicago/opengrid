@@ -97,7 +97,40 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 ## Measure distances and areas
 <p>Measuring distances and areas is a function within OpenGrid that allows the user to perform measurements between any given point to another. Once the measurement tool is selected the user will be prompt to start creating measurements by adding points on the map.</p>
 
+<table>
+<tr>
+<th> Measurement and Tools</th>
+</tr>
 
+<tr>
+<td>Click the measurement tool icon.<br>
+<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/ombine1.png"> <br>
+<p>A measurement tool textbox will appear with an option to <b>create a new measurement</b>.</p>
+<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/ombine4.png"></td>	
+</tr>
+
+<tr>
+<td>Once click <b>"create a new measurement"</b>... display points of origin and destination on the map by creating points.<br> <img src="https://github.com/Chicago/opengrid/blob/master/docs/media/ombine3.png"> <br>
+</td> 
+</tr>
+
+<tr>
+<td>
+<p>After the measurement has been created the finish measurement textbox will appear. click <b>"Finish Measurement"</b>.<br><br>
+<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/combine10.png"><br>
+After clicking on finish measurement the <b>"Area Measurement"</b> textbox will appear providing information about the perimeter:</p.
+<ul>
+<li>Acres</li>
+<li>Feet</li>
+<li>Miles</li>
+</ul>
+<br>
+<p>It also gives the user an option to center on the Area or to Delete the perimeter.
+<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/ombine5.png"></p>
+<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/combine9.png">
+</td> 
+</tr>
+</table>
 
 
 
