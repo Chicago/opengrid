@@ -132,6 +132,36 @@ After clicking on finish measurement the <b>"Area Measurement"</b> textbox will 
 </tr>
 </table>
 
+## FREQUENTLY ASKED QUESTIONS
+
+* [What is Opengrid](#what-is-opengrid)
+* [Why is OpenGrid important](#why-is-opengrid-important)
+* [How to reset my password](#how-to-reset-my-password)
+* [Whats the difference between quick search and advanced search](#whats-the-difference-between-quick-search-and-advanced-search)
+* [How to perform a query search](#how-to-perform-a-query-search)
+* [Whats the difference between Near Me and Near Marker](#whats-the-difference-between-near-me-and-near-marker)
+
+
+#### What is Opengrid
+<p>OpenGrid is a multi-platform application that offers support for situation awareness.  OpenGrid is modernized to support usage on both desktop and mobile device.</p>
+
+#### Why is OpenGrid important
+<p>It is important to keep current with the public, society, services and media trends. It provides analytic knowledge that is used to make decisions. It provides analytic knowledge that is used to for decisions tactics.</p>
+
+#### How to reset my password
+<p>Password reset is managed by an administrator.</p> 
+
+#### Whats the difference between quick search and advanced search
+<p> Quick search is a simple search tool that is queried with specific parameters but may return a broader result set whereas Advanced Search is used to combine search terms by setting specific parameters for result set; "Advanced Search" enables a user to search for requirements, features or use cases that match specific values in a dataset. The search results are smaller and more relevant than results from a quick search.</p>
+
+#### How to perform a query search
+</p>To perform a query search, depends on the specification of the query; for a specified lookup the user will perform a detail search within the Advanced Search section on the menu bar. The user will enter all specification needed to perform a detail query and click submit when complete.<br>
+To perform a query search that’s generic the user will enter data into the quick search textbox by entering a keyword (e.g. tweets) or keyword and/or keyphrase (.e.g. tweet food).</p>
+
+#### Whats the difference between Near Me and Near Marker
+<p>The Near <b>"Me"</b> and the Near <b>"Marker"</b> both use triangulation techniques. It’s located within the Advanced Search section under the geo-spatial filter.  Using the Near <b>“Me”</b> function will retrieve the perimeter around the user location using both lat and long to triangulate the user’s location or from usage of information from cell towers to pinpoint the approximate position. Near <b>“Marker”</b> function will pull data around the perimeter based off a given point using markers.</p>
+<br>
+<a href="#top">Back to Top</a>
 
 
 
