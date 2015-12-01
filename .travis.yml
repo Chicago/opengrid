@@ -6,11 +6,6 @@ node_js:
     - "0.12"
 
 install:
-    - node install.js
-    - sudo rm -rf /usr/local/phantomjs
-    - curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-x86_64.tar.bz2
-    - tar xjf phantomjs-1.9.7-linux-x86_64.tar.bz2
-    - sudo mv phantomjs-1.9.7-linux-x86_64 /usr/local/phantomjs
     - npm install
 
 script:

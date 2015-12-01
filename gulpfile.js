@@ -1,4 +1,4 @@
-    // core Gulp
+// core Gulp
 var gulp = require('gulp'),
 
     // Gulp plugins
@@ -16,12 +16,16 @@ var gulp = require('gulp'),
     series = require('stream-series'),
     mochaPhantomJS = require('gulp-mocha-phantomjs');
 
-//select theme to use
-//var themeFile = 'ogrid-theme-orig.css';
-var themeFile = 'ogrid-theme-blue.css'
-var themeSource = 'src/css/' + themeFile;
+//add path of CSS files to inject last into the HTML file
+var injectLastCss=[
+    //example: src/css/somefile.css
+    'src/css/login-custom.css'
+];
 
-var themeStream = gulp.src(themeSource, {read: false});
+//select theme to use
+//var themeFile =  'src/css/ogrid-theme-orig.css';
+var themeFile = 'src/css/ogrid-theme-blue.css';
+injectLastCss.push(themeFile);
 
 //used in scripts-app task
 var app_sources = [
@@ -41,8 +45,10 @@ var app_sources = [
     'src/js/custom/data/ChicagoCityShapeMap.js',
     'src/js/custom/qsearch/LatLng.js',
     'src/js/custom/qsearch/Place.js',
-    'src/js/custom/qsearch/Tweet.js',
-    'src/js/custom/qsearch/Weather.js',
+    //'src/js/custom/qsearch/Tweet.js',
+    //'src/js/custom/qsearch/Weather.js',
+    'src/js/custom/qsearch/FlexSearchBuilder.js',
+    'src/js/custom/qsearch/FlexData.js',
 
     'src/js/custom/Config.js',
     'src/js/session/Session.js',
@@ -81,7 +87,18 @@ gulp.task('html-debug', function(){
             {starttag: '<!-- inject:head:{{ext}} -->', relative: true}
         ))
         .pipe(inject(series(
-            gulp.src(app_sources.concat(['src/css/*.css', 'config/EnvSettings.js', '!./src/css/ogrid-theme*']), {read: false}), themeStream),
+            //inject all CSS except for the 'injectLastCss' list which is separately injected
+            gulp.src(
+                app_sources.concat(
+                    ['src/css/*.css', 'config/EnvSettings.js'],
+
+                    //negate injectLastCss files
+                    injectLastCss.map(function(v){
+                        return '!' + v;
+                    })
+                ), {read: false}),
+                gulp.src(injectLastCss, {read: false})
+            ),
             { relative: false, addRootSlash: false, addPrefix: '..' }
         ))
         .pipe(gulp.dest('./debug'))
@@ -95,6 +112,12 @@ gulp.task('leaflet-images-debug', function () {
         .pipe(gulp.dest('debug/images'));
 });
 
+gulp.task('images-app-debug', function () {
+    return gulp.src([
+        './src/images/**'
+    ]).pipe(gulp.dest('debug/images'));
+});
+
 //debug tasks end ********************
 
 
@@ -106,14 +129,22 @@ gulp.task('clean', function (cb) {
 
 //minify our application CSS files
 gulp.task('css-app', function() {
-    return gulp.src(['src/css/*.css', '!./src/css/ogrid-theme*'])
+    //minify except for injectLastCss files
+    return gulp.src([
+        'src/css/*.css'
+        ].concat(
+            //negate our injectLastCss files
+            injectLastCss.map(function(v){
+            return '!' + v;
+            })
+        ))
         .pipe(minifyCss({compatibility: 'ie8'}))
         .pipe(concat('app.css'))
         .pipe(gulp.dest('dist/css'));
 });
 
-gulp.task('css-theme', function() {
-    return gulp.src(themeSource)
+gulp.task('css-app-last', function() {
+    return  gulp.src(injectLastCss)
         .pipe(gulp.dest('dist/css'));
 });
 
@@ -152,7 +183,14 @@ gulp.task('images-all', function () {
         .pipe(gulp.dest('dist/images'));
 });
 
-gulp.task('images', ['images-leaflet1', 'images-leaflet2', 'images-all' ]);
+gulp.task('images-app', function () {
+    return gulp.src([
+        './src/images/**'
+    ]).pipe(gulp.dest('dist/images'));
+});
+
+
+gulp.task('images', ['images-leaflet1', 'images-leaflet2', 'images-all', 'images-app' ]);
 
 gulp.task('fonts', function () {
     return gulp.src([
@@ -160,6 +198,12 @@ gulp.task('fonts', function () {
     ])
         .pipe(flatten())
         .pipe(gulp.dest('dist/fonts'));
+});
+
+gulp.task('fonts-app', function () {
+    return gulp.src([
+        './src/fonts/**'
+    ]).pipe(gulp.dest('dist/fonts'));
 });
 
 gulp.task('templates', function () {
@@ -199,6 +243,7 @@ gulp.task('scripts-lib', function() {
 
 gulp.task('scripts', ['scripts-app', 'scripts-lib']);
 
+//injects both js and css files into HTML
 gulp.task('html-release', function(){
     return gulp.src('./src/index.html')
         .pipe(inject(gulp.src(['./dist/**/lib*min.js', './dist/**/lib*.css'], {read: false}), {
@@ -206,11 +251,14 @@ gulp.task('html-release', function(){
             ignorePath: '/dist/',
             addRootSlash: false
         }))
-
-        //Note: do not use min version of app js as we still have minify issue with the hereDoc templates
-        //use minified app js for release version
         .pipe(inject(gulp.src(
-                ['./dist/**/app*', '!./dist/**/app.js', 'config/EnvSettings.js', './dist/css/ogrid-theme*'],
+                ['./dist/**/app*', '!./dist/**/app.js', 'config/EnvSettings.js'].concat(
+                    //add our injectLastCss files from dist folder
+                    injectLastCss.map(function(v){
+                        var a = v.split('/');
+                        return './dist/css/' + a[a.length-1];
+                    })
+                ),
                 {read: false}
                 ),
                 {ignorePath: '/dist/', addRootSlash: false}
@@ -253,7 +301,7 @@ gulp.task('debug',  function(cb) {
         'clean-debug',
 
         //can be async
-        ['leaflet-images-debug', 'templates-debug', 'html-debug'],
+        ['leaflet-images-debug', 'templates-debug', 'html-debug', 'images-app-debug'],
         cb);
 });
 
@@ -264,7 +312,7 @@ gulp.task('release',  function(cb) {
         'test',
 
         //can be async
-        ['sass', 'css', 'css-theme', 'images', 'fonts', 'templates'],
+        ['sass', 'css', 'css-app-last', 'images', 'fonts', 'fonts-app', 'templates'],
         'scripts',
         'env-settings',
         'html-release',

@@ -20,16 +20,16 @@ ogrid.QSearchProcessor.Weather = ogrid.QSearchProcessor.extend({
 
 
     //constructor
-    init: function(inputString, options) {
+    init: function(options) {
         if (options) {
             this._options = ($.extend(this._options, options));
         }
 
-        if (inputString) {
+        /*if (inputString) {
             //validate input string
             this.validate(inputString);
             this._input = inputString;
-        }
+        }*/
     },
 
 
@@ -150,11 +150,6 @@ ogrid.QSearchProcessor.Weather = ogrid.QSearchProcessor.extend({
 });
 
 //support syntax without 'new' keyword (note: Camel-cased name)
-ogrid.QSearchProcessor.weather = function (inputString, options) {
-    return new ogrid.QSearchProcessor.Weather(inputString, options);
+ogrid.QSearchProcessor.weather = function (options) {
+    return new ogrid.QSearchProcessor.Weather(options);
 };
-
-
-//supported syntax (regex)
-//RegEx pattern by which the QuickSearch Prcoessor factory can recognize this
-//ogrid.QSearchProcessor.Weather.pattern = /^(weather|wea).*$/i;
