@@ -1,10 +1,17 @@
 ![OpenGrid](img/branding/OpenGrid_Logo_Horizontal_3Color.png)
 
-[![Build Status](https://magnum.travis-ci.com/Chicago/opengrid.svg?token=SysBhDyYWJMYLus2d27y&branch=master)](https://magnum.travis-ci.com/Chicago/opengrid)
+[![Build Status](https://magnum.travis-ci.com/Chicago/opengrid.svg?token=SysBhDyYWJMYLus2d27y&branch=master)](https://magnum.travis-ci.com/Chicago/opengrid) ![Node.js](https://img.shields.io/node/v/gh-badges.svg) ![Version](https://img.shields.io/github/release/qubyte/rubidium.svg)
 
-<p>Open Grid is an enterprise geographical information system. Developed to support situational awareness, incident monitoring and responses, historical data retrieval, and real-time advanced analytics. Open Grid architecture supports big data functionality using operational systems to handled big spatially enabled data. It performs integrated mapping and spatial analysis based off query and data flow of collective information to identify potential trends or significant variance between expected and actual values.</p>
+Open Grid is an enterprise geographical information system. Developed to support situational awareness, incident monitoring and responses, historical data retrieval, and real-time advanced analytics. Open Grid architecture supports big data functionality using operational systems to handled big spatially enabled data. It performs integrated mapping and spatial analysis based off query and data flow of collective information to identify potential trends or significant variance between expected and actual values.
 
-#  System Requirements <br>
+## Important Links
+* User Documentation: http://opengrid.readthedocs.org
+* Repository: https://github.com/Chicago/opengrid
+* Planning Documentation: https://github.com/Chicago/opengrid/wiki
+* Issues: https://github.com/Chicago/opengrid/issues
+* Mailing List & Discussion: https://groups.google.com/forum/#!forum/opengrid-chicago
+
+##  System Requirements <br>
 Web server for deployment and Open Grid Service Package. 
 
 <b>For Development/Customization:</b><br>
@@ -18,7 +25,7 @@ Chrome<br>
 Firefox<br>
 Safari
 
-# Installation<br>
+## Installation<br>
 Download OpenGrid Code:<br>
 <pre>git clone https://github.com/Chicago/opengrid.git</pre>
 
@@ -26,5 +33,5 @@ After the initiate OpenGrid Code has been downloaded install the dependencies [P
 
 After the release package has been built deploy the files under the ./dist folder to your web server.  For complete instructions on the entire process reference the [build procedures](https://github.com/Chicago/opengrid/wiki/Build-Procedures) section.
 
-# How to contribute coding
+## How to contribute coding
 Potential contributors are free to add to the project, provided you can convince the team that it embodies or utilized the well-being of the project. Consider some of these attributes before submission or contribution: fork and cloning, creating an issue and committing. Please see the [contributing guidelines](https://github.com/Chicago/opengrid/blob/master/Contribute.md) for complete details.
