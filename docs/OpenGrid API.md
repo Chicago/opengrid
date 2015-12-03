@@ -787,7 +787,7 @@ No response is returned when a query is deleted.
 <br>
 
 ## HTTP Status Codes on Responses
-#### 1.2 HTTP Status Codes on responses
+
 
 -   HTTP 401 is returned when users/token is called and authentication fails.
 -   HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.
