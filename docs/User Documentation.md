@@ -135,6 +135,7 @@ After clicking on finish measurement the <b>"Area Measurement"</b> textbox will 
 ## FREQUENTLY ASKED QUESTIONS
 
 * [Whats the difference between quick search and advanced search](#whats-the-difference-between-quick-search-and-advanced-search)
+
 * [Whats the difference between Near Me and Near Marker](#whats-the-difference-between-near-me-and-near-marker)
 
 #### Whats the difference between quick search and advanced search
