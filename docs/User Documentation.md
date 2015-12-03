@@ -134,10 +134,6 @@ After clicking on finish measurement the <b>"Area Measurement"</b> textbox will 
 
 ## FREQUENTLY ASKED QUESTIONS
 
-* [Whats the difference between quick search and advanced search](#whats-the-difference-between-quick-search-and-advanced-search)
-
-* [Whats the difference between Near Me and Near Marker](#whats-the-difference-between-near-me-and-near-marker)
-
 #### Whats the difference between quick search and advanced search
 <p> Quick search is a simple search tool that is queried with specific parameters but may return a broader result set whereas Advanced Search is used to combine search terms by setting specific parameters for result set; "Advanced Search" enables a user to search for requirements, features or use cases that match specific values in a dataset. The search results are smaller and more relevant than results from a quick search.</p>
 
