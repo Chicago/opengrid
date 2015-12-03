@@ -6,31 +6,31 @@
 ## Table of Contents
 
 
-1.1 [REST Service Resources](#rest-service-resources)
+[REST Service Resources](#rest-service-resources)
 
-1.1.1 [users/token](#userstoken)
+[users/token](#userstoken)
 
-1.1.2 [users/renew](#usersrenew)
+[users/renew](#usersrenew)
 
-1.1.3 [users](#users)
+[users](#users)
 
-1.1.4 [users/{user\_id}](#usersuser_id)
+[users/{user\_id}](#usersuser_id)
 
-1.1.5 [groups](#groups)
+[groups](#groups)
 
-1.1.6 [groups/{group\_id}](#groupsgroup_id)
+[groups/{group\_id}](#groupsgroup_id)
 
-1.1.7 [datasets](#datasets)
+[datasets](#datasets)
 
-1.1.8 [datasets/{dataset\_id}](#datasetsdataset_id)
+[datasets/{dataset\_id}](#datasetsdataset_id)
 
-1.1.9 [datasets/{dataset\_id}/query](#datasetsdataset_idquery)
+[datasets/{dataset\_id}/query](#datasetsdataset_idquery)
 
-1.1.10 [queries](#queries)
+[queries](#queries)
 
-1.1.11 [queries/{query\_id}](#queriesquery_id)
+[queries/{query\_id}](#queriesquery_id)
 
-1.2 [HTTP Status Codes on Responses](#http-status-codes-on-responses)
+[HTTP Status Codes on Responses](#http-status-codes-on-responses)
 
 ## REST Service Resources
 
@@ -40,7 +40,7 @@ be sent for each calls on the request header with the token obtained by
 calling /users/token as described in Section 1.1.1.*
 
 ## /users/token
-#### 1.1.1 /users/token<br>
+
 **Methods**
 
 <html>
@@ -83,7 +83,7 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 </html>
 
 ## /users/renew
-#### 1.1.2 /users/renew <br>
+
 **Methods**
 <html>
 <table>
@@ -107,7 +107,7 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 </html>
 
 ## /users
-#### 1.1.3 /users <br>
+
 **Methods**
 <html>
 <table>
@@ -195,7 +195,7 @@ It is recommended that this value be URL encoded.
 
 
 ## /users/{user\_id}
-#### 1.1.4 /users/{user\_id}
+
 **Methods**
 
 <html>
@@ -291,7 +291,7 @@ No response is returned when a user is deleted successfully.
  
 
 ## /groups
-#### 1.1.5 /groups
+
 **Methods**
 <html>
 <table>
@@ -479,7 +479,7 @@ No response is returned when a group is deleted successfully.
 </html>
 
 ## /datasets
-#### 1.1.7 /datasets
+
 **Methods** <br>
 <html>
 <table>
@@ -510,7 +510,7 @@ Return a list of available datasets. The response is a JSON array of descriptors
 </html>
   
 ## /datasets/{dataset\_id}
-#### 1.1.8 /datasets/{dataset\_id}
+
 **Methods**
 <html>
 <table>
@@ -542,7 +542,7 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 
 
 ## /datasets/{dataset\_id}/query
-#### 1.1.9 /datasets/{dataset\_id}/query
+
 **Methods**
 <html>
 <table>
@@ -609,7 +609,7 @@ It is recommended that this value be URL encoded.
 </html>
 
 ## /queries
-#### 1.1.10 /queries
+
 **Methods**
 <html>
 <table>
@@ -694,7 +694,7 @@ q
 </html>
 
 ## /queries/{query\_id}
-#### 1.1.11 /queries/{query\_id} 
+
 **Methods**
 <html>
 <table>
