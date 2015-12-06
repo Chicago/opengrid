@@ -401,11 +401,11 @@ footer {
 */
 
 /* Readjustments to page based on browser */
-@media all and (min-width: 768px) {
+/*@media all and (min-width: 768px) {
   	.navbar-header {
     		float: right;
   	}
-}
+}*/
 
 @media all and (max-width: 1024px) { 
 	#banner {
@@ -437,12 +437,18 @@ footer {
 		margin-right: auto;
 		text-align:-webkit-center;
 	}
-	
-	
+	#emblem-img {
+		height: auto;
+		width: auto;
+		max-width: 300px;
+	}
 } 
 
 @media all and (max-width: 500px) { 
-	#kitchen {
+	body {
+		font-size: 18px;
+	}
+	#banner {
 		background: url(../img/background_lake_east_tablet.jpg);
 	} 
 
@@ -457,6 +463,17 @@ footer {
 	IMG.stamp {
 		width: 280px;
 	}
+	h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+		font-size: 32px;
+	}
+	#emblem-img {
+		height: auto;
+		width: auto;
+		max-width: 200px;
+	}
+	.sub {
+		font-size: 28px;
+	}
 } 
 
 @media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0) { 
@@ -465,6 +482,7 @@ footer {
 		top: 20%;
 	}
 }
+
 @media all and (min-color-index:0) and(-webkit-min-device-pixel-ratio:2) { 
 	#banner article {
 		top: 15%;
@@ -487,6 +505,7 @@ footer {
 		width: 66%;
 	}
 }
+
 @media all and (min-color-index:0) and(-webkit-min-device-pixel-ratio:2) and (min-width: 768px){
 	#banner article {
 		top: 25%;
@@ -494,11 +513,10 @@ footer {
 		margin-right: auto;
 		text-align:center;
 		text-align:--webkit-center;
-		
 	}
 	#banner main { 
 		font-size: 32px;
-    		text-align:-webkit-center;
+    	text-align:-webkit-center;
 		margin-left:auto;
 		margin-right:auto;
 		width: 66%;
@@ -508,8 +526,6 @@ footer {
 		text-align:-webkit-center;
 		margin-left: auto;
 		margin-right: auto;
-		
 		width: 66%;
 	}
 }
-	
