@@ -353,6 +353,14 @@ IMG.stamp {
 	color: #fff;
 }
 
+#footnote a {
+	color: #BFD9F2;
+}
+
+#footnote a:hover {
+	color: #BFD9F2;
+}
+
 footer {
     margin: 25px 0;
 }
