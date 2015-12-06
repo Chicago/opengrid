@@ -354,13 +354,25 @@ THE SOFTWARE.
 
 Documentation is copyright (c) 2014 City of Chicago and licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/) (CC BY-SA 4.0).
 
-## img/handshake.jpg
+## img/handshake.png
 
-Documentation is copyright (c) 2015 City of Chicago and licensed under a [Creative Commons Attribution 3.0 United States License](http://creativecommons.org/licenses/by/3.0/us/) (CC BY 3.0 UA).
+Copyright (c) 2015 Sergey Demushkin and licensed under a [Creative Commons Attribution 3.0 United States License](http://creativecommons.org/licenses/by/3.0/us/) (CC BY 3.0 UA).
 
-## img/computer.jpg
+## img/computer.png
 
-Documentation is copyright (c) 2015 City of Chicago and licensed under a [Creative Commons Attribution 3.0 United States License](http://creativecommons.org/licenses/by/3.0/us/) (CC BY 3.0 UA).
+Copyright (c) 2015 Nicolas Vicent and licensed under a [Creative Commons Attribution 3.0 United States License](http://creativecommons.org/licenses/by/3.0/us/) (CC BY 3.0 UA).
+
+## img/email.png
+
+Copyright (c) 2015 Jason D. Rowley and licensed under a [Creative Commons Attribution 3.0 United States License](http://creativecommons.org/licenses/by/3.0/us/) (CC BY 3.0 UA).
+
+## img/documentation.png & img/issues.png
+
+Copyright (c) 2015 Creative Stall and licensed under a [Creative Commons Attribution 3.0 United States License](http://creativecommons.org/licenses/by/3.0/us/) (CC BY 3.0 UA).
+
+## img/dev-documentation.png
+
+Copyright (c) 2015 useiconic.com and licensed under a [Creative Commons Attribution 3.0 United States License](http://creativecommons.org/licenses/by/3.0/us/) (CC BY 3.0 UA).
 
 ## Contents of assets/, css/custom.css, and index.html
 Copyright (c) 2014 Iron Summit Media Strategies, LLC.

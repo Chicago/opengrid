@@ -331,6 +331,31 @@ IMG.stamp {
 	text-align: center;
 }
 
+#contact-us {
+	background-color: #F3F3F3;
+	color: #000;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	letter-spacing: 0.1em;
+}
+
+#contact-us img {
+	width: auto;
+	height: auto;
+	max-width: 300px;
+	max-height: 300px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+#contact-us p {
+	font-family: "Poppins", sans-serif;
+	font-size: 24px;
+	font-weight: 200;
+	text-indent: 0%;
+	text-align: center;
+}
+
 #document {
 	background-color: white;
 }

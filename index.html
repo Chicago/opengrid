@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="OpenGrid can combine and visualize spatial data from multiple sources ">
+    <meta name="description" content="OpenGrid can combine and visualize spatial data from multiple sources.">
     <meta name="author" content="City of Chicago">
     <meta name="creator" conent="Chicago Department of Innovation and Technology">
     <meta name="publisher" content="City of Chicago">
@@ -24,7 +24,8 @@
     <script src="js/parallax.js" type="text/javascript"></script>
     <!-- Header Scroll --> 
     <script src="js/header-scroll.js" type="text/javascript"></script>
-
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,300' rel='stylesheet' type='text/css'>
     <!-- favicon & share buttons -->
     <link rel='icon' href='img/favicon.ico' type='image/x-icon' />
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -47,18 +48,15 @@
 
 <div class="navbar navbar-fixed-top hr" role="navigation">
     <div class="container">
-<!--         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+        <!-- <div class="navbar-brand">
+            <img alt="OpenGrid" src="img/OpenGrid_Logo_Horizontal_White.png">
         </div> -->
         <div class="header navbar-nav">
             <!-- <ul class="nav navbar-nav mineul" style="font-size:17px;margin-top:9px; color:white;"> -->
             <ul>
               <li><a href="http://opengrid.io" class="btn btn-info btn-lg">Launch</a></li>
               <li><a href="https://github.com/Chicago/opengrid">Code</a></li>
+              <li><a href="#contact-us">Contact Us</a></li>
             </ul>
         </div>
     </div>
@@ -68,13 +66,13 @@
 <section id="banner" data-speed="4" data-type="background">
     <div class="container">
         <article>
-            <img id="emblem-img" src="img/OpenGrid_Logo_Vertical_White.png" alt="OpenGrid">
+            <img id="emblem-img" class="img-responsive center-block" src="img/OpenGrid_Logo_Vertical_White.png" alt="OpenGrid">
         </article>
     </div>
 </section>
 
 <!-- Page Content -->
-<div id="startchange">
+<div id="startchange">  <!-- Navbar changes to Navy starting here -->
 <div id="action-container">
     <div class="container">
         <!-- /.container -->
@@ -185,7 +183,51 @@
         </div>    
     </div>
     <!-- /.row -->
-    <br />
+</div>
+<!-- /.container -->
+<br />
+<!-- Interacting with us -->
+<div id="contact-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="mailto:developers@cityofchicago.org"><img class="img-responsive center-block" src="img/email.png" alt="Questions? Email us."></a>
+                <div class="sub">Questions? <br />Email Us.</div>
+                <p>Have questions about using OpenGrid? Reach out to the City of Chicago team.</p>
+            </div>
+            <div class="col-md-4">
+                <a href="https://groups.google.com/forum/#!forum/opengrid-chicago"><img class="img-responsive center-block" src="img/discuss.png" alt="OpenGrid Forum"></a>
+                <div class="sub">Discuss</div>
+                <p>For lengthier discussions with the development team and others, use our Google Forum to talk about OpenGrid features.</p>
+            </div>
+            <div class="col-md-4">
+                <a href="http://opengrid.readthedocs.org"><img class="img-responsive center-block" src="img/documentation.png" alt="Documentation"></a>
+                <div class="sub">User Documentation</div>
+                <p>Read the documentation on OpenGrid.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <a href="https://github.com/Chicago/opengrid/issues"><img class="img-responsive center-block" src="img/issues.png" alt="OpenGrid Forum"></a>
+                <div class="sub">Bugs?</div>
+                <p>Notice a bug or have a feature request? Let us know on our GitHub issues page.</p>
+            </div>
+            <div class="col-md-4">
+                <a href="http://github.com/Chicago/opengrid/wiki"><img class="img-responsive center-block" src="img/dev-documentation.png" alt="OpenGrid Forum"></a>
+                <div class="sub">Developer Documentation</div>
+                <p>Take a look at the functional design, planning, and roadmap documents.</p>
+            </div>
+            <div class="col-md-4">
+                <a href="#"><img class="img-responsive center-block" src="img/telephone.png" alt="OpenGrid Forum"></a>
+                <div class="sub">Developer Calls</div>
+                <p>Look at our schedule of upcoming public developer calls to discuss upcoming features, releases, and planning on the future roadmap.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="container">
+    <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
             <!-- <div style="width: 494px; height: 135px;"> -->
