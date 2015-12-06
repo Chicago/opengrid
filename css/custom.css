@@ -88,6 +88,10 @@
     font-weight: 700;
 }
 
+/* 
+	HTML BODY
+*/
+
 html {
 	font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
 }
@@ -97,26 +101,6 @@ body {
 	font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
 	font-size: 24px;
 }
-
-#title {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	border: 1px solid rgba(107,206,250,1);
-	border-left-style: none;
-	border-right-style: none;
-	padding: 1% 1%;
-	display: block;
-	text-align: center;
-	margin-bottom: 70px;
-}
-
-.page-header {
-	padding-bottom: 9px;
-	margin: 40px 0 20px;
-	line-height: 1.1;
-	color: #2b323c;
-	}
 
 h1,.h1 {
 	font-family: "Poppins", sans-serif;
@@ -153,6 +137,103 @@ p {
 	margin: 0;
 }
 
+.navbar li {
+	color: #000;
+}
+
+.navbar-nav>li>a {
+	color: #fff;
+	size: 16px;
+}
+
+.navbar-nav>li>a:hover{
+	background-color: none;
+}
+
+.header {
+	position:fixed;
+	background-color: transparent;
+	top:0;
+	left:0;
+	width:100%;
+	z-index:200;
+	height:70px;
+	-webkit-transition:height .3s linear;-moz-transition:height .3s linear;
+	transition:height .3s linear;
+	border: none;
+	text-transform: uppercase;
+}
+
+.header a {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+}
+
+.header a:hover {
+	color: #87CEFA;
+}
+
+.header ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: none;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+	/*vertical-align: middle;*/
+}
+
+.header li {
+	display: inline;
+	/*vertical-align: middle;*/
+	float: right;
+	border: none;
+	padding-left: 0;
+	padding-right: 2%;
+	font-family: "Poppins", sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	height: 70px;
+	line-height: 40px;
+}
+
+#title {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	border: 1px solid rgba(107,206,250,1);
+	border-left-style: none;
+	border-right-style: none;
+	padding: 1% 1%;
+	display: block;
+	text-align: center;
+	margin-bottom: 70px;
+}
+
+.sub {
+	font-family: "Poppins", sans-serif;
+	font-size: 32px;
+	font-weight: 600;
+	font-color: #fff;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+#emblem-img {
+	height: auto;
+	width: auto;
+	max-width: 400px;
+}
+
+.page-header {
+	padding-bottom: 9px;
+	margin: 40px 0 20px;
+	line-height: 1.1;
+	color: #2b323c;
+	}
+
 .portfolio-item {
     margin-bottom: 25px;
 }
@@ -171,121 +252,11 @@ footer {
 	margin-bottom: none;
 }
 
-.info-box {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	border: 5px solid rgba(107,206,250,1);
-	border-right: none;
-	border-left: none;
-	padding: 0%;
-/*	font-size: 62px;
-	font-weight: 400;
-	text-align: left;*/
-	color: rgba(107,206,250,1);
-}
-
-#big-number {
-	font-size: 120px;
-	font-weight: 700;
-	margin-top: -30px; /* Fixes for large gap between big-number and top border */
-	margin-bottom: -30px; /* Fixes for large gap between big-number and byline */
-	color: rgba(107,206,250,1);
-}
-
-#number-byline {
-	font-size: 24px;
-	font-weight: 900;
-	border: none;
-}
-
-#number-byline-text {
-	font-size: 24px;
-	font-weight: 400px;
-	border: none;
-}
-
-#left-list {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	width: 90%;
-	border: none;
-	font-family: "Rokkitt", Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
-	font-size: 24px;
-	text-align: justify;
-	color: black;
-}
-
-#chart {
-	min-width: 250px; 
-	height: 500px;
-	margin: 0 auto
-}
-
 IMG.stamp {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	width: 370.5px;
-}
-
-.header a {
-	display: block;
-	color: #9F9F9F;
-}
-
-.header li {
-	display: inline;
-	float: right;
-	font-family: 'Times New Roman', 'Times', serif;
-	font-size: 14px;
-	font-style: italic;
-	border: none;
-	padding-left: 0;
-	padding-right: 2%;
-}
-
-.header ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background: white;
-}
-
-/*#twitter-spacer {
-	padding-right: 2%;
-}*/
-
-a.twitter-share-button,
-a.twitter-mention-button,
-a.twitter-hashtag-button {
-  display: inline-block;
-  padding: 1px 3px 0 19px;
-  border: #ccc solid 1px;
-  border-radius: 3px;
-  background: #f8f8f8 url(http://platform.twitter.com/images/bird.png) 2px 3px no-repeat;
-  background: url(http://platform.twitter.com/images/bird.png) 2px 3px no-repeat,
-              -webkit-linear-gradient(#fff, #dedede);
-  background: url(http://platform.twitter.com/images/bird.png) 2px 3px no-repeat,
-              linear-gradient(#fff, #dedede);
-  background-size: 16px 13px, auto auto;
- 
-  /*Text */
-  font: bold 11px/17px Helvetica, Arial, sans-serif;
-  text-decoration: none;
-  color: #333;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
-  white-space: nowrap;
-}
- 
-/* Color Highlight for keyboard navigation */
-a.twitter-share-button:focus,
-a.twitter-mention-button:focus,
-a.twitter-hashtag-button:focus {
-  outline: none;
-  border-color: #0089cb;
 }
 
 #footnote {
@@ -334,18 +305,9 @@ a.twitter-hashtag-button:focus {
 	letter-spacing: 0.1em;
 }
 
-.sub {
-	font-family: "Poppins", sans-serif;
-	font-size: 32px;
-	font-weight: 600;
-	font-color: #fff;
-	text-align: center;
-	text-transform: uppercase;
-}
-
 #action-container {
 	/*background-color: #2b323c;*/
-	background-color: lightskyblue;
+	background-color: #2B323C;
 	color: #fff;
 	padding-top: 30px;
 	padding-bottom: 30px;
@@ -377,22 +339,34 @@ a.twitter-hashtag-button:focus {
 	background-color: white;
 }
 
+.btn.btn-info {
+    color: #ffffff;
+    background-color: #87CEFA;
+    border-color: #28A4C9;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn.btn-info:hover {
+    color: #ffffff;
+    background-color: #2AABD2;
+    border-color: #28A4C9;
+}
+
 /* Vertical spacing between parallax image and body */
 .spacer {
 	margin-bottom: 40px;
 }
+
+/*
+	FIXES FOR SMALLER SCREENS
+*/
 
 /* Readjustments to page based on browser */
 @media all and (min-width: 768px) {
   	.navbar-header {
     		float: right;
   	}
-}
-
-#emblem-img {
-	height: auto;
-	width: auto;
-	max-width: 400px;
 }
 
 @media all and (max-width: 1024px) { 
