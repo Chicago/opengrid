@@ -141,6 +141,10 @@ p {
 	color: #000;
 }
 
+.navbar-nav {
+	margin: 0px;
+}
+
 .navbar-nav>li>a {
 	color: #fff;
 	size: 16px;
