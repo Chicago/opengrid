@@ -238,10 +238,6 @@ p {
     margin-bottom: 25px;
 }
 
-footer {
-    margin: 50px 0;
-}
-
 .caption{
 	font-family: "Poppins", sans-serif;
 	font-size: 18px;
@@ -257,11 +253,6 @@ IMG.stamp {
 	margin-left: auto;
 	margin-right: auto;
 	width: 370.5px;
-}
-
-#footnote {
-	font-size: 14px;
-	text-indent: 0;
 }
 
 /* Parallax Effect*/
@@ -306,7 +297,6 @@ IMG.stamp {
 }
 
 #action-container {
-	/*background-color: #2b323c;*/
 	background-color: #2B323C;
 	color: #fff;
 	padding-top: 30px;
@@ -354,6 +344,21 @@ IMG.stamp {
 	font-weight: 200;
 	text-indent: 0%;
 	text-align: center;
+}
+
+#footnote {
+	font-size: 14px;
+	text-indent: 0;
+	background-color: #2B323C;
+	color: #fff;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+#techplan {
+	background-color: #c4c4c4;
 }
 
 #document {
