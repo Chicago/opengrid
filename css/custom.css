@@ -383,16 +383,16 @@ footer {
 
 .btn.btn-info {
     color: #ffffff;
-    background-color: #87CEFA;
-    border-color: #28A4C9;
+    background-color: #e53b3b;
+    border-color: #FC3250;
     font-size: 14px;
     font-weight: bold;
 }
 
 .btn.btn-info:hover {
     color: #ffffff;
-    background-color: #2AABD2;
-    border-color: #28A4C9;
+    background-color: #FF3353;
+    border-color: #FF3353;
 }
 
 /* Vertical spacing between parallax image and body */
