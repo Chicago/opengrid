@@ -14,24 +14,37 @@ Open Grid is an enterprise geographical information system. Developed to support
 ##  System Requirements <br>
 Web server for deployment and Open Grid Service Package. 
 
-<b>For Development/Customization:</b><br>
-Java Script IDE<br>
-Node.js<br>
-Npm
+**Required Software**
 
-<b>Browser Requirements:</b><br>
-IE10+<br>
-Chrome<br> 
-Firefox<br>
-Safari
+  * Java Script IDE
+  * Node.js
+  * Npm
 
-## Installation<br>
-Download OpenGrid Code:<br>
-<pre>git clone https://github.com/Chicago/opengrid.git</pre>
+**Browser Requirements:**
+
+OpenGrid has been tested on IE 10+, Chrome, Firefox, and Safari on the desktop. It has also been tested on iOS using Safari and Android using the Chrome browser.
+
+## Installation
+
+Download OpenGrid Code:
+
+```bash
+git clone https://github.com/Chicago/opengrid.git
+```
 
 After the initiate OpenGrid Code has been downloaded install the dependencies [Phantom JS](http://phantomjs.org/download.html) and [npm](https://www.npmjs.com/package/npm).
 
 After the release package has been built deploy the files under the ./dist folder to your web server.  For complete instructions on the entire process reference the [build procedures](https://github.com/Chicago/opengrid/wiki/Build-Procedures) section.
 
-## How to contribute coding
-Potential contributors are free to add to the project, provided you can convince the team that it embodies or utilized the well-being of the project. Consider some of these attributes before submission or contribution: fork and cloning, creating an issue and committing. Please see the [contributing guidelines](https://github.com/Chicago/opengrid/blob/master/Contribute.md) for complete details.
+## Submit a bug
+
+We would like to hear about any bugs or odd behavior that you uncover. Use the [issue tracker](../../../issues/) to open a new item. When describing the issue, we recommend that you discuss the following items:
+
+  * Describe the bug
+  * Describe the steps you did to discover the bug
+  * What was the expected outcome of the above steps?
+  * Please provide screenshots, if applicable
+
+## How to contribute code
+
+If you would like to contribute to this project, please see the [contributing guidelines](CONTRIBUTING.md) for the guidelines.
