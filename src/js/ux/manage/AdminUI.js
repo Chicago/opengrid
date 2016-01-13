@@ -7,7 +7,9 @@
 
 ogrid.AdminUI = ogrid.Class.extend({
     //private attributes
-    _options:{},
+    _options:{
+        datasets: null
+    },
     _container: null,
     _groupAdmin: null,
     _userAdmin: null,
@@ -30,7 +32,8 @@ ogrid.AdminUI = ogrid.Class.extend({
 
         this._groupAdmin = new ogrid.GroupAdmin($('#ogrid-manage-groups'),{
             postDelete: $.proxy(this._postGroupUpdate, this),
-            postUpdate: $.proxy(this._postGroupUpdate, this)
+            postUpdate: $.proxy(this._postGroupUpdate, this),
+            datasets: this._options.datasets
         });
         this._groupAdmin.refreshGroups();
 

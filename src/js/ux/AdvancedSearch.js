@@ -11,18 +11,25 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
     //private attributes
     _options:{
         defaultPointColor: '#DC143C',
-        allDataTypes: null
+        allDataTypes: null,
+        datasets: null
     },
 
     _geoFilter: null,
     _pendingQueries: 0,
     _queryScheduler: null,
-    _activeQueryId: null,
 
-    //holds last saved name
-    _activeQueryName: null,
+    //holds copy of loaded query
+    _activeQuery: null,
 
     _queryAdmin: null,
+
+    _isLoadingQuery: false,
+
+    //cache for lookup values
+    _lookup: {
+
+    },
 
     //public attributes
 
@@ -79,8 +86,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             this._loadQuery(query);
             //if shared query and we're not the owner, create a 'copy' of the query
             if (this._sharedNotOwned(query)) {
-                this._activeQueryId = null;
-                this._activeQueryName = null;
+                this._activeQuery = null;
             }
             if (autoExec) {
                 this._onSubmit();
@@ -101,6 +107,10 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             (query.owner !== ogrid.App.getSession().getCurrentUser().getProfile().loginId) );
     },
 
+    _commonNotOwned: function(query) {
+        return (query.isCommon &&
+        (query.owner != ogrid.App.getSession().getCurrentUser().getProfile().loginId) );
+    },
 
     _setupWindowResizeHandler: function() {
         $(window).resize(this._onWindowResize);
@@ -159,12 +169,15 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                         _id: JSON.stringify(v._id),
                         spec: JSON.stringify(v.spec),
                         name: v.name,
+                        owner: v.owner,
+                        isCommon: v.isCommon,
                         geoFilter: JSON.stringify(v.geoFilter),
                         autoRefresh: ( v.autoRefresh ? true : false),
                         refreshInterval: (v.refreshInterval ? v.refreshInterval : 0)
                     }
                 );
             });
+            //note: we need to keep the data attributes in sync on the HMTL file template
             $('#queryOptionTemplate').tmpl(d).appendTo(selectId);
         };
     },
@@ -174,6 +187,21 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         this._commonErrorHandler('Query listing', err, rawErrorData, passThroughData);
     },
 
+    _onQueryNameKeyup: function() {
+        //we need to handle common queries especially
+        if ( this._activeQuery && this._activeQuery.isCommon ) {
+            //enable save only when query name is different or when the current user is the owner
+            if ( (this._getQueryName().trim() ===  this._activeQuery.name)  &&
+                (this._commonNotOwned(this._activeQuery))
+            ) {
+                $('#advSearchSave').addClass('disabled');
+                return;
+            }
+        }
+
+        //default is to enable
+        $('#advSearchSave').removeClass('disabled');
+    },
 
     _initEventHandlers: function() {
         $('#beginDate').datetimepicker();
@@ -210,6 +238,8 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
         $('#autoRefreshSpinUp').click(this._getSpinEventHandler('#autoRefreshInterval', 1));
         $('#autoRefreshSpinDn').click(this._getSpinEventHandler('#autoRefreshInterval', -1));
+
+        $('#saveQueryAs').keyup($.proxy(this._onQueryNameKeyup, this));
 
         if (ogrid.Config.map.zoomToResultsExtent)
             ogrid.Event.on(ogrid.Event.types.MAP_RESULTS_DONE, $.proxy(this._onMapResultsDone, this));
@@ -274,7 +304,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _onQueryLoad: function(e) {
         try {
-            if ($(e.target).children(":selected").text()==='') {
+            if ($(e.target).children(":selected").val()==='') {
                 //selected blank, clear screen
                 this._clearQueryElements();
             } else {
@@ -290,8 +320,10 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 this._loadQuery({
                     _id:  $(e.target).children(":selected").data('queryId'),
                     spec: $(e.target).children(":selected").data('qspec'),
+                    owner: $(e.target).children(":selected").data('owner'),
                     name: $(e.target).children(":selected").text(),
                     geoFilter: $(e.target).children(":selected").data('geoFilter'),
+                    isCommon: $(e.target).children(":selected").data('isCommon'),
                     autoRefresh: $(e.target).children(":selected").data('autoRefresh'),
                     refreshInterval: $(e.target).children(":selected").data('refreshInterval')
                 });
@@ -307,7 +339,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         this._populateRecentlySavedQueries();
 
         this._clearQueryElements();
-        this._geoFilter.reset();
+        if (this._geoFilter) this._geoFilter.reset();
 
         //reset auto-refresh UI elements
         $('#autoRefreshCheckbox').prop('checked', false);
@@ -321,19 +353,17 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
         $('#saveQueryAs').val('');
 
-        this._activeQueryId = null;
-        this._activeQueryName = null;
+        this._activeQuery = null;
     },
 
     //load query definition into the UI
     //geo-filter is on the query level (not on data type/set level)
     _loadQuery: function(query) {
         try {
-           this._clearQueryElements();
+            this._isLoadingQuery = true;
+            this._clearQueryElements();
 
-            //think about storing a copy of the entire query object so we don't have to individually track attributes
-            this._activeQueryId = query._id;
-            this._activeQueryName = query.name;
+            this._activeQuery = query;
 
             //load filter tabs
             var me = this;
@@ -357,8 +387,16 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 $('#autoRefreshInterval').val(query.refreshInterval);
 
             $('#saveQueryAs').val(query.name);
+
+            //disable save as if common query
+            if ( this._commonNotOwned(query) )
+                $('#advSearchSave').addClass('disabled');
+            else
+                $('#advSearchSave').removeClass('disabled');
         } catch (e) {
             ogrid.Alert.error(e.message);
+        } finally {
+            this._isLoadingQuery = false;
         }
     },
 
@@ -394,7 +432,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         }
     },
 
-    _saveCurrentQuery: function(queryId) {
+    _saveCurrentQuery: function(queryId, isCommon) {
         try {
             var me = this;
             var q = {
@@ -402,7 +440,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 owner: ogrid.App.getSession().getCurrentUser().getProfile().loginId,
                 spec: [],
                 sharedWith: {users:[], groups:[]}, //no sharing implemented for Sprint 2
-                isCommon: false,
+                isCommon: isCommon ? isCommon : false, //make sure the isCommonFlag is not discarded
                 autoRefresh: $('#autoRefreshCheckbox').prop('checked'),
                 refreshInterval: $("#autoRefreshInterval").val()
             };
@@ -461,8 +499,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
         //on successful save of query, we always get back the query object
         //refresh our 'current' data
-        this._activeQueryId = data._id;
-        this._activeQueryName = data.name;
+        this._activeQuery = data;
 
         //refresh Manage Queries tab
         this._queryAdmin.refreshQueries();
@@ -500,9 +537,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
     _checkQueryExistence: function(name, cb) {
         try {
             var me = this;
-            if (this._activeQueryId && !this._savedAsNewName(name)) {
+            if (this._activeQuery && this._activeQuery._id && !this._savedAsNewName(name)) {
                 //existing query, let it through as this will get handled as an update
-                cb(this._activeQueryId);
+                cb(this._activeQuery._id, this._activeQuery.isCommon);
             } else {
                 //check if the same query name exists for this user, if so prompt the user if he wants to overlay it
                 this._findQueryWithName(name, function(queryId) {
@@ -527,7 +564,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
     },
 
     _savedAsNewName: function(name) {
-        return (this._activeQueryName !== name);
+        return (this._activeQuery.name !== name);
     },
 
 
@@ -548,6 +585,13 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         this._commonErrorHandler('Query save', err, rawErrorData, passThroughData);
     },
 
+    _hideMe: function() {
+        $("#ogrid-task-advanced-search").switchClass('visible','hide', 500);
+        $("#ogrid-advanced-btn").removeClass('active');
+
+        //remove focus from button
+        $('#ogrid-advanced-btn').blur();
+    },
 
     _onSubmit: function(e) {
         try {
@@ -605,6 +649,12 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 //immediate execution
                 ogrid.Search.exec(search, {origin: 'advancedSearch', search: search});
             });
+
+            //on a mobile device, auto-hide advanced search pane
+            if (ogrid.App.mobileView()) {
+                me._hideMe();
+            }
+
         } catch (ex) {
             ogrid.Alert.error(ex.message);
         }
@@ -680,12 +730,12 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         //get all data types
         if (!this._options.allDataTypes) {
             //get all available data type descriptors from the service
-            ogrid.ajax(this, function(data) {
-                me._options.allDataTypes = data;
-                $('#dtTemplate').tmpl(data).appendTo('#ogrid-dtlist');
+            //ogrid.ajax(this, function(data) {
+            me._options.allDataTypes = this._options.datasets;
+            $('#dtTemplate').tmpl(this._options.datasets).appendTo('#ogrid-dtlist');
 
-                $('#ogrid-dtlist').find('li').click($.proxy(me._onDataTypeAdd, me));
-            }, {url: '/datasets'});
+            $('#ogrid-dtlist').find('li').click($.proxy(me._onDataTypeAdd, me));
+            //}, {url: '/datasets'});
         }
     },
 
@@ -693,7 +743,8 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         var t = null;
 
         $.each(this._options.allDataTypes, function(i, v) {
-            if (v.id === typeId) {
+            //we don't want an exact type equality (i.e. 311 will not match '311')
+            if (v.id == typeId) {
                 t = v;
                 return;
             }
@@ -703,15 +754,83 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         return t;
     },
 
+//caches look up values
+    _lookupLov: function(listId, done, me) {
+        if (me._lookupLov[listId]) {
+            done(me._lookupLov[listId]);
+        } else {
+            $.ajax(ogrid.Config.service.endpoint + '/autocomplete/' + listId)
+                .done(function (data) {
+                    var a = $.map(data, function (v, i) {
+                        return {value: v.value, data: v.key};
+
+                    });
+                    me._lookupLov[listId] = a;
+                    done(me._lookupLov[listId]);
+                })
+                .fail(function (jqXHR, txtStatus, errorThrown) {
+                    //ogrid.App.handleError('User save', errorThrown, {jqXHR: jqXHR, txtStatus:txtStatus});
+                });
+        }
+    },
+
+
+    _filterSuggestions: function(query, data) {
+        var a =  $.map(data.suggestions, function(v, i) {
+            if ( v.value.match(new RegExp(query, 'i')) ) {
+                return v;
+            }
+        });
+        return {suggestions: a};
+    },
+
+    _getAutoComplete: function(filter, column, me) {
+        var listId = column.listOfValuesId;
+
+        filter.autocomplete = {
+            lookup: function (query, done) {
+
+                if (me._isLoadingQuery) {
+                    //handle issue where the auto-complete box pops up when we load an existing query
+                    done({suggestions: []}); return;
+                }
+
+                console.log(query);
+                if (me._lookupLov[listId]) {
+                    done( me._filterSuggestions(query, me._lookupLov[listId]) );
+                } else {
+                    $.ajax(ogrid.Config.service.endpoint + '/autocomplete/' + listId)
+                        .done(function (data) {
+                            var a = $.map(data, function (v, i) {
+                                return {value: v.value, data: v.key};
+                            });
+                            me._lookupLov[listId] = {suggestions: a};
+                            done( me._filterSuggestions(query, me._lookupLov[listId]) );
+                        })
+                        .fail(function (jqXHR, txtStatus, errorThrown) {
+                            //ogrid.App.handleError('User save', errorThrown, {jqXHR: jqXHR, txtStatus:txtStatus});
+                        });
+                }
+            },
+            onSelect: function (suggestion) {
+                console.log($(this).val());
+                //trigger change so the query builder can reclc it's model
+                $(this).trigger("change");
+            }
+        };
+    },
 
 
     _getFilters: function(typeId) {
         var a = [];
+        var date_ops = ['between', 'greater', 'less'];
         var numops = ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal', 'between'];
         var strops =  ['equal', 'not_equal', 'contains', 'begins_with'];
 
+        var me = this;
         $.each(this._options.allDataTypes, function(i, v) {
-            if (v.id === typeId) {
+            //we don't want an exact type equality (i.e. 311 will not match '311')
+            if (v.id == typeId) {
                 $.each(v.columns, function(i, v) {
                     //add only filterable properties
                     if (v.filter) {
@@ -720,7 +839,13 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                             label: v.displayName,
                             type: v.dataType
                         };
-                        if (v.dataType==='float') {
+                        if (v.dataType==='string') {
+                            //add auto-complete if configured
+                            if (v.listOfValuesId) {
+                                //f.autocomplete =  me._getAutoComplete(v, me);
+                                me._getAutoComplete(f, v, me);
+                            }
+                        } else if (v.dataType==='float') {
                             f.type = 'double';
                             f.validation = {step: 0.01};
                             f.operators = numops;
@@ -731,16 +856,78 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                             f.operators = numops;
 
                         } else if (v.dataType==='date') {
-                            f.validation = {format: 'MM/DD/YYYY'};
-                            f.plugin =  'datepicker';
+                            f.validation = {format: 'MM/DD/YYYY hh:mm:ss a'};
+                            f.plugin =  'datetimepicker';
                             f.plugin_config = {
-                                format: 'mm/dd/yyyy',
-                                todayBtn: 'linked',
-                                nowBtn: 'linked',
-                                todayHighlight: true,
-                                autoclose: true
+                                widgetPositioning: {vertical: 'bottom', horizontal: 'auto'},
+                                keyBinds: {
+                                    up: function (widget) {
+                                        if (widget.find('.datepicker').is(':visible')) {
+                                            this.date(this.date().clone().subtract(7, 'd'));
+                                        } else {
+                                            this.date(this.date().clone().add(1, 'm'));
+                                        }
+                                    },
+                                    down: function (widget) {
+                                        if (!widget) {
+                                            this.show();
+                                        }
+                                        else if (widget.find('.datepicker').is(':visible')) {
+                                            this.date(this.date().clone().add(7, 'd'));
+                                        } else {
+                                            this.date(this.date().clone().subtract(1, 'm'));
+                                        }
+                                    },
+                                    'control up': function (widget) {
+                                        if (widget.find('.datepicker').is(':visible')) {
+                                            this.date(this.date().clone().subtract(1, 'y'));
+                                        } else {
+                                            this.date(this.date().clone().add(1, 'h'));
+                                        }
+                                    },
+                                    'control down': function (widget) {
+                                        if (widget.find('.datepicker').is(':visible')) {
+                                            this.date(this.date().clone().add(1, 'y'));
+                                        } else {
+                                            this.date(this.date().clone().subtract(1, 'h'));
+                                        }
+                                    },
+                                    left: function (widget) {
+                                        return true;
+                                    },
+                                    right: function (widget) {
+                                        return true;
+                                    },
+                                    pageUp: function (widget) {
+                                        if (widget.find('.datepicker').is(':visible')) {
+                                            this.date(this.date().clone().subtract(1, 'M'));
+                                        }
+                                    },
+                                    pageDown: function (widget) {
+                                        if (widget.find('.datepicker').is(':visible')) {
+                                            this.date(this.date().clone().add(1, 'M'));
+                                        }
+                                    },
+                                    enter: function () {
+                                        this.hide();
+                                    },
+                                    escape: function () {
+                                        this.hide();
+                                    },
+                                    'control space': function (widget) {
+                                        if (widget.find('.timepicker').is(':visible')) {
+                                            widget.find('.btn[data-action="togglePeriod"]').click();
+                                        }
+                                    },
+                                    t: function () {
+                                        return true;
+                                    },
+                                    'delete': function () {
+                                        return true;
+                                    }
+                                }
                             };
-                            f.operators = numops;
+                            f.operators = date_ops;
 
                         } else {
                             f.operators = strops;

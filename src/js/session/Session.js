@@ -218,7 +218,7 @@ ogrid.Session = ogrid.Class.extend({
         //return static string so there is no additional external file dependency
         //  and to keep this widget more self-contained (may use an external file later if this becomes cumbersome)
         //we can use build-tools later to automate reading this from template to embedded string in our class
-        return '<div class="panel panel-default login-panel"><div class="panel-heading"><h2>' +
+        return '<div class="panel panel-default login-panel"><div class="panel-heading"><img src="images/OpenGrid_symbol_white.png" alt="Open Grid Logo" ><h2>' +
             ogrid.Config.brand.applicationName +
             '</h2></div><div class="panel-body"><!--<form method="post" action="" role="login"> --><div class="row"><div class="col-xs-12"><input id="ogrid-login-username" name="username" autocapitalize="off" placeholder="Username" class="form-control"/><span class="glyphicon glyphicon-user"></span></div><div class="col-xs-12"><input id="ogrid-login-password" type="password" name="password" placeholder="Password" class="form-control" /><span class="glyphicon glyphicon-lock"></span></div></div><button type="submit" name="go" class="btn btn-block btn-info disabled">LOG IN</button><div class="alert alert-danger fade hide">The login failed due to invalid username/password or you do not have permissions to access the system.</div><!--</form>--></div>';
     },
@@ -339,7 +339,7 @@ ogrid.Session = ogrid.Class.extend({
             type: 'POST',
             async: true,
             //contentType: 'application/json',
-            timeout: 60000,
+            timeout: ogrid.Config.service.timeout,
             processData: false, //make sure our payload does not get encoded
             data: JSON.stringify(payLoad),
             success: function(data, txtStatus, jqXHR) {

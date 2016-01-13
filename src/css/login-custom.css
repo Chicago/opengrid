@@ -1,7 +1,7 @@
 #loginForm {
 	position: fixed;
 	background-image: url("../images/background_lake_east.jpg");
-	background-size: 100% auto;
+	background-size: cover;
 	background-repeat: no-repeat;
 }
 
@@ -21,13 +21,19 @@
 }
 
 .ogrid-login .login-panel input {
-	background: rgba(107,107,107,0.25);
+	background: rgba(107,107,107,0.9);
 	border: 0px;
+	color: #fff;
 }
 
 .ogrid-login h2 {
 	font-family: 'Raleway', sans-serif;
-	font-size: 5em;
+	//	font-size: 5em;
+}
+
+.ogrid-login img {
+height:20%;
+width:20%;
 }
 
 .ogrid-login .alert-danger{
@@ -49,4 +55,25 @@
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+@media only screen and (max-width: 680px) {
+      h2 { font-weight: bold !important;
+           font-size: 3em;
+         }
+      
+      .panel-heading {
+            margin-left:-15px
+    }
+
+.login-panel {
+ margin-top:0px
+
+}
+
+}
+@media only screen and (min-width: 680px) {
+      h2 { font-weight: bold !important;
+           font-size: 5em; 
+         }
+
 }

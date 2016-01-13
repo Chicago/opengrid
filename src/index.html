@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
   <title>OpenGrid</title>
+
+  <!-- force a refresh everytime, can mess with updates -->
+  <meta http-equiv="expires" content="0">
+
   <meta charset="utf-8"><meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,9 +31,9 @@
   <!-- To be injected by gulp inject plug-in at build time -->
   <!-- inject:head:css -->
   <!-- endinject -->
-  <link href='https://fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css'> 
+    <link href='https://fonts.googleapis.com/css?family=Raleway:100' rel='stylesheet' type='text/css'>
 
-  <!-- inject:head:js -->
+    <!-- inject:head:js -->
   <!-- endinject -->
 
 </head>
@@ -45,12 +49,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+          <img class="ogrid-logo-small pull-left" src="images/OpenGrid_symbol_white.png" alt="Open Grid Logo">
           <a class="navbar-brand" href="#">OpenGrid</a>
             <div id="ogrid-search" class="pull-left">
                 <form class="navbar-form " role="search">
                     <div class="form-group has-feedback input-group" id="qsearch">
                         <input autocapitalize="off" type="text" class="form-control" id="qsearch-input" placeholder="Quick search" />
-                        <span id="ogrid-qsearch-hint" class="glyphicon glyphicon-question-sign" data-toggle="popover" tabindex="0" data-trigger="focus" data-placement="bottom" title="Quick Search Help"></span>
+                        <span id="ogrid-qsearch-hint" class="glyphicon glyphicon-question-sign" data-toggle="popover" tabindex="0" data-placement="bottom" title="Quick Search Help"></span>
                         <span class="input-group-addon" id="qsearch-button">
                             <i class="fa fa-search"></i>
                         </span>
@@ -62,7 +67,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <p class="navbar-btn ogrid-nav-btn">
-                <a id="ogrid-advanced-btn" href="#" class="btn btn-default">Advanced Search</a>
+                <a id="ogrid-advanced-btn" href="#" class="btn btn-default hide">Advanced Search</a>
               </p>
             </li>
             <li>
@@ -72,11 +77,11 @@
             </li>
             <li>
               <p class="navbar-btn ogrid-nav-btn">
-                <a id="ogrid-manage-btn" href="#" class="btn btn-default">Manage</a>
+                <a id="ogrid-manage-btn" href="#" class="btn btn-default hide">Manage</a>
               </p>
             </li>
             <li class="dropdown">
-              <a id="ogrid-user-name" class="dropdown-toggle" data-toggle="dropdown" href="#">John Smith
+              <a id="ogrid-user-name" class="dropdown-toggle" data-toggle="dropdown" href="#">Guest
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -122,7 +127,7 @@
                             <select id="commonlyUsedQueries" class="form-control">
                               <option value="">SELECT COMMONLY USED QUERY</option>
                               <script type="text/x-jquery-tmpl" id="queryOptionTemplate">
-                                  <option data-query-id="${_id}" data-qspec="${spec}" data-geo-filter="${geoFilter}" data-auto-refresh="${autoRefresh}" data-refresh-interval="${refreshInterval}" >${name}</option>
+                                  <option data-query-id="${_id}" data-qspec="${spec}" data-geo-filter="${geoFilter}" data-owner="${owner}"  data-is-common="${isCommon}" data-auto-refresh="${autoRefresh}" data-refresh-interval="${refreshInterval}" >${name}</option>
                                </script>
                             </select>
                           </div>

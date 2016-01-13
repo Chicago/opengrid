@@ -8,7 +8,8 @@ ogrid.GroupAdmin = ogrid.EntityAdmin.extend({
     //private attributes
     _options: {
         postDelete: null,
-        postUpdate: null
+        postUpdate: null,
+        datasets: null
     },
     _container: null,
 
@@ -121,96 +122,95 @@ ogrid.GroupAdmin = ogrid.EntityAdmin.extend({
 
     initTable: function () {
         var me = this;
-        var dsCall = $.ajax(ogrid.Config.service.endpoint + '/datasets');
-        dsCall.then(function (dataTypes) {
-            var accessFormatter = me._getMultiPickerFormatter(
-                'Choose functions...',
-                'functionsPicker',
-                //sample UI security
-                [ogrid.SecuredFunctions.ADVANCED_SEARCH, ogrid.SecuredFunctions.MANAGE]
-            );
 
-            var dataTypesFormatter = me._getMultiPickerFormatter(
-                'Choose data types...',
-                'dataTypesPicker',
-                $.map(dataTypes, function (v, i) {
-                    return v.id;
-                })
-            );
+        var dataTypes = me._options.datasets;
+        var accessFormatter = me._getMultiPickerFormatter(
+            'Choose functions...',
+            'functionsPicker',
+            //sample UI security
+            [ogrid.SecuredFunctions.ADVANCED_SEARCH, ogrid.SecuredFunctions.MANAGE]
+        );
 
-            var viewFormatter = function (data, row, index) {
-                return '<div>' +
-                    '<b>' + row.name + '</b><br>' +
-                    row.description +
-                    '</div>';
-            };
+        var dataTypesFormatter = me._getMultiPickerFormatter(
+            'Choose data types...',
+            'dataTypesPicker',
+            $.map(dataTypes, function (v, i) {
+                return v.id;
+            })
+        );
 
-            var actionFormatter = function (value) {
-                return [
-                    '<a class="update" href="javascript:" title="Update Item"><i class="glyphicon glyphicon-edit"></i></a>',
-                    '<a class="remove" href="javascript:" title="Delete Item"><i class="glyphicon glyphicon-remove-circle"></i></a>',
-                ].join('');
-            };
+        var viewFormatter = function (data, row, index) {
+            return '<div>' +
+                '<b>' + row.name + '</b><br>' +
+                row.description +
+                '</div>';
+        };
 
-            var actionEvents = {
-                'click .update': function (e, value, row) {
-                    me._showModal($(this).attr('title'), 'groupId', 'name', row);
-                },
-                'click .remove': function (e, value, row) {
-                    ogrid.Alert.modalPrompt('Manage Groups', 'Are you sure you want to delete this group?', function (selected) {
-                        //'ok' or 'cancel'
-                        if (selected === 'ok') {
-                            me._deleteItem(row);
-                        }
-                    });
-                }
-            };
+        var actionFormatter = function (value) {
+            return [
+                '<a class="update" href="javascript:" title="Update Item"><i class="glyphicon glyphicon-edit"></i></a>',
+                '<a class="remove" href="javascript:" title="Delete Item"><i class="glyphicon glyphicon-remove-circle"></i></a>',
+            ].join('');
+        };
 
-            var pickerEvents = {
-                'change .selectpicker': function (e, value, row) {
-                    //var r = $.extend(true, {}, row);
-                    if ($(e.target).attr('title').indexOf('functions') > -1) {
-                        row.functions = $(e.target).selectpicker('val');
-                    } else {
-                        row.datasets = $(e.target).selectpicker('val');
+        var actionEvents = {
+            'click .update': function (e, value, row) {
+                me._showModal($(this).attr('title'), 'groupId', 'name', row);
+            },
+            'click .remove': function (e, value, row) {
+                ogrid.Alert.modalPrompt('Manage Groups', 'Are you sure you want to delete this group?', function (selected) {
+                    //'ok' or 'cancel'
+                    if (selected === 'ok') {
+                        me._deleteItem(row);
                     }
-                    ogrid.admin('groups').updateItem(row._id, row, {
-                        success: $.proxy(this._onSaveSuccess, this),
-                        error: $.proxy(this._onSaveError, this)
-                    });
+                });
+            }
+        };
+
+        var pickerEvents = {
+            'change .selectpicker': function (e, value, row) {
+                //var r = $.extend(true, {}, row);
+                if ($(e.target).attr('title').indexOf('functions') > -1) {
+                    row.functions = $(e.target).selectpicker('val');
+                } else {
+                    row.datasets = $(e.target).selectpicker('val');
                 }
-            };
+                ogrid.admin('groups').updateItem(row._id, row, {
+                    success: $.proxy(this._onSaveSuccess, this),
+                    error: $.proxy(this._onSaveError, this)
+                });
+            }
+        };
 
-            var cols = [
-                {field: 'action', align: 'left', valign: 'middle', formatter: actionFormatter, events: actionEvents},
-                {field: 'view', title: 'Group Details', formatter: viewFormatter},
-                {field: '_id', title: 'Internal ID', visible: false},
-                //{field: 'groupId', title: 'ID', visible: false},
-                //{field: 'name', title: 'Name', visible: false},
-                //{field: 'description', title: 'Description', visible: false},
-                {field: 'functions', title: 'Functions', formatter: accessFormatter, events: pickerEvents},
-                {field: 'datasets', title: 'Data Types', formatter: dataTypesFormatter, events: pickerEvents},
-                //{field: 'enabled', title: 'Enabled', visible: false}
-            ];
+        var cols = [
+            {field: 'action', align: 'left', valign: 'middle', formatter: actionFormatter, events: actionEvents},
+            {field: 'view', title: 'Group Details', formatter: viewFormatter},
+            {field: '_id', title: 'Internal ID', visible: false},
+            //{field: 'groupId', title: 'ID', visible: false},
+            //{field: 'name', title: 'Name', visible: false},
+            //{field: 'description', title: 'Description', visible: false},
+            {field: 'functions', title: 'Functions', formatter: accessFormatter, events: pickerEvents},
+            {field: 'datasets', title: 'Data Types', formatter: dataTypesFormatter, events: pickerEvents},
+            //{field: 'enabled', title: 'Enabled', visible: false}
+        ];
 
-            $('#ogrid-table-groups').bootstrapTable({
-                classes: 'table table-hover table-condensed',
+        $('#ogrid-table-groups').bootstrapTable({
+            classes: 'table table-hover table-condensed',
 
-                columns: cols,
+            columns: cols,
 
-                //TODO: make responsive later
-                height: $(window).height() - 160,
+            //TODO: make responsive later
+            height: $(window).height() - 160,
 
-                //pagination: true,
-                toolbar: "#manage-group-toolbar"
-            });
-            $(window).resize(me._onWindowResize);
-            $('.ogrid-manage-groups .create').click(function () {
-
-                me._showModal($(this).text(), 'groupId');
-            });
-            me.refreshGroups();
+            //pagination: true,
+            toolbar: "#manage-group-toolbar"
         });
+        $(window).resize(me._onWindowResize);
+        $('.ogrid-manage-groups .create').click(function () {
+
+            me._showModal($(this).text(), 'groupId');
+        });
+        me.refreshGroups();
     },
 
     _onWindowResize: function () {

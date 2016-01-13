@@ -17,6 +17,9 @@ ogrid.Main = ogrid.Class.extend({
     _timedOut: false,
     _mobileMode: false,
 
+    //make this common now, so we don't have to retrieve multiple times
+    _datasets: null,
+
     //public attributes
 
 
@@ -79,6 +82,57 @@ ogrid.Main = ogrid.Class.extend({
 
 
     _initUx: function() {
+        var me = this;
+
+        //init map with no custom layers available
+        me._initMapRelatedUx();
+
+        //retrieve available datasets first ahead of initializing other dataset-dependent UI elements
+        // and pass datasets to save retrieval time
+        ogrid.ajax(this, function(data) {
+            me._datasets = data;
+
+            //init commandbar
+            me._cb = new ogrid.CommandBar(me._options.commandbar, {datasets: me._datasets});
+
+            //init advanced search
+            me._adv = new ogrid.AdvancedSearch({map: me._map, datasets: me._datasets});
+
+            //init manage UI only if user has Manage access
+            if ( me._isAdmin(me._session.getCurrentUser().getProfile()) ) {
+                ogrid.adminUI(
+                    $('#ogrid-admin-ui'),
+                    {datasets: me._datasets}
+                );
+            }
+            //init quick search
+            me._qs = new ogrid.QSearch(
+                me._options.qsearch_div,
+                me._options.qsearch_input,
+                me._options.qsearch_button,
+                {datasets: me._datasets}
+            );
+
+            //nav menu tweaks
+            me._setNavBarBehavior();
+
+            me._timedOut =  false;
+
+            //broadcast that we're finished logged in, passing user profile
+            ogrid.Event.raise(ogrid.Event.types.LOGGED_IN, me._session.getCurrentUser());
+        }, {url: '/datasets'});
+    },
+
+    _initMapRelatedUx: function(data) {
+        if (data) {
+            if (ogrid.Config.map.overlayLayers && Array.isArray(ogrid.Config.map.overlayLayers)) {
+                //append if there are static layers configured
+                //we have to concat to the dynamic data for the statics to appear first on the layer control
+                ogrid.Config.map.overlayLayers = data.concat(ogrid.Config.map.overlayLayers);
+            } else
+                ogrid.Config.map.overlayLayers = data;
+        }
+
         //init map
         this._map = new ogrid.Map(
             this._options.map,
@@ -86,33 +140,21 @@ ogrid.Main = ogrid.Class.extend({
             ogrid.Config.map
         );
 
-         //init quick search
-        this._qs = new ogrid.QSearch(
-            this._options.qsearch_div,
-             this._options.qsearch_input,
-             this._options.qsearch_button);
+        //init other map dependent objects
 
-        //init commandbar
-        this._cb = new ogrid.CommandBar(this._options.commandbar);
-
-         //init table view
+        //init table view
         this._tv = new ogrid.TableView($('#tableview'), $('#ogrid-nav-tabs'), $('#ogrid-tab-content'),
             {map: this._map}
         );
 
-        //nav menu tweaks
-        this._setNavBarBehavior();
-
-        //init advanced search
-        this._adv = new ogrid.AdvancedSearch({map: this._map});
-
-        //init manage UI
-        ogrid.adminUI($('#ogrid-admin-ui'));
-
-        this._timedOut =  false;
-        //broadcast that we're finished logged in, passing user profile
-        ogrid.Event.raise(ogrid.Event.types.LOGGED_IN, this._session.getCurrentUser());
     },
+
+    _isAdmin: function(userProfile) {
+        //quick way to check admin access
+        //there is a more granular way which is is implemented in CommandBar.js
+        return ($.inArray('$admin', userProfile.resources) !== -1);
+    },
+
 
     _postLogin: function() {
         //broadcast that we're finished logged in, passing user profile
@@ -179,7 +221,8 @@ ogrid.Main = ogrid.Class.extend({
                     ogrid.Alert.error("The service cannot be reached at this time. Make sure an internet connection is available then try again.");
                 } else if ( jqxhr.status === 500 ) {
                     ogrid.Alert.error("A general service error has occurred. The browser's log can be inspected for more detail on this error.");
-                } if ( jqxhr.status === 0 && jqxhr.statusText==='error') {
+                } if ( jqxhr.status === 0 && jqxhr.statusText==='error' && !jqxhr.ogridErrorHandled) {
+                    //ogridErrorHandled is a custom attribute that we tack on to a request so the global error handler won't take over
                     ogrid.Alert.error("A system error was encountered while performing the requested operation. The service may be unavailable.");
                 } else {
                     //fallback error handler
@@ -244,5 +287,22 @@ ogrid.Main = ogrid.Class.extend({
     //returns a flag indicating if we're in 'mobile-view' i.e. nav menu graphic is visible
     mobileView: function() {
         return this._mobileMode;
+    },
+
+    datasets: function() {
+        return this._datasets;
+    },
+
+    //common global error handler
+    handleError: function (opName, err, rawErrorData) {
+        if (err && !$.isEmptyObject(err)) {
+            ogrid.Alert.error(err.message + '(' + 'Code: ' + err.code + ')');
+        } else {
+            if (rawErrorData.txtStatus === 'timeout') {
+                ogrid.Alert.error(opName + ' has timed out.');
+            } else {
+                ogrid.Alert.error((rawErrorData.jqXHR.responseText) ? rawErrorData.jqXHR.responseText : rawErrorData.txtStatus);
+            }
+        }
     }
 });

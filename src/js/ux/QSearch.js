@@ -7,7 +7,9 @@
 
 ogrid.QSearch = ogrid.Class.extend({
     //private attributes
-    _options:{},
+    _options:{
+        datasets: null
+    },
     _qsContainer: null,
     _input: null,
     _qsbutton: null,
@@ -19,7 +21,7 @@ ogrid.QSearch = ogrid.Class.extend({
     init: function(qsdiv, qsinput, qsbutton, options) {
         if (options) {
             //ogrid.mixin(this._options);
-            this._options = options;
+            this._options = $.extend(this._options, options);
         }
 
         this._qsContainer = qsdiv;
@@ -76,14 +78,14 @@ ogrid.QSearch = ogrid.Class.extend({
             //set datasets option of FlexData quick search processor after login
             var o = this._findQSearchFlexDataPlugin();
             if (o) {
-                var dsCall = $.ajax(ogrid.Config.service.endpoint + '/datasets');
-                dsCall.then(function (dataTypes) {
-                    o.setOptions({datasets: dataTypes});
-                    me._input.prop('disabled', false);
+                //var dsCall = $.ajax(ogrid.Config.service.endpoint + '/datasets');
+                //dsCall.then(function (dataTypes) {
+                o.setOptions({datasets: this._options.datasets});
+                me._input.prop('disabled', false);
 
-                    //avoid annoying keyboard popup when on mobile mode
-                    if (!ogrid.App.mobileView()) me._input.focus();
-                });
+                //avoid annoying keyboard popup when on mobile mode
+                if (!ogrid.App.mobileView()) me._input.focus();
+                //});
             }
         } catch (ex) {
             console.log(ex.message);

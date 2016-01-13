@@ -7,14 +7,15 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
-    rename = require('gulp-rename'),
     flatten = require('gulp-flatten'),
     minifyCss = require('gulp-minify-css'),
     inject = require('gulp-inject'),
     runSequence = require('run-sequence'),
     mocha = require('gulp-mocha'),
     series = require('stream-series'),
-    mochaPhantomJS = require('gulp-mocha-phantomjs');
+    mochaPhantomJS = require('gulp-mocha-phantomjs'),
+    rev = require('gulp-rev'),
+    rename = require('gulp-rename');
 
 //add path of CSS files to inject last into the HTML file
 var injectLastCss=[
@@ -67,6 +68,9 @@ var third_party_sources = [
     'lib/jspdf-1.1.135/js/jspdf.js',
     'lib/**/*.js'
 ];
+
+//hashmap to store revved files
+var revManifest = {};
 
 //debug tasks start ******************
 //clean our target folder
@@ -133,19 +137,27 @@ gulp.task('css-app', function() {
     return gulp.src([
         'src/css/*.css'
         ].concat(
-            //negate our injectLastCss files
+            //negate/exclude our injectLastCss files
             injectLastCss.map(function(v){
             return '!' + v;
             })
         ))
         .pipe(minifyCss({compatibility: 'ie8'}))
         .pipe(concat('app.css'))
+        .pipe(rev())
         .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('css-app-last', function() {
-    return  gulp.src(injectLastCss)
-        .pipe(gulp.dest('dist/css'));
+    return gulp.src(injectLastCss)
+        .pipe(rev())
+        .pipe(gulp.dest('dist/css'))
+        .pipe(rev.manifest())
+        .pipe(gulp.dest('./dist'))
+        .on('end', function() {
+            var fs = require('fs');
+            revManifest = JSON.parse(fs.readFileSync('./dist/rev-manifest.json', 'utf8'));
+        });
 });
 
 //minify our 3rd-party library CSS files
@@ -153,6 +165,7 @@ gulp.task('css-lib', function() {
     return gulp.src(['lib/**/*.css'])
         .pipe(minifyCss({compatibility: 'ie8'}))
         .pipe(concat('lib.css'))
+        .pipe(rev())
         .pipe(gulp.dest('dist/css'));
 });
 
@@ -220,13 +233,58 @@ gulp.task('scripts-app', function() {
 
         .pipe(concat('app.min.js'))
         .pipe(uglify())
+        .pipe(rev())
         .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('env-settings', function () {
+var envHash = '';
+
+gulp.task('env-settings',  function(cb) {
+    runSequence(
+        'env-settings-root',
+        'env-settings-indiv',
+        cb
+    );
+});
+
+
+gulp.task('env-settings-indiv', function () {
     return gulp.src([
-        './config/**/*'
-        ]).pipe(gulp.dest('dist/config'));
+        './config/**/*', '!./config/EnvSettings*.js'
+        ])
+        //use straight rename based on common hash
+        .pipe(rename(function (filename) {
+            if (filename.extname.length > 0) {
+                filename.basename += '-' + envHash;
+            }
+            return filename;
+        }))
+        .pipe(gulp.dest('dist/config'));
+});
+
+
+gulp.task('env-settings-root', function () {
+    return gulp.src([
+        './config/EnvSettings.js'
+        ])
+        .pipe(rev())
+        .pipe(gulp.dest('dist/config'))
+        .pipe(rev.manifest({merge : true}))
+        .pipe(gulp.dest('./dist'))
+        .on('end', function() {
+            var fs = require('fs');
+            var m = JSON.parse(fs.readFileSync('./dist/rev-manifest.json', 'utf8'));
+
+            //get hash used for EnvSettings
+            var e = m['EnvSettings.js'];
+
+            var h = /^\w+-(\w+)\.(\w)*$$/i.exec(e);
+            if (h)
+                envHash =  h[1];
+            else
+                envHash = '';
+            console.log(envHash);
+        });
 });
 
 //concat and minify 3rd party libraries
@@ -238,6 +296,7 @@ gulp.task('scripts-lib', function() {
 
         .pipe(concat('lib-bundle.min.js'))
         .pipe(uglify())
+        .pipe(rev())
         .pipe(gulp.dest('dist/js'));
 });
 
@@ -245,6 +304,9 @@ gulp.task('scripts', ['scripts-app', 'scripts-lib']);
 
 //injects both js and css files into HTML
 gulp.task('html-release', function(){
+    if (revManifest === {}) {
+        revManifest = JSON.parse(fs.readFileSync('./dist/rev-manifest.json', 'utf8'));
+    }
     return gulp.src('./src/index.html')
         .pipe(inject(gulp.src(['./dist/**/lib*min.js', './dist/**/lib*.css'], {read: false}), {
             starttag: '<!-- inject:head:{{ext}} -->',
@@ -252,11 +314,11 @@ gulp.task('html-release', function(){
             addRootSlash: false
         }))
         .pipe(inject(gulp.src(
-                ['./dist/**/app*', '!./dist/**/app.js', 'config/EnvSettings.js'].concat(
+                ['./dist/**/app*', '!./dist/**/app.js', './dist/config/EnvSettings*'].concat(
                     //add our injectLastCss files from dist folder
                     injectLastCss.map(function(v){
                         var a = v.split('/');
-                        return './dist/css/' + a[a.length-1];
+                        return './dist/css/' + revManifest[a[a.length-1]];
                     })
                 ),
                 {read: false}
@@ -310,9 +372,12 @@ gulp.task('release',  function(cb) {
         'clean',
         'lint',
         'test',
+        'sass',
+        'css',
 
         //can be async
-        ['sass', 'css', 'css-app-last', 'images', 'fonts', 'fonts-app', 'templates'],
+        ['css-app-last', 'images', 'fonts', 'fonts-app', 'templates'],
+
         'scripts',
         'env-settings',
         'html-release',

@@ -243,6 +243,20 @@ ogrid.Map = ogrid.Class.extend({
         return renditionColor;
     },
 
+    _getLatestDataTs: function(data) {
+        var options = data.meta.view.options;
+        if (options.creationTimestamp) {
+            //check if a property is designated as cretion timestamp
+
+            if (data.features && data.features.length > 0) {
+                //assume sort by the creation timestamp, descending
+                return moment(data.features[0].properties[options.creationTimestamp], ogrid.Config.service.dateFormat);
+            }
+        }
+        return null;
+
+    },
+
     _onRefreshData: function (evtData) {
     	try {
             //console.log('map refresh: ' + JSON.stringify(evtData));
@@ -262,6 +276,9 @@ ogrid.Map = ogrid.Class.extend({
 
                 //if data is from a monitoring query, use that as our resultSetId as that remains constant through out the monitoring/timer session
                 var rsId = this._isMonitored(evtData.message) ? evtData.message.options.passthroughData.monitorData.monitorId : evtData.message.resultSetId;
+
+                //we need this for highlighting new data
+                var latestDataTs = me._getLatestDataTs(data);
 
                 var resultsLayer = L.geoJson(data, {
                     style: function (feature) {
@@ -298,7 +315,7 @@ ogrid.Map = ogrid.Class.extend({
                                     o.color,
                                     feature,
                                     data.meta.view.options,
-                                    me._markers[rsId].lastRefreshed
+                                    me._markers[rsId].latestDataTs
                                 ),
                                 fillOpacity:  (o.opacity/100), //pct
                                 fillColor:    o.fillColor
@@ -331,8 +348,8 @@ ogrid.Map = ogrid.Class.extend({
                 //we'll use the resultset Id to see if a layer for the same query needs to be replaced on our layer control
                 resultsLayer.opengridResultsetId = rsId;
 
-                //store lastRefreshed
-                this._markers[rsId].lastRefreshed = data.lastRefreshed;
+                //store latest data timestamp
+                this._markers[rsId].latestDataTs = latestDataTs;
 
                 //add query results to layer control
                 this._addLayerToControl(resultsLayer, data.meta.view, 'Data', this._GENERATED_LAYERS_LABEL);

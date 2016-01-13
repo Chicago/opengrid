@@ -148,6 +148,23 @@ ogrid.TableView = ogrid.Class.extend({
     _clear: function() {
         this._tabs.empty();
         this._tabContent.empty();
+
+        //clear our resultset Id->table map
+        this._tableRefs = {};
+    },
+
+    _getLatestDataTs: function(data) {
+        var options = data.meta.view.options;
+        if (options.creationTimestamp) {
+            //check if a property is designated as cretion timestamp
+
+            if (data.features && data.features.length > 0) {
+                //assume sort by the creation timestamp, descending
+                return moment(data.features[0].properties[options.creationTimestamp], ogrid.Config.service.dateFormat);
+            }
+        }
+        return null;
+
     },
 
     _populateTableRows: function(resultSetId, tableId, columns, data, showAutorefresh, lastRefreshed, creationTSColumn) {
@@ -183,8 +200,9 @@ ogrid.TableView = ogrid.Class.extend({
 
         if (showAutorefresh) {
             $('div.autorefresh').attr('title', 'Last auto-refreshed: ' + lastRefreshed.format('MM/DD/YYYY hh:mm:ss a'));
-            //update lastRefresh
-            $('#' + tableId).data('lastRefreshed', lastRefreshed);
+
+            //we need this for auto highlighting
+            $('#' + tableId).data('latestDataTs', this._getLatestDataTs(data));
         }
 
         //console.log($t.bootstrapTable('getData'));
@@ -258,13 +276,32 @@ ogrid.TableView = ogrid.Class.extend({
         return 'ogrid-table-' + id;
     },
 
+    _sortDateValues: function(a, b) {
+        if (!a || !b)
+            return 0;
+
+        //use moment js to compare date values
+        var aVal = moment(a, ogrid.Config.service.dateFormat);
+        var bVal = moment(b, ogrid.Config.service.dateFormat);
+
+        if (aVal > bVal) return 1;
+        if (aVal < bVal) return -1;
+
+        return 0;
+    },
+
     _transformData: function(data) {
         var a = [];
         for (var i in data.meta.view.columns) {
             if (data.meta.view.columns[i].list) {
                 //s += '<th>' + data.meta.view.columns[i].displayName + '</th>';
                 //build datatables column map at the same time
-                a.push( {field: 'properties.' + data.meta.view.columns[i].id, title: data.meta.view.columns[i].displayName, sortable:true} );
+                var col = {field: 'properties.' + data.meta.view.columns[i].id, title: data.meta.view.columns[i].displayName, sortable:true};
+                if ( data.meta.view.columns[i].dataType === 'date' ) {
+                    //add a custom sorter for date columns
+                    col.sorter = $.proxy(this._sortDateValues, this);
+                }
+                a.push( col );
             }
         }
         return a;
@@ -272,7 +309,7 @@ ogrid.TableView = ogrid.Class.extend({
 
     _getRowStyler:function(tableId, creationTSColumn) {
         return function(row, index) {
-            var lastRefreshed = $('#' + tableId).data('lastRefreshed');
+            var lastRefreshed = $('#' + tableId).data('latestDataTs');
             if (lastRefreshed) {
                 //highlight new rows on auto-refresh using Bootstrap's success style
                 if (creationTSColumn && moment(row[creationTSColumn], ogrid.Config.service.dateFormat) > lastRefreshed) {
@@ -367,18 +404,21 @@ ogrid.TableView = ogrid.Class.extend({
     updateData: function(tableId, data, showAutorefresh, lastRefreshed) {
         var a = this._transformData(data);
 
-        this._tableOptions.origData = data;
-        this._tableOptions.data = data.features;
-        this._tableOptions.height = this._getTableHeight();
-        this._tableOptions.showAutorefresh = showAutorefresh;
+        //we need this for auto highlighting
+        //get the newest timestamp prior to refresh
+        var currentOptions =  $('#' + tableId).bootstrapTable('getOptions');
 
-        var $t = $('#' + tableId).bootstrapTable('refreshOptions', this._tableOptions);
+        $('#' + tableId).data('latestDataTs', this._getLatestDataTs( currentOptions.origData ));
+
+        var $t = $('#' + tableId).bootstrapTable('refreshOptions', {
+            origData: data,
+            data: data.features,
+            height: this._getTableHeight(),
+            showAutorefresh: showAutorefresh
+        });
 
         if (showAutorefresh) {
             $('div.autorefresh').attr('title', 'Last auto-refreshed: ' + lastRefreshed.format('MM/DD/YYYY hh:mm:ss a'));
-
-            //update lastRefresh
-            $('#' + tableId).data('lastRefreshed', lastRefreshed);
         }
     }
 });
