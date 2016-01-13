@@ -28,7 +28,7 @@ html, body {
 @media (min-width: 450px) {
   #ogrid-search {
     width: 280px;
-    margin-left: 10px;
+    margin-left: 0px;
   }
 }
 

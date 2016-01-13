@@ -85,6 +85,18 @@ ogrid.FlexSearchBuilder = ogrid.Class.extend({
         });
     },
 
+    _momentValueReplacer: function(match, p1) {
+        if (p1!==null) {
+            if (p1.length > 0)
+                //should be a safe eval call due to constrain to work against moment object
+                return eval("moment()." + p1 + ".valueOf()"); // jshint ignore:line
+            else
+            //default moment value containing current epoch
+                return moment().valueOf();
+        } else {
+            return match;
+        }
+    },
 
     //public methods
 
@@ -157,17 +169,28 @@ ogrid.FlexSearchBuilder = ogrid.Class.extend({
         return this._params;
     },
 
-    //returns Db filter give
-    getFilterFromParams: function(params, columns) {
+    //returns Db filter given list of columns
+    //now takes baseClientFilter that can be applied when using simple search syntax
+    getFilterFromParams: function(params, columns, baseClientFilter) {
         var me = this;
         var f = {};
         $.each(params, function(i, v) {
             if (!me.isSystemColumn(v.key)) {
                 if (v.key === null) {
-                    //assume this can only happen when simple filter is typed in
+                    //case of simple search syntax <trigger word> "filter"
+                    //we're only expecting 1 here
                     var orFilters =  {$or: []};
                     me._pushContains(orFilters.$or, v.value, columns);
-                    f = orFilters;
+
+                    if (baseClientFilter) {
+                        var baseFilter = me.expandBaseFilter(baseClientFilter);
+
+                        //'and' this base filter with orFilters
+                        f = {$and: [orFilters, baseFilter]};
+                    } else {
+                        f = orFilters;
+                    }
+
                     return false; //break
                 } else {
                     var o = {};
@@ -178,6 +201,21 @@ ogrid.FlexSearchBuilder = ogrid.Class.extend({
                 }
             }
         });
+        if (baseClientFilter) {
+            //tack on a base filter for this dataset, if any
+            var baseFilter = me.expandBaseFilter(baseClientFilter);
+
+            if (!$.isEmptyObject(f)) {
+                if (f.$or) {
+                    f = {$and: [f, baseFilter]};
+                } else {
+                    //$and-ed filters
+                    f.$and.push( baseFilter );
+                }
+            } else {
+                f = baseFilter;
+            }
+        }
         return f;
     },
 
@@ -226,6 +264,15 @@ ogrid.FlexSearchBuilder = ogrid.Class.extend({
         if (options) {
             this._options = ($.extend(this._options, options));
         }
+    },
+
+    expandBaseFilter: function(txt) {
+        //replace known client filter tokens
+        //right now there's only one '@m', which encapsulates moment js expressions
+        var r = /@m{((.)*?)}/ig;
+
+        //return filter string
+        return JSON.parse(txt.replace(r, this._momentValueReplacer));
     }
 });
 

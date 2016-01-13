@@ -163,9 +163,17 @@ ogrid.QSearchProcessor.FlexData = ogrid.QSearchProcessor.extend({
             var params = this._flexBuilder.getParams();
             this._resolveColumnAliases(ds, params);
 
+            //var filter = this._flexBuilder.getFilterFromParams(params, this._getQuickSearchColumns(ds), ds.quickSearch.baseClientFilter);
+            /*if ($.isEmptyObject(filter)) {
+                //use base client filter for this ds, if any
+                if (ds.quickSearch.baseClientFilter) {
+                    filter = this._flexBuilder.expandBaseFilter(ds.quickSearch.baseClientFilter);
+                }
+            }*/
+
             var request = {
                 dataSetId: ds.id,
-                filter: this._flexBuilder.getFilterFromParams(params, this._getQuickSearchColumns(ds)),
+                filter: this._flexBuilder.getFilterFromParams(params, this._getQuickSearchColumns(ds), ds.quickSearch.baseClientFilter),
                 success: onSuccess,
                 error: onError
             };
