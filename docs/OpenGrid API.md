@@ -174,13 +174,14 @@ It is recommended that this value be URL encoded.
 <th align="left"><i>POST</i></th>
 </tr>
 <tr>
-<td>Create a new user. Returns object for newly created user, if successful.</td>
+<td><p>Create a new user. Returns object for newly created user, if successful.</p></td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
+<p>{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
+</p>
 </td>
 </tr>
 
