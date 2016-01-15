@@ -26,6 +26,3 @@ notifications:
   - provider: Email
     to:
       - rladines@eki-consulting.com
-    subject: 'Build {{status}}'
-    message: "{{message}}, {{commitId}}, ..."
-    on_build_status_changed: true  
