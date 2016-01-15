@@ -1,15 +1,11 @@
 # Build version format
-version: "{build}"
+version: 1.0.{build}-{branch}
 
 # Test against this version of Node.js
 environment:
   matrix:
   # node.js
   - nodejs_version: "0.12"
-
-platform:
-  - x86
-  - x64
 
 matrix:
   fast_finish: true     # set this flag to immediately finish build once one of the jobs fails
