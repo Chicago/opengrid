@@ -1,7 +1,7 @@
 <br>
-<div align="center">
+
 ![login](media/combine32.png)
-</div>
+
 
 ## Getting Started
 <p>OpenGrid is an enterprise geographical information system. Developed to support situational awareness, incident monitoring and responses, historical data retrieval, and real-time advanced analytics.</p>
