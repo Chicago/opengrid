@@ -10,7 +10,7 @@
 
 <p>OpenGrid utilizes MongoDB, a NoSQL database optimized to handle big spatially-enabled data. From the application layer, users may then query data by type, time and distance from a point or within a boundary, while retrieving real-time or historical data. Queries and data flow through a web service to ensure data security.</p>
 
-#### Acknowledgements
+### Acknowledgements
 OpenGrid was developed with the support of Bloomberg Philanthropies. 
 
 ## User Documentation
@@ -74,7 +74,7 @@ There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b
 ## Table Functions
 <p>The table functionality is used to organized information that has been displayed via query. The table displays the data that was pulled from the queried results and in return structures it in a readable format for the user to interpret. Each dropdown are intertwined with one another.The table consist of five drop down sections: </p>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/master/docs/media/combine33.png"></div>
+![table](media/combine33.png)
 #### 1. Columns<br>
 The columns section displays the list of columns from the query data-sets and places them in order by default. The columns can be interchangeable and removed to fit the user preference.
 
@@ -94,7 +94,8 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 <p>Search criteria that’s been entered and saved within the database are called Saved Queries. The saved queries are store in the Manage Queries section. To save a query, the user enters in the preferred name for a query; then clicks the saved button. The user will also be given an option to overwrite other queries and save it using an existing name.</p>
 <p>There are three icons for managing queries submit, share and delete. The submit function allows the user to run the query for the manage queries window. The share function gives the user the ability to share a query either to a group or to another user. The delete function gives the user the option to delete a query.</p>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/master/docs/media/combine31.png"></div>
+![measure](media/combine31.png)
+
 
 ## Measure Distance and Area
 <p>Measuring distances and areas is a function within OpenGrid that allows the user to perform measurements between any given point to another. Once the measurement tool is selected the user will be prompt to start creating measurements by adding points on the map.</p>
@@ -106,20 +107,21 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 
 <tr>
 <td>Click the measurement tool icon.<br>
-<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/ombine1.png"> <br>
+![icoa](media/ombine1.png) <br>
 <p>A measurement tool textbox will appear with an option to <b>create a new measurement</b>.</p>
-<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/ombine4.png"></td>	
+![icob](media/ombine4.png)</td>	
 </tr>
 
 <tr>
-<td>Once click <b>"create a new measurement"</b>... display points of origin and destination on the map by creating points.<br> <img src="https://github.com/Chicago/opengrid/blob/master/docs/media/ombine3.png"> <br>
+<td>Once click <b>"create a new measurement"</b>... display points of origin and destination on the map by creating points.<br> 
+![icoc](media/ombine3.png) <br>
 </td> 
 </tr>
 
 <tr>
 <td>
 <p>After the measurement has been created the finish measurement textbox will appear. click <b>"Finish Measurement"</b>.<br><br>
-<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/combine10.png"><br>
+![icod](media/combine10.png) <br>
 After clicking on finish measurement the <b>"Area Measurement"</b> textbox will appear providing information about the perimeter:</p.
 <ul>
 <li>Acres</li>
@@ -127,9 +129,9 @@ After clicking on finish measurement the <b>"Area Measurement"</b> textbox will 
 <li>Miles</li>
 </ul>
 <br>
-<p>It also gives the user an option to center on the Area or to Delete the perimeter.
-<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/ombine5.png"></p>
-<img src="https://github.com/Chicago/opengrid/blob/master/docs/media/combine9.png">
+<p>It also gives the user an option to center on the Area or to Delete the perimeter.</p>
+![icoe](media/ombine5.png)
+![icof](media/combine9.png)
 </td> 
 </tr>
 </table>
