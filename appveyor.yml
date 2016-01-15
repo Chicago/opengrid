@@ -22,7 +22,7 @@ install:
   - npm install -g gulp
   - npm install
   
-  build_script:
+build_script:
   - gulp release
 
 # to disable deployment
