@@ -1,6 +1,6 @@
 ![OpenGrid](img/branding/OpenGrid_Logo_Horizontal_3Color.png)
 
-[![Build Status](https://magnum.travis-ci.com/Chicago/opengrid.svg?token=SysBhDyYWJMYLus2d27y&branch=master)](https://magnum.travis-ci.com/Chicago/opengrid) ![Node.js Version](https://img.shields.io/node/v/gh-badges.svg)
+[![Build Status](https://magnum.travis-ci.com/Chicago/opengrid.svg?token=SysBhDyYWJMYLus2d27y&branch=master)](https://magnum.travis-ci.com/Chicago/opengrid) ![Node.js Version](https://img.shields.io/node/v/gh-badges.svg) [![Dependency Status](https://david-dm.org/Chicago/opengrid.svg)](https://david-dm.org/Chicago/opengrid)
 
 OpenGrid an open-source, interactive map platform that allows users to explore multiple data sources in an easy-to-use interface. Developed to support situational awareness, incident monitoring and responses, historical data retrieval, and real-time advanced analytics. Users can perform advanced queries to filter data, search within custom boundaries, or based on the users location. Other GIS data, such as weather and Shapefiles can be overlaid on the map with other data. OpenGrid is natively compatible with desktops and mobile devices.
 
