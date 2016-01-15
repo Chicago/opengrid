@@ -35,11 +35,11 @@ The quick search help feature assist users in performing a valid search. Each se
 <p><b>Search area weather</b><br> Weather 60602</P>
 
 ## Advanced Search
-
 <p>Advanced Search allows you to combine search terms by setting specific parameters for your results.It gives the user the ability to narrow their searches by a series of different filters such as adding additional rules, groups,datasets and Geo spatial-filters.</p>
 
 #### Selecting data and date range
 <p>To query by data and date range...Click on add datasets, select the saved dataset from the list <b>(for ex: business license)</b>; click submit. Add a rule or group to your dataset <b><small>(Adding a rule or group gives the user an option to query by date, city, name, address, etc. depending on the search criteria.)</b></small>. Date range can be specified with the parameters of:</p>
+
 - equal
 - not equal 
 - less
@@ -48,7 +48,7 @@ The quick search help feature assist users in performing a valid search. Each se
 - greater or equal
 - between
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/master/docs/media/combine21.png"></div>
+![combine](media/combine21.png)
 
 #### Search around a parameter (Point)
 <p>To search with given point or boundaries the Geo spatial-filters will have to be applied.<br>
