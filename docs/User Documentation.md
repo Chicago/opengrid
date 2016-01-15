@@ -59,10 +59,9 @@ There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b
 - Drawn Extent (create polygon or rectangular perimeter)<br>
 - Citywide (within the city limits)<br>
 - Zip Code (within a given zip code)<br>
-- Ward (within a given ward)<br>
+- Ward (within a given ward)
 
-<b><i>Near</i></b> have search points of:<br>
-
+<p><b><i>Near</i></b> have search points of:</p>
 - Near <b>“Me”</b> (search around the user geo location)<br>
 - Near <b>“Marker”</b> (search around a given area)
 
