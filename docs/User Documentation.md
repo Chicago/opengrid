@@ -37,7 +37,7 @@ The quick search help feature assist users in performing a valid search. Each se
 ## Advanced Search
 <p>Advanced Search allows you to combine search terms by setting specific parameters for your results.It gives the user the ability to narrow their searches by a series of different filters such as adding additional rules, groups,datasets and Geo spatial-filters.</p>
 
-#### Selecting data and date range
+### Selecting data and date range
 <p>To query by data and date range...Click on add datasets, select the saved dataset from the list <b>(for ex: business license)</b>; click submit. Add a rule or group to your dataset <b><small>(Adding a rule or group gives the user an option to query by date, city, name, address, etc. depending on the search criteria.)</b></small>. Date range can be specified with the parameters of:</p>
 
 - equal
@@ -47,10 +47,12 @@ The quick search help feature assist users in performing a valid search. Each se
 - greater 
 - greater or equal
 - between
+<br>
 
 ![combine](media/combine21.png)
 
-#### Search around a parameter (Point)
+<br>
+### Search around a parameter (Point)
 <p>To search with given point or boundaries the Geo spatial-filters will have to be applied.<br>
 There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b>“Within”</b> is used to search boundaries within a query. <b>“Near”</b> is used to search within a given parameter or around the area of your locale.</p>
 <b><i>Within</i></b> have search boundaries of:<br>
@@ -65,7 +67,7 @@ There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b
 - Near <b>“Me”</b> (search around the user geo location)<br>
 - Near <b>“Marker”</b> (search around a given area)
 
-#### Monitoring Queries
+## Monitoring Queries
 <p>The monitor mode in the quick search section allows the user to monitor and update activity using auto-refresh. To use auto-refresh for monitoring queries:</p>
 - Enable the auto-refresh check-box
 - Ascend or descend on the seconds needed for refreshing the screen <b><i><small>(seconds are user preference)</b></i></small>.
