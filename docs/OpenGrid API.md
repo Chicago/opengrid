@@ -810,9 +810,9 @@ No response is returned when a query is deleted.
 occurred and &lt;error message&gt; is a description of the error.</li>
 </ul>
 
-<p>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.</p>
-
 <ul>
+<li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
+</li>
 <li>HTTP 204 (No Content) is returned when an object is deleted successfully (DELETE method where applicable)
 </li>
 </ul>
