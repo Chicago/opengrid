@@ -1,48 +1,38 @@
-# version format
-version: 1.0.0
+# Build version format
+version: "{build}"
 
-# Do not build on tags (GitHub only)
-skip_tags: true
+# Test against this version of Node.js
+environment:
+  matrix:
+  # node.js
+  - nodejs_version: "0.10"
+  # io.js
+  # - nodejs_version: "2.0.2"
 
-#---------------------------------#
-#    environment configuration    #
-#---------------------------------#
+platform:
+  - x86
+  - x64
 
-# Operating system (build VM template)
-os: Windows Server 2012	
-
-# scripts that are called at very beginning, before repo cloning
-init:
-#noop  
-  
 matrix:
   fast_finish: true     # set this flag to immediately finish build once one of the jobs fails
-
-# scripts that run after cloning repository
-install:
-  - npm install
-
-#---------------------------------#
-#       build configuration       #
-#---------------------------------#  
   
-# to run your custom scripts instead of automatic MSBuild
-build_script:
+install:
+  - ps: Install-Product node $env:nodejs_version
+  # install modules
+  - npm install -g gulp
+  - npm install
+  
+  build_script:
   - gulp release
 
 # to disable deployment
 deploy: off
-
-
-#---------------------------------#
-#         notifications           #
-#---------------------------------#
 
 notifications:
   # Email
   - provider: Email
     to:
       - rladines@eki-consulting.com
-    subject: 'Build {{status}}'                  # optional
-    message: "{{message}}, {{commitId}}, ..."    # optional
+    subject: 'Build {{status}}'
+    message: "{{message}}, {{commitId}}, ..."
     on_build_status_changed: true  
