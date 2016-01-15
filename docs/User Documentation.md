@@ -99,12 +99,12 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 ## Measure Distance and Area
 <p>Measuring distances and areas is a function within OpenGrid that allows the user to perform measurements between any given point to another. Once the measurement tool is selected the user will be prompt to start creating measurements by adding points on the map.</p>
 
-![icoa](media/ombine1.png) 
+ 
 
 ## Measurement and Tools
 <p>Click the measurement tool icon.</p>  
 <br>
-
+![icoa](media/ombine1.png)
 
 <p>A measurement tool textbox will appear with an option to <b>create a new measurement</b>.</p>
 <br>
@@ -124,7 +124,10 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 <li>Feet</li>
 <li>Miles</li>
 </ul>
-<p>It also gives the user an option to center on the Area or to Delete the perimeter.</p>![icoe](media/ombine5.png)
+<p>It also gives the user an option to center on the Area or to Delete the perimeter.</p>
+<br>
+![icoe](media/ombine5.png)
+
 <p></p>
 
 ![icof](media/combine9.png)
