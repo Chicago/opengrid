@@ -787,7 +787,7 @@ No response is returned when a query is deleted.
 </html>
 
 ## HTTP Status Codes on Responses
-<ul type="none">
+<ul>
 <li>HTTP 401 is returned when users/token is called and authentication fails.</li>
 <li>HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.</li>
 <li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li>
@@ -811,7 +811,8 @@ occurred and &lt;error message&gt; is a description of the error.</li>
 </ul>
 
 <p>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.</p>
-<ul type="none">
+
+<ul>
 <li>HTTP 204 (No Content) is returned when an object is deleted successfully (DELETE method where applicable)
 </li>
 </ul>
