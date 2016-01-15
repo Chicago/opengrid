@@ -93,49 +93,41 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 ### Manage Saved Queries
 <p>Search criteria that’s been entered and saved within the database are called Saved Queries. The saved queries are store in the Manage Queries section. To save a query, the user enters in the preferred name for a query; then clicks the saved button. The user will also be given an option to overwrite other queries and save it using an existing name.</p>
 <p>There are three icons for managing queries submit, share and delete. The submit function allows the user to run the query for the manage queries window. The share function gives the user the ability to share a query either to a group or to another user. The delete function gives the user the option to delete a query.</p>
-
+<br>
 ![measure](media/combine31.png)
 
 ## Measure Distance and Area
 <p>Measuring distances and areas is a function within OpenGrid that allows the user to perform measurements between any given point to another. Once the measurement tool is selected the user will be prompt to start creating measurements by adding points on the map.</p>
 
-<table>
-<tr>
-<th> Measurement and Tools</th>
-</tr>
-
-<tr>
-<td>Click the measurement tool icon.<br>
 ![icoa](media/ombine1.png) 
+
+## Measurement and Tools
+<p>Click the measurement tool icon.</p>  
+<br>
+
+
 <p>A measurement tool textbox will appear with an option to <b>create a new measurement</b>.</p>
+<br>
 ![icob](media/ombine4.png)
-</td>	
-</tr>
 
-<tr>
-<td>Once click <b>"create a new measurement"</b>... display points of origin and destination on the map by creating points.<br> 
+<p>Once click <b>"create a new measurement"</b>... display points of origin and destination on the map by creating points.</p> 
+<br>
 ![icoc](media/ombine3.png)
-</td> 
-</tr>
 
-<tr>
-<td>
+<br>
 <p>After the measurement has been created the finish measurement textbox will appear. click <b>"Finish Measurement"</b>.</p>
 ![icod](media/combine10.png)
+<br>
 <p>After clicking on finish measurement the <b>"Area Measurement"</b> textbox will appear providing information about the perimeter:</p>.
 <ul>
 <li>Acres</li>
 <li>Feet</li>
 <li>Miles</li>
 </ul>
-<br>
-<p>It also gives the user an option to center on the Area or to Delete the perimeter.</p>
-![icoe](media/ombine5.png)
+<p>It also gives the user an option to center on the Area or to Delete the perimeter.</p>![icoe](media/ombine5.png)
+<p></p>
 
 ![icof](media/combine9.png)
-</td> 
-</tr>
-</table>
 
 ## FREQUENTLY ASKED QUESTIONS
 
@@ -145,6 +137,7 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 #### Whats the difference between Near Me and Near Marker
 <p>The Near <b>"Me"</b> and the Near <b>"Marker"</b> both use triangulation techniques. It’s located within the Advanced Search section under the geo-spatial filter.  Using the Near <b>“Me”</b> function will retrieve the perimeter around the user location using both lat and long to triangulate the user’s location or from usage of information from cell towers to pinpoint the approximate position. Near <b>“Marker”</b> function will pull data around the perimeter based off a given point using markers.</p>
 <br>
+
 
 <a href="#top">Back to Top</a>
 
