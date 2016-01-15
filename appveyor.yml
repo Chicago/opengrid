@@ -1,12 +1,6 @@
 # version format
 version: 1.0.0
 
-# branches to build
-branches:
-  # whitelist
-  only:
-    - master
-	
 # Do not build on tags (GitHub only)
 skip_tags: true
 
