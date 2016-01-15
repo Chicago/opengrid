@@ -24,11 +24,11 @@ OpenGrid was developed with the support of Bloomberg Philanthropies.
 The quick search help feature assist users in performing a valid search. Each search is unique based on query type. Some are queried by keyword and others are queried based off keyword followed by key phrase (descriptive text) e.g., tweets and weather query. The search results will appear on the grid as either points or custom icons.
 </p>
 
-<p><b>Find an Address</b><br> 50 W. Washington St
+<p><b>Find an Address</b><br> 50 W. Washington St</p>
 
-<p><b>Display area by Lat and Long</b><br> 41.8270, -87.6423
+<p><b>Display area by Lat and Long</b><br> 41.8270, -87.6423</p>
 
-<p><b>Search by Place Name</b><br> Daley Center
+<p><b>Search by Place Name</b><br> Daley Center</p>
 
 <p><b>Search by Tweets</b><br> Tweet Ballet</p>
 
@@ -51,7 +51,6 @@ The quick search help feature assist users in performing a valid search. Each se
 
 ![combine](media/combine21.png)
 
-<br>
 ### Search around a parameter (Point)
 <p>To search with given point or boundaries the Geo spatial-filters will have to be applied.<br>
 There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b>“Within”</b> is used to search boundaries within a query. <b>“Near”</b> is used to search within a given parameter or around the area of your locale.</p>
