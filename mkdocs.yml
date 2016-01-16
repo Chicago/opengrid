@@ -1,0 +1,24 @@
+site_name: OpenGrid
+site_url: http://www.opengrid.io
+site_description: Explore your space with OpenGrid
+site_author: City of Chicago
+
+repo_url: https://github.com/Chicago/opengrid
+
+pages:
+- Home: index.md
+- User Guide:
+    - End-user documentation: User Documentation.md
+- System administration:
+    - Installation and Setup: Installation and Setup.md
+    - Build Procedures: Build Procedures.md
+    - Administration: Administration.md
+- Developers:
+    - API: OpenGrid API.md
+
+markdown_extensions:
+    - toc:
+        permalink: 
+    - admonition:
+
+copyright: Copyright &copy; 2015 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.
