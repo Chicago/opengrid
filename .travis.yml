@@ -16,7 +16,7 @@ script:
     - gulp release
 
 after_success:
-    - ./node_modules/.bin/jscoverage lib lib-cov
+    - jscoverage lib lib-cov
     - gulp test-coveralls | ./node_modules/coveralls/bin/coveralls.js
 
 notifications:
