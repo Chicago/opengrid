@@ -14,11 +14,24 @@ Instructions for building the release packages can be found below:
 
 ### Installation
 #### Service Layer
-##### Installation and Setup
-* TODO: Add steps to deploy WAR file
-
 ##### Database Configuration (MongoDB)
-* TODO: add steps to import sample data into Mongo DB
+* The OpenGrid Service Layer template implementation utilizes a MongoDB instance to store and retrieve test datasets. Two sample datasets are made available by the service: tweets and weather. Assuming that a  MongoDB instance is already installed, import the test data by running the mongoimport utility for each json file similar to below:
+
+```
+mongoimport --host <mongodb hostname> --port <port #> --username <userid> --password <password> --collection <target collection name> --db <dbname> --file <file location>
+```
+
+The json files to import can be found in ./opengridservice/src/test/data folder under the opengrid-svc-template project. Use the first part of the the json file name as the target collection name.
+
+For example to import the opengrid_users collection, you can run the following:
+```
+mongoimport --host <mongodb hostname> --port <port #> --username <userid> --password <password> --collection opengrid_users --db <dbname> --file ./test/data/opengrid_users.json
+```
+
+By default, an admin user is created with user id 'admin' and password 'admin123'.
+
+##### Installation and Setup
+* Follow the steps described in the Service Layer Build Procedures above making sure that the application.properties file is updated with the appropriate MongoDB connection string. A war file is generated after the build process which can be deployed to an application server of your choice.
 
 #### User Interface
 * Update service URL to point to service URL configured above.
