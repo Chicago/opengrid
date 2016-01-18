@@ -358,6 +358,11 @@ gulp.task('test', function () {
         .pipe(mochaPhantomJS({'reporter': 'spec'}));
 });
 
+gulp.task('test-coveralls', function () {
+    return gulp.src('test/runner.html')
+        .pipe(mochaPhantomJS({'reporter': 'json-cov'}));
+});
+
 gulp.task('debug',  function(cb) {
     runSequence('lint',
         'clean-debug',
