@@ -8,6 +8,7 @@ node_js:
 install:
     - npm install
     #added for Coveralls.io integration
+    - npm install -g jscoverage
     - npm install coveralls --save-dev
     - npm install mocha-lcov-reporter --save-dev
 
