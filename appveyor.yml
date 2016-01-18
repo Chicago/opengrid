@@ -27,4 +27,4 @@ notifications:
     to:
       - windygrid@cityofchicago.org
       - developers@cityofchicago.org
- on_build_status_changed: true
+    on_build_status_changed: true
