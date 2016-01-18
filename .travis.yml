@@ -7,9 +7,16 @@ node_js:
 
 install:
     - npm install
+    #added for Coveralls.io integration
+    - npm install coveralls --save-dev
+    - npm install mocha-lcov-reporter --save-dev
 
 script:
     - gulp release
+
+after_success:
+    - ./node_modules/.bin/jscoverage lib lib-cov
+    - ./node_modules/.bin/mocha test/**.js -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
 
 notifications:
   email:
