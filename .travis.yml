@@ -17,7 +17,7 @@ script:
 
 after_success:
     - ./node_modules/.bin/jscoverage lib lib-cov
-    - ./node_modules/.bin/mocha test/**.js -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
+    - gulp test-coveralls | ./node_modules/coveralls/bin/coveralls.js
 
 notifications:
   email:
