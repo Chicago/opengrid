@@ -197,7 +197,7 @@ It is recommended that this value be URL encoded.
 
 ## /users/{user\_id}
 
-**Methods**
+<p><b>Methods</b></p>
 <html>
 <table>
 <tr>
