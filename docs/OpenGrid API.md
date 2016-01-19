@@ -2,7 +2,6 @@
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
 <h4 align="center">Version 1.0</h4>
 
-
 ## Table of Contents
 
 
@@ -492,7 +491,8 @@ No response is returned when a group is deleted successfully.
 
 <tr>
 <td>
-Return a list of available datasets. The response is a JSON array of descriptors for each available dataset.
+<p>Return a list of available datasets. The response is a JSON array of descriptors for each available dataset.
+</p>
 </td>
 </tr>
 
@@ -512,9 +512,10 @@ Return a list of available datasets. The response is a JSON array of descriptors
 </table>
 </html>
   
-## /datasets/{dataset\_id}
+<h2>/datasets/{dataset\_id}
+</h2>
 
-**Methods**
+<b>Methods</b>
 <html>
 <table>
 <tr>
@@ -544,9 +545,10 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 </html>
 
 
-## /datasets/{dataset\_id}/query
+<h2> /datasets/{dataset\_id}/query
+</h2>
 
-**Methods**
+<b>Methods</b>
 <html>
 <table>
 <tr>
@@ -611,10 +613,9 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h3>/queries
-</h3>
-
-**Methods**
+<h2>/queries
+</h2>
+<b>Methods</b>
 <html>
 <table>
 <tr>
@@ -697,8 +698,8 @@ q
 </table>
 </html>
 
-<h3>/queries/{query\_id}
-</h3>
+<h2>/queries/{query\_id}
+</h2>
 
 **Methods**
 <html>
@@ -735,7 +736,7 @@ q
 
 <tr>
 <td>
-</p>Update a query. Returns the updated query object, if successful.</p>
+<p>Update a query. Returns the updated query object, if successful.</p>
 </td>
 </tr>
 
