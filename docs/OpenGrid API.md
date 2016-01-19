@@ -787,8 +787,7 @@ No response is returned when a query is deleted.
 </table>
 </html>
 
-HTTP Status Codes on Responses
----------------------------------
+<h2>HTTP Status Codes on Responses</h2>
 
 <ul>
 <li>HTTP 401 is returned when users/token is called and authentication fails.</li>
