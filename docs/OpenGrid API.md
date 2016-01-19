@@ -124,6 +124,7 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 <tr>
 <td>
 <p><b>Request Query Parameters</b></p>
+</td>
 
 <html>
 <table>
