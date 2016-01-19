@@ -195,8 +195,8 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-## /users/{user\_id}
-
+<h2>/users/{user\_id}
+</h2>
 <p><b>Methods</b></p>
 <html>
 <table>
@@ -290,9 +290,9 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-## /groups
-
-**Methods**
+<h2>/groups
+</h2>
+<b>Methods</b>
 <html>
 <table>
 <tr>
@@ -381,7 +381,7 @@ It is recommended that this value be URL encoded.
 </h3>
 <h4>1.1.6 /groups/{group\_id}
 </h4>
-**Methods**
+<b>Methods</b>
 
 <html>
 <table>
@@ -564,6 +564,8 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 <tr>
 <td>
 <p><b>Request Query Parameters</b></p>
+</td>
+</tr>
 
 <html>
 <table>
