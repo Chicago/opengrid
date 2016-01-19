@@ -558,8 +558,7 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 <tr>
 <td>
 <p>Execute a query against a specific dataset.</p>
-</td>
-</tr>
+
 
 <tr>
 <td>
