@@ -378,8 +378,10 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-## /groups/{group\_id}
-#### 1.1.6 /groups/{group\_id}
+<h3> /groups/{group\_id}
+</h3>
+<h4>1.1.6 /groups/{group\_id}
+</h4>
 **Methods**
 
 <html>
@@ -445,7 +447,6 @@ Update a group (group-level attributes and members). Returns the updated group d
 </tr>
 </table>
 </html>
-
 
 <html>
 <table>
@@ -610,7 +611,8 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-## /queries
+<h3>/queries
+</h3>
 
 **Methods**
 <html>
@@ -695,7 +697,8 @@ q
 </table>
 </html>
 
-## /queries/{query\_id}
+<h3>/queries/{query\_id}
+</h3>
 
 **Methods**
 <html>
@@ -755,7 +758,6 @@ q
 </tr>
 </table>
 </html>
-
 
 <html>
 <table>
