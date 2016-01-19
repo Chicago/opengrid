@@ -198,7 +198,6 @@ It is recommended that this value be URL encoded.
 ## /users/{user\_id}
 
 **Methods**
-
 <html>
 <table>
 <tr>
@@ -223,7 +222,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
+<p>{ "_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}</p>
 </td>
 </tr>
 
@@ -233,7 +232,7 @@ It is recommended that this value be URL encoded.
 
 <tr>
 <td>
-Update a user’s information. Returns the updated user data, if successful.
+<p>Update a user’s information. Returns the updated user data, if successful.</p>
 </td>
 </tr>
 
@@ -244,19 +243,20 @@ Update a user’s information. Returns the updated user data, if successful.
 &lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"}<br>
 <p><b><small>or when URL encoded:</b></small></p>
 &lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D <br>
-<p><b><small>Request Payload:</b></small></p> {"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
+<p><b><small>Request Payload:</b></small></p> <p>{"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
+</p>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" : [ ]}
+<p>{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" : [ ]}
+</p>
 </td>
 </tr>
 </table>
 </html>
-
 
 <html>
 <table>
@@ -266,7 +266,8 @@ Update a user’s information. Returns the updated user data, if successful.
 
 <tr>
 <td>
-Delete a user given the user’s internal Id on the URL path.
+<p>Delete a user given the user’s internal Id on the URL path.
+</p>
 </td>
 </tr>
 
@@ -282,13 +283,12 @@ Delete a user given the user’s internal Id on the URL path.
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-No response is returned when a user is deleted successfully.
+<p>No response is returned when a user is deleted successfully.
+</p>
 </td>
 </tr>
 </table>
 </html>
-
- 
 
 ## /groups
 
@@ -322,7 +322,7 @@ No response is returned when a user is deleted successfully.
 q
 </td>
 <td>String</td>
-<td> <p>Filter expression to use to search against the Open Grid group repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether. <br>
+<td><p>Filter expression to use to search against the Open Grid group repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether. <br>
 It is recommended that this value be URL encoded.
 </p></td>
 </tr>
@@ -339,7 +339,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/groups?q={}&n=200<br>
+&lt;Service URL&gt;/groups?q={}&n=200 <br>
 <p><b><small>Or when URL encoded:</small></b></p>
 &lt;Service URL&gt;/groups?q=%7B%7D&n=200
 </td>
@@ -370,7 +370,8 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "groupId" : "OPENGRID_NEWGROUP" , "name" : "ABC GROUP" , "description" : "ADD ABC GROUP" , "enabled" : true , "functions" : [ ] , "datasets" : [ ] , "_id" : { "$oid" : "55cb6362c4aa475d78d4bc40"}}
+<p>{"groupId" : "OPENGRID_NEWGROUP" , "name" : "ABC GROUP" , "description" : "ADD ABC GROUP" , "enabled" : true , "functions" : [ ] , "datasets" : [ ] , "_id" : { "$oid" : "55cb6362c4aa475d78d4bc40"}}
+</p>
 </td>
 </tr>
 </table>
