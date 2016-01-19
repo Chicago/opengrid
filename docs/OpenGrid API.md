@@ -138,10 +138,11 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 q
 </td>
 <td>String</td>
-<td> <p>Filter expression to use to search against the Open Grid user repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.<br>
+<td><p>Filter expression to use to search against the Open Grid user repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.<br>
 The query filter must follow the MongoDB query syntax, as with all other API calls that has a query filter parameter.<br> 
 It is recommended that this value be URL encoded.
-</p></td>
+</p>
+</td>
 </tr>
 
 <tr>
@@ -194,7 +195,6 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-
 ## /users/{user\_id}
 
 **Methods**
@@ -244,8 +244,7 @@ Update a user’s information. Returns the updated user data, if successful.
 &lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"}<br>
 <p><b><small>or when URL encoded:</b></small></p>
 &lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D <br>
-<b><small>Request Payload:</b></small><br> 
-{"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
+<p><b><small>Request Payload:</b></small></p> {"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
 </td>
 </tr>
 
