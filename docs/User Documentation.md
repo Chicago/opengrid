@@ -68,8 +68,11 @@ There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b
 
 ## Monitoring Queries
 <p>The monitor mode in the quick search section allows the user to monitor and update activity using auto-refresh. To use auto-refresh for monitoring queries:</p>
-- Enable the auto-refresh check-box
-- Ascend or descend on the seconds needed for refreshing the screen <b><i><small>(seconds are user preference)</b></i></small>.
+<ul>
+<li>Enable the auto-refresh check-box</li>
+<li>Ascend or descend on the seconds needed for refreshing the screen <b><i><small>(seconds are user preference)</b></i></small>.
+</li>
+</ul>
 
 ## Table Functions
 <p>The table functionality is used to organized information that has been displayed via query. The table displays the data that was pulled from the queried results and in return structures it in a readable format for the user to interpret. Each dropdown are intertwined with one another.The table consist of five drop down sections: </p>
@@ -98,8 +101,6 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 
 ## Measure Distance and Area
 <p>Measuring distances and areas is a function within OpenGrid that allows the user to perform measurements between any given point to another. Once the measurement tool is selected the user will be prompt to start creating measurements by adding points on the map.</p>
-
- 
 
 ## Measurement and Tools
 <p>Click the measurement tool icon.</p>  
