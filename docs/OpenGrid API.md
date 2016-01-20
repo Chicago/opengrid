@@ -13,21 +13,21 @@
 
 [users](#users)
 
-[users/{user\_id}](#usersuser_id)
+[users/{user_id}](#usersuser_id)
 
 [groups](#groups)
 
-[groups/{group\_id}](#groupsgroup_id)
+[groups/{group_id}](#groupsgroup_id)
 
 [datasets](#datasets)
 
-[datasets/{dataset\_id}](#datasetsdataset_id)
+[datasets/{dataset_id}](#datasetsdataset_id)
 
-[datasets/{dataset\_id}/query](#datasetsdataset_idquery)
+[datasets/{dataset_id}/query](#datasetsdataset_idquery)
 
 [queries](#queries)
 
-[queries/{query\_id}](#queriesquery_id)
+[queries/{query_id}](#queriesquery_id)
 
 [HTTP Status Codes on Responses](#http-status-codes-on-responses)
 
@@ -69,7 +69,7 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 <p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:</p>
 X-AUTH-TOKEN:<br>
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
-<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See https://github.com/auth0/jwt-decode)</p>
+<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library See <https://github.com/auth0/jwt-decode></p>
 </td>
 </tr>
 
@@ -195,7 +195,7 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h2>/users/{user\_id}
+<h2>/users/{user_id}
 </h2>
 <p><b>Methods</b></p>
 <html>
@@ -377,9 +377,9 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h3> /groups/{group\_id}
+<h3>/groups/{group_id}
 </h3>
-<h4>1.1.6 /groups/{group\_id}
+<h4>1.1.6 /groups/{group_id}
 </h4>
 <b>Methods</b>
 
@@ -441,7 +441,7 @@ Update a group (group-level attributes and members). Returns the updated group d
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : [ "weather"]}
+{ "groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : ["weather"]}
 </td>
 </tr>
 </table>
@@ -512,7 +512,7 @@ No response is returned when a group is deleted successfully.
 </table>
 </html>
   
-<h2>/datasets/{dataset\_id}
+<h2>/datasets/{dataset_id}
 </h2>
 
 <b>Methods</b>
@@ -544,8 +544,7 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 </table>
 </html>
 
-
-<h2> /datasets/{dataset\_id}/query
+<h2>/datasets/{dataset_id}/query
 </h2>
 
 <b>Methods</b>
@@ -558,7 +557,6 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 <tr>
 <td>
 <p>Execute a query against a specific dataset.</p>
-
 
 <tr>
 <td>
@@ -699,7 +697,7 @@ q
 </table>
 </html>
 
-<h2>/queries/{query\_id}
+<h2>/queries/{query_id}
 </h2>
 
 **Methods**
