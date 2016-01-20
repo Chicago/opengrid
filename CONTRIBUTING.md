@@ -42,7 +42,7 @@ When you are ready to submit a pull request, please following these instructions
   * Build your changes locally to ensure all tests pass:
 
   	```bash
-  	grunt test
+  	gulp test
   	```
   * Push your branch to GitHub
 
