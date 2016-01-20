@@ -77,7 +77,7 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 </p>
 </blockquote>
 
-<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library &#40;See [](https://github.com/auth0/jwt-decode) &#41;
+<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library &#40;See https://github.com/auth0/jwt-decode &#41;
 </p>
 </td>
 </tr>
