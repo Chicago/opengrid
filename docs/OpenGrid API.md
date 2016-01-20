@@ -195,8 +195,8 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h2>/users/{user_id}
-</h2>
+# /users/{user_id}
+
 <p><b>Methods</b></p>
 <html>
 <table>
