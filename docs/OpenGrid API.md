@@ -194,7 +194,8 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-# /users/{user_id}
+<h2><a name="/users/{user_id}"></a>
+</h2>
 
 <p><b>Methods</b></p>
 <html>
