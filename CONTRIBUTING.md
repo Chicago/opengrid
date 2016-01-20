@@ -5,7 +5,7 @@ We think open source is great because we can work with you to add new features a
   * Add or clarify the language in the documentation (e.g., `README.md`, `docs/` folder)
   * Fix a bug listed on the [issue tracker](../../../issues/)
   * **Write a unit test**
-  * Add a new feature that is listed on the [roadmap](../../../wiki/Roadmap)
+  * Add a new feature that is discussed on the [developer documentation](../../../wiki)
 
 If you're interested in contributing to the project, below are the guidelines for developers.
 
@@ -14,7 +14,7 @@ If you're interested in contributing to the project, below are the guidelines fo
 Below are the guidelines on submitting code to this project and some of the criteria we will use before accepting a pull request:
 
   - **Discuss major changes with development team** If you hope to add a new feature or make a significant change, please discuss it with the development team on the [issue tracker](../../../issues/) or [forum](https://groups.google.com/forum/#!forum/opengrid-chicago). If you start working on a new feature, please open a new issue that describes the work you will complete. This will help avoiding duplicating work, creating technical conflicts, and help your work to be included in the project.
-  - **Sign a contributor license agreement** Before we accept any pull request, you must sign a contributor license agreement (CLA). Use the above link to sign the CLA with your GitHub credentials. If you'd like to discuss the CLA language, please visit its [repository](https://github.com/Chicago/contributor-license-agreement).
+  - **Sign a contributor license agreement** Before we accept any pull request, you must sign a contributor license agreement (CLA). If you'd like to discuss the CLA language, please visit its [repository](https://github.com/Chicago/contributor-license-agreement).
   - **Write unit tests for new functions** New features or functions should be accompanied by unit tests that must work on Travis CI (Ubuntu) and AppVeyor (Windows).
   - **Ensure code conforms to the project coding standards** 
   - **Update or add new documentation** Likewise, these changes should also have documentation to reflect that. Please update the documentation found in the `docs/` folder.
