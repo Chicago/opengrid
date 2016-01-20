@@ -33,10 +33,10 @@
 
 ## REST Service Resources
 
-*Note: See Section 1.2 for information on error responses and other HTTP
+<p><i>Note: See Section 1.2 for information on error responses and other HTTP
 status codes used by the service. Also note that X-AUTH-TOKEN needs to
 be sent for each calls on the request header with the token obtained by
-calling /users/token as described in Section 1.1.1.*
+calling /users/token as described in Section 1.1.1.</i></p>
 
 ## /users/token
 
@@ -50,9 +50,10 @@ calling /users/token as described in Section 1.1.1.*
 
 <tr>
 <td>
-Return a JSON Web Token (JWT) token after user id and password have been successfully validated.<br><br> 
-The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. (See 1.1.2 below)<br><br>
-<i>Note on security</i>: the password is currently expected to be sent in plain text (not encrypted). This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
+<p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated.<br> 
+The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. (See 1.1.2 below)<br>
+<i>Note on security</i>: the password is currently expected to be sent in plain text (not encrypted). <br>This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
+</p>
 </td>
 </tr>
 
@@ -165,15 +166,15 @@ It is recommended that this value be URL encoded.
 
 <tr>
 <td>
-<b>Sample Response</b>
-<p>[{ "_id" : { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
-</p>
+<p><b>Sample Response</b></p>
+[{ "_id" : { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
 </td>
 </tr>
 
 <tr>
 <th align="left"><i>POST</i></th>
 </tr>
+
 <tr>
 <td><p>Create a new user. Returns object for newly created user, if successful.</p></td>
 </tr>
@@ -189,7 +190,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-<p>{ "userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "Three" , "groups" : [ ] , "_id" : { "$oid" : "55ca52dec4aac050466bc1a9"}}</p>
+{ "userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "Three" , "groups" : [ ] , "_id" : { "$oid" : "55ca52dec4aac050466bc1a9"}}
 </td>
 </tr>
 </table>
@@ -213,7 +214,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/users/{"$oid": "55b63708a3db5f292c533c7b"}<br>
+&lt;Service URL&gt;/users/{"$oid": "55b63708a3db5f292c533c7b"} <br>
 <p><b><small>or when URL encoded:</b></small></p>
 &lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
 </td>
@@ -222,7 +223,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-<p>{ "_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}</p>
+{ "_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
 </td>
 </tr>
 
@@ -240,7 +241,7 @@ It is recommended that this value be URL encoded.
 <td>
 <p><b>Sample Request</b></p>
 <p><b>URL:</b></p>
-&lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"}<br>
+&lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"} <br>
 <p><b><small>or when URL encoded:</b></small></p>
 &lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D <br>
 <p><b><small>Request Payload:</b></small></p> <p>{"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
@@ -251,8 +252,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-<p>{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" : [ ]}
-</p>
+{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" : [ ]}
 </td>
 </tr>
 </table>
