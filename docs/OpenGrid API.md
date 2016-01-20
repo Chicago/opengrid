@@ -32,10 +32,10 @@
 
 ## REST Service Resources
 
-<p><i>Note: See Section 1.2 for information on error responses and other HTTP
+<i>Note: See Section 1.2 for information on error responses and other HTTP
 status codes used by the service. Also note that X-AUTH-TOKEN needs to
 be sent for each calls on the request header with the token obtained by
-calling /users/token as described in Section 1.1.1.</i></p>
+calling /users/token as described in Section 1.1.1.</i>
 
 ## /users/token
 
@@ -57,8 +57,12 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 
 <tr>
 <td><b>Sample Request</b><br>
-<small><b>Request Payload</small></b>:<br>
+<small><b>Request Payload</small></b>:
+<blockquote>
+<p>
 {"username":"admin","password":"xxx"}
+</p>
+</blockquote>
 </td>
 </tr>
 
@@ -66,9 +70,15 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 <td>
 <b>Sample Response</b>
 <p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:</p>
+
+<blockqoute><p> 
 X-AUTH-TOKEN:<br>
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
-<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library See <https://github.com/auth0/jwt-decode></p>
+</p>
+</blockquote>
+
+<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library &#40;See [](https://github.com/auth0/jwt-decode) &#41;
+</p>
 </td>
 </tr>
 
@@ -91,7 +101,8 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 
 <tr>
 <td>
-<p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.</p>
+<p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.
+</p>
 </td>
 </tr>
 
@@ -121,7 +132,8 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 
 <tr>
 <td>
-<p><b>Request Query Parameters</b></p>
+<p><b>Request Query Parameters</b>
+</p>
 </td>
 
 <html>
@@ -162,9 +174,11 @@ It is recommended that this value be URL encoded.
 </td>
 </tr>
 
+<br>
+
 <tr>
 <td>
-<p><b>Sample Response</b></p>
+<b>Sample Response</b>
 [{ "_id" : { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
 </td>
 </tr>
@@ -180,23 +194,21 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-<p>{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
-</p>
+{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "Three" , "groups" : [ ] , "_id" : { "$oid" : "55ca52dec4aac050466bc1a9"}}
+{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "Three" , "groups" : [ ] , "_id" : {"$oid": "55ca52dec4aac050466bc1a9"}}
 </td>
 </tr>
 </table>
 </html>
 
-<h2><a name="/users/{user_id}"></a>
+<h2>users/{user_id}
 </h2>
-
 <p><b>Methods</b></p>
 <html>
 <table>
@@ -222,7 +234,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
+{"_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
 </td>
 </tr>
 
@@ -243,15 +255,14 @@ It is recommended that this value be URL encoded.
 &lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"} <br>
 <p><b><small>or when URL encoded:</b></small></p>
 &lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D <br>
-<p><b><small>Request Payload:</b></small></p> <p>{"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
-</p>
+<p><b><small>Request Payload:</b></small></p> {"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" : [ ]}
+{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" :[ ]}
 </td>
 </tr>
 </table>
@@ -461,11 +472,8 @@ Delete a group given the group’s internal Id on the URL path.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-
 &lt;Service URL&gt;/groups/{"$oid":"55cb6362c4aa475d78d4bc40"}
-
 <p><b><small>or when URL encoded:</b></small></p>
-
 &lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D <br>
 </td>
 </tr>
