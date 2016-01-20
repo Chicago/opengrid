@@ -50,9 +50,9 @@ calling /users/token as described in Section 1.1.1.</i></p>
 
 <tr>
 <td>
-<p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated.<br> 
-The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. (See 1.1.2 below)<br>
-<i>Note on security</i>: the password is currently expected to be sent in plain text (not encrypted). <br>This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
+<p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated.</p>
+<p>The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. (See 1.1.2 below)</p>
+<p><i>Note on security</i>:the password is currently expected to be sent in plain text (not encrypted).</p> <p>This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
 </p>
 </td>
 </tr>
