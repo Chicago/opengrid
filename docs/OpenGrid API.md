@@ -27,7 +27,7 @@
 
 [queries](#queries)
 
-[queries/{query\_id}](#queriesquery_id)
+[queries/query_id](#queriesquery_id)
 
 [HTTP Status Codes on Responses](#http-status-codes-on-responses)
 
