@@ -13,17 +13,17 @@
 
 [users](#users)
 
-[users/{user\_id}](#usersuser_id)
+[users/user_id](#usersuser_id)
 
 [groups](#groups)
 
-[groups/{group\_id}](#groupsgroup_id)
+[groups/group_id](#groupsgroup_id)
 
 [datasets](#datasets)
 
-[datasets/{dataset\_id}](#datasetsdataset_id)
+[datasets/dataset_id](#datasetsdataset_id)
 
-[datasets/{dataset\_id}/query](#datasetsdataset_idquery)
+[datasets/dataset_id/query](#datasetsdataset_idquery)
 
 [queries](#queries)
 
@@ -195,9 +195,8 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h2>/users/{user\_id}
-</h2>
-<p><b>Methods</b></p>
+## /users/user_id
+**Methods**
 <html>
 <table>
 <tr>
@@ -290,9 +289,8 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h2>/groups
-</h2>
-<b>Methods</b>
+## /groups
+**Methods**
 <html>
 <table>
 <tr>
@@ -377,12 +375,8 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h3> /groups/{group\_id}
-</h3>
-<h4>1.1.6 /groups/{group\_id}
-</h4>
-<b>Methods</b>
-
+## /groups/group_id
+**Methods**
 <html>
 <table>
 <tr>
@@ -481,8 +475,7 @@ No response is returned when a group is deleted successfully.
 </html>
 
 ## /datasets
-
-**Methods** <br>
+**Methods** 
 <html>
 <table>
 <tr>
@@ -512,10 +505,8 @@ No response is returned when a group is deleted successfully.
 </table>
 </html>
   
-<h2>/datasets/{dataset\_id}
-</h2>
-
-<b>Methods</b>
+## /datasets/dataset_id
+**Methods**
 <html>
 <table>
 <tr>
@@ -545,10 +536,8 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 </html>
 
 
-<h2> /datasets/{dataset\_id}/query
-</h2>
-
-<b>Methods</b>
+## /datasets/dataset_id/query
+**Methods**
 <html>
 <table>
 <tr>
@@ -558,7 +547,6 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 <tr>
 <td>
 <p>Execute a query against a specific dataset.</p>
-
 
 <tr>
 <td>
@@ -614,9 +602,8 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h2>/queries
-</h2>
-<b>Methods</b>
+## /queries
+**Methods**
 <html>
 <table>
 <tr>
@@ -699,8 +686,7 @@ q
 </table>
 </html>
 
-<h2>/queries/{query\_id}
-</h2>
+## queries/query_id
 
 **Methods**
 <html>
@@ -748,7 +734,6 @@ q
 &lt;Service URL&gt;/queries/{"$oid":"55c52cf6c4aa31b24b04d620"} <br>
 
 <p><b><small>or when URL encoded:</b></small></p>
-
 &lt;Service URL&gt;/queries/%7B%22$oid%22:%2255c52cf6c4aa31b24b04d620%22%7D <br>
 </td>
 
@@ -791,7 +776,7 @@ No response is returned when a query is deleted.
 </table>
 </html>
 
-<h2>HTTP Status Codes on Responses</h2>
+## HTTP Status Codes on Responses
 
 <ul>
 <li>HTTP 401 is returned when users/token is called and authentication fails.</li>
