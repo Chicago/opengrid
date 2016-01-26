@@ -91,9 +91,18 @@ ogrid.QSearchProcessor.Place = ogrid.QSearchProcessor.extend({
 
         //force to look within chicago (make configurable later)
         var txt = encodeURI(input);
+
+        //default bounding box to use for esri geoCode search (East IL area)
+        var bbox = 'bbox=-89.2700, 37.0000, -87.5000, 42.5000';
+
+        //overlay with bbox from config, if any
+        if (ogrid.Config.quickSearch.esriGeocodeBBox) {
+            bbox = 'bbox=' + ogrid.Config.quickSearch.esriGeocodeBBox;
+        }
+
         $.ajax({
             //use ArcGIS online's geocoder server
-            url: 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find?outSr=4326&forStorage=false&outFields=*&maxLocations=20&text=' + txt + '&magicKey=GST7YMc0AM9UOsE3GY8tIS9GOghnYnwZGPTp7P9PCZc0YiD7DsKGCZyAOh5-Dn47Z5Et1bWtHghnCbWQ&f=json',
+            url: 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find?outSr=4326&forStorage=false&outFields=*&maxLocations=20&' + bbox + '&text=' + txt + '&magicKey=GST7YMc0AM9UOsE3GY8tIS9GOghnYnwZGPTp7P9PCZc0YiD7DsKGCZyAOh5-Dn47Z5Et1bWtHghnCbWQ&f=json',
             type: 'GET',
             async: true,
             timeout: ogrid.Config.service.timeout,

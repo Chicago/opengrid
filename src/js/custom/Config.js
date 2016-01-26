@@ -168,7 +168,11 @@ ogrid.Config = {
 
             //Place/Address search is built-in
         ],
-        helpFile: 'templates/qsearch-help.html'
+        helpFile: 'templates/qsearch-help.html',
+
+        //slightly larger than Chicago
+        //around E. Central Rd (Mt. Prospect)&290 and Rt 80 and Rt 65
+        esriGeocodeBBox: '-88.02864,42.06663,-87.30011,41.56614',
     },
 
     //advanced search options
