@@ -12,23 +12,24 @@
 
 [users](#users)
 
-[users/{user_id}](#usersuser_id)
+[users/user_id](#usersuser_id)
 
 [groups](#groups)
 
-[groups/{group_id}](#groupsgroup_id)
+[groups/group_id](#groupsgroup_id)
 
 [datasets](#datasets)
 
-[datasets/{dataset_id}](#datasetsdataset_id)
+[datasets/dataset_id](#datasetsdataset_id)
 
-[datasets/{dataset_id}/query](#datasetsdataset_idquery)
+[datasets/dataset_id/query](#datasetsdataset_idquery)
 
 [queries](#queries)
 
-[queries/{query_id}](#queriesquery_id)
+[queries/query_id](#queriesquery_id)
 
 [HTTP Status Codes on Responses](#http-status-codes-on-responses)
+
 
 ## REST Service Resources
 
@@ -49,20 +50,18 @@ calling /users/token as described in Section 1.1.1.</i>
 
 <tr>
 <td>
-<p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated.<br>
+<p>Return a JSON Web Tokn (JWT) token after user id and password have been successfully validated.<br>
 The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. <br> (See 1.1.2 below) <i>Note on security</i>:the password is currently expected to be sent in plain text (not encrypted).<br> This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
 </p>
 </td>
 </tr>
 
 <tr>
-<td><b>Sample Request</b><br>
-<small><b>Request Payload</small></b>:
-<blockquote>
-<p>
+<td><p><b>Sample Request</b></p>
+<p><small><b>Request Payload</small></b>:</p>
+<code>
 {"username":"admin","password":"xxx"}
-</p>
-</blockquote>
+</code>
 </td>
 </tr>
 
@@ -71,19 +70,22 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 <b>Sample Response</b>
 <p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:</p>
 
-<blockqoute><p> 
+<code> 
 X-AUTH-TOKEN:<br>
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
-</p>
-</blockquote>
+</code>
+</td>
+</tr>
 
-<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library &#40;See https://github.com/auth0/jwt-decode &#41;
+<tr>
+<td>
+<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See <a href="https://github.com/auth0/jwt-decode"> https://github.com/auth0/jwt-decode</a>)
 </p>
 </td>
 </tr>
 
 <tr>
-<td><b>Error Codes</b>
+<td><p><b>Error Codes</b></p>
 <p>If user authentication fails, HTTP status code 401 (Unauthorized) is returned to the requester.</p>
 </td>
 </tr>
@@ -132,9 +134,9 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 
 <tr>
 <td>
-<p><b>Request Query Parameters</b>
-</p>
+<b>Request Query Parameters</b>
 </td>
+</tr>
 
 <html>
 <table>
@@ -145,13 +147,10 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 </tr>
 
 <tr>
-<td>
-q
-</td>
+<td>q</td>
 <td>String</td>
-<td><p>Filter expression to use to search against the Open Grid user repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.<br>
-The query filter must follow the MongoDB query syntax, as with all other API calls that has a query filter parameter.<br> 
-It is recommended that this value be URL encoded.
+<td>
+<p>Filter expression to use to search against the Open Grid user repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.<br> The query filter must follow the MongoDB query syntax, as with all other API calls that has a query filter parameter.<br> It is recommended that this value be URL encoded.
 </p>
 </td>
 </tr>
@@ -168,73 +167,103 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/users?q={}&n=1000<br>
-<p><b><small>Or when URL encoded:</small></b></p>
+<code>
+&lt;Service URL&gt;/users?q={}&n=1000
+</code>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>Or when URL encoded:</b></p>
+<code>
 &lt;Service URL&gt;/users?q=%7B%7D&n=1000
-</td>
-</tr>
-
-<br>
-
-<tr>
-<td>
-<b>Sample Response</b>
-[{ "_id" : { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
-</td>
-</tr>
-
-<tr>
-<th align="left"><i>POST</i></th>
-</tr>
-
-<tr>
-<td><p>Create a new user. Returns object for newly created user, if successful.</p></td>
-</tr>
-
-<tr>
-<td>
-<p><b>Sample Request</b></p>
-{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "Three" , "groups" : [ ] , "_id" : {"$oid": "55ca52dec4aac050466bc1a9"}}
+<code>
+[{"&#95;: { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
+</code>
+</td>
+</tr>
+
+<tr>
+<th align="left"><i><b>POST</i></b></th>
+</tr>
+
+<tr>
+<td>
+<p>Create a new user. Returns object for newly created user, if successful.
+</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>Sample Request</b></p>
+<code>
+{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
+</code>
+</td>
+</tr>
+
+<tr>
+<td>
+<P><b>Sample Response</b></P>
+<br>
+<code>
+{"userId":"test3", "password":"testxxx", "firstName":"Test", "lastName":"Three", "groups":[ ],"&#95;id":{"$oid":"55ca52dec4aac050466bc1a9"}}
+</code>
 </td>
 </tr>
 </table>
 </html>
 
-<h2>users/{user_id}
-</h2>
-<p><b>Methods</b></p>
+
+## /users/user_id
+**Methods**
+
 <html>
 <table>
 <tr>
-<th align="left"><i>GET</i></th>
+<th align="left">GET</th>
 </tr>
 
 <tr>
 <td>
-<p>Return a single user object given the user’s internal id.</p>
+<p>
+Return a single user object given the user’s internal id.
+</p>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/users/{"$oid": "55b63708a3db5f292c533c7b"} <br>
-<p><b><small>or when URL encoded:</b></small></p>
+<code>&lt;Service URL&gt;/users/{"$oid":"55b63708a3db5f292c533c7b"} 
+</code> 
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>or when URL encoded:</b></p>
+<code>
 &lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{"_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
+<code>
+{"&#95;id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
+</code>
 </td>
 </tr>
 
@@ -244,7 +273,8 @@ It is recommended that this value be URL encoded.
 
 <tr>
 <td>
-<p>Update a user’s information. Returns the updated user data, if successful.</p>
+<p>Update a user’s information. Returns the updated user data, if successful.
+</p>
 </td>
 </tr>
 
@@ -252,24 +282,39 @@ It is recommended that this value be URL encoded.
 <td>
 <p><b>Sample Request</b></p>
 <p><b>URL:</b></p>
-&lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"} <br>
-<p><b><small>or when URL encoded:</b></small></p>
-&lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D <br>
-<p><b><small>Request Payload:</b></small></p> {"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
+<code>
+&lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"}
+</code>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>or when URL encoded:</b></p>
+<code>
+&lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D
+</code>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>Request Payload:</b></p>
+<code>
+{"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"&#95;id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" :[ ]}
+<code>
+{"userId":"test3", "password":"testxxx", "firstName":"Test", "lastName":"3", "groups":[ ]}
+</code>
 </td>
 </tr>
-</table>
-</html>
 
-<html>
-<table>
 <tr>
 <th align="left"><i>DELETE</i></th>
 </tr>
@@ -284,9 +329,18 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
+<code>
 &lt;Service URL&gt;/users/{"$oid": "55b63708a3db5f292c533c7b"}
-<p><b><small>or when URL encoded:</b></small></p>
-&lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D <br>
+</code>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>or when URL encoded:</b></p>
+<code>
+&lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
+</code>
 </td>
 </tr>
 
@@ -300,9 +354,9 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
-<h2>/groups
-</h2>
-<b>Methods</b>
+## /groups
+**Methods**
+
 <html>
 <table>
 <tr>
@@ -318,6 +372,8 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Request Query Parameters</b></p>
+</td>
+</tr>
 
 <html>
 <table>
@@ -332,15 +388,18 @@ It is recommended that this value be URL encoded.
 q
 </td>
 <td>String</td>
-<td><p>Filter expression to use to search against the Open Grid group repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether. <br>
+<td>
+<p>Filter expression to use to search against the Open Grid group repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether. <br>
 It is recommended that this value be URL encoded.
-</p></td>
+</p>
+</td>
 </tr>
 
 <tr>
 <td>n</td>
 <td>Integer</td>
-<td><p>The maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0)</p>
+<td><p>The maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0)
+</p>
 </td>
 </tr>
 </table>
@@ -349,50 +408,65 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/groups?q={}&n=200 <br>
-<p><b><small>Or when URL encoded:</small></b></p>
+<code>
+&lt;Service URL&gt;/groups?q={}&n=200
+</code> 
+<br>
+<br>
+<p><b>Or when URL encoded:</b></p>
+<code>
 &lt;Service URL&gt;/groups?q=%7B%7D&n=200
+</code>
 </td>
 </tr>
 
-<tr>
-<td>
-<b>Sample Response</b>
-<p>[{ "_id" : { "$oid" : "55c0c620a3db5f3058630eb3"} , "groupId" : "opengrid_users" , "name" : "OpenGrid Users" , "description" : "Group for all OpenGrid users" , "enabled" : true , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : [ "twitter" , "weather"]}]
-</p>
-</td>
-</tr>
-
-<tr>
-<th align="left"><i>POST</i></th>
-</tr>
-<tr>
-<td>Create a new group. Returns object for newly created group, if successful.</td>
-</tr>
-
-<tr>
-<td>
-<p><b>Sample Request</b></p>
-&lt;Service URL&gt;/groups
-</td>
-</tr>
+<br>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-<p>{"groupId" : "OPENGRID_NEWGROUP" , "name" : "ABC GROUP" , "description" : "ADD ABC GROUP" , "enabled" : true , "functions" : [ ] , "datasets" : [ ] , "_id" : { "$oid" : "55cb6362c4aa475d78d4bc40"}}
+<code>
+[{ "_id" : { "$oid" : "55c0c620a3db5f3058630eb3"} , "groupId" : "opengrid_users" , "name" : "OpenGrid Users" , "description" : "Group for all OpenGrid users" , "enabled" : true , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : [ "twitter" , "weather"]}]
+</code>
+</td>
+</tr>
+
+<br>
+
+<tr>
+<th align="left"><b>POST</b></th>
+</tr>
+
+<tr>
+<td><p>Create a new group. Returns object for newly created group, if successful.
 </p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>Sample Request</b></p>
+<code>
+&lt;Service URL&gt;/groups
+</code>
+</td>
+</tr>
+
+<br>
+
+<tr>
+<td>
+<p><b>Sample Response</b></p>
+<code>
+{"groupId" : "OPENGRID_NEWGROUP" , "name" : "ABC GROUP" , "description" : "ADD ABC GROUP" , "enabled" : true , "functions" : [ ] , "datasets" : [ ] , "&#95;id" : { "$oid" : "55cb6362c4aa475d78d4bc40"}}
+</code>
 </td>
 </tr>
 </table>
 </html>
 
-<h3>/groups/{group_id}
-</h3>
-<h4>1.1.6 /groups/{group_id}
-</h4>
-<b>Methods</b>
-
+## /groups/group_id
+**Methods**
 <html>
 <table>
 <tr>
@@ -408,16 +482,29 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/groups/{"$oid": "55c0c620a3db5f3058630eb3"} <br>
-<p><b><small>or when URL encoded:</b></small></p>
+<code>
+&lt;Service URL&gt;/groups/{"$oid": "55c0c620a3db5f3058630eb3"}
+</code> 
+</td>
+</tr>
+
+<br>
+
+<tr>
+<td>
+<p><b>or when URL encoded:</b></p>
+<code>
 &lt;Service URL&gt;/groups/%7B%22%24oid%22%3A%20%2255c0c620a3db5f3058630eb3%22%7D
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-[{ "_id" : { "$oid" : "55c0c620a3db5f3058630eb3"} , "groupId" : "opengrid_users" , "name" : "OpenGrid Users" , "description" : "Group for all OpenGrid users" , "enabled" : true , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : [ "twitter" , "weather"]}]
+<code>
+[{"_id" : { "$oid" : "55c0c620a3db5f3058630eb3"} , "groupId" : "opengrid_users" , "name" : "OpenGrid Users" , "description" : "Group for all OpenGrid users" , "enabled" : true , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : [ "twitter" , "weather"]}]
+</code>
 </td>
 </tr>
 
@@ -427,35 +514,43 @@ It is recommended that this value be URL encoded.
 
 <tr>
 <td>
-Update a group (group-level attributes and members). Returns the updated group data, if successful.
+<p>Update a group (group-level attributes and members). Returns the updated group data, if successful.
+</p>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-
 <p><b>URL:</b></p>
-
-&lt;Service URL&gt;/groups/{"$oid":"55c525c6c4aae748132f4d06"} <br>
-
+<code>
+&lt;Service URL&gt;/groups/{"$oid":"55c525c6c4aae748132f4d06"}
+</code> <br> <br>
 <p><b><small>or when URL encoded:</b></small></p>
+<code>
+&lt;Service URL&gt;/groups/%7B%22%24oid%22%3A%2255c525c6c4aae748132f4d06%22%7D
+</code> 
+</td>
+</tr>
 
-&lt;Service URL&gt;/groups/%7B%22%24oid%22%3A%2255c525c6c4aae748132f4d06%22%7D <br>
-<b><small>Request Payload:</b></small> <br> 
 
+<tr>
+<td>
+<p><b><small>Request Payload:</b></small></p> 
+<code>
 {"id":{"$oid":"55c525c6c4aae748132f4d06"},"o":{"groupId":"opengrid_users_L2","name":"OpenGrid Users Level 2","description":"Users with access to weather data","enabled":true,"isAdmin":false,"functions":["Quick Search","Advanced Search"],"datasets":["weather"]}}}
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : ["weather"]}
+<code>
+{"groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : ["weather"]}
+</code>
 </td>
 </tr>
-</table>
-</html>
 
 <html>
 <table>
@@ -465,23 +560,35 @@ Update a group (group-level attributes and members). Returns the updated group d
 
 <tr>
 <td>
-Delete a group given the group’s internal Id on the URL path.
+<p>Delete a group given the group’s internal Id on the URL path.
+</p>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Request</b></p>
+<code>
 &lt;Service URL&gt;/groups/{"$oid":"55cb6362c4aa475d78d4bc40"}
-<p><b><small>or when URL encoded:</b></small></p>
-&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D <br>
+</code>
+<br>
+<br>
+<p><b>or when URL encoded:</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-No response is returned when a group is deleted successfully.
+<p>No response is returned when a group is deleted successfully.
+</p>
 </td>
 </tr>
 </table>
@@ -489,7 +596,7 @@ No response is returned when a group is deleted successfully.
 
 ## /datasets
 
-**Methods** <br>
+**Methods** 
 <html>
 <table>
 <tr>
@@ -506,23 +613,36 @@ No response is returned when a group is deleted successfully.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/datasets
+</td>
+</tr>
+
+<tr>
+<td>
+<code>&lt;Service URL&gt;/datasets
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>
 [{ "id" : "twitter" , "displayName" : "Twitter" , "options" : { "rendition" : { "icon" : "default" , "color" : "#001F7A" , "fillColor" : "#00FFFF" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "_id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "screenName" , "displayName" : "Screen Name" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2 , "groupBy" : true} , { "id" : "text" , "displayName" : "Text" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "city" , "displayName" : "City" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4 , "groupBy" : true} , { "id" : "bio" , "displayName" : "Bio" , "dataType" : "string" , "sortOrder" : 5} , { "id" : "hashtags" , "displayName" : "Hashtags" , "dataType" : "string" , "sortOrder" : 6} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 7} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8}]}, { "id" : "weather" , "displayName" : "Weather" , "options" : { "rendition" : { "icon" : "default" , "color" : "#8c2d04" , "fillColor" : "#fdae6b" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "_id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "temp" , "displayName" : "Temperature" , "dataType" : "float" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "windspeed" , "displayName" : "Wind Speed" , "dataType" : "float" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2} , { "id" : "condition" , "displayName" : "Condition" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "humidity" , "displayName" : "Humidity" , "dataType" : "float" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4} , { "id" : "precipIntensity" , "displayName" : "Precipitation Intensity" , "dataType" : "float" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 5} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 5} , { "id" : "zipcode" , "displayName" : "Zip Code" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 6 , "values" : [ 60601 , 60602] , "groupBy" : true} , { "id" : "forecast" ,"displayName" : "Today's Forecast" , "dataType" : "string" , "popup" : true , "list" : true , "sortOrder" : 7} , { "id" : "icon" , "displayName" : "Icon" , "dataType" : "graphic" , "popup" : true , "sortOrder" : 7} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 9}]}] 
+</code>
 </td>
 </tr>
 </table>
 </html>
-  
-<h2>/datasets/{dataset_id}
-</h2>
 
-<b>Methods</b>
+## /datasets/dataset_id
+
+**Methods**
+
 <html>
 <table>
 <tr>
@@ -531,30 +651,32 @@ No response is returned when a group is deleted successfully.
 
 <tr>
 <td>
-Return a single dataset descriptor. An HTTP 403 is returned when the user has no access to the dataset requested.
+<p>Return a single dataset descriptor. An HTTP 403 is returned when the user has no access to the dataset requested.
+</p>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/datasets/twitter
+<code>&lt;Service URL&gt;/datasets/twitter
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "id" : "twitter" , "displayName" : "Twitter" , "options" : { "rendition" : { "icon" : "default" , "color" : "#001F7A" , "fillColor" : "#00FFFF" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "_id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "screenName" , "displayName" : "Screen Name" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2 , "groupBy" : true} , { "id" : "text" , "displayName" : "Text" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "city" , "displayName" : "City" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4 , "groupBy" : true} , { "id" : "bio" , "displayName" : "Bio" , "dataType" : "string" , "sortOrder" : 5} , { "id" : "hashtags" , "displayName" : "Hashtags" , "dataType" : "string" , "sortOrder" : 6} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 7} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8}]}
+<code>
+{"id" : "twitter" , "displayName" : "Twitter" , "options" : { "rendition" : { "icon" : "default" , "color" : "#001F7A" , "fillColor" : "#00FFFF" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "&#95;id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "screenName" , "displayName" : "Screen Name" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2 , "groupBy" : true} , { "id" : "text" , "displayName" : "Text" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "city" , "displayName" : "City" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4 , "groupBy" : true} , { "id" : "bio" , "displayName" : "Bio" , "dataType" : "string" , "sortOrder" : 5} , { "id" : "hashtags" , "displayName" : "Hashtags" , "dataType" : "string" , "sortOrder" : 6} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 7} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8}]}
+</code>
 </td>
 </tr>
 </table>
 </html>
 
-<h2>/datasets/{dataset_id}/query
-</h2>
-
-<b>Methods</b>
+## /datasets/dataset_id/query
+**Methods**
 <html>
 <table>
 <tr>
@@ -564,6 +686,8 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 <tr>
 <td>
 <p>Execute a query against a specific dataset.</p>
+</td>
+</tr>
 
 <tr>
 <td>
@@ -584,8 +708,9 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 q
 </td>
 <td>String</td>
-<td> <p>Filter expression to use to against the specified dataset Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether. <br>
-The query filter must follow the MongoDB query syntax, as with all other API calls that has a query filter parameter.<br> 
+<td><p>Filter expression to use to against the specified dataset Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.
+</p>
+<p>The query filter must follow the MongoDB query syntax, as with all other API calls that has a query filter parameter.<br> 
 It is recommended that this value be URL encoded.
 </p>
 </td>
@@ -603,24 +728,45 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1 <br>
+<code>&lt;Service URL&gt;/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1
+</code> 
+</td>
+</tr>
+
+<br>
+
+<tr>
+<td>
 <p><b><small>Or when URL encoded:</small></b></p>
-&lt;Service URL&gt;/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=1
 </td>
 </tr>
 
 <tr>
 <td>
-<b>Sample Response</b>
-<p>{ "type" : "FeatureCollection", "features" : [{"type": "Feature", "properties": { "_id" : { "$oid" : "556e6f18aef407e1dc98685e"} , "date" : "05/02/2012 8:24 AM" , "screenName" : "DeeeEmmm" , "text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways...." , "city" : "Chicago, IL" , "bio" : "I'm the female version of Ari Gold!" , "lat" : 41.84770456 , "long" : -87.8521837 , "hashtags" : ""}, "geometry": {"type": "Point", "coordinates": [-87.8521837,41.84770456]}, "autoPopup": false }],"meta": { "view": { "id" : "twitter" , "displayName" : "Twitter" , "options" : { "rendition" : { "icon" : "default" , "color" : "#001F7A" , "fillColor" : "#00FFFF" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "_id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "screenName" , "displayName" : "Screen Name" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2 , "groupBy" : true} , { "id" : "text" , "displayName" : "Text" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "city" , "displayName" : "City" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4 , "groupBy" : true} , { "id" : "bio" , "displayName" : "Bio" , "dataType" : "string" , "sortOrder" : 5} , { "id" : "hashtags" , "displayName" : "Hashtags" , "dataType" : "string" , "sortOrder" : 6} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 7} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8}]} }}
-</p>
+<code>
+&lt;Service URL&gt;/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=1
+</code>
+</td>
+</tr>
+
+<br>
+<tr>
+<td>
+<p><b>Sample Response</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>
+{"type" : "FeatureCollection", "features" : [{"type": "Feature", "properties": { "_id" : { "$oid" : "556e6f18aef407e1dc98685e"} , "date" : "05/02/2012 8:24 AM" , "screenName" : "DeeeEmmm" , "text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways...." , "city" : "Chicago, IL" , "bio" : "I'm the female version of Ari Gold!" , "lat" : 41.84770456 , "long" : -87.8521837 , "hashtags" : ""}, "geometry": {"type": "Point", "coordinates": [-87.8521837,41.84770456]}, "autoPopup": false }],"meta": { "view": { "id" : "twitter" , "displayName" : "Twitter" , "options" : { "rendition" : { "icon" : "default" , "color" : "#001F7A" , "fillColor" : "#00FFFF" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "_id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "screenName" , "displayName" : "Screen Name" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2 , "groupBy" : true} , { "id" : "text" , "displayName" : "Text" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "city" , "displayName" : "City" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4 , "groupBy" : true} , { "id" : "bio" , "displayName" : "Bio" , "dataType" : "string" , "sortOrder" : 5} , { "id" : "hashtags" , "displayName" : "Hashtags" , "dataType" : "string" , "sortOrder" : 6} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 7} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8}]} }}
+</code>
 </td>
 </tr>
 </table>
 </html>
 
-<h2>/queries
-</h2>
+## /queries
 <b>Methods</b>
 <html>
 <table>
@@ -630,13 +776,16 @@ It is recommended that this value be URL encoded.
 
 <tr>
 <td>
-<p>Return list of all queries that user has access to. A user has access to all queries he or she has created and those shared with his groups or shared with him directly by other users.</p>
+<p>Return list of all queries that user has access to. A user has access to all queries he or she has created and those shared with his groups or shared with him directly by other users.
+</p>
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Request Query Parameters</b></p>
+</td>
+</tr>
 
 <html>
 <table>
@@ -648,18 +797,29 @@ It is recommended that this value be URL encoded.
 
 <tr>
 <td>
-q
+q</td>
+<td>
+String
 </td>
-<td>String</td>
-<td><p>Filter expression to use. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether. <br> It is recommended that this value be URL encoded.
+<td>
+<p>
+Filter expression to use. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.
+<br>
+It is recommended that this value be URL encoded.
 </p>
 </td>
 </tr>
 
 <tr>
-<td>n</td>
-<td>Integer</td>
-<td><p>The maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0)</p>
+<td>n
+</td>
+<td>
+Integer
+</td>
+<td>
+<p>
+maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0).
+</p>
 </td>
 </tr>
 </table>
@@ -668,50 +828,85 @@ q
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/queries?n=1 <br>
 </td>
 </tr>
 
 <tr>
 <td>
-<b>Sample Response</b>
-<p>[{ "_id" : { "$oid" : "5582f831a3db5f4190e4707a"} , "name" : "Weather Records for 60601" , "owner" : "jsmith" , "spec" : [ { "dataSetId" : "weather" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "zipcode" , "field" : "zipcode" , "type" : "string" , "input" : "text" , "operator" : "equal" , "value" : "60601"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : 85 , "size" : 6}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : true}]
-</p>
+<code>&lt;Service URL&gt;/queries?n=1
+</code>
 </td>
 </tr>
 
-<tr>
-<th align="left"><i>POST</i></th>
-</tr>
-<tr>
-<td>Create a new query. Returns object for newly created query, if successful.</td>
-</tr>
-
-<tr>
-<td>
-<p><b>Sample Request</b></p>
-<b><small>Request Payload</small></b><br>
-<p>{"o":{"name":"Tweets By Bud","owner":"user1","spec":[{"dataSetId":"twitter","filters":{"condition":"AND","rules":[{"id":"screenName","field":"screenName","type":"string","input":"text","operator":"contains","value":"bud"}]},"rendition":{"color":"#DC143C","opacity":"85","size":"6"}}],"sharedWith":{"users":[],"groups":[]},"isCommon":false,"autoRefresh":false,"refreshInterval":"30","geoFilter":{"boundaryType":"within","boundary":""}}}</p>
-</td>
-</tr>
-
+<br>
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "name" : "Tweets By Bud" , "owner" : "user1" , "spec" : [ { "dataSetId" : "twitter" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "screenName" , "field" : "screenName" , "type" : "string" , "input" : "text" , "operator" : "contains" , "value" : "bud"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : "85" , "size" : "6"}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : false , "autoRefresh" : false , "refreshInterval" : "30" , "geoFilter" : { "boundaryType" : "within" , "boundary" : ""} , "_id" : { "$oid" : "55df5ec39900ec81a481b0f6"}}
+</td>
+</tr>
+
+<tr>
+<td>
+<code>
+[{"&#95;id" : { "$oid" : "5582f831a3db5f4190e4707a"} , "name" : "Weather Records for 60601" , "owner" : "jsmith" , "spec" : [ { "dataSetId" : "weather" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "zipcode" , "field" : "zipcode" , "type" : "string" , "input" : "text" , "operator" : "equal" , "value" : "60601"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : 85 , "size" : 6}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : true}]
+</code>
+</td>
+</tr>
+
+<br>
+<th align="left"><b>POST</b></th>
+</tr>
+
+<tr>
+<td>
+<p>
+Create a new query. Returns object for newly created query, if successful.
+</p>
+</td>
+</tr>
+
+<br>
+<tr>
+<td>
+<p><b>Sample Request</b>
+</p>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b><small>Request Payload</b></small></p>
+<code>
+{"o":{"name":"Tweets By Bud","owner":"user1","spec":[{"dataSetId":"twitter","filters":{"condition":"AND","rules":[{"id":"screenName","field":"screenName","type":"string","input":"text","operator":"contains","value":"bud"}]},"rendition":{"color":"#DC143C","opacity":"85","size":"6"}}],"sharedWith":{"users":[],"groups":[]},"isCommon":false,"autoRefresh":false,"refreshInterval":"30","geoFilter":{"boundaryType":"within","boundary":""}}}
+</code>
+</td>
+</tr>
+
+<br>
+<tr>
+<td>
+<p><b>Sample Response</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>
+{"name" : "Tweets By Bud" , "owner" : "user1" , "spec" : [ { "dataSetId" : "twitter" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "screenName" , "field" : "screenName" , "type" : "string" , "input" : "text" , "operator" : "contains" , "value" : "bud"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : "85" , "size" : "6"}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : false , "autoRefresh" : false , "refreshInterval" : "30" , "geoFilter" : { "boundaryType" : "within" , "boundary" : ""} , "&#95;id" : { "$oid" : "55df5ec39900ec81a481b0f6"}}
+</code>
 </td>
 </tr>
 </table>
 </html>
 
-<h2>/queries/{query_id}
-</h2>
-
+<br>
+## /queries/query_id
 **Methods**
+
 <html>
 <table>
 <tr>
-<th align="left"><i>GET</i></th>
+<th align="left">GET</th>
 </tr>
 
 <tr>
@@ -720,29 +915,58 @@ q
 </td>
 </tr>
 
+
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/queries/{"$oid":"5582f831a3db5f4190e4707a"} <br>
-<p><b><small>or when URL encoded:</b></small></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>
+&lt;Service URL&gt;/queries/{"$oid":"5582f831a3db5f4190e4707a"} 
+</code> 
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>or when URL encoded:</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>
 &lt;Service URL&gt;/queries/%7B%22$oid%22:%5582f831a3db5f4190e4707a%22%7D
+</code>
 </td>
 </tr>
 
 <tr>
 <td>
-<p><b>Sample Response</b></p>
-[{ "_id" : { "$oid" : "5582f831a3db5f4190e4707a"} , "name" : "Weather Records for 60601" , "owner" : "jsmith" , "spec" : [ { "dataSetId" : "weather" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "zipcode" , "field" : "zipcode" , "type" : "string" , "input" : "text" , "operator" : "equal" , "value" : "60601"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : 85 , "size" : 6}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : true}]
+<p><b>Sample Response</b>
+</p>
 </td>
 </tr>
 
 <tr>
-<th align="left"><i>PUT</i></th>
+<td>
+<code>
+[{"&#95;id" : { "$oid" : "5582f831a3db5f4190e4707a"} , "name" : "Weather Records for 60601" , "owner" : "jsmith" , "spec" : [ { "dataSetId" : "weather" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "zipcode" , "field" : "zipcode" , "type" : "string" , "input" : "text" , "operator" : "equal" , "value" : "60601"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : 85 , "size" : 6}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : true}]
+</code>
+</td>
+</tr>
+
+<tr>
+<th align="left">PUT</th>
 </tr>
 
 <tr>
 <td>
-<p>Update a query. Returns the updated query object, if successful.</p>
+<p>Update a query. Returns the updated query object, if successful.
+</p>
 </td>
 </tr>
 
@@ -750,26 +974,47 @@ q
 <td>
 <p><b>Sample Request</b></p>
 <p><b>URL:</b></p>
-&lt;Service URL&gt;/queries/{"$oid":"55c52cf6c4aa31b24b04d620"} <br>
-
-<p><b><small>or when URL encoded:</b></small></p>
-
-&lt;Service URL&gt;/queries/%7B%22$oid%22:%2255c52cf6c4aa31b24b04d620%22%7D <br>
 </td>
+</tr>
+
+<tr>
+<td>
+<code>
+&lt;Service URL&gt;/queries/{"$oid":"55c52cf6c4aa31b24b04d620"} 
+</code> 
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>or when URL encoded:</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>
+&lt;Service URL&gt;/queries/%7B%22$oid%22:%2255c52cf6c4aa31b24b04d620%22%7D
+</code>
+</td>
+</tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "name" : "Tweets on coupon" , "owner" : "user1" , "spec" : [ { "dataSetId" : "twitter" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "text" , "field" : "text" , "type" : "string" , "input" : "text" , "operator" : "contains" , "value" : "coupon"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : "85" , "size" : "6"}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : false , "autoRefresh" : false , "refreshInterval" : "30" , "_id" : { "$oid" : "55c52cf6c4aa31b24b04d620"} , "geoFilter" : { "boundaryType" : "within" , "boundary" : ""}}
 </td>
 </tr>
-</table>
-</html>
 
-<html>
-<table>
 <tr>
-<th align="left"><i>DELETE</i></th>
+<td>
+<code>
+{"name" : "Tweets on coupon" , "owner" : "user1" , "spec" : [ { "dataSetId" : "twitter" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "text" , "field" : "text" , "type" : "string" , "input" : "text" , "operator" : "contains" , "value" : "coupon"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : "85" , "size" : "6"}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : false , "autoRefresh" : false , "refreshInterval" : "30" , "&#95;id" : { "$oid" : "55c52cf6c4aa31b24b04d620"} , "geoFilter" : { "boundaryType" : "within" , "boundary" : ""}}
+</code>
+</td>
+</tr>
+
+<tr>
+<th align="left">DELETE</th>
 </tr>
 
 <tr>
@@ -781,55 +1026,74 @@ q
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/queries/{"$oid":"55cb6362c4aa475d78d4bc40"}
-<p><b><small>or when URL encoded:</b></small></p>
-&lt;Service URL&gt;/queries/%7B%22%24oid%22%3A%2255cb6362c4aa475d78d4bc40%22%7D <br>
 </td>
 </tr>
 
 <tr>
 <td>
-<p><b>Sample Response</b></p>
+<code>
+&lt;Service URL&gt;/queries/{"$oid":"55cb6362c4aa475d78d4bc40"}
+</code> 
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>or when URL encoded:</b></p>
+</td>
+</tr>
+
+<tr>
+<td>
+<code>
+&lt;Service URL&gt;/queries/%7B%22%24oid%22%3A%2255cb6362c4aa475d78d4bc40%22%7D 
+</code>
+</td>
+</tr>
+
+<tr>
+<td>
+<p><b>Sample Response</b>
+</p>
+<p>
 No response is returned when a query is deleted.
+</p>
 </td>
 </tr>
 </table>
 </html>
 
-<h2>HTTP Status Codes on Responses</h2>
 
-<ul>
-<li>HTTP 401 is returned when users/token is called and authentication fails.</li>
-<li>HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.</li>
-<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li>
-</ul>
+## HTTP Status Codes on Response
 
-<blockquote>
-<p>{
-</p>
-<p> “error”: {
-</p>
-<p>“code”: “&lt;error code&gt;”
-</p>
-<p> “message”: “&lt;error message&gt;”
-</p>
-<p> }
-</p>
-<p> }
-</p>
-</blockquote>
+<ul><li>HTTP 401 is returned when users/token is called and authentication fails.
+</li>
+<li>HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.
+</li>
+<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error objectis returned with the format below:
+</li></ul>
 
-<blockquote>
-where &lt;error code&gt; is a code corresponding to the error that
+<code>
+ {
+<br> “error”: {
+<br>
+ “code”: “&lt;error code&gt;”
+<br>
+“message”: “&lt;error message&gt;”
+<br> }
+<br> }
+</code>
+
+<p>where &lt;error code&gt; is a code corresponding to the error that
 occurred and &lt;error message&gt; is a description of the error.
-</blockquote>
+</p>
 
-<ul>
-<li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
+<ul><li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
 </li>
-<li>HTTP 204 (No Content) is returned when an object is deleted successfully (DELETE method where applicable)
-</li>
-</ul>
+
+<li>HTTP 204 (No Content) is returned when an object is deleted successfully (DELETE method where applicable).
+</li></ul>
+
 <br>
-<br>
-<a href="#top">Back to top</a> 
+
+<a href="#top">Back to top</a>
