@@ -242,11 +242,12 @@ ogrid.TableView = ogrid.Class.extend({
 
     _overrideExportBehavior: function(t) {
         //get original event handler for export option
-        var oldClickFn = jQuery._data( $('div.export li')[0], "events").click[0].handler;
-        $('div.export li').off('click');
+        var tabId = $(t)[0].id.replace('ogrid-table', 'ogrid-tab');
+        var oldClickFn = jQuery._data( $('#' + tabId).find('div.export li')[0], "events").click[0].handler;
+        $('#' + tabId).find('div.export li').off('click');
 
         //setup our own click event handler
-        $('div.export li').click(function(e) {
+        $('#' + tabId).find('div.export li').click(function(e) {
             ogrid.Alert.busy('Exporting table data...', this, function() {
                 //temporarily turn off pagination when exporting all records
                 t.bootstrapTable('togglePagination');

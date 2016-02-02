@@ -2,41 +2,12 @@
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
 <h4 align="center">Version 1.0</h4>
 
-## Table of Contents
-
-
-[REST Service Resources](#rest-service-resources)
-
-[users/token](#userstoken)
-
-[users/renew](#usersrenew)
-
-[users](#users)
-
-[users/user_id](#usersuser_id)
-
-[groups](#groups)
-
-[groups/group_id](#groupsgroup_id)
-
-[datasets](#datasets)
-
-[datasets/dataset_id](#datasetsdataset_id)
-
-[datasets/dataset_id/query](#datasetsdataset_idquery)
-
-[queries](#queries)
-
-[queries/query_id](#queriesquery_id)
-
-[HTTP Status Codes on Responses](#http-status-codes-on-responses)
-
 ## REST Service Resources
 
-*Note: See Section 1.2 for information on error responses and other HTTP
+<i>Note: See Section 1.2 for information on error responses and other HTTP
 status codes used by the service. Also note that X-AUTH-TOKEN needs to
 be sent for each calls on the request header with the token obtained by
-calling /users/token as described in Section 1.1.1.*
+calling /users/token as described in Section 1.1.1.</i>
 
 ## /users/token
 
@@ -50,16 +21,20 @@ calling /users/token as described in Section 1.1.1.*
 
 <tr>
 <td>
-Return a JSON Web Token (JWT) token after user id and password have been successfully validated.<br><br> 
-The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. (See 1.1.2 below)<br><br>
-<i>Note on security</i>: the password is currently expected to be sent in plain text (not encrypted). This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
+<p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated.<br>
+The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. <br> (See 1.1.2 below) <i>Note on security</i>:the password is currently expected to be sent in plain text (not encrypted).<br> This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
+</p>
 </td>
 </tr>
 
 <tr>
 <td><b>Sample Request</b><br>
-<small><b>Request Payload</small></b>:<br>
+<small><b>Request Payload</small></b>:
+<blockquote>
+<p>
 {"username":"admin","password":"xxx"}
+</p>
+</blockquote>
 </td>
 </tr>
 
@@ -67,9 +42,15 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 <td>
 <b>Sample Response</b>
 <p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:</p>
+
+<blockqoute><p> 
 X-AUTH-TOKEN:<br>
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
-<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See https://github.com/auth0/jwt-decode)</p>
+</p>
+</blockquote>
+
+<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library &#40;See https://github.com/auth0/jwt-decode &#41;
+</p>
 </td>
 </tr>
 
@@ -92,7 +73,8 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 
 <tr>
 <td>
-<p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.</p>
+<p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.
+</p>
 </td>
 </tr>
 
@@ -122,7 +104,8 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 
 <tr>
 <td>
-<p><b>Request Query Parameters</b></p>
+<p><b>Request Query Parameters</b>
+</p>
 </td>
 
 <html>
@@ -163,17 +146,19 @@ It is recommended that this value be URL encoded.
 </td>
 </tr>
 
+<br>
+
 <tr>
 <td>
 <b>Sample Response</b>
-<p>[{ "_id" : { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
-</p>
+[{ "_id" : { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
 </td>
 </tr>
 
 <tr>
 <th align="left"><i>POST</i></th>
 </tr>
+
 <tr>
 <td><p>Create a new user. Returns object for newly created user, if successful.</p></td>
 </tr>
@@ -181,22 +166,27 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-<p>{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
-</p>
+{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-<p>{ "userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "Three" , "groups" : [ ] , "_id" : { "$oid" : "55ca52dec4aac050466bc1a9"}}</p>
+{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "Three" , "groups" : [ ] , "_id" : {"$oid": "55ca52dec4aac050466bc1a9"}}
 </td>
 </tr>
 </table>
 </html>
 
+<<<<<<< HEAD
 ## /users/user_id
 **Methods**
+=======
+<h2>users/{user_id}
+</h2>
+<p><b>Methods</b></p>
+>>>>>>> iss135
 <html>
 <table>
 <tr>
@@ -212,7 +202,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-&lt;Service URL&gt;/users/{"$oid": "55b63708a3db5f292c533c7b"}<br>
+&lt;Service URL&gt;/users/{"$oid": "55b63708a3db5f292c533c7b"} <br>
 <p><b><small>or when URL encoded:</b></small></p>
 &lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
 </td>
@@ -221,7 +211,7 @@ It is recommended that this value be URL encoded.
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-<p>{ "_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}</p>
+{"_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
 </td>
 </tr>
 
@@ -239,19 +229,17 @@ It is recommended that this value be URL encoded.
 <td>
 <p><b>Sample Request</b></p>
 <p><b>URL:</b></p>
-&lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"}<br>
+&lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"} <br>
 <p><b><small>or when URL encoded:</b></small></p>
 &lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D <br>
-<p><b><small>Request Payload:</b></small></p> <p>{"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
-</p>
+<p><b><small>Request Payload:</b></small></p> {"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
 </td>
 </tr>
 
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-<p>{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" : [ ]}
-</p>
+{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" :[ ]}
 </td>
 </tr>
 </table>
@@ -375,8 +363,17 @@ It is recommended that this value be URL encoded.
 </table>
 </html>
 
+<<<<<<< HEAD
 ## /groups/group_id
 **Methods**
+=======
+<h3>/groups/{group_id}
+</h3>
+<h4>1.1.6 /groups/{group_id}
+</h4>
+<b>Methods</b>
+
+>>>>>>> iss135
 <html>
 <table>
 <tr>
@@ -435,7 +432,7 @@ Update a group (group-level attributes and members). Returns the updated group d
 <tr>
 <td>
 <p><b>Sample Response</b></p>
-{ "groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : [ "weather"]}
+{ "groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : ["weather"]}
 </td>
 </tr>
 </table>
@@ -456,11 +453,8 @@ Delete a group given the group’s internal Id on the URL path.
 <tr>
 <td>
 <p><b>Sample Request</b></p>
-
 &lt;Service URL&gt;/groups/{"$oid":"55cb6362c4aa475d78d4bc40"}
-
 <p><b><small>or when URL encoded:</b></small></p>
-
 &lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D <br>
 </td>
 </tr>
@@ -505,8 +499,15 @@ No response is returned when a group is deleted successfully.
 </table>
 </html>
   
+<<<<<<< HEAD
 ## /datasets/dataset_id
 **Methods**
+=======
+<h2>/datasets/{dataset_id}
+</h2>
+
+<b>Methods</b>
+>>>>>>> iss135
 <html>
 <table>
 <tr>
@@ -535,9 +536,16 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 </table>
 </html>
 
+<<<<<<< HEAD
 
 ## /datasets/dataset_id/query
 **Methods**
+=======
+<h2>/datasets/{dataset_id}/query
+</h2>
+
+<b>Methods</b>
+>>>>>>> iss135
 <html>
 <table>
 <tr>
@@ -686,7 +694,12 @@ q
 </table>
 </html>
 
+<<<<<<< HEAD
 ## queries/query_id
+=======
+<h2>/queries/{query_id}
+</h2>
+>>>>>>> iss135
 
 **Methods**
 <html>
