@@ -199,8 +199,12 @@ ogrid.Main = ogrid.Class.extend({
                         me._session.showLogin($.proxy(me._postLogin, me));
                         return false;
                     }
-                } else
+                } else {
+                    if (options.url.indexOf(ogrid.Config.service.authUrl) === -1) {
+                        ogrid.Alert.busy('Working...');
+                    }
                     return true;
+                }
             },
             complete:function(){
                 //$("#ogrid-busy").hide();
