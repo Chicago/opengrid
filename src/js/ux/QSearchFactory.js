@@ -26,7 +26,10 @@ ogrid.QSearchFactory.parse = function(inputString) {
         if (qsProvider) return qsProvider;
     }
     //default provider
-    return ogrid.QSearchProcessor.place(inputString);
+    if (ogrid.Config.quickSearch.plugInOptions) {
+        return ogrid.QSearchProcessor.place(ogrid.Config.quickSearch.plugInOptions.places);
+    }
+    return ogrid.QSearchProcessor.place();
 
     //throw ogrid.error('Quick Search Error', 'Unrecognized command \'' + inputString + '\'.');
 };

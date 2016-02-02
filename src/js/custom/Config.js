@@ -168,7 +168,21 @@ ogrid.Config = {
 
             //Place/Address search is built-in
         ],
-        helpFile: 'templates/qsearch-help.html'
+        helpFile: 'templates/qsearch-help.html',
+        plugInOptions: {
+            places: {
+                //slightly larger than Chicago
+                //around E. Central Rd (Mt. Prospect)&290 and Rt 80 and Rt 65
+                esriGeocodeBBox: '-88.02864,42.06663,-87.30011,41.56614',
+
+                //add this for more Chicago-centric results esp. with POIs
+                esriGeocodeLocation: '-87.63940, 41.87440',
+                esriGeocodeMaxResults: 20,
+
+                //filter non-POI results using this geoJson shape
+                esriGeocodeFilterUsingShape: ogrid.chicagoCityShapeMap().getData().chicago,
+            }
+        },
     },
 
     //advanced search options

@@ -298,3 +298,21 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
 .leaflet-popup-content a {
     color: lightskyblue;
 }
+
+#ogrid-help-icon {
+    padding-top: 18px;
+    padding-right: 10px;
+    color: whitesmoke;
+}
+
+
+.no-underline-on-hover:hover { text-decoration: none; }
+.no-underline-on-hover { text-decoration: none; }
+
+/* mobile styles for help icon*/
+@media (max-width: 845px) {
+    #ogrid-help-icon {
+        padding-left: 10px;
+        font-size: 1.5em;
+    }
+}
