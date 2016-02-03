@@ -17,7 +17,7 @@ OpenGrid was developed with the support of Bloomberg Philanthropies.
 <p>User documentation is designed to assist end users with the use of OpenGrid product and services. Upon usage of documentation the user will gain appropriate knowledge and capabilities to navigate the system. The user will inherit an understanding of the system and its processes and have the foundation to execute queries for navigation.</p>
  
 #### Supported Browsers
-<p>OpenGrid supports both mobile and desktop versions search engines. Mobile Android devices support Firefox version 40+ and Chrome 44+. Ios devices support Chrome 45+, Safari 8.1+ and Firefox 40+. Desktop versions support Firefox 42+ and Chrome 46+; Internet Explorer is supported from IE10+ no older versions will be continued. All browsers must have cookies enabled and support JavaScript/ECMAScript version 5.1.</p>
+<p>OpenGrid supports both mobile and desktop versions search engines. Mobile Android devices support Firefox version 40&#43; and Chrome 44&#43;. Ios devices support Chrome 45&#43;, Safari 8.1&#43; and Firefox 40&#43;. Desktop versions support Firefox 42&#43; and Chrome 46&#43;; Internet Explorer is supported from IE10&#43; no older versions will be continued. All browsers must have cookies enabled and support JavaScript/ECMAScript version 5.1.</p>
 
 ## Quick Search
 <p>
@@ -68,8 +68,11 @@ There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b
 
 ## Monitoring Queries
 <p>The monitor mode in the quick search section allows the user to monitor and update activity using auto-refresh. To use auto-refresh for monitoring queries:</p>
-- Enable the auto-refresh check-box
-- Ascend or descend on the seconds needed for refreshing the screen <b><i><small>(seconds are user preference)</b></i></small>.
+<ul>
+<li>Enable the auto-refresh check-box</li>
+<li>Ascend or descend on the seconds needed for refreshing the screen <b><i><small>(seconds are user preference)</b></i></small>.
+</li>
+</ul>
 
 ## Table Functions
 <p>The table functionality is used to organized information that has been displayed via query. The table displays the data that was pulled from the queried results and in return structures it in a readable format for the user to interpret. Each dropdown are intertwined with one another.The table consist of five drop down sections: </p>
@@ -98,8 +101,6 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 
 ## Measure Distance and Area
 <p>Measuring distances and areas is a function within OpenGrid that allows the user to perform measurements between any given point to another. Once the measurement tool is selected the user will be prompt to start creating measurements by adding points on the map.</p>
-
- 
 
 ## Measurement and Tools
 <p>Click the measurement tool icon.</p>  
