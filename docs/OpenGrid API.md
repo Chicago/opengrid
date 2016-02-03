@@ -429,7 +429,7 @@ Return a list of available datasets. The response is a JSON array of descriptors
 
 ## 1.1.8 /datasets/{dataset_id}
 **Methods**
-<p><b><i>GET</i><br>
+<p><b><i>GET</i></b><br>
 Return a single dataset descriptor. An HTTP 403 is returned when the user has no access to the dataset requested.
 </p>
 
@@ -447,7 +447,8 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 
 ## 1.1.9 /datasets/{dataset_id}/query
 **Methods**
-<p><b>GET</b><br>
+<p><b>GET</b>
+<br>
 Execute a query against a specific dataset.
 </p>
 
@@ -583,17 +584,20 @@ Create a new query. Returns object for newly created query, if successful.
 
 ## 1.1.11 /queries/{query_id}
 **Methods**
-<p><b>GET</b><br>
+<p><b>GET</b>
+<br>
 Return a single query given a query’s internal id.
 </p>
 
-<p><b>Sample Request</b><br>
+<p><b>Sample Request</b>
+<br>
 <code>
 &lt;Service URL&gt;/queries/{"$oid":"5582f831a3db5f4190e4707a"} 
 </code> 
 </p>
 
-<p><b>or when URL encoded:</b><br>
+<p><b>or when URL encoded:</b>
+<br>
 <code>
 &lt;Service URL&gt;/queries/%7B%22$oid%22:%5582f831a3db5f4190e4707a%22%7D
 </code>
