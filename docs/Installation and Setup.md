@@ -4,7 +4,7 @@ Once the application sources are downloaded and built, the distributable package
 Instructions for building the release packages can be found below:
 <ul>
 <li>
-<a href="./Build%20Procedures/"> User Interface Build Procedures</a>
+<a href="(https://github.com/Chicago/opengrid/blob/master/docs/Build%20Procedures.md)/"> User Interface Build Procedures</a>
 </li>
 <li>
 <a href="https://github.com/Chicago/opengrid-svc-template/blob/master/docs/Build%20Procedures.md">Service Layer Build Procedures</a>
