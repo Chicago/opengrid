@@ -2,7 +2,6 @@
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
 <h4 align="center">Version 1.0</h4>
 
-<<<<<<< HEAD
 <!--
 ## Table of Contents
 //-->
@@ -62,26 +61,17 @@
 ## 1.1 REST Service Resources
 
 <p>
-=======
-## REST Service Resources
-
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 <i>Note: See Section 1.2 for information on error responses and other HTTP
 status codes used by the service. Also note that X-AUTH-TOKEN needs to
 be sent for each calls on the request header with the token obtained by
 calling /users/token as described in Section 1.1.1.</i>
-<<<<<<< HEAD
 </p>
-=======
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 ## 1.1.1 /users/token
 
 **Methods**
 
 <p><b>POST</b></p>
-
-<<<<<<< HEAD
 
 <p>Return a JSON Web Tokn (JWT) token after user id and password have been successfully validated.</p>
 
@@ -115,42 +105,6 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 <p><b>Error Codes</b><br>
 If user authentication fails, HTTP status code 401 (Unauthorized) is returned to the requester.
 </p>
-=======
-<tr>
-<td>
-<p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated.<br>
-The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. <br> (See 1.1.2 below) <i>Note on security</i>:the password is currently expected to be sent in plain text (not encrypted).<br> This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
-</p>
-</td>
-</tr>
-
-<tr>
-<td><b>Sample Request</b><br>
-<small><b>Request Payload</small></b>:
-<blockquote>
-<p>
-{"username":"admin","password":"xxx"}
-</p>
-</blockquote>
-</td>
-</tr>
-
-<tr>
-<td>
-<b>Sample Response</b>
-<p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:</p>
-
-<blockqoute><p> 
-X-AUTH-TOKEN:<br>
-eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
-</p>
-</blockquote>
-
-<p>This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library &#40;See https://github.com/auth0/jwt-decode &#41;
-</p>
-</td>
-</tr>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 
 ## 1.1.2 /users/renew
@@ -158,17 +112,8 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 **Methods**
 <p><b>POST</b></p>
 
-<<<<<<< HEAD
 <p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.
 </p>
-=======
-<tr>
-<td>
-<p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.
-</p>
-</td>
-</tr>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 <p><b>Sample Response</b><br>
 No response is returned but the authentication token with a new expiration time is appended to the response header, replacing the previous one. See 1.1.1 above for a sample token value.
@@ -181,15 +126,7 @@ No response is returned but the authentication token with a new expiration time 
 
 <p>Return a list of users given a filter</p>
 
-<<<<<<< HEAD
 <p><b>Request Query Parameters</b></p>
-=======
-<tr>
-<td>
-<p><b>Request Query Parameters</b>
-</p>
-</td>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 <html>
 <table>
@@ -230,7 +167,6 @@ No response is returned but the authentication token with a new expiration time 
 </code>
 </p>
 
-<<<<<<< HEAD
 <p><b>Sample Response</b><br>
 <code>
 [{"&#95;: { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
@@ -260,60 +196,12 @@ Create a new user. Returns object for newly created user, if successful.
 
 **Methods**
 <p><b>GET</b></p>
-=======
 <br>
-
-<tr>
-<td>
-<b>Sample Response</b>
-[{ "_id" : { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
-</td>
-</tr>
-
-<tr>
-<th align="left"><i>POST</i></th>
-</tr>
-
-<tr>
-<td><p>Create a new user. Returns object for newly created user, if successful.</p></td>
-</tr>
-
-<tr>
-<td>
-<p><b>Sample Request</b></p>
-{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
-</td>
-</tr>
-
-<tr>
-<td>
-<p><b>Sample Response</b></p>
-{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "Three" , "groups" : [ ] , "_id" : {"$oid": "55ca52dec4aac050466bc1a9"}}
-</td>
-</tr>
-</table>
-</html>
-
-<<<<<<< HEAD
-## /users/user_id
-**Methods**
-=======
-<h2>users/{user_id}
-</h2>
-<p><b>Methods</b></p>
->>>>>>> iss135
-<html>
-<table>
-<tr>
-<th align="left"><i>GET</i></th>
-</tr>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 <p>
 Return a single user object given the user’s internal id.
 </p>
 
-<<<<<<< HEAD
 <p><b>Sample Request</b><br>
 <code>
 &lt;Service URL&gt;/users/{"$oid":"55b63708a3db5f292c533c7b"} 
@@ -322,31 +210,15 @@ Return a single user object given the user’s internal id.
 
 <p><b>or when URL encoded:</b><br>
 <code>
-=======
-<tr>
-<td>
-<p><b>Sample Request</b></p>
-&lt;Service URL&gt;/users/{"$oid": "55b63708a3db5f292c533c7b"} <br>
-<p><b><small>or when URL encoded:</b></small></p>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 &lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
 </code>
 </p>
 
-<<<<<<< HEAD
 <p><b>Sample Response</b><br>
 <code>
 {"&#95;id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
 </code>
 </p>
-=======
-<tr>
-<td>
-<p><b>Sample Response</b></p>
-{"_id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
-</td>
-</tr>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 <p><b>PUT</b><br>
 Update a user’s information. Returns the updated user data, if successful.
@@ -359,7 +231,6 @@ Update a user’s information. Returns the updated user data, if successful.
 </code>
 </p>
 
-<<<<<<< HEAD
 <p><b>or when URL encoded:</b><br>
 <code>
 &lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D
@@ -371,27 +242,7 @@ Update a user’s information. Returns the updated user data, if successful.
 {"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"&#95;id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
 </code>
 </p>
-=======
-<tr>
-<td>
-<p><b>Sample Request</b></p>
-<p><b>URL:</b></p>
-&lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"} <br>
-<p><b><small>or when URL encoded:</b></small></p>
-&lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D <br>
-<p><b><small>Request Payload:</b></small></p> {"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"_id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
-</td>
-</tr>
 
-<tr>
-<td>
-<p><b>Sample Response</b></p>
-{"userId" : "test3" , "password" : "testxxx" , "firstName" : "Test" , "lastName" : "3" , "groups" :[ ]}
-</td>
-</tr>
-</table>
-</html>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 <p><b>Sample Response</b><br>
 <code>
@@ -503,25 +354,6 @@ Create a new group. Returns object for newly created group, if successful.
 
 **Methods**
 <p><b><i>GET</i></b></p>
-=======
-<<<<<<< HEAD
-## /groups/group_id
-**Methods**
-=======
-<h3>/groups/{group_id}
-</h3>
-<h4>1.1.6 /groups/{group_id}
-</h4>
-<b>Methods</b>
-
->>>>>>> iss135
-<html>
-<table>
-<tr>
-<th align="left"><i>GET</i></th>
-</tr>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
-
 <p>Return a single group given a group’s internal id.</p>
 
 <p><b>Sample Request</b><br>
@@ -535,7 +367,6 @@ Create a new group. Returns object for newly created group, if successful.
 &lt;Service URL&gt;/groups/%7B%22%24oid%22%3A%20%2255c0c620a3db5f3058630eb3%22%7D
 </code>
 </p>
-
 
 <p><b>Sample Response</b><br>
 <code>
@@ -568,28 +399,16 @@ Update a group (group-level attributes and members). Returns the updated group d
 </code>
 </p>
 
-<<<<<<< HEAD
 <p><b>Sample Response</b><br>
 <code>
 {"groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : ["weather"]}
 </code>
 </p>
-=======
-<tr>
-<td>
-<p><b>Sample Response</b></p>
-{ "groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : ["weather"]}
-</td>
-</tr>
-</table>
-</html>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 <p><b><i>DELETE</i></b></p>
 
 <p>
 Delete a group given the group’s internal Id on the URL path.
-<<<<<<< HEAD
 </p>
 
 <p><b>Sample Request</b><br>
@@ -599,22 +418,10 @@ Delete a group given the group’s internal Id on the URL path.
 </p>
 
 <p><b>or when URL encoded:</b><br>
-<code>&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D
+<code>
+&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D
 </code>
 </p>
-=======
-</td>
-</tr>
-
-<tr>
-<td>
-<p><b>Sample Request</b></p>
-&lt;Service URL&gt;/groups/{"$oid":"55cb6362c4aa475d78d4bc40"}
-<p><b><small>or when URL encoded:</b></small></p>
-&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D <br>
-</td>
-</tr>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 <p><b>Sample Response</b><br>
 No response is returned when a group is deleted successfully.
@@ -630,7 +437,8 @@ Return a list of available datasets. The response is a JSON array of descriptors
 </p>
 
 <p><b>Sample Request</b><br>
-<code>&lt;Service URL&gt;/datasets
+<code>
+&lt;Service URL&gt;/datasets
 </code>
 </p>
 
@@ -640,27 +448,9 @@ Return a list of available datasets. The response is a JSON array of descriptors
 </code>
 </p>
 
-  
-<<<<<<< HEAD
 ## 1.1.8 /datasets/{dataset_id}
 
 **Methods**
-=======
-<<<<<<< HEAD
-## /datasets/dataset_id
-**Methods**
-=======
-<h2>/datasets/{dataset_id}
-</h2>
-
-<b>Methods</b>
->>>>>>> iss135
-<html>
-<table>
-<tr>
-<th align="left"><i>GET</i></th>
-</tr>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
 
 <p><b><i>GET</i></p>
 
@@ -680,29 +470,9 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 </code>
 </p>
 
-<<<<<<< HEAD
 ## 1.1.9 /datasets/{dataset_id}/query
-=======
-<<<<<<< HEAD
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
-
 **Methods**
-<<<<<<< HEAD
 <p><b>GET</b></p>
-=======
-=======
-<h2>/datasets/{dataset_id}/query
-</h2>
-
-<b>Methods</b>
->>>>>>> iss135
-<html>
-<table>
-<tr>
-<th align="left">GET</th>
-</tr>
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
-
 <p>Execute a query against a specific dataset.</p>
 
 <p><b>Request Query Parameters</b></p>
@@ -821,7 +591,6 @@ maximum number of records to return; If this parameter is not specified, no reco
 Create a new query. Returns object for newly created query, if successful.
 </p>
 
-<<<<<<< HEAD
 <p><b>Sample Request</b>
 <br>
 <b><small>Request Payload</b></small><br>
@@ -837,15 +606,6 @@ Create a new query. Returns object for newly created query, if successful.
 </p>
 
 ## 1.1.11 /queries/{query_id}
-=======
-<<<<<<< HEAD
-## queries/query_id
-=======
-<h2>/queries/{query_id}
-</h2>
->>>>>>> iss135
->>>>>>> 0767a58c9caed0392212212950511255685ec4a8
-
 **Methods**
 
 <p><b>GET</b></p>
@@ -888,13 +648,6 @@ Update a query. Returns the updated query object, if successful.
 </code>
 </p>
 
-<p><b><small>or when URL encoded:</b></small><br>
-<code>
-&lt;Service URL&gt;/queries/%7B%22$oid%22:%2255c52cf6c4aa31b24b04d620%22%7D
->>>>>>> 2457dfbf29fcd1e672ecd25b5be3c9d1a103fbd6
-</code>
-</p>
-
 <p><b>Sample Response</b><br>
 <code>
 {"name" : "Tweets on coupon" , "owner" : "user1" , "spec" : [ { "dataSetId" : "twitter" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "text" , "field" : "text" , "type" : "string" , "input" : "text" , "operator" : "contains" , "value" : "coupon"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : "85" , "size" : "6"}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : false , "autoRefresh" : false , "refreshInterval" : "30" , "&#95;id" : { "$oid" : "55c52cf6c4aa31b24b04d620"} , "geoFilter" : { "boundaryType" : "within" , "boundary" : ""}}
@@ -905,6 +658,8 @@ Update a query. Returns the updated query object, if successful.
 <p>Delete a query given the query’s internal Id on the URL path.</p>
 
 <p><b>Sample Request</b><br>
+<b>URL:</b>
+<br>
 <code>
 &lt;Service URL&gt;/queries/{"$oid":"55cb6362c4aa475d78d4bc40"}
 </code> 
@@ -924,12 +679,14 @@ No response is returned when a query is deleted.
 
 ## 1.2 HTTP Status Codes on Response
 
-<ul><li>HTTP 401 is returned when users/token is called and authentication fails.
+<ul>
+<li>HTTP 401 is returned when users/token is called and authentication fails.
 </li>
 <li>HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.
 </li>
 <li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error objectis returned with the format below:
-</li></ul>
+</li>
+</ul>
 
 <code>
  {
@@ -946,11 +703,13 @@ No response is returned when a query is deleted.
 occurred and &lt;error message&gt; is a description of the error.
 </p>
 
-<ul><li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
+<ul>
+<li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
 </li>
 
 <li>HTTP 204 (No Content) is returned when an object is deleted successfully (DELETE method where applicable).
-</li></ul>
+</li>
+</ul>
 
 <br>
 
