@@ -2,8 +2,14 @@
 Once the application sources are downloaded and built, the distributable packages can be deployed to your web server (in case of the OpenGrid user interface) and application server (service layer).
 
 Instructions for building the release packages can be found below:
-* [User Interface Build Procedures](./Build%20Procedures/)
-* [Service Layer Build Procedures](https://github.com/Chicago/opengrid-svc-template/blob/master/docs/Build%20Procedures.md)
+<ul>
+<li>
+<a href="./Build%20Procedures/"> User Interface Build Procedures</a>
+</li>
+<li>
+<a href="https://github.com/Chicago/opengrid-svc-template/blob/master/docs/Build%20Procedures.md">Service Layer Build Procedures</a>
+</li>
+</ul>
 
 ### Overview
 #### Technical Requirements
