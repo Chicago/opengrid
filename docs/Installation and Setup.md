@@ -34,7 +34,7 @@ By default, an admin user is created with user id 'admin' and password 'admin123
 * Follow the steps described in the Service Layer Build Procedures above making sure that the application.properties file is updated with the appropriate MongoDB connection string. A war file is generated after the build process which can be deployed to an application server of your choice.
 
 #### User Interface
-* Configure various application settings as required by your application by editing `src/js/custom/Config.js`. See [OpenGrid Configuration](https://github.com/Chicago/opengrid/blob/master/docs/OpenGrid%20Configuration.md) for more details
+* Configure various application settings as required by your application by editing `src/js/custom/Config.js`. The settings include session timeout, area to limit address quick searches, to name a few. See [OpenGrid Configuration](https://github.com/Chicago/opengrid/blob/master/docs/OpenGrid%20Configuration.md) for more details
 * Update service URL to point to service URL configured above by editing `config/EnvSettings.js`. `EnvSettings.js` is meant to contain settings that are environment-specific e.g. Dev, Qa or Production, etc. and overrides any settings as specified in `Config.js` mentioned above.
 
 After a successful build as documented on the [User Interface Build Procedures](https://github.com/Chicago/opengrid/blob/master/docs/Build%20Procedures.md), a `/dist` folder is created with the files necessary for deployment to a web server. Copy all the files from the `/dist` folder, including sub-folders, to your application's root folder on the web server. 
