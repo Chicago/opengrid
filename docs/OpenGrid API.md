@@ -669,18 +669,18 @@ No response is returned when a query is deleted.
 </ul>
 
 <code>
-{
-<br> “error”: {
-<br>
- “code”: “&lt;error code&gt;”
-<br>
-“message”: “&lt;error message&gt;”
-<br> }
-<br> }
+<p>{ </p>
+<p> “error”: {
+</p>
+ <p>“code”: “&lt;error code&gt;”
+</p>
+<p>“message”: “&lt;error message&gt;” </p>
+<p>} </p>
+<p>} </p>
 </code>
 
-<p>where &lt;error code&gt; is a code corresponding to the error that
-occurred and &lt;error message&gt; is a description of the error.
+<p>where <i>&lt;error code&gt;</i> is a code corresponding to the error that
+occurred and <i>&lt;error message&gt;</i> is a description of the error.
 </p>
 
 <ul>
