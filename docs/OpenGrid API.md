@@ -668,8 +668,8 @@ No response is returned when a query is deleted.
 </li>
 </ul>
 
-<code>
- {
+code>
+{
 <br> “error”: {
 <br>
  “code”: “&lt;error code&gt;”
