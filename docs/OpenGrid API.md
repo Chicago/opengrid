@@ -106,13 +106,10 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 If user authentication fails, HTTP status code 401 (Unauthorized) is returned to the requester.
 </p>
 
-
 ## 1.1.2 /users/renew
-
 **Methods**
-<p><b>POST</b></p>
-
-<p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.
+<p><b>POST</b><br>
+Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.
 </p>
 
 <p><b>Sample Response</b><br>
@@ -122,9 +119,8 @@ No response is returned but the authentication token with a new expiration time 
 ## 1.1.3 /users
 
 **Methods**
-<p><b>GET</b></p>
-
-<p>Return a list of users given a filter</p>
+<p><b>GET</b><br>
+Return a list of users given a filter</p>
 
 <p><b>Request Query Parameters</b></p>
 
@@ -173,9 +169,7 @@ No response is returned but the authentication token with a new expiration time 
 </code>
 </p>
 
-<p><b>POST</b></p>
-
-<p>
+<p><b>POST</b><br>
 Create a new user. Returns object for newly created user, if successful.
 </p>
 
@@ -193,12 +187,9 @@ Create a new user. Returns object for newly created user, if successful.
 </p>
 
 ## 1.1.4 /users/{user_id}
-
 **Methods**
-<p><b>GET</b></p>
+<p><b>GET</b>
 <br>
-
-<p>
 Return a single user object given the user’s internal id.
 </p>
 
@@ -243,15 +234,14 @@ Update a user’s information. Returns the updated user data, if successful.
 </code>
 </p>
 
-
 <p><b>Sample Response</b><br>
 <code>
 {"userId":"test3", "password":"testxxx", "firstName":"Test", "lastName":"3", "groups":[ ]}
 </code>
 </p>
 
-<p><b>DELETE</b><p>
-<p>Delete a user given the user’s internal Id on the URL path.
+<p><b>DELETE</b><br>
+Delete a user given the user’s internal Id on the URL path.
 </p>
 
 <p><b>Sample Request</b>
@@ -273,12 +263,10 @@ No response is returned when a user is deleted successfully.
 </p>
 
 ## 1.1.5 /groups
-
 **Methods**
-
-<p><b>GET</b></p>
-
-<p>Return a list of OpenGrid groups (teams)</p>
+<p><b>GET</b><br>
+Return a list of OpenGrid groups (teams)
+</p>
 
 <p><b>Request Query Parameters</b></p>
 
@@ -332,8 +320,7 @@ The maximum number of records to return; If this parameter is not specified, no 
 </code>
 </p>
 
-<p><b>POST</b></p>
-<p>
+<p><b>POST</b><br>
 Create a new group. Returns object for newly created group, if successful.
 </p>
 
@@ -349,12 +336,11 @@ Create a new group. Returns object for newly created group, if successful.
 </code>
 </p>
 
-<<<<<<< HEAD
 ## 1.1.6 /groups/{group_id}
-
 **Methods**
-<p><b><i>GET</i></b></p>
-<p>Return a single group given a group’s internal id.</p>
+<p><b><i>GET</i></b><br>
+Return a single group given a group’s internal id.
+</p>
 
 <p><b>Sample Request</b><br>
 <code>
@@ -374,9 +360,7 @@ Create a new group. Returns object for newly created group, if successful.
 </code>
 </p>
 
-<p><b><i>PUT</i></b></p>
-
-<p>
+<p><b><i>PUT</i></b><br>
 Update a group (group-level attributes and members). Returns the updated group data, if successful.
 </p>
 
@@ -405,9 +389,7 @@ Update a group (group-level attributes and members). Returns the updated group d
 </code>
 </p>
 
-<p><b><i>DELETE</i></b></p>
-
-<p>
+<p><b><i>DELETE</i></b><br>
 Delete a group given the group’s internal Id on the URL path.
 </p>
 
@@ -428,11 +410,8 @@ No response is returned when a group is deleted successfully.
 </p>
 
 ## 1.1.7 /datasets
-
 **Methods** 
-<p><b><i>GET</i></b></th>
-
-<p>
+<p><b><i>GET</i></b><br>
 Return a list of available datasets. The response is a JSON array of descriptors for each available dataset.
 </p>
 
@@ -449,12 +428,8 @@ Return a list of available datasets. The response is a JSON array of descriptors
 </p>
 
 ## 1.1.8 /datasets/{dataset_id}
-
 **Methods**
-
-<p><b><i>GET</i></p>
-
-<p>
+<p><b><i>GET</i><br>
 Return a single dataset descriptor. An HTTP 403 is returned when the user has no access to the dataset requested.
 </p>
 
@@ -472,8 +447,9 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 
 ## 1.1.9 /datasets/{dataset_id}/query
 **Methods**
-<p><b>GET</b></p>
-<p>Execute a query against a specific dataset.</p>
+<p><b>GET</b><br>
+Execute a query against a specific dataset.
+</p>
 
 <p><b>Request Query Parameters</b></p>
 
@@ -607,10 +583,9 @@ Create a new query. Returns object for newly created query, if successful.
 
 ## 1.1.11 /queries/{query_id}
 **Methods**
-
-<p><b>GET</b></p>
-
-<p>Return a single query given a query’s internal id.</p>
+<p><b>GET</b><br>
+Return a single query given a query’s internal id.
+</p>
 
 <p><b>Sample Request</b><br>
 <code>
@@ -654,8 +629,9 @@ Update a query. Returns the updated query object, if successful.
 </code>
 </p>
 
-<p><b>DELETE</b></p>
-<p>Delete a query given the query’s internal Id on the URL path.</p>
+<p><b>DELETE</b><br>
+Delete a query given the query’s internal Id on the URL path.
+</p>
 
 <p><b>Sample Request</b><br>
 <b>URL:</b>
