@@ -12,6 +12,7 @@ pages:
 - System administration:
     - Installation and Setup: Installation and Setup.md
     - Build Procedures: Build Procedures.md
+    - Configuration: OpenGrid Configuration.md
     - Administration: Administration.md
 - Developers:
     - API: OpenGrid API.md
