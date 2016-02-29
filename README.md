@@ -32,9 +32,9 @@ Download OpenGrid Code:
 git clone https://github.com/Chicago/opengrid.git
 ```
 
-After the initiate OpenGrid Code has been downloaded install the dependencies [Phantom JS](http://phantomjs.org/download.html) and [npm](https://www.npmjs.com/package/npm).
+After the initial OpenGrid Code has been downloaded install the dependencies [Phantom JS](http://phantomjs.org/download.html) and [npm](https://www.npmjs.com/package/npm).
 
-After the release package has been built deploy the files under the ./dist folder to your web server.  For complete instructions on the entire process reference the [build procedures](https://github.com/Chicago/opengrid/blob/master/docs/Build%20Procedures.md) document.
+After the release package has been built deploy the files under the ./dist folder to your web server.  For complete instructions on the entire process reference the [build procedures](./Build%20Procedures/) document.
 
 ## Submit a bug
 
