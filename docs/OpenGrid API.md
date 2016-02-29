@@ -93,6 +93,7 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 <p><b>Sample Response</b></p>
 <p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:
 </p>
+
 <code> 
 <b>X-AUTH-TOKEN:</b><br>
 <p>eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
@@ -747,16 +748,10 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 ## 1.1.9 /datasets/{dataset_id}/query
 
 **Methods**
-<<<<<<< HEAD
-<p><b>GET</b></p>
-
-<p>Execute a query against a specific dataset.</p>
-=======
 <p><b>GET</b>
 <br>
 Execute a query against a specific dataset.
 </p>
->>>>>>> 281d37e444d19c47b4d52af3ff976fb4427af860
 
 <p><b>Request Query Parameters</b></p>
 
@@ -1114,11 +1109,10 @@ No response is returned when a query is deleted.
 <li>HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.
 </li>
 
-<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error objectis returned with the format below:
+<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:
 </li></ul>
 
 <code>
-<<<<<<< HEAD
 &nbsp; {
 <br> &nbsp; &nbsp; “error”: {
 <br> &nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
@@ -1127,10 +1121,8 @@ No response is returned when a query is deleted.
 <br> &nbsp;&nbsp; }
 </code>
 
-<p>
-where &lt;error code&gt; is a code corresponding to the error that occurred and &lt;error message&gt; is a description of the error.
-=======
-<p>{ </p>
+<p>{ 
+</p>
 <p> “error”: {
 </p>
  <p>“code”: “&lt;error code&gt;”
@@ -1142,7 +1134,6 @@ where &lt;error code&gt; is a code corresponding to the error that occurred and 
 
 <p>where <i>&lt;error code&gt;</i> is a code corresponding to the error that
 occurred and <i>&lt;error message&gt;</i> is a description of the error.
->>>>>>> 281d37e444d19c47b4d52af3ff976fb4427af860
 </p>
 
 <ul><li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
