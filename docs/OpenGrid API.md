@@ -1114,12 +1114,17 @@ No response is returned when a query is deleted.
 </li></ul>
 
 <code>
-&nbsp; {
-<br> &nbsp; &nbsp; “error”: {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
-<br> &nbsp; &nbsp; &nbsp; &nbsp; “message”: “&lt;error message&gt;”
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp;&nbsp; }
+<p>&nbsp; { </p>
+<p>&nbsp; &nbsp; “error”: { 
+</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
+</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; “message”: “&lt;error message&gt;”
+</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+</p>
+<p>&nbsp;&nbsp; }
+</p>
 </code>
 
 <p>where <i>&lt;error code&gt;</i> is a code corresponding to the error that
