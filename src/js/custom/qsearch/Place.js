@@ -214,7 +214,7 @@ ogrid.QSearchProcessor.Place = ogrid.QSearchProcessor.extend({
             //use ArcGIS online's geocoder server
             url: 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/find?outSr=4326&outFields=*&maxLocations=' +
                 (me._options.esriGeocodeMaxResults || 20) +
-                '&' + bbox + '&text=' + txt + '&magicKey=GST7YMc0AM9UOsE3GY8tIS9GOghnYnwZGPTp7P9PCZc0YiD7DsKGCZyAOh5-Dn47Z5Et1bWtHghnCbWQ&f=json' + '&' + location,
+                '&' + bbox + '&text=' + txt + '&f=json' + '&' + location,
             type: 'GET',
             async: true,
             timeout: ogrid.Config.service.timeout,

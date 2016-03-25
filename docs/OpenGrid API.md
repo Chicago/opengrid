@@ -73,6 +73,7 @@ calling /users/token as described in Section 1.1.1.</i>
 
 <p><b>POST</b></p>
 
+
 <p>Return a JSON Web Tokn (JWT) token after user id and password have been successfully validated.</p>
 
 <p>
@@ -91,12 +92,12 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 
 <p><b>Sample Response</b></p>
 <p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:
-<br>
+</p>
+
 <code> 
 <b>X-AUTH-TOKEN:</b><br>
-eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
-</code>
-</p>
+<p>eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
+</p></code>
 
 <p>
 This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See <a href="https://github.com/auth0/jwt-decode"> https://github.com/auth0/jwt-decode</a>)
@@ -165,7 +166,21 @@ Return a list of users given a filter</p>
 
 <p><b>Sample Response</b><br>
 <code>
-[{"&#95;: { "$oid" : "55ca20b9c4aac050466bc1a3"} , "userId" : "tester1" , "password" : "password1" , "firstName" : "Tester" , "lastName" : "One" , "groups" : [ "opengrid_users_L1"]}]
+&nbsp;[ 
+<br>
+&nbsp; &nbsp;{"&#95;id: {"$oid" : "55ca20b9c4aac050466bc1a3"}, 
+<br> &nbsp; &nbsp; &nbsp;
+"userId" : "tester1",
+<br> &nbsp; &nbsp; &nbsp;
+"password" : "password1",
+<br> &nbsp; &nbsp; &nbsp;
+"firstName" : "Tester",
+<br> &nbsp; &nbsp; &nbsp;
+"lastName" : "One",
+<br> &nbsp; &nbsp; &nbsp;
+"groups" : ["opengrid_users_L1"]
+<br> &nbsp; &nbsp; &nbsp;  } 
+<br> &nbsp;]
 </code>
 </p>
 
@@ -175,14 +190,27 @@ Create a new user. Returns object for newly created user, if successful.
 
 <p><b>Sample Request</b><br>
 <code>
-{"id":null,"o":{"userId":"test3","password":"testxxx","firstName":"Test","lastName":"Three","groups":[]}}
+&nbsp;{"id":null,
+<br>&nbsp;&nbsp;&nbsp;"o":{"userId":"test3",
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  "password":"testxxx",
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  "firstName":"Test",
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  "lastName":"Three",
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  "groups":[]
+<br>&nbsp; &nbsp; &nbsp; &nbsp;}
+<br>&nbsp;&nbsp;}
 </code>
 </p>
 
 <p><b>Sample Response</b>
 <br>
 <code>
-{"userId":"test3", "password":"testxxx", "firstName":"Test", "lastName":"Three", "groups":[ ],"&#95;id":{"$oid":"55ca52dec4aac050466bc1a9"}}
+&nbsp;{"userId":"test3",
+<br>&nbsp;&nbsp;&nbsp;"password":"testxxx",
+<br>&nbsp;&nbsp;&nbsp;"firstName":"Test",
+<br>&nbsp;&nbsp;&nbsp;"lastName":"Three",
+<br>&nbsp;&nbsp;&nbsp;"groups":[ ],
+<br>&nbsp;&nbsp;&nbsp;"&#95;id":{"$oid":"55ca52dec4aac050466bc1a9"}
+<br>&nbsp;}
 </code>
 </p>
 
@@ -207,7 +235,14 @@ Return a single user object given the user’s internal id.
 
 <p><b>Sample Response</b><br>
 <code>
-{"&#95;id" : { "$oid" : "55b63708a3db5f292c533c7b"} , "userId" : "TesterOne" , "password" : "test123" , "firstName" : "ABC Test" , "lastName" : "One Update" , "groups" : [ "opengrid_users_L1"]}
+&nbsp;{
+<br>&nbsp;&nbsp;"&#95;id": {"$oid" : "55b63708a3db5f292c533c7b"},
+<br>&nbsp;&nbsp;"userId" : "TesterOne",
+<br>&nbsp;&nbsp;"password" : "test123",
+<br>&nbsp;&nbsp;"firstName" : "ABC Test",
+<br>&nbsp;&nbsp;"lastName" : "One Update",
+<br>&nbsp;&nbsp;"groups" : [ "opengrid_users_L1"]
+<br>&nbsp;}
 </code>
 </p>
 
@@ -230,13 +265,28 @@ Update a user’s information. Returns the updated user data, if successful.
 
 <p><b>Request Payload:</b><br>
 <code>
-{"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"o":{"&#95;id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},"userId":"twitterUser","password":"testxxx","firstName":"Twitter","lastName":"User","groups":["opengrid_users_L1","opengrid_users_L2"]}}
+&nbsp;{
+<br>&nbsp;&nbsp;&nbsp; "id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
+<br> &nbsp; &nbsp; &nbsp; "o":{"&#95;id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "userId":"twitterUser",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "password":"testxxx",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "firstName":"Twitter",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "lastName":"User",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groups":["opengrid_users_L1","opengrid_users_L2"]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
+<br>&nbsp;}
 </code>
 </p>
 
 <p><b>Sample Response</b><br>
 <code>
-{"userId":"test3", "password":"testxxx", "firstName":"Test", "lastName":"3", "groups":[ ]}
+&nbsp;{
+<br>&nbsp;&nbsp;&nbsp; "userId":"test3",
+<br>&nbsp;&nbsp;&nbsp; "password":"testxxx",
+<br>&nbsp;&nbsp;&nbsp; "firstName":"Test",
+<br>&nbsp;&nbsp;&nbsp; "lastName":"3",
+<br>&nbsp;&nbsp;&nbsp; "groups":[ ]
+<br>&nbsp;}
 </code>
 </p>
 
@@ -316,7 +366,16 @@ The maximum number of records to return; If this parameter is not specified, no 
 
 <p><b>Sample Response</b><br>
 <code>
-[{ "_id" : { "$oid" : "55c0c620a3db5f3058630eb3"} , "groupId" : "opengrid_users" , "name" : "OpenGrid Users" , "description" : "Group for all OpenGrid users" , "enabled" : true , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : [ "twitter" , "weather"]}]
+&nbsp;[
+<br>&nbsp;&nbsp;&nbsp;{ 
+<br>&nbsp;&nbsp;&nbsp; "&#95;id" : {"$oid" : "55c0c620a3db5f3058630eb3"},
+<br>&nbsp;&nbsp;&nbsp; "groupId" : "opengrid_users",
+<br>&nbsp;&nbsp;&nbsp; "name" : "OpenGrid Users",
+<br>&nbsp;&nbsp;&nbsp; "description" : "Group for all OpenGrid users", "enabled" : true,
+<br>&nbsp;&nbsp;&nbsp; "functions" : [ "Quick Search" , "Advanced Search"],
+<br>&nbsp;&nbsp;&nbsp; "datasets" : [ "twitter" , "weather"]
+<br>&nbsp;&nbsp;&nbsp;}
+<br>&nbsp;]
 </code>
 </p>
 
@@ -332,7 +391,15 @@ Create a new group. Returns object for newly created group, if successful.
 
 <p><b>Sample Response</b><br>
 <code>
-{"groupId" : "OPENGRID_NEWGROUP" , "name" : "ABC GROUP" , "description" : "ADD ABC GROUP" , "enabled" : true , "functions" : [ ] , "datasets" : [ ] , "&#95;id" : { "$oid" : "55cb6362c4aa475d78d4bc40"}}
+&nbsp;{
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "groupId" : "OPENGRID_NEWGROUP",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "name" : "ABC GROUP",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "description" : "ADD ABC GROUP",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "enabled" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "functions" : [ ],
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "datasets" : [ ] ,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "&#95;id" : { "$oid" : "55cb6362c4aa475d78d4bc40"}
+<br>&nbsp;}
 </code>
 </p>
 
@@ -354,9 +421,20 @@ Return a single group given a group’s internal id.
 </code>
 </p>
 
+
 <p><b>Sample Response</b><br>
 <code>
-[{"_id" : { "$oid" : "55c0c620a3db5f3058630eb3"} , "groupId" : "opengrid_users" , "name" : "OpenGrid Users" , "description" : "Group for all OpenGrid users" , "enabled" : true , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : [ "twitter" , "weather"]}]
+&nbsp;[
+<br> &nbsp; &nbsp; {
+<br> &nbsp; &nbsp; &nbsp; "&#95;id" : {"$oid" : "55c0c620a3db5f3058630eb3"},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "groupId" : "opengrid_users",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "name" : "OpenGrid Users",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "description" : "Group for all OpenGrid users",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "enabled" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "functions" : ["Quick Search", "Advanced Search"],
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "datasets" : ["twitter", "weather"]
+<br> &nbsp; &nbsp; }
+<br>&nbsp;]
 </code>
 </p>
 
@@ -379,13 +457,31 @@ Update a group (group-level attributes and members). Returns the updated group d
 
 <p><b><small>Request Payload:</b></small><br> 
 <code>
-{"id":{"$oid":"55c525c6c4aae748132f4d06"},"o":{"groupId":"opengrid_users_L2","name":"OpenGrid Users Level 2","description":"Users with access to weather data","enabled":true,"isAdmin":false,"functions":["Quick Search","Advanced Search"],"datasets":["weather"]}}}
+&nbsp;{
+<br> &nbsp; &nbsp; &nbsp;"id":{"$oid":"55c525c6c4aae748132f4d06"},
+<br> &nbsp; &nbsp; &nbsp; "o":{"groupId":"opengrid_users_L2",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "name":"OpenGrid Users Level 2",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "description":"Users with access to weather data",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "enabled":true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "isAdmin":false,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "functions":["Quick Search","Advanced Search"],
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "datasets":["weather"]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br>&nbsp;}
 </code>
 </p>
 
 <p><b>Sample Response</b><br>
 <code>
-{"groupId" : "opengrid_users_L2" , "name" : "OpenGrid Users Level 2" , "description" : "Users with access to weather data" , "enabled" : true , "isAdmin" : false , "functions" : [ "Quick Search" , "Advanced Search"] , "datasets" : ["weather"]}
+&nbsp;{
+<br> &nbsp; &nbsp; &nbsp; "groupId" : "opengrid_users_L2",
+<br> &nbsp; &nbsp; &nbsp; "name" : "OpenGrid Users Level 2",
+<br> &nbsp; &nbsp; &nbsp; "description" : "Users with access to weather data",
+<br> &nbsp; &nbsp; &nbsp; "enabled" : true,
+<br> &nbsp; &nbsp; &nbsp; "isAdmin" : false,
+<br> &nbsp; &nbsp; &nbsp; "functions" : ["Quick Search", "Advanced Search"],
+<br> &nbsp; &nbsp; &nbsp; "datasets" : ["weather"]
+<br> &nbsp;}
 </code>
 </p>
 
@@ -400,8 +496,7 @@ Delete a group given the group’s internal Id on the URL path.
 </p>
 
 <p><b>or when URL encoded:</b><br>
-<code>
-&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D
+<code>&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D
 </code>
 </p>
 
@@ -416,17 +511,160 @@ Return a list of available datasets. The response is a JSON array of descriptors
 </p>
 
 <p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/datasets
+<code>&lt;Service URL&gt;/datasets
 </code>
 </p>
 
 <p><b>Sample Response</b><br>
 <code>
-[{ "id" : "twitter" , "displayName" : "Twitter" , "options" : { "rendition" : { "icon" : "default" , "color" : "#001F7A" , "fillColor" : "#00FFFF" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "_id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "screenName" , "displayName" : "Screen Name" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2 , "groupBy" : true} , { "id" : "text" , "displayName" : "Text" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "city" , "displayName" : "City" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4 , "groupBy" : true} , { "id" : "bio" , "displayName" : "Bio" , "dataType" : "string" , "sortOrder" : 5} , { "id" : "hashtags" , "displayName" : "Hashtags" , "dataType" : "string" , "sortOrder" : 6} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 7} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8}]}, { "id" : "weather" , "displayName" : "Weather" , "options" : { "rendition" : { "icon" : "default" , "color" : "#8c2d04" , "fillColor" : "#fdae6b" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "_id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "temp" , "displayName" : "Temperature" , "dataType" : "float" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "windspeed" , "displayName" : "Wind Speed" , "dataType" : "float" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2} , { "id" : "condition" , "displayName" : "Condition" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "humidity" , "displayName" : "Humidity" , "dataType" : "float" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4} , { "id" : "precipIntensity" , "displayName" : "Precipitation Intensity" , "dataType" : "float" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 5} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 5} , { "id" : "zipcode" , "displayName" : "Zip Code" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 6 , "values" : [ 60601 , 60602] , "groupBy" : true} , { "id" : "forecast" ,"displayName" : "Today's Forecast" , "dataType" : "string" , "popup" : true , "list" : true , "sortOrder" : 7} , { "id" : "icon" , "displayName" : "Icon" , "dataType" : "graphic" , "popup" : true , "sortOrder" : 7} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 9}]}] 
+&nbsp; [
+<br> &nbsp; &nbsp; &nbsp; { "id" : "twitter",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Twitter",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "options" : {"rendition" :{
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "icon" : "default", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; "color" : "#001F7A", "fillColor" : "#00FFFF",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; "opacity" : 85,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "size" : 6 }
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, "columns": 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [{ "id" : "&#95;id",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : false, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date", "filter" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 1},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id": "screenName",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Screen Name",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", "filter" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, "sortOrder" : 2,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "text", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Text",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder": 3},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "city", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "City",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 4,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" :"bio",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Bio",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 5},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "hashtags",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Hashtags",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 6},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 7},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 8 }
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ] },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "weather",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Weather",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "options" :
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "rendition" :
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "icon" : "default",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "color" : "#8c2d04", "fillColor" : "#fdae6b",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : 85, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "size" : 6
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, "columns" : 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  {"id :" "&#95;id", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : false, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "temp",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Temperature",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 1
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "windspeed",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Wind Speed",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 2
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "condition",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Condition",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 3
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "humidity",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Humidity",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 4
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "precipIntensity",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Precipitation Intensity",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 5
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 5
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "zipcode",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Zip Code",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 6 ,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "values" : [ 60601 , 60602], "groupBy" : true
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" :"forecast",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Today's Forecast",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true , "sortOrder" : 7
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "icon",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Icon",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "graphic", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true , "sortOrder" : 7
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 8
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float", "list" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 9
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
+<br> &nbsp; &nbsp; }
+<br> &nbsp;] 
 </code>
 </p>
 
+  
 ## 1.1.8 /datasets/{dataset_id}
 **Methods**
 <p><b><i>GET</i></b><br>
@@ -441,11 +679,74 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 
 <p><b>Sample Response</b><br>
 <code>
-{"id" : "twitter" , "displayName" : "Twitter" , "options" : { "rendition" : { "icon" : "default" , "color" : "#001F7A" , "fillColor" : "#00FFFF" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "&#95;id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "screenName" , "displayName" : "Screen Name" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2 , "groupBy" : true} , { "id" : "text" , "displayName" : "Text" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "city" , "displayName" : "City" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4 , "groupBy" : true} , { "id" : "bio" , "displayName" : "Bio" , "dataType" : "string" , "sortOrder" : 5} , { "id" : "hashtags" , "displayName" : "Hashtags" , "dataType" : "string" , "sortOrder" : 6} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 7} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8}]}
+<br> &nbsp; &nbsp; &nbsp; {
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "id" : "twitter",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Twitter", "options" : 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "rendition" :
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "icon" : "default",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "color" : "#001F7A", "fillColor" : "#00FFFF", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : 85, "size" : 6
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "columns" : [ {"id" : "&#95;id",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, "popup" : false, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder": 1
+<br> &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "screenName",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Screen Name", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 2,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "text", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Text",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 3
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "city", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "City",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 4, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{"id" : "bio",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Bio", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", "sortOrder" : 5
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "hashtags", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Hashtags",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 6
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 7
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float", "list" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 8
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; &nbsp; ]
+<br> &nbsp; &nbsp; &nbsp; }
 </code>
 </p>
 
 ## 1.1.9 /datasets/{dataset_id}/query
+
 **Methods**
 <p><b>GET</b>
 <br>
@@ -501,7 +802,44 @@ It is recommended that this value be URL encoded.
 
 <p><b>Sample Response</b></br>
 <code>
-{"type" : "FeatureCollection", "features" : [{"type": "Feature", "properties": { "_id" : { "$oid" : "556e6f18aef407e1dc98685e"} , "date" : "05/02/2012 8:24 AM" , "screenName" : "DeeeEmmm" , "text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways...." , "city" : "Chicago, IL" , "bio" : "I'm the female version of Ari Gold!" , "lat" : 41.84770456 , "long" : -87.8521837 , "hashtags" : ""}, "geometry": {"type": "Point", "coordinates": [-87.8521837,41.84770456]}, "autoPopup": false }],"meta": { "view": { "id" : "twitter" , "displayName" : "Twitter" , "options" : { "rendition" : { "icon" : "default" , "color" : "#001F7A" , "fillColor" : "#00FFFF" , "opacity" : 85 , "size" : 6}} , "columns" : [ { "id" : "_id" , "displayName" : "ID" , "dataType" : "string" , "filter" : false , "popup" : false , "list" : false} , { "id" : "date" , "displayName" : "Date" , "dataType" : "date" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 1} , { "id" : "screenName" , "displayName" : "Screen Name" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 2 , "groupBy" : true} , { "id" : "text" , "displayName" : "Text" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 3} , { "id" : "city" , "displayName" : "City" , "dataType" : "string" , "filter" : true , "popup" : true , "list" : true , "sortOrder" : 4 , "groupBy" : true} , { "id" : "bio" , "displayName" : "Bio" , "dataType" : "string" , "sortOrder" : 5} , { "id" : "hashtags" , "displayName" : "Hashtags" , "dataType" : "string" , "sortOrder" : 6} , { "id" : "lat" , "displayName" : "Latitude" , "dataType" : "float" , "list" : true , "sortOrder" : 7} , { "id" : "long" , "displayName" : "Longitude" , "dataType" : "float" , "list" : true , "sortOrder" : 8}]} }}
+&nbsp; {
+<br> &nbsp; &nbsp; &nbsp; "type" : "FeatureCollection", 
+<br> &nbsp; &nbsp; &nbsp; "features" : [
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "type": "Feature", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "properties": 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "&#95;id" : {"$oid" : "556e6f18aef407e1dc98685e"},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "date" : "05/02/2012 8:24 AM",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "screenName" : "DeeeEmmm", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways....",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "city" : "Chicago, IL", "bio" : "I'm the female version of Ari Gold!",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "lat" : 41.84770456 , "long" : -87.8521837,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "hashtags" : ""},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "geometry": {"type": "Point", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "coordinates": [-87.8521837,41.84770456]}, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "autoPopup": false }],
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "meta": { "view": { "id" : "twitter",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Twitter", "options" : {"rendition" :
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"icon" : "default", "color" : "#001F7A", "fillColor" : "#00FFFF", "opacity" : 85 , "size" : 6}},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "columns" : [ {"id" : "&#95;id", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID", "dataType" : "string", "filter" : false, "popup" : false, "list" : false},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date", "displayName" : "Date", "dataType" : "date", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, "list" : true, "sortOrder" : 1},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "screenName", "displayName" : "Screen Name", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", "filter" : true, "popup" : true, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 2, "groupBy" : true},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "text", "displayName" : "Text", "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, "list" : true, "sortOrder" : 3},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "city", "displayName" : "City", "dataType" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, "list" : true, "sortOrder" : 4, "groupBy" : true},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "bio", "displayName" : "Bio", "dataType" : "string", "sortOrder" : 5},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "hashtags", "displayName" : "Hashtags", "dataType" : "string", "sortOrder" : 6},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat", "displayName" : "Latitude", "dataType" : "float", "list" : true, "sortOrder" : 7},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long", "displayName" : "Longitude", "dataType" : "float", "list" : true , "sortOrder" : 8}
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; }
 </code>
 </p>
 
@@ -560,7 +898,22 @@ maximum number of records to return; If this parameter is not specified, no reco
 
 <p><b>Sample Response</b><br>
 <code>
-[{"&#95;id" : { "$oid" : "5582f831a3db5f4190e4707a"} , "name" : "Weather Records for 60601" , "owner" : "jsmith" , "spec" : [ { "dataSetId" : "weather" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "zipcode" , "field" : "zipcode" , "type" : "string" , "input" : "text" , "operator" : "equal" , "value" : "60601"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : 85 , "size" : 6}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : true}]
+&nbsp; [
+<br> &nbsp; &nbsp; {"&#95;id" :
+<br> &nbsp; &nbsp; &nbsp; {"$oid" : "5582f831a3db5f4190e4707a"},
+<br> &nbsp; &nbsp; &nbsp; "name" : "Weather Records for 60601", "owner" : "jsmith", "spec" :
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"dataSetId" : "weather", "filters" : {"condition" : "AND", "rules" : 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ {"id" : "zipcode", "field" : "zipcode", "type" : "string", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "input" : "text", "operator" : "equal", "value" : "60601"}
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "rendition" : {"color" : "#DC143C", "opacity" : 85, "size" : 6}
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ],
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sharedWith" : { "users" : [ ], "groups" : [ ]}, 
+<br> &nbsp; "isCommon" : true}
+<br> &nbsp; ]
 </code>
 </p>
 
@@ -572,17 +925,67 @@ Create a new query. Returns object for newly created query, if successful.
 <br>
 <b><small>Request Payload</b></small><br>
 <code>
-{"o":{"name":"Tweets By Bud","owner":"user1","spec":[{"dataSetId":"twitter","filters":{"condition":"AND","rules":[{"id":"screenName","field":"screenName","type":"string","input":"text","operator":"contains","value":"bud"}]},"rendition":{"color":"#DC143C","opacity":"85","size":"6"}}],"sharedWith":{"users":[],"groups":[]},"isCommon":false,"autoRefresh":false,"refreshInterval":"30","geoFilter":{"boundaryType":"within","boundary":""}}}
+&nbsp; {
+<br> &nbsp; &nbsp; "o":{
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "name":"Tweets By Bud",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "owner":"user1","spec":
+<br> &nbsp; &nbsp; [
+<br> &nbsp; &nbsp; &nbsp; {
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataSetId":"twitter",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "filters":{
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "condition":"AND","rules":[{
+<br> &nbsp; &nbsp; &nbsp; "id":"screenName",
+<br> &nbsp; &nbsp; &nbsp; "field":"screenName",
+<br> &nbsp; &nbsp; &nbsp; "type":"string","input":"text",
+<br> &nbsp; &nbsp; &nbsp; "operator":"contains","value":"bud"}]
+<br> &nbsp; &nbsp; &nbsp; },"rendition":{
+<br> &nbsp; &nbsp; &nbsp; "color":"#DC143C","opacity":"85","size":"6"}
+<br> &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; &nbsp; &nbsp; &nbsp; ],
+<br> &nbsp; &nbsp; &nbsp; "sharedWith":{
+<br> &nbsp; &nbsp; &nbsp; "users":[],
+<br> &nbsp; &nbsp; &nbsp; "groups":[]
+<br> &nbsp; &nbsp; },"isCommon":false,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "autoRefresh":false,"refreshInterval":"30",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "geoFilter":{"boundaryType":"within","boundary":""}
+<br> &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; }
 </code>
 </p>
 
 <p><b>Sample Response</b><br>
 <code>
-{"name" : "Tweets By Bud" , "owner" : "user1" , "spec" : [ { "dataSetId" : "twitter" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "screenName" , "field" : "screenName" , "type" : "string" , "input" : "text" , "operator" : "contains" , "value" : "bud"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : "85" , "size" : "6"}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : false , "autoRefresh" : false , "refreshInterval" : "30" , "geoFilter" : { "boundaryType" : "within" , "boundary" : ""} , "&#95;id" : { "$oid" : "55df5ec39900ec81a481b0f6"}}
+&nbsp; {
+<br> &nbsp; &nbsp; &nbsp; "name" : "Tweets By Bud",
+<br> &nbsp; &nbsp; &nbsp; "owner" : "user1",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "spec" : [ {
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataSetId" : "twitter",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filters" : { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; "condition" : "AND",
+<br> &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; "rules" : [ { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "screenName",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "field" : "screenName",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "type" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "input" : "text", 
+<br> &nbsp; &nbsp; &nbsp; "operator" : "contains" , "value" : "bud"}]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "rendition" : {"color" : "#DC143C",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : "85", "size" : "6"
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }],
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "sharedWith" : { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "users" : [ ], 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "groups" : [ ] &nbsp;},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "isCommon" : false, 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "autoRefresh" : false, "refreshInterval" : "30",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "geoFilter" : { "boundaryType" : "within" , "boundary" : ""},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "&#95;id" : { "$oid" : "55df5ec39900ec81a481b0f6"}
+<br> &nbsp; }
 </code>
 </p>
 
 ## 1.1.11 /queries/{query_id}
+
 **Methods**
 <p><b>GET</b>
 <br>
@@ -606,7 +1009,20 @@ Return a single query given a query’s internal id.
 <p><b>Sample Response</b>
 <br>
 <code>
-[{"&#95;id" : { "$oid" : "5582f831a3db5f4190e4707a"} , "name" : "Weather Records for 60601" , "owner" : "jsmith" , "spec" : [ { "dataSetId" : "weather" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "zipcode" , "field" : "zipcode" , "type" : "string" , "input" : "text" , "operator" : "equal" , "value" : "60601"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : 85 , "size" : 6}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : true}]
+[
+<br> &nbsp; {"&#95;id" :
+<br> &nbsp; &nbsp; { "$oid" : "5582f831a3db5f4190e4707a"},
+<br> &nbsp; &nbsp; "name" : "Weather Records for 60601",
+<br> &nbsp; &nbsp; "owner" : "jsmith", "spec" : [ { "dataSetId" : "weather",
+<br> &nbsp; &nbsp; "filters" : { "condition" : "AND" , "rules" : 
+<br> &nbsp; &nbsp; &nbsp; [{ "id" : "zipcode" , "field" : "zipcode", 
+<br> &nbsp; &nbsp; &nbsp; "type" : "string", "input" : "text",
+<br> &nbsp; &nbsp; &nbsp; "operator" : "equal", "value" : "60601"
+<br> &nbsp; &nbsp; &nbsp; &nbsp; }]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, "rendition" : { "color" : "#DC143C", "opacity" : 85, "size" : 6}
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }], "sharedWith" : { "users" : [ ], "groups" : [ ]},
+<br> &nbsp; "isCommon" : true}
+<br> ]
 </code>
 </p>
 
@@ -621,7 +1037,7 @@ Update a query. Returns the updated query object, if successful.
 </code> 
 </p>
 
-<p><b>or when URL encoded:</b><br>
+<p><b><small>or when URL encoded:</b></small><br>
 <code>
 &lt;Service URL&gt;/queries/%7B%22$oid%22:%2255c52cf6c4aa31b24b04d620%22%7D
 </code>
@@ -629,7 +1045,38 @@ Update a query. Returns the updated query object, if successful.
 
 <p><b>Sample Response</b><br>
 <code>
-{"name" : "Tweets on coupon" , "owner" : "user1" , "spec" : [ { "dataSetId" : "twitter" , "filters" : { "condition" : "AND" , "rules" : [ { "id" : "text" , "field" : "text" , "type" : "string" , "input" : "text" , "operator" : "contains" , "value" : "coupon"}]} , "rendition" : { "color" : "#DC143C" , "opacity" : "85" , "size" : "6"}}] , "sharedWith" : { "users" : [ ] , "groups" : [ ]} , "isCommon" : false , "autoRefresh" : false , "refreshInterval" : "30" , "&#95;id" : { "$oid" : "55c52cf6c4aa31b24b04d620"} , "geoFilter" : { "boundaryType" : "within" , "boundary" : ""}}
+&nbsp; {
+<br> &nbsp; &nbsp; &nbsp; "name" : "Tweets on coupon",
+<br> &nbsp; &nbsp; &nbsp; "owner" : "user1", 
+<br> &nbsp; &nbsp; &nbsp; "spec" : [ { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataSetId" : "twitter", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filters" : { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "condition" : "AND",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "rules" : [ { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "text",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "field" : "text",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "type" : "string",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "input" : "text",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "operator" : "contains", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "value" : "coupon"}]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "rendition" : { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "color" : "#DC143C",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : "85",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "size" : "6"}
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }],
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "sharedWith" : { "users" : [ ],
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groups" : [ ]
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  },
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "isCommon" : false,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "autoRefresh" : false,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "refreshInterval" : "30",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "&#95;id" : { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "$oid" : "55c52cf6c4aa31b24b04d620"},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "geoFilter" : { 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "boundaryType" : "within",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  "boundary" : ""}
+<br> &nbsp; }
 </code>
 </p>
 
@@ -638,8 +1085,6 @@ Delete a query given the query’s internal Id on the URL path.
 </p>
 
 <p><b>Sample Request</b><br>
-<b>URL:</b>
-<br>
 <code>
 &lt;Service URL&gt;/queries/{"$oid":"55cb6362c4aa475d78d4bc40"}
 </code> 
@@ -659,37 +1104,38 @@ No response is returned when a query is deleted.
 
 ## 1.2 HTTP Status Codes on Response
 
-<ul>
-<li>HTTP 401 is returned when users/token is called and authentication fails.
+<ul><li>HTTP 401 is returned when users/token is called and authentication fails.
 </li>
+
 <li>HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.
 </li>
-<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error objectis returned with the format below:
-</li>
-</ul>
+
+<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:
+</li></ul>
 
 <code>
-<p>{ </p>
-<p> “error”: {
+<p>&nbsp; { </p>
+<p>&nbsp; &nbsp; “error”: { 
 </p>
- <p>“code”: “&lt;error code&gt;”
+<p>&nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
 </p>
-<p>“message”: “&lt;error message&gt;” </p>
-<p>} </p>
-<p>} </p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; “message”: “&lt;error message&gt;”
+</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+</p>
+<p>&nbsp;&nbsp; }
+</p>
 </code>
 
 <p>where <i>&lt;error code&gt;</i> is a code corresponding to the error that
 occurred and <i>&lt;error message&gt;</i> is a description of the error.
 </p>
 
-<ul>
-<li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
+<ul><li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
 </li>
 
 <li>HTTP 204 (No Content) is returned when an object is deleted successfully (DELETE method where applicable).
-</li>
-</ul>
+</li></ul>
 
 <br>
 
