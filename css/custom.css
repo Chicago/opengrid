@@ -194,7 +194,7 @@ p {
 	/*vertical-align: middle;*/
 	float: right;
 	border: none;
-	padding-left: 0;
+	padding-left: 10px;
 	padding-right: 2%;
 	font-family: "Poppins", sans-serif;
 	font-size: 14px;
