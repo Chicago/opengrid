@@ -93,6 +93,7 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 <p><b>Sample Response</b></p>
 <p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:
 </p>
+
 <code> 
 <b>X-AUTH-TOKEN:</b><br>
 <p>eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
@@ -167,11 +168,7 @@ Return a list of users given a filter</p>
 <code>
 &nbsp;[ 
 <br>
-&nbsp; &nbsp;{
-<br> &nbsp; &nbsp; &nbsp;
-"&#95;id: { 
-<br> &nbsp; &nbsp; &nbsp;
-"$oid" : "55ca20b9c4aac050466bc1a3"}, 
+&nbsp; &nbsp;{"&#95;id: {"$oid" : "55ca20b9c4aac050466bc1a3"}, 
 <br> &nbsp; &nbsp; &nbsp;
 "userId" : "tester1",
 <br> &nbsp; &nbsp; &nbsp;
@@ -181,7 +178,7 @@ Return a list of users given a filter</p>
 <br> &nbsp; &nbsp; &nbsp;
 "lastName" : "One",
 <br> &nbsp; &nbsp; &nbsp;
-"groups" : [ "opengrid_users_L1"]
+"groups" : ["opengrid_users_L1"]
 <br> &nbsp; &nbsp; &nbsp;  } 
 <br> &nbsp;]
 </code>
@@ -193,14 +190,12 @@ Create a new user. Returns object for newly created user, if successful.
 
 <p><b>Sample Request</b><br>
 <code>
-&nbsp;{
-<br>&nbsp;&nbsp;&nbsp;"id":null,
-<br>&nbsp;&nbsp;&nbsp;"o":{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "userId":"test3",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "password":"testxxx",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "firstName":"Test",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "lastName":"Three",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groups":[]
+&nbsp;{"id":null,
+<br>&nbsp;&nbsp;&nbsp;"o":{"userId":"test3",
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  "password":"testxxx",
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  "firstName":"Test",
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  "lastName":"Three",
+<br> &nbsp; &nbsp; &nbsp; &nbsp;  "groups":[]
 <br>&nbsp; &nbsp; &nbsp; &nbsp;}
 <br>&nbsp;&nbsp;}
 </code>
@@ -209,21 +204,23 @@ Create a new user. Returns object for newly created user, if successful.
 <p><b>Sample Response</b>
 <br>
 <code>
-&nbsp;{
-<br>&nbsp;&nbsp;&nbsp;"userId":"test3",
+&nbsp;{"userId":"test3",
 <br>&nbsp;&nbsp;&nbsp;"password":"testxxx",
 <br>&nbsp;&nbsp;&nbsp;"firstName":"Test",
 <br>&nbsp;&nbsp;&nbsp;"lastName":"Three",
 <br>&nbsp;&nbsp;&nbsp;"groups":[ ],
-<br>&nbsp;&nbsp;&nbsp;"&#95;id":{
-<br>&nbsp;&nbsp;&nbsp;"$oid":"55ca52dec4aac050466bc1a9"}
+<br>&nbsp;&nbsp;&nbsp;"&#95;id":{"$oid":"55ca52dec4aac050466bc1a9"}
 <br>&nbsp;}
 </code>
 </p>
 
 ## 1.1.4 /users/{user_id}
 **Methods**
+<<<<<<< HEAD
 <p><b>GET</b></p>
+=======
+<p><b>GET</b>
+>>>>>>> df7c549d50d1400ec04f15d3c747fc5f50c7951c
 <br>
 Return a single user object given the user’s internal id.
 </p>
@@ -243,8 +240,7 @@ Return a single user object given the user’s internal id.
 <p><b>Sample Response</b><br>
 <code>
 &nbsp;{
-<br>&nbsp;&nbsp;"&#95;id": { 
-<br>&nbsp;&nbsp;"$oid" : "55b63708a3db5f292c533c7b"},
+<br>&nbsp;&nbsp;"&#95;id": {"$oid" : "55b63708a3db5f292c533c7b"},
 <br>&nbsp;&nbsp;"userId" : "TesterOne",
 <br>&nbsp;&nbsp;"password" : "test123",
 <br>&nbsp;&nbsp;"firstName" : "ABC Test",
@@ -274,11 +270,8 @@ Update a user’s information. Returns the updated user data, if successful.
 <p><b>Request Payload:</b><br>
 <code>
 &nbsp;{
-<br>&nbsp;&nbsp;&nbsp; "id":{
-<br>&nbsp;&nbsp;&nbsp; "$oid":"55ccaca15fc6c6bf8a807cf2"},
-<br> &nbsp; &nbsp; &nbsp; "o":{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "&#95;id":{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "$oid":"55ccaca15fc6c6bf8a807cf2"},
+<br>&nbsp;&nbsp;&nbsp; "id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
+<br> &nbsp; &nbsp; &nbsp; "o":{"&#95;id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "userId":"twitterUser",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "password":"testxxx",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "firstName":"Twitter",
@@ -379,8 +372,7 @@ The maximum number of records to return; If this parameter is not specified, no 
 <code>
 &nbsp;[
 <br>&nbsp;&nbsp;&nbsp;{ 
-<br>&nbsp;&nbsp;&nbsp; "&#95;id" : { 
-<br>&nbsp;&nbsp;&nbsp; "$oid" : "55c0c620a3db5f3058630eb3"},
+<br>&nbsp;&nbsp;&nbsp; "&#95;id" : {"$oid" : "55c0c620a3db5f3058630eb3"},
 <br>&nbsp;&nbsp;&nbsp; "groupId" : "opengrid_users",
 <br>&nbsp;&nbsp;&nbsp; "name" : "OpenGrid Users",
 <br>&nbsp;&nbsp;&nbsp; "description" : "Group for all OpenGrid users", "enabled" : true,
@@ -438,8 +430,7 @@ Return a single group given a group’s internal id.
 <code>
 &nbsp;[
 <br> &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; "&#95;id" : { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "$oid" : "55c0c620a3db5f3058630eb3"},
+<br> &nbsp; &nbsp; &nbsp; "&#95;id" : {"$oid" : "55c0c620a3db5f3058630eb3"},
 <br> &nbsp; &nbsp; &nbsp; &nbsp; "groupId" : "opengrid_users",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; "name" : "OpenGrid Users",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; "description" : "Group for all OpenGrid users",
@@ -471,10 +462,8 @@ Update a group (group-level attributes and members). Returns the updated group d
 <p><b><small>Request Payload:</b></small><br> 
 <code>
 &nbsp;{
-<br> &nbsp; &nbsp; &nbsp;"id":{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "$oid":"55c525c6c4aae748132f4d06"},
-<br> &nbsp; &nbsp; &nbsp; "o":{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupId":"opengrid_users_L2",
+<br> &nbsp; &nbsp; &nbsp;"id":{"$oid":"55c525c6c4aae748132f4d06"},
+<br> &nbsp; &nbsp; &nbsp; "o":{"groupId":"opengrid_users_L2",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "name":"OpenGrid Users Level 2",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "description":"Users with access to weather data",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "enabled":true,
@@ -533,76 +522,63 @@ Return a list of available datasets. The response is a JSON array of descriptors
 <p><b>Sample Response</b><br>
 <code>
 &nbsp; [
-<br> &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "twitter",
+<br> &nbsp; &nbsp; &nbsp; { "id" : "twitter",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Twitter",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "options" : { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "rendition" :{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; "icon" : "default", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "options" : {"rendition" :{
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "icon" : "default", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; "color" : "#001F7A", "fillColor" : "#00FFFF",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; "opacity" : 85,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "size" : 6 }
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, "columns": 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "&#95;id",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [{ "id" : "&#95;id",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : false, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "date", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date", "filter" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 1},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id": "screenName",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id": "screenName",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Screen Name",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", "filter" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, "sortOrder" : 2,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "text", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "text", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Text",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder": 3},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "city", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "city", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "City",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 4,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" :"bio",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" :"bio",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Bio",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 5},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "hashtags",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "hashtags",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Hashtags",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 6},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "lat", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 7},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "long",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 8 }
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ] },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "weather",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "weather",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Weather",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "options" :
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "rendition" :
@@ -614,86 +590,74 @@ Return a list of available datasets. The response is a JSON array of descriptors
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, "columns" : 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id :" "&#95;id", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  {"id :" "&#95;id", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : false, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "temp",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "temp",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Temperature",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 1
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "windspeed",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "windspeed",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Wind Speed",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 2
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "condition",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "condition",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Condition",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 3
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "humidity",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "humidity",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Humidity",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 4
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "precipIntensity",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "precipIntensity",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Precipitation Intensity",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 5
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "date",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 5
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "zipcode",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "zipcode",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Zip Code",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 6 ,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "values" : [ 60601 , 60602], "groupBy" : true
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" :"forecast",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" :"forecast",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Today's Forecast",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true , "sortOrder" : 7
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "icon",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "icon",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Icon",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "graphic", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true , "sortOrder" : 7
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "lat",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 8
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "long",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float", "list" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 9
@@ -728,63 +692,54 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : 85, "size" : 6
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "columns" : [ {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "&#95;id",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; "columns" : [ {"id" : "&#95;id",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, "popup" : false, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "date", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder": 1
 <br> &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "screenName",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "screenName",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Screen Name", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 2,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "text", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "text", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Text",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 3
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "city", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "city", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "City",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 4, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "bio",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{"id" : "bio",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Bio", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", "sortOrder" : 5
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "hashtags", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "hashtags", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Hashtags",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 6
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "lat", 
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 7
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "long",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float", "list" : true, 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 8
@@ -857,12 +812,12 @@ It is recommended that this value be URL encoded.
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "type": "Feature", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "properties": 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "&#95;id" : 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "$oid" : "556e6f18aef407e1dc98685e"},
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "&#95;id" : {"$oid" : "556e6f18aef407e1dc98685e"},
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "date" : "05/02/2012 8:24 AM",
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "screenName" : "DeeeEmmm", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways....",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "city" : "Chicago, IL", "bio" : "I'm the female version of Ari Gold!" , "lat" : 41.84770456 , "long" : -87.8521837,
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "city" : "Chicago, IL", "bio" : "I'm the female version of Ari Gold!",
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "lat" : 41.84770456 , "long" : -87.8521837,
 <br> &nbsp; &nbsp; &nbsp; &nbsp; "hashtags" : ""},
 <br> &nbsp; &nbsp; &nbsp; &nbsp; "geometry": {"type": "Point", 
 <br> &nbsp; &nbsp; &nbsp; &nbsp; "coordinates": [-87.8521837,41.84770456]}, 
@@ -1159,10 +1114,11 @@ No response is returned when a query is deleted.
 <li>HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.
 </li>
 
-<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error objectis returned with the format below:
+<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:
 </li></ul>
 
 <code>
+<<<<<<< HEAD
 &nbsp; {
 <br> &nbsp; &nbsp; “error”: {
 <br> &nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
@@ -1173,12 +1129,19 @@ No response is returned when a query is deleted.
 
 { 
 <p> “error”: {
+=======
+<p>&nbsp; { </p>
+<p>&nbsp; &nbsp; “error”: { 
 </p>
- <p>“code”: “&lt;error code&gt;”
+<p>&nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
 </p>
-<p>“message”: “&lt;error message&gt;” </p>
-<p>} </p>
-<p>} </p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; “message”: “&lt;error message&gt;”
+</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+>>>>>>> df7c549d50d1400ec04f15d3c747fc5f50c7951c
+</p>
+<p>&nbsp;&nbsp; }
+</p>
 </code>
 
 <p>where <i>&lt;error code&gt;</i> is a code corresponding to the error that

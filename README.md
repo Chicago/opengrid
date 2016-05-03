@@ -1,13 +1,13 @@
 ![OpenGrid](img/branding/OpenGrid_Logo_Horizontal_3Color.png)
 
-[![Build status - Linux](https://img.shields.io/travis/Chicago/opengrid/master.svg?style=flat-square&label=Linux build)](https://travis-ci.org/Chicago/opengrid)[![Build status - Windows](https://img.shields.io/appveyor/ci/tomschenkjr/opengrid/master.svg?style=flat-square&label=Windows build)](https://ci.appveyor.com/project/tomschenkjr/opengrid)[![Node.js dependencies](https://img.shields.io/coveralls/Chicago/opengrid/master.svg?style=flat-square)](https://coveralls.io/github/Chicago/opengrid)[![Node.js](https://img.shields.io/node/v/gh-badges.svg?style=flat-square)](https://david-dm.org/Chicago/opengrid)[![Node.js dependencies](https://img.shields.io/david/Chicago/opengrid.svg?style=flat-square)](https://david-dm.org/Chicago/opengrid)
+[![Build status - Linux](https://img.shields.io/travis/Chicago/opengrid/master.svg?style=flat-square&label=Linux build)](https://travis-ci.org/Chicago/opengrid)[![Build status - Windows](https://img.shields.io/appveyor/ci/tomschenkjr/opengrid/master.svg?style=flat-square&label=Windows build)](https://ci.appveyor.com/project/tomschenkjr/opengrid)[![Node.js dependencies](https://img.shields.io/coveralls/Chicago/opengrid/master.svg?style=flat-square)](https://coveralls.io/github/Chicago/opengrid)[![Node.js](https://img.shields.io/node/v/gh-badges.svg?style=flat-square)](https://david-dm.org/Chicago/opengrid)[![Node.js dependencies](https://img.shields.io/david/Chicago/opengrid.svg?style=flat-square)](https://david-dm.org/Chicago/opengrid)[![Node.js devdependencies](https://img.shields.io/david/dev/chicago/opengrid.svg?style=flat-square)](https://david-dm.org/Chicago/opengrid#info=devDependencies&view=table)
 
 OpenGrid an open-source, interactive map platform that allows users to explore multiple data sources in an easy-to-use interface. Developed to support situational awareness, incident monitoring and responses, historical data retrieval, and real-time advanced analytics. Users can perform advanced queries to filter data, search within custom boundaries, or based on the users location. Other GIS data, such as weather and Shapefiles can be overlaid on the map with other data. OpenGrid is natively compatible with desktops and mobile devices.
 
 ## Important Links
-* User Documentation: http://opengrid.readthedocs.org
+* User Documentation: http://opengrid.readthedocs.io
 * Repository: https://github.com/Chicago/opengrid
-* Planning Documentation: https://github.com/Chicago/opengrid/wiki
+* Planning Documentation and Meeting Notes: https://github.com/Chicago/opengrid/wiki
 * Issues: https://github.com/Chicago/opengrid/issues
 * Mailing List & Discussion: https://groups.google.com/forum/#!forum/opengrid-chicago
 
@@ -34,7 +34,7 @@ git clone https://github.com/Chicago/opengrid.git
 
 After the initial OpenGrid Code has been downloaded install the dependencies [Phantom JS](http://phantomjs.org/download.html) and [npm](https://www.npmjs.com/package/npm).
 
-After the release package has been built deploy the files under the ./dist folder to your web server.  For complete instructions on the entire process reference the [build procedures](./Build%20Procedures/) document.
+After the release package has been built deploy the files under the ./dist folder to your web server.  For complete instructions on the entire process reference the [build procedures](http://opengrid.readthedocs.io/en/latest/Build%20Procedures/) document.
 
 ## Submit a bug
 
