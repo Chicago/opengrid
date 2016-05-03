@@ -77,7 +77,7 @@ There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b
 ## Table Functions
 <p>The table functionality is used to organized information that has been displayed via query. The table displays the data that was pulled from the queried results and in return structures it in a readable format for the user to interpret. Each dropdown are intertwined with one another.The table consist of five drop down sections: </p>
 
-![table](media/combine33.jpg)
+![table](media/combine33.png)
 #### 1. Columns<br>
 The columns section displays the list of columns from the query data-sets and places them in order by default. The columns can be interchangeable and removed to fit the user preference.
 
