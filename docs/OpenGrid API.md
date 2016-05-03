@@ -223,14 +223,8 @@ Create a new user. Returns object for newly created user, if successful.
 
 ## 1.1.4 /users/{user_id}
 **Methods**
-<<<<<<< HEAD
 <p><b>GET</b></p>
-
-<p>
-=======
-<p><b>GET</b>
 <br>
->>>>>>> 281d37e444d19c47b4d52af3ff976fb4427af860
 Return a single user object given the user’s internal id.
 </p>
 
@@ -423,15 +417,9 @@ Create a new group. Returns object for newly created group, if successful.
 
 ## 1.1.6 /groups/{group_id}
 **Methods**
-<<<<<<< HEAD
-<p><b><i>GET</i></b></p>
-
-<p>Return a single group given a group’s internal id.</p>
-=======
 <p><b><i>GET</i></b><br>
 Return a single group given a group’s internal id.
 </p>
->>>>>>> 281d37e444d19c47b4d52af3ff976fb4427af860
 
 <p><b>Sample Request</b><br>
 <code>
@@ -809,16 +797,10 @@ Return a single dataset descriptor. An HTTP 403 is returned when the user has no
 ## 1.1.9 /datasets/{dataset_id}/query
 
 **Methods**
-<<<<<<< HEAD
-<p><b>GET</b></p>
-
-<p>Execute a query against a specific dataset.</p>
-=======
 <p><b>GET</b>
 <br>
 Execute a query against a specific dataset.
 </p>
->>>>>>> 281d37e444d19c47b4d52af3ff976fb4427af860
 
 <p><b>Request Query Parameters</b></p>
 
@@ -1181,7 +1163,6 @@ No response is returned when a query is deleted.
 </li></ul>
 
 <code>
-<<<<<<< HEAD
 &nbsp; {
 <br> &nbsp; &nbsp; “error”: {
 <br> &nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
@@ -1190,10 +1171,7 @@ No response is returned when a query is deleted.
 <br> &nbsp;&nbsp; }
 </code>
 
-<p>
-where &lt;error code&gt; is a code corresponding to the error that occurred and &lt;error message&gt; is a description of the error.
-=======
-<p>{ </p>
+{ 
 <p> “error”: {
 </p>
  <p>“code”: “&lt;error code&gt;”
@@ -1205,7 +1183,6 @@ where &lt;error code&gt; is a code corresponding to the error that occurred and 
 
 <p>where <i>&lt;error code&gt;</i> is a code corresponding to the error that
 occurred and <i>&lt;error message&gt;</i> is a description of the error.
->>>>>>> 281d37e444d19c47b4d52af3ff976fb4427af860
 </p>
 
 <ul><li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
