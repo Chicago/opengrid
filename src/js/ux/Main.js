@@ -16,6 +16,7 @@ ogrid.Main = ogrid.Class.extend({
     _session: null,
     _timedOut: false,
     _mobileMode: false,
+    _serviceCaps: {},
 
     //make this common now, so we don't have to retrieve multiple times
     _datasets: null,
@@ -120,6 +121,12 @@ ogrid.Main = ogrid.Class.extend({
 
             //broadcast that we're finished logged in, passing user profile
             ogrid.Event.raise(ogrid.Event.types.LOGGED_IN, me._session.getCurrentUser());
+
+            //retrieve service capabilities
+            ogrid.ajax(me, function(data) {
+                me._serviceCaps = data;
+            }, {url: '/capabilities'});
+
         }, {url: '/datasets'});
     },
 
@@ -295,6 +302,10 @@ ogrid.Main = ogrid.Class.extend({
 
     datasets: function() {
         return this._datasets;
+    },
+
+    serviceCapabilities: function() {
+        return this._serviceCaps;
     },
 
     //common global error handler

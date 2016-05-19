@@ -11,6 +11,15 @@ ogrid.Search._getParams = function(filter) {
     return 'q=' + encodeURI(JSON.stringify(filter));
 };
 
+
+ogrid.Search._getOpts = function(geoFilter) {
+    if (geoFilter) {
+        var f = {"geoFilter": geoFilter};
+        return '&opts=' + encodeURI(JSON.stringify(f));
+    } else
+        return '';
+};
+
 ogrid.Search._preProcess = function(data, renditionOptions) {
     if (renditionOptions)
         //apply rendition options to returning json
@@ -56,13 +65,14 @@ ogrid.Search._onAjaxError = function (opName, err, options, passThroughData, jqX
 /* renditionOptions override default rendition options on the response json
  */
 ogrid.Search.exec = function(options, passThroughData) {
-    //options {dataSetId, filter, renditionOptions, success, error}
+    //options {dataSetId, filter, geoFilter, renditionOptions, success, error}
     //passThroughData is additional info from the caller that is passed to success and error callbacks
     var me = this;
     var q = this._getParams(options.filter);
+    var opts = this._getOpts(options.geoFilter);
 
     var url = ogrid.Config.service.endpoint + '/datasets/' + options.dataSetId + '/query?' + q  +
-        '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults);
+        '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults)  + opts;
     if (!ogrid.isNull(options.sort)) {
         url +='&s=' + encodeURI(options.sort);
     }

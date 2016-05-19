@@ -646,6 +646,12 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                     //not blank condition and in error state
                     throw ogrid.error('Search Error', 'Search criteria is invalid.');
                 }
+
+                //if geoSpatial filtering is supported by service, send geoSpatial filters
+                if ( ogrid.App.serviceCapabilities().geoSpatialFiltering && me._geoFilter.getSettings().boundary) {
+                    search.geoFilter = me._geoFilter.getGeoFilter();
+                }
+
                 //immediate execution
                 ogrid.Search.exec(search, {origin: 'advancedSearch', search: search});
             });
@@ -675,9 +681,12 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _onSubmitSuccess: function(data, passThroughData) {
         try {
-            //apply additional geo-spatial filter, if any is specified
-            if (this._geoFilter.getSettings().boundary)
-                data = this._geoFilter.filterData(data);
+            //if geoSpatial filtering is not supported by service, implement filtering locally
+            if ( !ogrid.App.serviceCapabilities().geoSpatialFiltering ) {
+                //apply additional geo-spatial filter, if any is specified
+                if (this._geoFilter.getSettings().boundary)
+                    data = this._geoFilter.filterData(data);
+            }
 
             var rsId = ogrid.guid();
 
