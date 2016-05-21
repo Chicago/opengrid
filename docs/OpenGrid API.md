@@ -1,6 +1,6 @@
 <br>
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
-<h4 align="center">Version 1.0</h4>
+<h4 align="center">Version 1.1.0</h4>
 
 <!--
 ## Table of Contents
