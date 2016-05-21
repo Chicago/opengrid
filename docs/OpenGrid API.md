@@ -216,11 +216,8 @@ Create a new user. Returns object for newly created user, if successful.
 
 ## 1.1.4 /users/{user_id}
 **Methods**
-<<<<<<< HEAD
+
 <p><b>GET</b></p>
-=======
-<p><b>GET</b>
->>>>>>> df7c549d50d1400ec04f15d3c747fc5f50c7951c
 <br>
 Return a single user object given the user’s internal id.
 </p>
