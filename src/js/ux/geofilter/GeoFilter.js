@@ -463,6 +463,18 @@ ogrid.GeoFilter = ogrid.Class.extend({
     },
 
 
+    //returns geometry objects for sending to service
+    getGeoFilter: function() {
+        var settings = this.getSettings();
+        var f = ogrid.geoFilterFactory({
+            map: this._options.map,
+            shapeMap: this._getShapeMap(settings)
+        }).getFilter(settings);
+        console.log(f.getGeometry());
+        return f.getGeometry();
+    },
+
+
     setBoundaryType: function(boundaryType) {
         $('.adv-search-geofilter input[name="boundaryOption"][value="' + boundaryType + '"]').prop('checked', true);
     },
@@ -485,6 +497,9 @@ ogrid.GeoFilter = ogrid.Class.extend({
         else
             throw ogrid.error('Advanced Search (ogrid.GeoFilter)', 'Unknown boundary type \'' + settings.boundary + '\'');
     },
+
+
+
 
     //can be used to get an object that represents the state of geoFilters that can be saved
     getSettings: function() {

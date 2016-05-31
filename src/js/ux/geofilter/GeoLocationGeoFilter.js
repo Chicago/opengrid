@@ -65,6 +65,24 @@ ogrid.GeoLocationGeoFilter = ogrid.BaseGeoFilter.extend({
         var o = $.extend(true, {}, data);
         o.features = filtered;
         return o;
+    },
+
+    getGeometry: function() {
+        if (!this._settings.maxRadius || !this._settings.maxRadiusUnit) {
+            throw ogrid.error('Advanced Search (ogrid.GeoLocationGeoFilter)', 'Radius data is not initialized');
+        }
+
+        if (!this._options.shapeMap) {
+            throw ogrid.error('Advanced Search (ogrid.GeoLocationGeoFilter)', 'No Geo-location coordinates were detected. Please allow geo-location detection in your browser.');
+        }
+
+        //shapeMap for Near Me will contain the LatLng of the last location found
+        var c = L.circle(this._options.shapeMap, this._getRadius());
+
+        var coordinates = this._getCoordinatesFromLatLngBounds(c.getBounds());
+        var polyGeo =  this._getEmptyPolygon();
+        polyGeo.features[0].geometry.coordinates = coordinates;
+        return polyGeo.features[0].geometry;
     }
 });
 

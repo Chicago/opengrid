@@ -49,6 +49,21 @@ ogrid.DrawnGeoFilter = ogrid.BaseGeoFilter.extend({
         var o = $.extend(true, {}, data);
         o.features = filtered;
         return o;
+    },
+
+    //returns multipolygon for use with service-side geo-spatial filtering
+    getGeometry: function() {
+        if (!this._options.shapeMap) {
+            throw ogrid.error('Advanced Search (ogrid.DrawnGeoFilter)','Shape object is not initialized');
+        }
+        //shapeMap is of class L.featureGroup
+        var me = this;
+        var geoJSON = me._options.shapeMap.toGeoJSON();
+        var multiGeo =  me._getEmptyMultiPolygon();
+        $.each(geoJSON.features, function( i, v ) {
+            multiGeo.features[0].geometry.coordinates.push(v.geometry.coordinates);
+        });
+        return multiGeo.features[0].geometry;
     }
 });
 

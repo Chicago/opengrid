@@ -1,6 +1,6 @@
 <br>
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
-<h4 align="center">Version 1.0</h4>
+<h4 align="center">Version 1.1.0</h4>
 
 <!--
 ## Table of Contents
@@ -216,11 +216,8 @@ Create a new user. Returns object for newly created user, if successful.
 
 ## 1.1.4 /users/{user_id}
 **Methods**
-<<<<<<< HEAD
+
 <p><b>GET</b></p>
-=======
-<p><b>GET</b>
->>>>>>> df7c549d50d1400ec04f15d3c747fc5f50c7951c
 <br>
 Return a single user object given the user’s internal id.
 </p>
