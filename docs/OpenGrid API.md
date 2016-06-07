@@ -1102,6 +1102,26 @@ Delete a query given the query’s internal Id on the URL path.
 No response is returned when a query is deleted.
 </p>
 
+## 1.1.12 /capabilities
+New since Release 1.1.0<br>
+**Methods**
+<p><b>GET</b>
+<br>
+Return a json object with service's capabilities flags. As of Release 1.1.0, only 'geoSpatialFiltering' flag is available.
+</p>
+<p><b>Sample Request</b>
+<br>
+<code>
+&lt;Service URL&gt;/capabilities 
+</code> 
+</p>
+<p><b>Sample Response</b><br>
+<code>
+&nbsp; {
+<br> &nbsp; &nbsp; &nbsp; "geoSpatialFiltering" : "true"
+<br> &nbsp; }
+</code>
+</p>
 
 ## 1.2 HTTP Status Codes on Response
 
