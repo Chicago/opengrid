@@ -459,6 +459,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 $(v)[0].queryBuilder.setOptions({display_errors: !me._hasEmptyFilter(v)});
                 //get mongo-specific query
                 var f = $(v).queryBuilder('getMongo');
+
+                console.log("filter: " + JSON.stringify(f));
+
                 if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
                     console.log(JSON.stringify($(v).queryBuilder('getRules')));
                     //alert(JSON.stringify($(v).queryBuilder('getRules')));
@@ -607,6 +610,8 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             $.each($('#ogrid-ds-content').find('.query-builder'), function(i,v) {
                 var f = $(v).queryBuilder('getMongo');
 
+                //console.log("filter: " + JSON.stringify(f));
+
                 //allow empty filters
                 //Issue #118
                 //if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
@@ -624,6 +629,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
                 //get mongo-specific query
                 var f = $(v).queryBuilder('getMongo');
+
+                console.log("filter: " + JSON.stringify(f));
+
                 var tabId = $(v).data('parentId');
 
                 //allow empty filters
@@ -646,6 +654,12 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                     //not blank condition and in error state
                     throw ogrid.error('Search Error', 'Search criteria is invalid.');
                 }
+
+                //if geoSpatial filtering is supported by service, send geoSpatial filters
+                if ( ogrid.App.serviceCapabilities().geoSpatialFiltering && me._geoFilter.getSettings().boundary) {
+                    search.geoFilter = me._geoFilter.getGeoFilter();
+                }
+
                 //immediate execution
                 ogrid.Search.exec(search, {origin: 'advancedSearch', search: search});
             });
@@ -675,9 +689,12 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _onSubmitSuccess: function(data, passThroughData) {
         try {
-            //apply additional geo-spatial filter, if any is specified
-            if (this._geoFilter.getSettings().boundary)
-                data = this._geoFilter.filterData(data);
+            //if geoSpatial filtering is not supported by service, implement filtering locally
+            if ( !ogrid.App.serviceCapabilities().geoSpatialFiltering ) {
+                //apply additional geo-spatial filter, if any is specified
+                if (this._geoFilter.getSettings().boundary)
+                    data = this._geoFilter.filterData(data);
+            }
 
             var rsId = ogrid.guid();
 
@@ -859,69 +876,20 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                             f.validation = {format: 'MM/DD/YYYY hh:mm:ss a'};
                             f.plugin =  'datetimepicker';
                             f.plugin_config = {
+                                //added to support non-date/time value (natural language date expression)
+                                keepInvalid: true,
+
+                                //prevent natural language date from being parsed
+                                useStrict: true,
                                 widgetPositioning: {vertical: 'bottom', horizontal: 'auto'},
                                 keyBinds: {
-                                    up: function (widget) {
-                                        if (widget.find('.datepicker').is(':visible')) {
-                                            this.date(this.date().clone().subtract(7, 'd'));
-                                        } else {
-                                            this.date(this.date().clone().add(1, 'm'));
-                                        }
-                                    },
-                                    down: function (widget) {
-                                        if (!widget) {
-                                            this.show();
-                                        }
-                                        else if (widget.find('.datepicker').is(':visible')) {
-                                            this.date(this.date().clone().add(7, 'd'));
-                                        } else {
-                                            this.date(this.date().clone().subtract(1, 'm'));
-                                        }
-                                    },
-                                    'control up': function (widget) {
-                                        if (widget.find('.datepicker').is(':visible')) {
-                                            this.date(this.date().clone().subtract(1, 'y'));
-                                        } else {
-                                            this.date(this.date().clone().add(1, 'h'));
-                                        }
-                                    },
-                                    'control down': function (widget) {
-                                        if (widget.find('.datepicker').is(':visible')) {
-                                            this.date(this.date().clone().add(1, 'y'));
-                                        } else {
-                                            this.date(this.date().clone().subtract(1, 'h'));
-                                        }
-                                    },
                                     left: function (widget) {
                                         return true;
                                     },
                                     right: function (widget) {
                                         return true;
                                     },
-                                    pageUp: function (widget) {
-                                        if (widget.find('.datepicker').is(':visible')) {
-                                            this.date(this.date().clone().subtract(1, 'M'));
-                                        }
-                                    },
-                                    pageDown: function (widget) {
-                                        if (widget.find('.datepicker').is(':visible')) {
-                                            this.date(this.date().clone().add(1, 'M'));
-                                        }
-                                    },
-                                    enter: function () {
-                                        this.hide();
-                                    },
-                                    escape: function () {
-                                        this.hide();
-                                    },
-                                    'control space': function (widget) {
-                                        if (widget.find('.timepicker').is(':visible')) {
-                                            widget.find('.btn[data-action="togglePeriod"]').click();
-                                        }
-                                    },
-                                    t: function () {
-                                        return true;
-                                    },
+                                    t: null,
                                     'delete': function () {
                                         return true;
                                     }
@@ -1013,9 +981,10 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             filters: {},
             rendition: {
                 //defaults- get from config later
-                color: this._options.defaultPointColor,
-                opacity: 85,
-                size: 6
+                //color: this._options.defaultPointColor,
+                color: $(e.target).data('color'),
+                opacity: $(e.target).data('opacity'),
+                size: $(e.target).data('size')
             }
         };
         $('#ogrid-ds-tabs').find('li').removeClass('active');

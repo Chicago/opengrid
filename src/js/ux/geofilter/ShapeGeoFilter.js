@@ -49,6 +49,23 @@ ogrid.ShapeGeoFilter = ogrid.BaseGeoFilter.extend({
         var o = $.extend(true, {}, data);
         o.features = filtered;
         return o;
+    },
+
+    getGeometry: function() {
+        if (!this._options.shapeMap) {
+            throw ogrid.error('Advanced Search (ogrid.ShapeGeoFilter)','Shape object is not initialized');
+        }
+        if (this._options.shapeMap[this._settings.value]) {
+            var me = this;
+            var geoJSON = me._options.shapeMap[this._settings.value];
+            var multiGeo =  me._getEmptyMultiPolygon();
+            $.each(geoJSON.features, function( i, v ) {
+                multiGeo.features[0].geometry.coordinates.push(v.geometry.coordinates);
+            });
+            return multiGeo.features[0].geometry;
+        } else
+            throw ogrid.error('Advanced Search (ogrid.ShapeGeoFilter)','Shape object is not initialized');
+
     }
 
 });

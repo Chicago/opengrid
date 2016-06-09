@@ -1,6 +1,6 @@
 <br>
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
-<h4 align="center">Version 1.0</h4>
+<h4 align="center">Version 1.1.0</h4>
 
 <!--
 ## Table of Contents
@@ -216,7 +216,8 @@ Create a new user. Returns object for newly created user, if successful.
 
 ## 1.1.4 /users/{user_id}
 **Methods**
-<p><b>GET</b>
+
+<p><b>GET</b></p>
 <br>
 Return a single user object given the user’s internal id.
 </p>
@@ -785,18 +786,25 @@ It is recommended that this value be URL encoded.
 <td><p>The maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0)</p>
 </td>
 </tr>
+<tr>
+<td>opts</td>
+<td>JSON string</td>
+<td><p>Optional parameters that can be passed depending on service capabilities. This value needs to be encoded for the call to work as expected. "geoFilter" is an attribute supported as of Release 1.1.0 and should be a valid geoJson geometry value.</p>
+</td>
+</tr>
+
 </table>
 </html>
 
 <p><b>Sample Request</b><br>
 <code>
-&lt;Service URL&gt;/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1
+&lt;Service URL&gt;/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1&opts={"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.63304710388184,41.89278978584501],[-87.61206150054932,41.89278978584501],[-87.61206150054932,41.88140002416609],[-87.63304710388184,41.88140002416609],[-87.63304710388184,41.89278978584501]]]]}}
 </code> 
 </p>
 
 <p><b><small>Or when URL encoded:</small></b><br>
 <code>
-&lt;Service URL&gt;/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=1
+&lt;Service URL&gt;/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=6000&opts=%7B%22geoFilter%22:%7B%22type%22:%22MultiPolygon%22,%22coordinates%22:%5B%5B%5B%5B-87.63304710388184,41.89278978584501%5D,%5B-87.61206150054932,41.89278978584501%5D,%5B-87.61206150054932,41.88140002416609%5D,%5B-87.63304710388184,41.88140002416609%5D,%5B-87.63304710388184,41.89278978584501%5D%5D%5D%5D%7D%7D
 </code>
 </p>
 
@@ -1101,6 +1109,26 @@ Delete a query given the query’s internal Id on the URL path.
 No response is returned when a query is deleted.
 </p>
 
+## 1.1.12 /capabilities
+New since Release 1.1.0<br>
+**Methods**
+<p><b>GET</b>
+<br>
+Return a json object with service's capabilities flags. As of Release 1.1.0, only 'geoSpatialFiltering' flag is available.
+</p>
+<p><b>Sample Request</b>
+<br>
+<code>
+&lt;Service URL&gt;/capabilities 
+</code> 
+</p>
+<p><b>Sample Response</b><br>
+<code>
+&nbsp; {
+<br> &nbsp; &nbsp; &nbsp; "geoSpatialFiltering" : true
+<br> &nbsp; }
+</code>
+</p>
 
 ## 1.2 HTTP Status Codes on Response
 
@@ -1114,6 +1142,18 @@ No response is returned when a query is deleted.
 </li></ul>
 
 <code>
+<<<<<<< HEAD
+&nbsp; {
+<br> &nbsp; &nbsp; “error”: {
+<br> &nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
+<br> &nbsp; &nbsp; &nbsp; &nbsp; “message”: “&lt;error message&gt;”
+<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+<br> &nbsp;&nbsp; }
+</code>
+
+{ 
+<p> “error”: {
+=======
 <p>&nbsp; { </p>
 <p>&nbsp; &nbsp; “error”: { 
 </p>
@@ -1122,6 +1162,7 @@ No response is returned when a query is deleted.
 <p>&nbsp; &nbsp; &nbsp; &nbsp; “message”: “&lt;error message&gt;”
 </p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
+>>>>>>> df7c549d50d1400ec04f15d3c747fc5f50c7951c
 </p>
 <p>&nbsp;&nbsp; }
 </p>

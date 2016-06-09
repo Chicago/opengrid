@@ -1,6 +1,6 @@
 <br>
 
-![login](media/combine32.png)
+![login](media/combine32.jpg)
 
 
 ## Getting Started
@@ -49,7 +49,7 @@ The quick search help feature assist users in performing a valid search. Each se
 - between
 <br>
 
-![combine](media/combine21.png)
+![combine](media/combine21.jpg)
 
 ### Search around a parameter (Point)
 <p>To search with given point or boundaries the Geo spatial-filters will have to be applied.<br>
@@ -97,7 +97,7 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 <p>Search criteria that’s been entered and saved within the database are called Saved Queries. The saved queries are store in the Manage Queries section. To save a query, the user enters in the preferred name for a query; then clicks the saved button. The user will also be given an option to overwrite other queries and save it using an existing name.</p>
 <p>There are three icons for managing queries submit, share and delete. The submit function allows the user to run the query for the manage queries window. The share function gives the user the ability to share a query either to a group or to another user. The delete function gives the user the option to delete a query.</p>
 <br>
-![measure](media/combine31.png)
+![measure](media/combine31.jpg)
 
 ## Measure Distance and Area
 <p>Measuring distances and areas is a function within OpenGrid that allows the user to perform measurements between any given point to another. Once the measurement tool is selected the user will be prompt to start creating measurements by adding points on the map.</p>
@@ -105,19 +105,19 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 ## Measurement and Tools
 <p>Click the measurement tool icon.</p>  
 <br>
-![icoa](media/ombine1.png)
+![icoa](media/ombine1.jpg)
 
 <p>A measurement tool textbox will appear with an option to <b>create a new measurement</b>.</p>
 <br>
-![icob](media/ombine4.png)
+![icob](media/ombine4.jpg)
 
 <p>Once click <b>"create a new measurement"</b>... display points of origin and destination on the map by creating points.</p> 
 <br>
-![icoc](media/ombine3.png)
+![icoc](media/ombine3.jpg)
 
 <br>
 <p>After the measurement has been created the finish measurement textbox will appear. click <b>"Finish Measurement"</b>.</p>
-![icod](media/combine10.png)
+![icod](media/combine10.jpg)
 <br>
 <p>After clicking on finish measurement the <b>"Area Measurement"</b> textbox will appear providing information about the perimeter:</p>.
 <ul>
@@ -127,11 +127,11 @@ Tile Maps are small images, usually rectangular or isometric that acts like a pu
 </ul>
 <p>It also gives the user an option to center on the Area or to Delete the perimeter.</p>
 <br>
-![icoe](media/ombine5.png)
+![icoe](media/ombine5.jpg)
 
 <p></p>
 
-![icof](media/combine9.png)
+![icof](media/combine9.jpg)
 
 ## FREQUENTLY ASKED QUESTIONS
 

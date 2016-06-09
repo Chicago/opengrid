@@ -16,6 +16,7 @@ ogrid.Main = ogrid.Class.extend({
     _session: null,
     _timedOut: false,
     _mobileMode: false,
+    _serviceCaps: {},
 
     //make this common now, so we don't have to retrieve multiple times
     _datasets: null,
@@ -90,7 +91,7 @@ ogrid.Main = ogrid.Class.extend({
         //retrieve available datasets first ahead of initializing other dataset-dependent UI elements
         // and pass datasets to save retrieval time
         ogrid.ajax(this, function(data) {
-            me._datasets = data;
+            me._datasets = data.sort(me._sortDs);
 
             //init commandbar
             me._cb = new ogrid.CommandBar(me._options.commandbar, {datasets: me._datasets});
@@ -120,7 +121,25 @@ ogrid.Main = ogrid.Class.extend({
 
             //broadcast that we're finished logged in, passing user profile
             ogrid.Event.raise(ogrid.Event.types.LOGGED_IN, me._session.getCurrentUser());
+
+            //retrieve service capabilities
+            ogrid.ajax(me, function(data) {
+                me._serviceCaps = data;
+            }, {url: '/capabilities'});
+
         }, {url: '/datasets'});
+    },
+
+
+    //performs an alphasort on the dataset based on the display name
+    _sortDs: function(a, b) {
+        if (!a || !b)
+            return 0;
+
+        if (a.displayName > b.displayName) return 1;
+        if (a.displayName < b.displayName) return -1;
+
+        return 0;
     },
 
     _initMapRelatedUx: function(data) {
@@ -295,6 +314,10 @@ ogrid.Main = ogrid.Class.extend({
 
     datasets: function() {
         return this._datasets;
+    },
+
+    serviceCapabilities: function() {
+        return this._serviceCaps;
     },
 
     //common global error handler

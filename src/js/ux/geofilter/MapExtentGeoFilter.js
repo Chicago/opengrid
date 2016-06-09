@@ -41,6 +41,17 @@ ogrid.MapExtentGeoFilter = ogrid.BaseGeoFilter.extend({
         var o = $.extend(true, {}, data);
         o.features = filtered;
         return o;
+    },
+
+    getGeometry: function() {
+        //filter is dynamic and extent is calculated in real-time
+        if (!this._options.map) {
+            throw ogrid.error('Advanced Search (ogrid.MapExtentGeoFilter)','Map object is not initialized');
+        }
+        var coordinates = this._getCoordinatesFromLatLngBounds(this._options.map.getBounds());
+        var multiGeo =  this._getEmptyMultiPolygon();
+        multiGeo.features[0].geometry.coordinates.push(coordinates);
+        return multiGeo.features[0].geometry;
     }
 });
 

@@ -64,6 +64,21 @@ ogrid.PointGeoFilter = ogrid.BaseGeoFilter.extend({
         var o = $.extend(true, {}, data);
         o.features = filtered;
         return o;
+    },
+
+    getGeometry: function() {
+        if (!this._options.shapeMap) {
+            throw ogrid.error('Advanced Search (ogrid.PointGeoFilter)','Shape object is not initialized');
+        }
+        var me = this;
+        var multiGeo =  me._getEmptyMultiPolygon();
+        $.each(me._options.shapeMap.getLayers(), function(i, v) {
+            var c = L.circle(v.getLatLng(), me._getRadius());
+
+            var coordinates = me._getCoordinatesFromLatLngBounds(c.getBounds());
+            multiGeo.features[0].geometry.coordinates.push(coordinates);
+        });
+        return multiGeo.features[0].geometry;
     }
 });
 
