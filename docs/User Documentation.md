@@ -38,7 +38,7 @@ The quick search help feature assist users in performing a valid search. Each se
 <p>Advanced Search allows you to combine search terms by setting specific parameters for your results.It gives the user the ability to narrow their searches by a series of different filters such as adding additional rules, groups,datasets and Geo spatial-filters.</p>
 
 ### Selecting data and date range
-<p>To query by data and date range...Click on add datasets, select a dataset from the list <b>(for ex: business license)</b>; click submit. Add a rule or group to your dataset <b><small>(Adding a rule or group is optional and gives the user an option to query by date, city, name, address, etc. depending on the search criteria.)</b></small>. Date range can be specified with the parameters  and relative dates of:</p>
+<p>To query by data and date range...Click on add datasets, select a dataset from the list <b>(for ex: business license)</b>; click submit. Add a rule or group to your dataset <b><small>(Adding a rule or group is optional and gives the user an option to query by date, city, name, address, etc. depending on the search criteria.)</b></small>. Date range can be specified with the parameters and relative dates of:</p>
 
 - between
 - greater 
@@ -46,8 +46,8 @@ The quick search help feature assist users in performing a valid search. Each se
 - yesterday
 - tomorrow
 - today
-- a week ago
-- a month ago
+- week (i.e. a week ago, 2 weeks ago, etc.)
+- month (i.e. a month ago, 2 months ago, etc.)
 <br>
 
 ![combine](media/combine21.jpg)
