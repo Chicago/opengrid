@@ -46,9 +46,10 @@ The quick search help feature assist users in performing a valid search. Each se
 - yesterday
 - tomorrow
 - today
-- year (i.e. a year ago, 2 years ago, etc.)
+- day (i.e. a day ago, 2 days ago, etc.)
 - week (i.e. a week ago, 2 weeks ago, etc.)
 - month (i.e. a month ago, 2 months ago, etc.)
+- year (i.e. a year ago, 2 years ago, etc.)
 <br>
 
 ![combine](media/combine21.jpg)
