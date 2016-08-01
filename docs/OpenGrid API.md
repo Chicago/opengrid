@@ -798,15 +798,16 @@ It is recommended that this value be URL encoded.
 </html>
 
 <p><b>Sample Request</b></p>
-<code>
+
+```
 &lt;Service URL&gt;/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1&opts={"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.63304710388184,41.89278978584501],[-87.61206150054932,41.89278978584501],[-87.61206150054932,41.88140002416609],[-87.63304710388184,41.88140002416609],[-87.63304710388184,41.89278978584501]]]]}}
-</code> 
+```
 
 
 <p><b><small>Or when URL encoded:</small></b></p>
-<code>
+```
 &lt;Service URL&gt;/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=6000&opts=%7B%22geoFilter%22:%7B%22type%22:%22MultiPolygon%22,%22coordinates%22:%5B%5B%5B%5B-87.63304710388184,41.89278978584501%5D,%5B-87.61206150054932,41.89278978584501%5D,%5B-87.61206150054932,41.88140002416609%5D,%5B-87.63304710388184,41.88140002416609%5D,%5B-87.63304710388184,41.89278978584501%5D%5D%5D%5D%7D%7D
-</code>
+```
 
 <p><b>Sample Response</b></br>
 <code>
