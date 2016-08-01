@@ -94,10 +94,26 @@ The JavaScript Web Token expire after 4 hours. The authentication token needs to
 <p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:
 </p>
 
-<code> 
-<b>X-AUTH-TOKEN:</b><br>
-eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
-</code>
+<p>
+<b>X-AUTH-TOKEN:</b>
+</p>
+
+<html>
+<head>
+<style>
+p.test {
+    width:20em;
+    border: 1px solid #000000;
+    word-wrap: break-word;
+}
+</style>
+</head>
+<body>
+
+<p class="test"> eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ.</p>
+
+</body>
+</html>
 
 <p>
 This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See <a href="https://github.com/auth0/jwt-decode"> https://github.com/auth0/jwt-decode</a>)
