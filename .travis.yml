@@ -2,9 +2,9 @@ language: ruby
 sudo: required
 warnings_are_errors: true
 rvm:
-  - 2.1
+- 2.1
 script:
-  - bundle exec htmlproofer index.html --only-4xx --check-html
+- bundle exec htmlproofer index.html --only-4xx --check-html
 env:
 - global:
   - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
@@ -16,7 +16,7 @@ deploy:
   provider: s3
   access_key_id: AKIAJODHIGA544MQYMNA
   secret_access_key:
-    secure: j+5KV/GnQ2K+eCbuiUdYsBbYPPMOJopIqBYg6xsR+viRwlb/2nYEGNshpeK4CGCL6dgj16eYyGos/GKj2MJSpVPNe26fpBk37hhZzRu4ycq+CIa4nWyJhaHyw9Bn3aJbnD9mdSwBxXJ9WObIK06YhpbjQpKB3DQYHNbuk99Lus/ZSpCZvHq5IKhSLhZoJCi6EQEAv9ZPQ86CeukeKawmGfW5veKXfzyyjaomlfd3i25u7uES4YRdJsLKVJEzGBAXrpbeqttSWV549SP+c+kJsrI4ysiwmguyFBty/SAaNRLDXXsfBJ6ptiNaFz29CcjXCQRNWxjr8vi6tPGcTiY1sgSviT4uGQukTugcW3NhgBTD5yRrJNw3tK+z1JqCj0g1nJScwg5ELu4HENCTcFul5y131zvAzBvUaP/qcoGUU8YVQvrFbaBkpvxK3XJpP0TVv3tXXZjzRg7JEEBaTqqw+ear2Zeywtot9fWv3jLIYserLhtYuRLQ91VOiE+vMyP58hXP+jZTtxEDrBkgRWmes2wakGyxHUHmYy9u79G1lxQDodSmgAJw7A0P64NaF7uOlF8hJBD+W6xRsXYm88PsMVAAcYprHU9qbgxlS/HpV4bBeO9x76AQUZDYMNCyAAznu39kL8Rh+BTbSMMt+UshFSGFnxEoeuJq3K/3gszPS3E=
+    secure: vR6vA/4d7ZLFq3nhJbK4OBjjqDV+VVZQCW8PokkORil5iO2QPQ+/5wq1ZW6iNO9rkYg+32f9bbpqedxN8qFa/m3v+SYAyizWaZLA4N89GWb63Vtdz/E67Cr+fUkotar4HEOC+JGpg2LUktNDGLkyBpZO+gSs0CvJRkbZ+ZjxVvPcbLSQ6gB1YomEr/sqooYsaLRNJpTINsD+xeWN+yRA7e+4QLS36hwqK34ST+QOaZAQBG0Fbzu3LgdMUYEQi3lxLdtB7YOBJ2WVxiwya7Pgh7x0uspkCuWDFdwCTFo7Shyba7FwjMqUmswBp97g7liEnF99KR6fny/EVR6xzRlTQ3SU0MYxDKh88tKJbhmOeLo7iEWXTc3crFIFu7gIlDIfe3bkchp5C4cW9+Nr3och96kOsXmTYm2NllqEi4HsFOBb0OGU7/DsNTv+mEO2jtMv7gYvdDq+uTTKfj4hA39KnMC8/cE6avDac59FhrGNnlcRIOx91lMnd3TNwdiL6n72oR/g3e2IUrnBM6DDwDXdDdx+3E291xnJ0OobnDFnkghtCGNMqGLqO9gLkubZfrTWE/7PbKtJFxDpNq21eApVka1OOKoAH97u+urwrXauP1kTiq+Qm2x8sEEG+8ivnqnQ/AlWElIpJYehW4BPwZrOkl1O2i1QLTjJ70FZw8yoR7c=
   skip_cleanup: true
   bucket: opengrid.io
   region: us-west-2
