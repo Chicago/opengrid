@@ -208,15 +208,15 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         $('#endDate').datetimepicker();
 
         $('.panel-heading span.clickable, #ogrid-adv-content .panel-heading').on("click", function (e) {
-            if ($(this).hasClass('panel-collapsed')) {
-                // expand the panel
-                $(this).parents('.panel').find('.panel-body').slideDown();
+             if ($(this).hasClass('panel-collapsed')) {
+                // expand the panel, excluding color options which is independently controlled
+                $(this).parents('.panel').find('.panel-body').not('.ogrid-color-options-panel-body').slideDown();
                 $(this).removeClass('panel-collapsed');
                 $(this).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
             }
             else {
-                // collapse the panel
-                $(this).parents('.panel').find('.panel-body').slideUp();
+                // collapse the panel, excluding color options which is independently controlled
+                $(this).parents('.panel').find('.panel-body').not('.ogrid-color-options-panel-body').slideUp();
                 $(this).addClass('panel-collapsed');
                 $(this).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
             }
@@ -248,6 +248,12 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         ogrid.Event.on(ogrid.Event.types.LOGGED_IN, $.proxy(this._onLoggedIn, this));
     },
 
+	_expandPane: function(pane) {
+        //exclude color options which is independently controlled
+        pane.parents('.panel').find('.panel-body').not('.ogrid-color-options-panel-body').slideDown();
+        pane.removeClass('panel-collapsed');
+        pane.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+    },
 
     _onLoggedIn: function(e) {
         //refresh available queries as logged user might have changed
@@ -260,6 +266,14 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         //refvresh query list
         this._queryAdmin.setUser(e.message);
         this._queryAdmin.refreshQueries();
+		
+		// load auto-load query if option is set
+		if (ogrid.Config.advancedSearch.autoLoadQuery) {
+			this._loadQuery(ogrid.Config.advancedSearch.autoLoadQuery);
+			
+			//auto-open Select Data pane
+            this._expandPane($("#ogrid-select-data-pane"));
+			}
     },
 
 
@@ -664,10 +678,8 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 ogrid.Search.exec(search, {origin: 'advancedSearch', search: search});
             });
 
-            //on a mobile device, auto-hide advanced search pane
-            if (ogrid.App.mobileView()) {
-                me._hideMe();
-            }
+             //auto-hide Advanced Search pane after Submit (no longer done in mobile mode only)
+            me._hideMe();
 
         } catch (ex) {
             ogrid.Alert.error(ex.message);
@@ -908,7 +920,21 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         });
         return a;
     },
-
+	
+ _onColorOptionsClick: function(e) {
+        if ($(e.target).hasClass('panel-collapsed')) {
+            // expand the panel
+            $(e.target).parent().find('.panel-body').slideDown();
+            $(e.target).removeClass('panel-collapsed');
+            $(e.target).find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+        }
+        else {
+            // collapse the panel
+            $(e.target).parent().find('.panel-body').slideUp();
+            $(e.target).addClass('panel-collapsed');
+            $(e.target).find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+        }
+    },
 
     _loadNewTab: function(qspec) {
         $('#ogrid-ds-tabs').find('li').removeClass('active');
@@ -963,6 +989,13 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         //set values
         $('#sizeSpin_' + tabId).val(qspec.rendition.size);
         $('#opacitySpin_' + tabId).val(qspec.rendition.opacity);
+		
+		//assign click handler for this clickable link
+        $("#colorOptions_" + tabId).click(this._onColorOptionsClick);
+
+        //hide color options explicitly
+        $("#colorOptions_" + tabId).addClass("panel-collapsed");
+        $("#colorOptions_" + tabId).parent().find('.panel-body').css("display", "none!important");
 
         //$('#saveQueryAs').val(qspec.name);
     },

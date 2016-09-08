@@ -49,7 +49,8 @@ ogrid.QSearchProcessor.FlexData = ogrid.QSearchProcessor.extend({
         var ds = null;
         $.each(this._options.datasets, function(i, v) {
             if (v.quickSearch && v.quickSearch.enable) {
-                if (v.quickSearch.triggerWord === trigger || v.quickSearch.triggerAlias === trigger) {
+                //use case insensitive search
+                if (v.quickSearch.triggerWord.toUpperCase() === trigger.toUpperCase() || v.quickSearch.triggerAlias.toUpperCase() === trigger.toUpperCase()) {
                     ds = v;
                     return false; //break
                 }
@@ -128,6 +129,32 @@ ogrid.QSearchProcessor.FlexData = ogrid.QSearchProcessor.extend({
         });
     },
 
+
+    _getGeoFilterWidget: function() {
+        var fakeContainer = $();
+        var o =  ogrid.geoFilter(fakeContainer, {
+                bounds: ogrid.Config.advancedSearch.geoFilterBoundaries,
+
+                //no additional near refs aside from _map-click
+                nearReferences: null,
+
+                //pass the true map object
+                map: ogrid.App.map().getMap(),
+                geoLocationControl: ogrid.App.map().getGeoLocationControl()
+            }
+        );
+        //this makes it map-extent by default
+        o.reset();
+        return o;
+    },
+
+    _getMapExtentGeoFilter:function() {
+        if ( !this._geoFilter ) {
+            this._geoFilter = this._getGeoFilterWidget();
+        }
+        return this._geoFilter.getGeoFilter();
+    },
+
     //public methods
     test: function(input) {
         //dynamically determine pattern based on available datasets
@@ -181,6 +208,11 @@ ogrid.QSearchProcessor.FlexData = ogrid.QSearchProcessor.extend({
             //max if specified on input, else dstaset default max, else service default max
             request.maxResults = this._flexBuilder.getLimit() || ds.quickSearch.defaultMax ||  ogrid.Config.service.maxresults;
             request.sort = ds.quickSearch.defaultSort || null;
+
+            //if geoSpatial filtering is supported by service, send geoSpatial filters
+            if ( ogrid.App.serviceCapabilities && ogrid.App.serviceCapabilities().geoSpatialFiltering ) {
+                request.geoFilter = this._getMapExtentGeoFilter();
+            }
             ogrid.Search.exec( request, {origin: 'qsearchFlex'});
 
         } catch (ex) {

@@ -46,24 +46,24 @@ ogrid.TableView = ogrid.Class.extend({
 
     //private methods
     _toggleTablePanelCollapse: function() {
-        if ($('#ogrid-panel-caret').hasClass('glyphicon-chevron-up')) {
+        if ($('#ogrid-panel-caret').hasClass('fa-chevron-circle-up')) {
             $('.ogrid-footer-panel-heading').animate({
                 backgroundColor: "#E8E8E8"
             }, 500);
             //$('#panel-caret').removeClass('fa-caret-square-o-up').addClass('fa-caret-square-o-down');
             //glyphicon glyphicon-chevron-down
-            $('#ogrid-panel-caret').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+            $('#ogrid-panel-caret').removeClass('fa-chevron-circle-up').addClass('fa-chevron-circle-down');
         } else {
             $('.ogrid-footer-panel-heading').animate({
                 backgroundColor: "#E8E8E8"
             }, 500);
-            $('#ogrid-panel-caret').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+            $('#ogrid-panel-caret').removeClass('fa-chevron-circle-down').addClass('fa-chevron-circle-up');
         }
     },
 
     _onTableViewCaretClick: function(e) {
         //this._toggleTablePanelCollapse();
-        if ($('#ogrid-panel-caret').hasClass('glyphicon-chevron-up')) {
+        if ($('#ogrid-panel-caret').hasClass('fa-chevron-circle-up')) {
             $('#tableview').collapse('show');
         } else {
             $('#tableview').collapse('hide');
@@ -228,6 +228,19 @@ ogrid.TableView = ogrid.Class.extend({
         //workaround the table export limitation (Bootstrap table widget can only export one page at a time)
         //  by overriding existing event handler on export
         this._overrideExportBehavior($t);
+
+        //make sure height attribute is reflected, not doing it on init population
+        //fix unaligned headers and columns on data update
+        //$t.bootstrapTable('resetView');
+
+        /*$t.on('all.bs.table', function (e, name, args) {
+            console.log(name, args);
+            if (name === 'post-header.bs.table') {
+                setTimeout(function() {
+                    $t.bootstrapTable('resetView');
+                }, 500);
+            }
+        });*/
     },
 
 
@@ -411,6 +424,15 @@ ogrid.TableView = ogrid.Class.extend({
 
         $('#' + tableId).data('latestDataTs', this._getLatestDataTs( currentOptions.origData ));
 
+        //create clone to force a refresh since the component checks for equality before refreshing
+        /*var o = $.extend(true, {}, currentOptions);
+
+        //update options with new data
+        o.origData = data;
+        o.data = data.features;
+        o.height = this._getTableHeight();
+        o.showAutorefresh = showAutorefresh;*/
+
         var $t = $('#' + tableId).bootstrapTable('refreshOptions', {
             origData: data,
             data: data.features,
@@ -420,6 +442,11 @@ ogrid.TableView = ogrid.Class.extend({
 
         if (showAutorefresh) {
             $('div.autorefresh').attr('title', 'Last auto-refreshed: ' + lastRefreshed.format('MM/DD/YYYY hh:mm:ss a'));
+
         }
+
+        //fix unalighed headers and columns on data update
+        //$t.bootstrapTable('resetView');
+
     }
 });
