@@ -13,6 +13,7 @@ ogrid.QSearch = ogrid.Class.extend({
     _qsContainer: null,
     _input: null,
     _qsbutton: null,
+    _geoFilter: null,
 
     //public attributes
 
@@ -32,11 +33,16 @@ ogrid.QSearch = ogrid.Class.extend({
 
         //hint icon
         $.get(ogrid.Config.quickSearch.helpFile, function(data) {
-            $("[data-toggle=popover]").popover({
+            var $o = $("[data-toggle=popover]").popover({
                 html: true,
-                content: data
-                }
-            );
+                content: data,
+                container: 'body'
+                //title: 'Quick Search Help <a href="#" class="close" data-dismiss="alert">X</a>'
+            });
+
+            /*$(document).on("click", ".popover .close" , function(){
+                $(this).parents(".popover").popover('hide');
+            });*/
         });
 
         this._input = qsinput;
@@ -80,11 +86,11 @@ ogrid.QSearch = ogrid.Class.extend({
             if (o) {
                 //var dsCall = $.ajax(ogrid.Config.service.endpoint + '/datasets');
                 //dsCall.then(function (dataTypes) {
-                o.setOptions({datasets: this._options.datasets});
-                me._input.prop('disabled', false);
+                    o.setOptions({datasets: this._options.datasets});
+                    me._input.prop('disabled', false);
 
-                //avoid annoying keyboard popup when on mobile mode
-                if (!ogrid.App.mobileView()) me._input.focus();
+                    //avoid annoying keyboard popup when on mobile mode
+                    if (!ogrid.App.mobileView()) me._input.focus();
                 //});
             }
         } catch (ex) {
@@ -116,14 +122,54 @@ ogrid.QSearch = ogrid.Class.extend({
 
         try {
             //parse and exec async
-            ogrid.QSearchFactory.parse(searchInput).exec(searchInput, this._onExecDone, this._onExecError);
+            ogrid.QSearchFactory.parse(searchInput).exec(searchInput, this._onExecDone.bind(this), this._onExecError);
         } catch (e) {
             //ogrid.Alert.modal('OpenGrid Error', e.message);
             ogrid.Alert.error(e.message);
         }
     },
 
+    _getGeoFilterWidget: function() {
+        var fakeContainer = $();
+        var o =  ogrid.geoFilter(fakeContainer, {
+                bounds: ogrid.Config.advancedSearch.geoFilterBoundaries,
+
+                //no additional near refs aside from _map-click
+                nearReferences: null,
+
+                //pass the true map object
+                map: ogrid.App.map().getMap(),
+                geoLocationControl: ogrid.App.map().getGeoLocationControl()
+            }
+        );
+        //this makes it map-extent by default
+        o.reset();
+        return o;
+    },
+
+    _isGeoFilterableData: function(data) {
+        //we are using this indicator for data to be geo-Filter in quick search; might change in the future
+        return (data.meta.view.options.rendition.icon !== "marker");
+    },
+
     _onExecDone: function (results) {
+        //if geoSpatial filtering is not supported by service, implement filtering locally
+        if ( !ogrid.App.serviceCapabilities().geoSpatialFiltering && this._isGeoFilterableData(results)) {
+            if ( !this._geoFilter ) {
+                this._geoFilter = this._getGeoFilterWidget();
+            }
+            //apply additional geo-spatial filter, within map extent
+            results = this._geoFilter.filterData(results);
+        }
+
+        //fix fillColor of points to make it consistent with Advanced Search
+        if (this._isGeoFilterableData(results)) {
+            var c = results.meta.view.options.rendition.color;
+            results.meta.view.options.rendition.fillColor =  chroma.scale(['white', c])(0.5).hex();
+        }
+
+        //we're no longer sending clear flag after a quick search is executed
+        //"no clear" disabled temporarily as of 08/19
         ogrid.Event.raise(ogrid.Event.types.REFRESH_DATA, {resultSetId:ogrid.guid(), data: results, options: {clear:true}} );
     },
 

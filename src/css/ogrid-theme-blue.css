@@ -65,14 +65,17 @@ html, body {
 
 
 .query-builder .rules-group-container {
-    padding: 10px 10px 6px;
+   padding: 5px 5px 0px 0px;
+
     border:none !important;
     background: none !important;
 }
 .query-builder .rules-group-container .btn-success {background-color: #28303D !important; border-color:#73C4E1 !important;}
 #ogrid-ds-tabs .regtab a {background-color:transparent !important; border:1px #FFFFFF solid !important; border-radius: 10px; }
-.query-builder .rules-group-container .btn-danger {color: #28303D; background-color:transparent !important; border-color: #28303D;}
+.query-builder .rules-group-container .btn-danger {color: #28303D; background-color:transparent !important; border: none;
+    font-size: 1.5em;}
 #advSearchSave {color:#fff !important; background-color:#28303D !important; border-color:#2E6DA4 !important;}
+.query-builder .rules-group-container .btn-danger:hover {opacity: 0.6; }
 
 	::-webkit-scrollbar-button:start:decrement,
     ::-webkit-scrollbar-button:end:increment { height: 0px; display: block; background-color: black;}
@@ -181,13 +184,25 @@ html, body {
 }
 
 #advSearchSubmit, #advSearchReset, #advSearchSave {
-    width: 100px;
+    width: 120px;
 }
+
 
 #advSearchSubmit {
-    margin-left: 10px;
+    margin-left: 35px;
+	position: fixed;
+	bottom: 35px;
 }
 
+ #advSearchReset {
+	position: fixed;
+	bottom: 35px;
+	margin-left: 165px;
+}
+
+.ogrid-color-panel {
+    padding: 0px 10px 0px 10px !important;
+}
 
 
 #autorefresh-panel .control-label {
@@ -258,7 +273,10 @@ html, body {
 .ogrid-task-pane .rule-value-container .form-control {
     font-weight: 300;
 }
-
+.ogrid-color-options {
+    font-size: 12px !important;
+    text-decoration: underline;
+}
 
 div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
     padding-left: 0px;
@@ -274,6 +292,17 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
 
 #ogrid-adv-tabs a {
     font-size: 152%;
+}
+
+.adv-bottom-commandbar {
+    background-color: #2480a0;
+    margin-left: -25px;
+    position: fixed;
+    bottom: 0px;
+    height: 80px;
+    width: 100%;
+    opacity: 1.0;
+    z-index: 8000;
 }
 
 /* Size when the advanced tabs header breaks */
@@ -315,4 +344,36 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
         padding-left: 10px;
         font-size: 1.5em;
     }
+}
+
+.header-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    margin-right: 0 !important;
+    margin-top: 0 !important;
+}
+
+#ogrid-footer .panel-title a {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ogrid-footer-panel {
+    border-width: 0;
+}
+
+.ogrid-footer-panel-heading, .ogrid-footer-panel-heading .panel-title {
+    color: #fff !important;
+    background-color: #292e35 !important;
+    border-width: 0 !important;
+}
+.ogrid-nav-btn .active {
+    background-color: rgba(129, 131, 132, 0.97) !important;
+}
+
+.leaflet-control-attribution {
+    /* adjusted due to increase in search results panel height */
+    margin-bottom: 4px !important;
 }

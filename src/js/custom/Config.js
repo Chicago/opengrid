@@ -66,15 +66,27 @@ ogrid.Config = {
 
     map: {
         //first base layer becomes base layer selected by default
-        baseLayers:[{
+       baseLayers:[{
             name: 'Streets',
-            url:'https://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer',
+           // url:'https://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer',
             //flag to indicate whether Esri's tiledMapLayer plug-in class will be used
-            useEsri: true,
+           url:'https://{s}.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFub2puZWxha3VydGhpIiwiYSI6ImNpcTJmcW96MDAxNDJmdG00MDV4dms1M2QifQ.Gac-ef2dr0xsmgkMbgD9zw',
+			useEsri: false,
             options: {
-                attribution: 'City of Chicago, Esri, HERE, DeLorme, METI/NASA, USGS, USDA, EPA'
+                attribution: 'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }}
+        , 
+		{
+            name: 'Black and White',
+           
+           url:'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png',
+            useEsri: false,
+            options: {
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }
-        }, {
+        }, 
+		
+		{
             name: 'Aerial',
             url:'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             useEsri: false,
@@ -83,6 +95,8 @@ ogrid.Config = {
             }
         }
         ],
+		
+		
         //additional layers
         //can be a service URL or an object with the same structure as the base layer objects
         overlayLayers: [{
@@ -139,7 +153,9 @@ ogrid.Config = {
 
         measureOptions: {
             activeColor: '#fc9272',
-            completedColor: '#fc9272'
+            completedColor: '#fc9272',
+			position: 'bottomleft'
+			
         },
 
         tileMapOptions: {
@@ -191,7 +207,41 @@ ogrid.Config = {
             {id:'citywide', displayName:'Citywide', data:ogrid.chicagoCityShapeMap().getData()},
             {id:'zip-code', displayName:'Zip Code', data: ogrid.chicagoZipShapeMap().getData()},
             {id:'ward', displayName:'Ward', data: ogrid.chicagoWardsShapeMap().getData()}
-        ]
+        ], 
+		
+		autoLoadQuery: {
+              //_id:  "5797b9ad40c6662c52dca26f",
+            spec: [{
+                  "dataSetId" : "weather",
+                  "filters" : { },
+                  "rendition" : {
+                    "color" : "#FFD700",
+                    "opacity" : "85",
+                    "size" : "6"
+                  }
+                }, {
+                  "dataSetId" : "twitter",
+                  "filters" : { },
+                  "rendition" : {
+                    "color" : "#C71585",
+                    "opacity" : "85",
+                    "size" : "6"
+                  }
+                }],
+            sharedWith : {
+               "users" : [],
+               "groups" : []
+            },
+            owner: "system",
+            name: "New search",
+            geoFilter: {
+                "boundaryType" : "within",
+                "boundary" : "_map-extent"
+            },
+            isCommon: false,
+            autoRefresh: false,
+            refreshInterval: "30"
+          },
     },
 
 

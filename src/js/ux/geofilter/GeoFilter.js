@@ -411,7 +411,7 @@ ogrid.GeoFilter = ogrid.Class.extend({
         //clear Within option
         this.setBoundaryType('within');
 
-        this.setWithinBoundaryOption('');
+        this.setWithinBoundaryOption('_map-extent');
 
         //manually trigger event on change in option value
         this._onBoundaryChange({target: $('#geofilter-within-bounds')});
