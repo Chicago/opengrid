@@ -54,7 +54,7 @@
             <div id="ogrid-search" class="pull-left">
                 <form class="navbar-form " role="search">
                     <div class="form-group has-feedback input-group" id="qsearch">
-                        <input autocapitalize="off" type="text" class="form-control" id="qsearch-input" placeholder="Quick search" />
+                        <input autocapitalize="off" type="text" class="form-control" id="qsearch-input" placeholder="Find Places, Businesses, etc." />
                         <span id="ogrid-qsearch-hint" class="glyphicon glyphicon-question-sign" data-toggle="popover" tabindex="0" data-placement="bottom" title="Quick Search Help"></span>
                         <span class="input-group-addon" id="qsearch-button">
                             <i class="fa fa-search"></i>
@@ -67,7 +67,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <p class="navbar-btn ogrid-nav-btn">
-                <a id="ogrid-advanced-btn" href="#" class="btn btn-default hide">Advanced Search</a>
+                <a id="ogrid-advanced-btn" href="#" class="btn btn-default hide">Find Data</a>
               </p>
             </li>
             <li>
@@ -146,7 +146,7 @@
                   </div>
                 </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading panel-collapsed">Datasets and Standard Filters <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
+                  <div id="ogrid-select-data-pane"class="panel-heading panel-collapsed">Select Data<span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
                   <div id="ogrid-dataset-filters" class="panel-body" style="display:none">
                     <ul id="ogrid-ds-tabs" class="nav nav-tabs nav-pills" role="tablist">
                       <!-- JQuery template -->
@@ -173,7 +173,9 @@
                                     <div class="tab-pane active" id="${tabName}">
                                         <div id="builder_${tabName}"></div>
                                         <div class="row">
-                                            <div class="panel panel-default col-xs-12">
+                                            <div class="panel panel-default col-xs-12 ogrid-color-panel">
+                                                <div id="colorOptions_${tabName}" class="panel-heading ogrid-color-options">Color Options <span class="clickable"></span></div>
+                                                <div class="panel-body ogrid-color-options-panel-body" style="display:none">
                                                 <form class="form-inline form-in-panel">
                                                     <div class="form-group">
                                                         <label for="colorPicker" class="control-label">Color</label>
@@ -222,6 +224,7 @@
                                                         </div>
                                                     </div>
                                                 </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +233,7 @@
                   </div>
                 </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading panel-collapsed">Additional/Geo-spatial Filters <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
+                  <div class="panel-heading panel-collapsed">Select Location <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
                   <div id="ogrid-geo-filters" class="panel-body" style="display:none">
                     <div id="geo-filter"></div>
                   </div>
@@ -266,9 +269,9 @@
                   </div>
                 </div>
               </div>
-              <div class="pull-left">
-                <button id="advSearchSubmit" type="button" class="btn btn-primary">Submit</button>
-                <button id="advSearchReset" type="button" class="btn btn-default">Reset</button>
+              <div class="pull-left adv-bottom-commandbar">
+                <button id="advSearchSubmit" type="button" class="btn btn-primary">Get Data</button>
+                <button id="advSearchReset" type="button" class="btn btn-default">Clear Search</button>
               </div>
             </div>
             <div class="tab-pane" id="save-queries">
@@ -279,9 +282,9 @@
       </div>
     </div>
     <div id="ogrid-footer" class="panel-group">
-      <div class="panel panel-default ogrid-footer-panel ogrid-footer-panel-default">
+      <div class="panel panel-default ogrid-footer-panel ogrid-footer-panel-default" data-toggle="tooltip" data-placement="top" title="Search results">
         <div class="panel-heading ogrid-footer-panel-heading">
-          <i id="ogrid-panel-caret" class="glyphicon glyphicon-chevron-up pull-right"></i>
+          <i id="ogrid-panel-caret" class="fa fa-chevron-circle-up fa-lg header-center"></i>
           <h6 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#tableview"></a>
           </h6>

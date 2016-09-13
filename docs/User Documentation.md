@@ -38,15 +38,18 @@ The quick search help feature assist users in performing a valid search. Each se
 <p>Advanced Search allows you to combine search terms by setting specific parameters for your results.It gives the user the ability to narrow their searches by a series of different filters such as adding additional rules, groups,datasets and Geo spatial-filters.</p>
 
 ### Selecting data and date range
-<p>To query by data and date range...Click on add datasets, select the saved dataset from the list <b>(for ex: business license)</b>; click submit. Add a rule or group to your dataset <b><small>(Adding a rule or group gives the user an option to query by date, city, name, address, etc. depending on the search criteria.)</b></small>. Date range can be specified with the parameters of:</p>
+<p>To query by data and date range...Click on add datasets, select a dataset from the list <b>(for ex: business license)</b>; click submit. Add a rule or group to your dataset <b><small>(Adding a rule or group is optional and gives the user an option to query by date, city, name, address, etc. depending on the search criteria.)</b></small>. Date range can be specified with the parameters and relative dates of:</p>
 
-- equal
-- not equal 
-- less
-- less or equal
-- greater 
-- greater or equal
 - between
+- greater 
+- less
+- yesterday
+- tomorrow
+- today
+- day (i.e. a day ago, 2 days ago, etc.)
+- week (i.e. a week ago, 2 weeks ago, etc.)
+- month (i.e. a month ago, 2 months ago, etc.)
+- year (i.e. a year ago, 2 years ago, etc.)
 <br>
 
 ![combine](media/combine21.jpg)
@@ -77,7 +80,7 @@ There are two filters to search by <b>“Within”</b> and <b>“Near”</b>. <b
 ## Table Functions
 <p>The table functionality is used to organized information that has been displayed via query. The table displays the data that was pulled from the queried results and in return structures it in a readable format for the user to interpret. Each dropdown are intertwined with one another.The table consist of five drop down sections: </p>
 
-![table](media/combine33.png)
+![table](media/combine33.jpg)
 #### 1. Columns<br>
 The columns section displays the list of columns from the query data-sets and places them in order by default. The columns can be interchangeable and removed to fit the user preference.
 

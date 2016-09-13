@@ -10,6 +10,7 @@ pages:
 - User Guide:
     - End-user documentation: User Documentation.md
 - System administration:
+    - App Architecture: Architecture.md
     - Installation and Setup: Installation and Setup.md
     - Build Procedures: Build Procedures.md
     - Configuration: OpenGrid Configuration.md
@@ -22,4 +23,4 @@ markdown_extensions:
         permalink: 
     - admonition:
 
-copyright: Copyright &copy; 2015 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.
+copyright: Copyright &copy; 2015-2016 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.

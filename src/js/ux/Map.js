@@ -13,6 +13,7 @@ ogrid.Map = ogrid.Class.extend({
     _baseMapLayer: null,
     _markers: {},
     _locateControl: null,
+	 _legend: null,
 
     _options: {
         //lime
@@ -121,7 +122,20 @@ ogrid.Map = ogrid.Class.extend({
         this._locateControl =  L.control.locate();
         this._locateControl.options.strings.title = 'Show current location';
         this._locateControl.addTo(this._map);
+		
+		 //create legend
+        this._legend = L.control({position: 'bottomright'});
+
+        this._legend.onAdd = function (map) {
+            //hidden initially
+            var div = L.DomUtil.create('div', 'map-info legend hide');
+            return div;
+        };
+        this._legend.addTo(this._map);
+
     },
+	
+	
 
     _resetZoom: function() {
         //this._map.setZoom(this._options.mapLibraryOptions.zoom);
@@ -159,14 +173,21 @@ ogrid.Map = ogrid.Class.extend({
     _initLayerControl: function() {
         //populate our base layers from the options
         var bl = this._getGroupedLayer(this._options.baseLayers, true);
+		var options = {
+            container_width 	: "250px",
+            group_maxHeight     : "1000px",
+            //container_maxHeight : "800px",
+			position			: 'bottomleft',
+            exclusive       	: false,
+        };
 
         //No support for service URL overlays yet
         if (this._options.overlayLayers && ( typeof this._options.overlayLayers==='object') ) {
             var ol = this._getGroupedLayer(this._options.overlayLayers, false);
-            this._layerControl = L.control.groupedLayers(bl, ol);
+            this._layerControl = L.control.groupedLayers(bl, ol, options);
         } else {
             //no overlays
-            this._layerControl = L.control.groupedLayers(bl);
+            this._layerControl = L.control.groupedLayers(bl, null, options);
         }
 
         this._map.addControl(this._layerControl);
@@ -432,7 +453,15 @@ ogrid.Map = ogrid.Class.extend({
         }
         throw ogrid.error('Data Error', 'GeoJson data is not formatted properly. Unable to find meta/view attributes for column \'' + p + '\'.');
     },
+	
+_clearLegend: function() {
+        var legendDiv = this._legend.getContainer();
+        legendDiv.innerHTML = '';
 
+        //hide, since we have nothing to show
+        $(legendDiv).addClass('hide');
+    },
+	
     _clear: function() {
         var me = this;
         this._map.eachLayer(function (layer) {
@@ -453,6 +482,10 @@ ogrid.Map = ogrid.Class.extend({
 
         //clear any remaining generated layers
         me._clearOwnLayersFromLayerControl();
+		
+		 //clear legend
+        me._clearLegend();
+		
     },
 
     //clear our own generated layers if any remains (usually unchecked ones that do not appear as a layer on the map)
@@ -568,6 +601,21 @@ ogrid.Map = ogrid.Class.extend({
         }
         var sp = '<i class="fa fa-circle-o" style="color:' + c + '"></i>&nbsp';
         this._layerControl.addOverlay(layer, sp + name, group);
+		
+		//add to legend as well
+        //console.log(this._legend.getContainer());
+        var legendElem = this._legend.getContainer();
+        if ($(legendElem).hasClass('hide')) {
+            //show legend, if hidden
+            $(legendElem).removeClass('hide');
+        }
+
+        //only add if not already there
+        var item = '<i class="ogrid-legend-circle" style="background:' + c + '"></i> ' +
+            (dataView.displayName ? dataView.displayName + '<br>' : '+');
+        if (legendElem.innerHTML.indexOf(item) == -1) {
+            legendElem.innerHTML += item;
+        }
     },
 
     _onOverlayAdd: function(e) {

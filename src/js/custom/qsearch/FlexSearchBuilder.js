@@ -245,7 +245,8 @@ ogrid.FlexSearchBuilder = ogrid.Class.extend({
 
             //matches only if trigger word is on the list
             $.each(triggers, function(i,v){
-                if (trigger === v) {
+                //use case-insensitive comparison
+                if (trigger.toUpperCase() === v.toUpperCase()) {
                     t = true;
                     return false; //break
                 }

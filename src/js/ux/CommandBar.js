@@ -147,6 +147,12 @@ ogrid.CommandBar = ogrid.Class.extend({
                 me,
                 me._getRequiredAccess(ogrid.SecuredFunctions.ADVANCED_SEARCH),
                 '#ogrid-advanced-btn', accessList);
+				
+				// show Advanced Search button on logged in and if not on mobile
+            if (!ogrid.App.mobileView()) {
+                me.toggleAdvancedSearchPane();
+            }
+
 
             //initialize Admin UI if not initialized and user is an admin
             if (me._noAdminUI() && !$('#ogrid-manage-btn').hasClass('hide')) {
@@ -231,8 +237,11 @@ ogrid.CommandBar = ogrid.Class.extend({
         if (ogrid.App.mobileView()) {
             this._hideMenu();
         }
-    }
+    },
 
     //public methods
-
+toggleAdvancedSearchPane: function() {
+        this._onAdvancedSearchClick();
+    }
+	
 });
