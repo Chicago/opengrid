@@ -109,6 +109,12 @@ ogrid.QSearch = ogrid.Class.extend({
     },
 
     _onSearch: function() {
+        // If main content is hidden remove it and disable help.
+        if($("#ogrid-content").hasClass('hide')) {
+            $("#ogrid-help").addClass('hide');
+            $("#ogrid-content").removeClass('hide');
+        }
+
         //console.log("Quick Search clicked");
         if (this._input.val().trim().length === 0 ) {
             ogrid.Alert.error('No quick search command was entered.');

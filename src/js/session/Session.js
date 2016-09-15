@@ -225,8 +225,20 @@ ogrid.Session = ogrid.Class.extend({
 
 
     _clearLoginForm: function() {
-        $('#ogrid-login-username').val('');
-        $('#ogrid-login-password').val('');
+
+        if(ogrid.Config.service.autologin) {
+            $(".login-panel").attr("style", "visibility: hidden");
+            $('#ogrid-login-username').val('NoAuth');
+            $('#ogrid-login-password').val('NoAuth');
+
+            var me = this;
+            me._doLogin();
+
+        } else {
+            //$(‘#loginForm').css('background-image', 'url("../dist/images/background_lake_east.jpg")');
+            $('#ogrid-login-username').val('');
+            $('#ogrid-login-password').val('');
+        }
     },
 
 

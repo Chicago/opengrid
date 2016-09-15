@@ -852,9 +852,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _getFilters: function(typeId) {
         var a = [];
-        var date_ops = ['between', 'greater', 'less'];
-        var numops = ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal', 'between'];
-        var strops =  ['equal', 'not_equal', 'contains', 'begins_with'];
+        var date_ops = ['greater', 'less'];
+        var numops = ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal'];
+        var strops =  ['equal', 'not_equal'];
 
         var me = this;
         $.each(this._options.allDataTypes, function(i, v) {

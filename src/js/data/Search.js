@@ -11,7 +11,6 @@ ogrid.Search._getParams = function(filter) {
     return 'q=' + encodeURI(JSON.stringify(filter));
 };
 
-
 ogrid.Search._getOpts = function(geoFilter) {
     if (geoFilter) {
         var f = {"geoFilter": geoFilter};
