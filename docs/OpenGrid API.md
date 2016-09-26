@@ -74,21 +74,17 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 <li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li>
 </ul>
 
-``` json
-{
-	“error”: {
-			“code”: “<error code>”
-			“message”: “<error message>”
-					}
+```
+	{
+		"error": {
+					"code": "<error code>",
+					"message": "<error message>"
+			}
 	}
 ```
 
-<p>where <i><error code></i> is a code corresponding to the error that
-occurred and <i><error message></i> is a description of the error.
-</p>
-
-
 <ul>
+<li>where <b>HTTP &lt;error code&gt;</b> is a code corresponding to the error that occurred and <b>HTTP &lt;error message&gt;</b> is a description of the error.</li>
 <li><b>HTTP 500</b> for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
 </li>
 <br>
@@ -111,14 +107,11 @@ occurred and <i><error message></i> is a description of the error.
 <small><b>Request Payload:</b></small></p>
 
 ```
-
-{
- "username":"admin",
-"password":"xxx"
-}
-
+	{
+			"username": "admin",
+			"password": "xxx"
+		}
 ```
-
 <p><b>Sample Response</b></p>
 
 <p>The authentication token is returned, the authentication token format is as follows separated by (.): HEADER.PAYLOAD.SIGNATURE, the key X-AUTH-TOKEN is appended to the response header below: </p>
