@@ -71,19 +71,17 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 <br>
 <li><b>HTTP 403</b> is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.</li>
 <br>
-<li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li>
-</ul>
+<li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li> </ul> 
+			<pre><code>
+					{
+						"error": {
+									"code": "&lt;error code&gt;",
+									"message": "&lt;error message&gt;"
+										}
+							}
+							</code> </pre>
 
-```
-	{
-		"error": {
-					"code": "<error code>",
-					"message": "<error message>"
-			}
-	}
-```
-
-<ul>
+<ul>		
 <li>where <b>HTTP &lt;error code&gt;</b> is a code corresponding to the error that occurred and <b>HTTP &lt;error message&gt;</b> is a description of the error.</li>
 <li><b>HTTP 500</b> for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
 </li>
@@ -91,11 +89,9 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 <li><b>HTTP 204</b> (No Content) is returned when an object is deleted successfully (DELETE method where applicable).</li>
 </ul>
 
-
-## 1.1.1 /users/token
+<h2>1.1.1 /users/token</h2>
 
 **Method**
-
 <p><b>POST</b> /users/token</p>
 
 <p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated. The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew.<b>(See 1.1.2 below)</b>
@@ -103,9 +99,8 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 
 <p><b>Note on security:</b>The password is currently expected to be sent in plain text (not encrypted). This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.</p>
 
-<p><b>Sample Request<br>
-<small><b>Request Payload:</b></small></p>
-
+<p><b>Sample Request</b></p>
+<p><small><b>Request Payload:</b></small></p>
 ```
 	{
 			"username": "admin",
@@ -114,7 +109,7 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 ```
 <p><b>Sample Response</b></p>
 
-<p>The authentication token is returned, the authentication token format is as follows separated by (.): HEADER.PAYLOAD.SIGNATURE, the key X-AUTH-TOKEN is appended to the response header below: </p>
+<p>The authentication token is returned, the authentication token consist of three sections separated by dots(<b>.</b>): <b>HEADER.PAYLOAD.SIGNATURE</b>; the key X-AUTH-TOKEN is appended to the response header below: </p>
 ```
 X-AUTH-TOKEN:
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
