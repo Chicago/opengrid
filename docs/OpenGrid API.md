@@ -1,4 +1,3 @@
-<br>
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
 <h4 align="center">Version 1.1.0</h4>
 
@@ -65,9 +64,7 @@ status codes used by the service. Also note that <b>X-AUTH-TOKEN</b> needs to
 be sent for each calls on the request header with the token obtained by
 calling <b>/users/token</b> as described in Section 1.1.1.</p>
 
-
-
-## HTTP Status Codes on Response
+<h2>HTTP Status Codes on Response</h2>
 
 <ul>
 <li><b>HTTP 401</b> is returned when users/token is called and authentication fails.</li>
@@ -77,15 +74,15 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 <li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li>
 </ul>
 
-```
-	{
-			“error”: {
-						“code”: “<error code>”
-						“message”: “<error message>”
+``` json
+{
+	“error”: {
+			“code”: “<error code>”
+			“message”: “<error message>”
 					}
-		}
-
+	}
 ```
+
 <p>where <i><error code></i> is a code corresponding to the error that
 occurred and <i><error message></i> is a description of the error.
 </p>
@@ -114,10 +111,12 @@ occurred and <i><error message></i> is a description of the error.
 <small><b>Request Payload:</b></small></p>
 
 ```
+
 {
- 	"username":"admin",
-	"password":"xxx"
-					}
+ "username":"admin",
+"password":"xxx"
+}
+
 ```
 
 <p><b>Sample Response</b></p>
