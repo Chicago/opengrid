@@ -4,25 +4,36 @@
 
 OpenGrid an open-source, interactive map platform that allows users to explore multiple data sources in an easy-to-use interface. Developed to support situational awareness, incident monitoring and responses, historical data retrieval, and real-time advanced analytics. Users can perform advanced queries to filter data, search within custom boundaries, or based on the users location. Other GIS data, such as weather and Shapefiles can be overlaid on the map with other data. OpenGrid is natively compatible with desktops and mobile devices.
 
+OpenGrid uses a service layer to retrieve data from an underlying data store.
+
 ## Important Links
-* User Documentation: http://opengrid.readthedocs.io
-* Repository: https://github.com/Chicago/opengrid
+
+* User Documentation: http://docs.opengrid.io
+* Repository for User Interface: https://github.com/Chicago/opengrid
+* Repository for 
 * Planning Documentation and Meeting Notes: https://github.com/Chicago/opengrid/wiki
 * Issues: https://github.com/Chicago/opengrid/issues
 * Mailing List & Discussion: https://groups.google.com/forum/#!forum/opengrid-chicago
 
-##  System Requirements <br>
+##  System Requirements
+
 Web server for deployment and Open Grid Service Package. 
 
-**Required Software**
+### Required Software
 
   * Java Script IDE
   * Node.js
   * Npm
 
-**Browser Requirements:**
+### Browser Requirements:
 
 OpenGrid has been tested on IE 10+, Chrome, Firefox, and Safari on the desktop. It has also been tested on iOS using Safari and Android using the Chrome browser.
+
+### Architecture
+
+This repository contains the code which users interact with in the web browser. OpenGrid depends on a service layer, which then communicates with a data storage layer. Currently, OpenGrid is compatible with [MongoDB](http://mongodb.com) or [Plenario](http://plenar.io) using their respective service layers.
+
+Read the documentation for a description of the service layer and available test instances.
 
 ## Installation
 

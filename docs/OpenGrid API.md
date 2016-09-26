@@ -123,7 +123,6 @@ occurred and <i><error message></i> is a description of the error.
 <p><b>Sample Response</b></p>
 
 <p>The authentication token is returned, the authentication token format is as follows separated by (.): HEADER.PAYLOAD.SIGNATURE, the key X-AUTH-TOKEN is appended to the response header below: </p>
-
 ```
 X-AUTH-TOKEN:
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
@@ -132,7 +131,7 @@ eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4
 This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See <a href="https://github.com/auth0/jwt-decode"> https://github.com/auth0/jwt-decode</a>)
 </p>
 
-<p><b>Error Codes</b></p>
+<p><b>Error Code</b></p>
 <p>If user authentication fails, HTTP status code 401 (Unauthorized) is returned to the requester.</p>
 
 
@@ -190,7 +189,7 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 <p><b>Or when URL encoded:</b></p>
 
 ```
-<Service URL&gt;/users?q=%7B%7D&n=1000
+<Service URL>/users?q=%7B%7D&n=1000
 ```
 <p><b>Sample Response</b></p>
 
@@ -229,12 +228,13 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 
 ```
 {
- "userId":"test3",
- "password":"testxxx",
- "firstName":"Test",
- "lastName":"Three",
- "groups":[ ],
- "_id":{"$oid":"55ca52dec4aac050466bc1a9"}
+	"userId":"test3",
+	"password":"testxxx",
+	"firstName":"Test",
+	"lastName":"Three",
+	"groups":[ ],
+	"_id":
+		{"$oid":"55ca52dec4aac050466bc1a9"}
 }
 ```
 
@@ -261,21 +261,21 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 
 ```
 {
- "_id":
-       {"$oid":"55b63708a3db5f292c533c7b"},
- "userId":"TesterOne",
- "password":"test123",
- "firstName":"ABC Test",
- "lastName":"One Update",
- "groups":["opengrid_users_L1"]
+	 "_id":
+			{"$oid":"55b63708a3db5f292c533c7b"},
+	"userId":"TesterOne",
+	"password":"test123",
+	"firstName":"ABC Test",
+	"lastName":"One Update",
+	"groups":["opengrid_users_L1"]
 }
 ```
 
 <p><b>PUT</b> /users/{user_id}</p>
 <p>Update a user’s information. Returns the updated user data, if successful.</p>
 
-<p><b>Sample Request</b>
-<br><b>URL:</b></p>
+<p><b>Sample Request</p>
+<p><b>URL:</b></p>
 
 ```
 <Service URL>/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"}
@@ -291,30 +291,33 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 
 ```
 {
- "id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
- "o":{"_id":
-            {"$oid":"55ccaca15fc6c6bf8a807cf2"},
-      "userId":"twitterUser",
-      "password":"testxxx",
-      "firstName":"Twitter",
-      "lastName":"User",
-      "groups":["opengrid_users_L1","opengrid_users_L2"]
-      }
+	"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
+	"o":{
+			"_id":
+					{"$oid":"55ccaca15fc6c6bf8a807cf2"},
+			"userId":"twitterUser",
+			"password":"testxxx",
+			"firstName":"Twitter",
+			"lastName":"User",
+			"groups":[
+					"opengrid_users_L1",
+					"opengrid_users_L2"]
+			}
 }
 ```
 
 <p><b>Sample Response</b></p>
 ```
 {
- "userId":"test3",
- "password":"testxxx",
- "firstName":"Test",
- "lastName":"3",
- "groups":[ ]
+ 	"userId":"test3",
+	"password":"testxxx",
+	"firstName":"Test",
+	"lastName":"3",
+	"groups":[ ]
 }
 ```
 
-<b>DELETE</b> /user/{user_id}
+<p><b>DELETE</b> /user/{user_id}</p>
 
 <p>Delete a user given the user’s internal Id on the URL path.</p>
 
@@ -330,15 +333,15 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 <Service URL>/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
 ```
 
-<b>Sample Response</b>
+<p><b>Sample Response</b></p>
 
 <p>No response is returned when a user is deleted successfully.</p>
 
 ## 1.1.5 /groups
 **Methods**
-<p><b>GET /groups</b><br>
-Return a list of OpenGrid groups (teams)
-</p>
+<p><b>GET /groups</b></p>
+
+<p>Return a list of OpenGrid groups (teams)</p>
 
 <p><b>Request Query Parameters</b></p>
 
@@ -390,17 +393,21 @@ The maximum number of records to return; If this parameter is not specified, no 
 <p><b>Sample Response</b></p>
 
 ```
-[
- {"_id" : 
-          {"$oid":"55c0c620a3db5f3058630eb3"},
-  "groupId":"opengrid_users",
-  "name":"OpenGrid Users",
-  "description":"Group for all OpenGrid users", 
-  "enabled": true,
-  "functions": ["Quick Search","Advanced Search"],
-  "datasets": ["twitter","weather"]
-  } 
- ]
+	[
+		{"_id" :
+				{"$oid":"55c0c620a3db5f3058630eb3"},
+		"groupId":"opengrid_users",
+		"name":"OpenGrid Users",
+		"description":"Group for all OpenGrid users", 
+		"enabled": true,
+		"functions": [
+					"Quick Search",
+					"Advanced Search"],
+		"datasets": [
+					"twitter",
+					"weather"]
+		}
+]
 ```
  
 **Method**
@@ -417,21 +424,21 @@ The maximum number of records to return; If this parameter is not specified, no 
 <p><b>Sample Response</b></p>
 
 ```
-{
- "groupId" : "OPENGRID_NEWGROUP",
- "name" : "ABC GROUP",
- "description" : "ADD ABC GROUP",
- "enabled" : true,
- "functions" : [ ],
- "datasets" : [ ] ,
- "_id": {"$oid":"55cb6362c4aa475d78d4bc40"}
-}
+	{
+		"groupId" : "OPENGRID_NEWGROUP",
+		"name" : "ABC GROUP",
+		"description" : "ADD ABC GROUP",
+		"enabled" : true,
+		"functions" : [ ],
+		"datasets" : [ ],
+		"_id": {"$oid":"55cb6362c4aa475d78d4bc40"}
+		}
 ```
 
 ## 1.1.6 /groups/{group_id}
 
 **Method**
-<p><b>GET</b> /groups/{group_id}</p>
+<p><b>GET</b>/groups/{group_id}</p>
 
 <p>Return a single group given a group’s internal id.</p>
 
@@ -458,14 +465,17 @@ The maximum number of records to return; If this parameter is not specified, no 
     "name" : "OpenGrid Users",
     "description" : "Group for all OpenGrid users",
     "enabled" : true,
-    "functions" : ["Quick Search", "Advanced Search"],
-    "datasets" : ["twitter", "weather"]
+    "functions" : [
+	    			"Quick Search",
+    				"Advanced Search"],
+    "datasets" : [
+    				"twitter",
+				"weather"]
   }
 ]
 ```
 
-
-<p><b>PUT</b> /groups/{group_id}</p>
+<p><b>PUT</b>/groups/{group_id}</p>
 <p>Update a group (group-level attributes and members). Returns the updated group data, if successful.</p>
 
 <p><b>Sample Request</b></p>
@@ -481,7 +491,6 @@ The maximum number of records to return; If this parameter is not specified, no 
 <Service URL>/groups/%7B%22%24oid%22%3A%2255c525c6c4aae748132f4d06%22%7D
 ```
 
-
 <p><b><small>Request Payload:</b></small></p>
 
 ```
@@ -492,7 +501,9 @@ The maximum number of records to return; If this parameter is not specified, no 
       "description":"Users with access to weather data",
       "enabled":true,
       "isAdmin":false,
-      "functions":["Quick Search","Advanced Search"],
+      "functions":[
+				"Quick Search",
+				"Advanced Search"],
       "datasets":["weather"]
      }
 }
@@ -507,15 +518,15 @@ The maximum number of records to return; If this parameter is not specified, no 
   "description" : "Users with access to weather data",
   "enabled" : true,
   "isAdmin" : false,
-  "functions" : ["Quick Search", "Advanced Search"],
+  "functions" : [
+  				"Quick Search",
+				"Advanced Search"],
   "datasets" : ["weather"]
 }
 ```
 
-
-<p><b>DELETE /groups/{group_id}</b><br>
-Delete a group given the group’s internal Id on the URL path.
-</p>
+<p><b>DELETE /groups/{group_id}</b></p>
+<p>Delete a group given the group’s internal Id on the URL path.</p>
 
 <p><b>Sample Request</b></p>
 
@@ -867,7 +878,7 @@ Delete a group given the group’s internal Id on the URL path.
 ## 1.1.9 /datasets/{dataset_id}/query
 
 **Method**
-<p><b>GET</b> /datasets/{dataset_id}/query</p>
+<p><b>GET</b>/datasets/{dataset_id}/query</p>
 
 <p>Execute a query against a specific dataset.</p>
 
@@ -1144,8 +1155,8 @@ maximum number of records to return; If this parameter is not specified, no reco
 	"isCommon" : true
 	}
 ]
-```
 
+```
 
 <p><b>POST</b>/queries</p>
 <p>Create a new query. Returns object for newly created query, if successful.</p>
@@ -1195,9 +1206,11 @@ maximum number of records to return; If this parameter is not specified, no reco
 											}
 	}
 }
+
 ```
 
 <p><b>Sample Response</b></p>
+
 ```
 	{
 		"name" : "Tweets By Bud",
@@ -1235,6 +1248,7 @@ maximum number of records to return; If this parameter is not specified, no reco
 											},
 		"_id" : { "$oid" : "55df5ec39900ec81a481b0f6"}
 	}
+
 ```
 
 ## 1.1.11 /queries/{query_id}
