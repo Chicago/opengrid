@@ -171,7 +171,7 @@ ogrid.QSearch = ogrid.Class.extend({
         //fix fillColor of points to make it consistent with Advanced Search
         if (this._isGeoFilterableData(results)) {
             var c = results.meta.view.options.rendition.color;
-            results.meta.view.options.rendition.fillColor =  chroma.scale(['white', c])(0.5).hex();
+            results.meta.view.options.rendition.fillColor =  (chroma.scale(['white', c])(0.5)).hex();
         }
 
         //we're no longer sending clear flag after a quick search is executed

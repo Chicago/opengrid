@@ -416,9 +416,13 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _getRendition: function(tabId) {
         var c = $('#colorPicker_' + tabId + ' option').filter(':selected').data('color');
+
+        if (c === undefined || c === null)
+        {c = 'indianred';}
+
         return {
                 color: c,
-                fillColor: chroma.scale(['white', c])(0.5).hex(),
+                fillColor: (chroma.scale(['white', c])(0.5)).hex(),
                 opacity: $('#opacitySpin_' + tabId).val(),
                 size: $('#sizeSpin_' + tabId).val()
             };
@@ -852,9 +856,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _getFilters: function(typeId) {
         var a = [];
-        var date_ops = ['greater', 'less'];
-        var numops = ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal'];
-        var strops =  ['equal', 'not_equal'];
+        var date_ops = ['between', 'greater', 'less'];
+        var numops = ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal', 'between'];
+        var strops =  ['equal', 'not_equal', 'contains', 'begins_with'];
 
         var me = this;
         $.each(this._options.allDataTypes, function(i, v) {
