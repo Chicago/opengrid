@@ -91,7 +91,7 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 
 <h2>1.1.1 /users/token</h2>
 
-**Method**
+<b>Method</b>
 <p><b>POST</b> /users/token</p>
 
 <p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated. The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew.<b>(See 1.1.2 below)</b>
@@ -261,7 +261,7 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 <p><b>PUT</b> /users/{user_id}</p>
 <p>Update a user’s information. Returns the updated user data, if successful.</p>
 
-<p><b>Sample Request</p>
+<p><b>Sample Request</b></p>
 <p><b>URL:</b></p>
 
 ```
@@ -472,13 +472,13 @@ The maximum number of records to return; If this parameter is not specified, no 
 <Service URL>/groups/{"$oid":"55c525c6c4aae748132f4d06"}
 ```
 
-<p><b><small>or when URL encoded:</b></small></p>
+<p><b><small>or when URL encoded:</small></b></p>
 
 ```
 <Service URL>/groups/%7B%22%24oid%22%3A%2255c525c6c4aae748132f4d06%22%7D
 ```
 
-<p><b><small>Request Payload:</b></small></p>
+<p><b><small>Request Payload:</small></b></p>
 
 ```
 {
@@ -1148,9 +1148,9 @@ maximum number of records to return; If this parameter is not specified, no reco
 <p><b>POST</b>/queries</p>
 <p>Create a new query. Returns object for newly created query, if successful.</p>
 
-<p><b>Sample Request</p>
+<p><b>Sample Request</b></p>
 
-<b><small>Request Payload</b></small></p>
+<p><b><small>Request Payload</small></b></p>
 
 ```
 {
@@ -1292,7 +1292,7 @@ maximum number of records to return; If this parameter is not specified, no reco
 	]
 ```
 
-<p><b>PUT /queries/{query_id}</b></p>
+<p><b>PUT</b> /queries/{query_id}</p>
 <p>Update a query. Returns the updated query object, if successful.</p>
 
 <p><b>Sample Request</b></p>
