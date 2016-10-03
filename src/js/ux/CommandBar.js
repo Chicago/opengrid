@@ -196,7 +196,9 @@ ogrid.CommandBar = ogrid.Class.extend({
             this._onAdvancedSearchClick();
         }*/
         if (ogrid.App.mobileView()) {
+            $("#ogrid-task-advanced-search").removeClass('visible');
             $("#ogrid-task-advanced-search").addClass('hide');
+            $("#ogrid-advanced-btn").removeClass('active');
         }
 
         if (this._isPanelVisible( $("#ogrid-admin-ui")) ) {
