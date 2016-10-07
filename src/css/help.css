@@ -1,0 +1,63 @@
+/*body {
+    font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif;
+    font-weight: normal;
+    color: #404040;
+    min-height: 100%;
+    width: 90%;
+    overflow-y: auto;
+}*/
+
+#container {
+    width:100%;
+    margin-top: 50px;
+}
+
+#uturn-logo {
+    float: left;
+    width: 5%;
+    background-image: url(../images/logo/uturn-logo.png);
+    display: block;
+    height: 60px;
+    background-size: 100% 60px;
+    background-repeat: no-repeat;
+}
+
+
+#smart-chicago-logo {
+    float: right;
+    width: 5%;
+    background-image: url(../images/logo/smart-chicago-logo.png);
+    background-size: 100% 60px;
+    height: 60px;
+    display: block;
+    background-repeat: no-repeat;
+}
+
+#help-content {
+    vertical-align: middle;
+    display: inline-block;
+    width: 90%;
+}
+
+h1,h2,h3,h4,h5,h6,legend {
+    margin-top: 0;
+    font-weight: 700;
+    font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
+    color: #2980b9;
+}
+
+#help-content h2 {
+    font-size: 30px !important;
+}
+
+#help-content p {
+    line-height: 24px;
+    margin: 0;
+    font-size: 16px;
+    margin-bottom: 14px
+}
+
+#main-content {
+    margin-left: 2%;
+    margin-right: 5%;
+}

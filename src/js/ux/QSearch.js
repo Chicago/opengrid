@@ -109,6 +109,12 @@ ogrid.QSearch = ogrid.Class.extend({
     },
 
     _onSearch: function() {
+        // If main content is hidden remove it and disable help.
+        if($("#ogrid-content").hasClass('hide')) {
+            $("#ogrid-help").addClass('hide');
+            $("#ogrid-content").removeClass('hide');
+        }
+
         //console.log("Quick Search clicked");
         if (this._input.val().trim().length === 0 ) {
             ogrid.Alert.error('No quick search command was entered.');
@@ -165,7 +171,7 @@ ogrid.QSearch = ogrid.Class.extend({
         //fix fillColor of points to make it consistent with Advanced Search
         if (this._isGeoFilterableData(results)) {
             var c = results.meta.view.options.rendition.color;
-            results.meta.view.options.rendition.fillColor =  chroma.scale(['white', c])(0.5).hex();
+            results.meta.view.options.rendition.fillColor =  (chroma.scale(['white', c])(0.5)).hex();
         }
 
         //we're no longer sending clear flag after a quick search is executed
