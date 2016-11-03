@@ -416,9 +416,13 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _getRendition: function(tabId) {
         var c = $('#colorPicker_' + tabId + ' option').filter(':selected').data('color');
+
+        if (c === undefined || c === null)
+        {c = 'indianred';}
+
         return {
                 color: c,
-                fillColor: chroma.scale(['white', c])(0.5).hex(),
+                fillColor: (chroma.scale(['white', c])(0.5)).hex(),
                 opacity: $('#opacitySpin_' + tabId).val(),
                 size: $('#sizeSpin_' + tabId).val()
             };

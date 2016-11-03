@@ -91,7 +91,12 @@ ogrid.Main = ogrid.Class.extend({
         //retrieve available datasets first ahead of initializing other dataset-dependent UI elements
         // and pass datasets to save retrieval time
         ogrid.ajax(this, function(data) {
-            me._datasets = data.sort(me._sortDs);
+          
+            if(typeof(data) === 'undefined' || data.error) {
+              me._datasets = data;
+            } else {
+              me._datasets = data.sort(me._sortDs);
+            }
 
             //init commandbar
             me._cb = new ogrid.CommandBar(me._options.commandbar, {datasets: me._datasets});
@@ -114,6 +119,10 @@ ogrid.Main = ogrid.Class.extend({
                 {datasets: me._datasets}
             );
 
+	    if(!ogrid.Config.service.autologin) {
+              $( '#ogrid-menu .dropdown' ).removeClass( "hide" );
+            }
+
             //nav menu tweaks
             me._setNavBarBehavior();
 
@@ -129,7 +138,6 @@ ogrid.Main = ogrid.Class.extend({
 
         }, {url: '/datasets'});
     },
-
 
     //performs an alphasort on the dataset based on the display name
     _sortDs: function(a, b) {

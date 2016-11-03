@@ -52,7 +52,7 @@ html, body {
 
 #ogrid-adv-content .panel-heading {
     cursor: pointer;
-    padding:5px 10px!important;
+    /*padding:5px 10px!important;*/
 }
 
 
@@ -129,6 +129,7 @@ html, body {
     /*font-size: 12px;*/
     /*font-weight: 300;*/
     /*font-family: 'Lato', sans-serif;*/
+    overflow-y: auto;;
 }
 
 .ogrid-task-pane .control-label {
@@ -273,6 +274,7 @@ html, body {
 .ogrid-task-pane .rule-value-container .form-control {
     font-weight: 300;
 }
+
 .ogrid-color-options {
     font-size: 12px !important;
     text-decoration: underline;
@@ -326,24 +328,6 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
 
 .leaflet-popup-content a {
     color: lightskyblue;
-}
-
-#ogrid-help-icon {
-    padding-top: 18px;
-    padding-right: 10px;
-    color: whitesmoke;
-}
-
-
-.no-underline-on-hover:hover { text-decoration: none; }
-.no-underline-on-hover { text-decoration: none; }
-
-/* mobile styles for help icon*/
-@media (max-width: 845px) {
-    #ogrid-help-icon {
-        padding-left: 10px;
-        font-size: 1.5em;
-    }
 }
 
 .header-center {
