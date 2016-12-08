@@ -61,6 +61,7 @@
             <span class="icon-bar"></span>
           </button>
 	  <img class="ogrid-logo-small pull-left" src="images/OpenGrid_symbol_white.png" alt="Open Grid Logo">
+          <!-- for some reason AWS does not like 'href="./#"' so we had to link to index.html specifically -->
           <a class="navbar-brand" href="./index.html">OpenGrid</a>
             <div id="ogrid-search" class="pull-left">
                 <form class="navbar-form " role="search">
@@ -78,7 +79,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <p class="navbar-btn ogrid-nav-btn">
-                <a id="ogrid-advanced-btn" href="#" class="btn btn-default">Find Data</a>
+                <a id="ogrid-advanced-btn" href="#" class="btn btn-default hide">Find Data</a>
               </p>
             </li>
             <li>
@@ -86,7 +87,7 @@
                 <a id="ogrid-clear-btn" href="#" class="btn btn-default">Clear Data</a>
               </p>
             </li>
-           <li>
+            <li>
               <p class="navbar-btn ogrid-nav-btn">
                 <a id="ogrid-help-btn" href="#" class="btn btn-default hide">Help</a>
               </p>
@@ -96,7 +97,7 @@
                 <a id="ogrid-manage-btn" href="#" class="btn btn-default hide">Manage</a>
               </p>
             </li>
-            <li class="dropdown hide">
+            <li id="ogrid-user-menu" class="dropdown hide">
               <a id="ogrid-user-name" class="dropdown-toggle" data-toggle="dropdown" href="#">Guest
                 <span class="caret"></span>
               </a>
@@ -106,7 +107,7 @@
                 <li><a id="ogrid-logout-item" href="#">Logout</a></li>
               </ul>
             </li>
-            <a id="ogrid-help-icon" class="fa fa-question-circle" alt="OpenGrid Help" href="http://opengrid.readthedocs.org/en/latest/User%20Documentation" target="_blank"></a>
+            <a id="ogrid-help-icon" class="fa fa-question-circle hide" alt="OpenGrid Help" href="http://opengrid.readthedocs.org/en/latest/User%20Documentation" target="_blank"></a>
           </ul>
         </div>
       </div>
@@ -120,7 +121,7 @@
       <div id="table-chart"></div>
 
       <!-- advanced search container, modularize later -->
-      <div id="ogrid-task-advanced-search" class="ogrid-task-pane visible">
+      <div id="ogrid-task-advanced-search" class="ogrid-task-pane">
         <div id="ogrid-advanced-find" class="panel-body">
           <ul id="ogrid-adv-tabs" class="nav nav-tabs" role="tablist">
             <li class="active">
@@ -144,12 +145,12 @@
                             <select id="commonlyUsedQueries" class="form-control">
                               <option value="">SELECT COMMONLY USED QUERY</option>
                               <script type="text/x-jquery-tmpl" id="queryOptionTemplate">
-                                  <option data-query-id="${_id}" data-qspec="${spec}" data-geo-filter="${geoFilter}" data-auto-refresh="${autoRefresh}" data-refresh-interval="${refreshInterval}" >${name}</option>
+                                   <option data-query-id="${_id}" data-qspec="${spec}" data-geo-filter="${geoFilter}" data-owner="${owner}"  data-is-common="${isCommon}" data-auto-refresh="${autoRefresh}" data-refresh-interval="${refreshInterval}" >${name}</option>
                                </script>
                             </select>
                           </div>
                         </div>
-                        <div class="form-group hide">
+                        <div class="form-group">
                           <label for="lastSavedQueries" class="control-label col-xs-5">Load saved query</label>
                           <div class="col-xs-7 svdqry">
                             <select id="lastSavedQueries" class="form-control">
@@ -162,13 +163,13 @@
                   </div>
                 </div>
                 <div class="panel panel-default">
-                  <div class="panel-heading panel-collapsed">Select Data<span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
+                  <div id="ogrid-select-data-pane"class="panel-heading panel-collapsed">Select Data <span class="clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span></div>
                   <div id="ogrid-dataset-filters" class="panel-body" style="display:none">
                     <ul id="ogrid-ds-tabs" class="nav nav-tabs nav-pills" role="tablist">
                       <!-- JQuery template -->
                       <script type="text/x-jquery-tmpl" id="newDTTemplate">
-                                    <li class="active regtab"><a href="#${tabName}" role="tab" data-toggle="tab"><button class="close closeTab" type="button" ><i class="fa fa-times-circle"></i></button>${label}</a></li>
-                                </script>
+                        <li class="active regtab"><a href="#${tabName}" role="tab" data-toggle="tab"><button class="close closeTab" type="button" ><i class="fa fa-times-circle"></i></button>${label}</a></li>
+                      </script>
                       <li>
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">Add dataset <span class="glyphicon glyphicon-plus-sign"></span></a>
                         <ul id="ogrid-dtlist" class="dropdown-menu"></ul>
@@ -253,7 +254,7 @@
                     <div id="geo-filter"></div>
                   </div>
                 </div>
-                <div id="savequery-panel" class="panel panel-default hide">
+                <div id="savequery-panel" class="panel panel-default">
                   <div class="panel-body">
                       <form class="form-inline">
                         <div class="form-group">

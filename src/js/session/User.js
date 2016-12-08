@@ -8,6 +8,7 @@ ogrid.User = ogrid.Class.extend({
     //private attributes
     _options:{},
     _profile: null,
+    _decodedToken: null,
 
     //public attributes
 
@@ -28,6 +29,7 @@ ogrid.User = ogrid.Class.extend({
             lastName: d.lname,
             roles: d.roles.split(',')
         };
+        this._decodedToken = d;
     },
 
 
@@ -84,6 +86,14 @@ ogrid.User = ogrid.Class.extend({
 
     getProfile: function() {
         return this._profile;
+    },
+
+    isAdmin: function() {
+        if (this._decodedToken && this._decodedToken.resources) {
+            //$admin is a reserved opengrid resource name
+            return ($.inArray('$admin', this._decodedToken.resources) === -1);
+        }
+
     }
 });
 

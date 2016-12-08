@@ -330,6 +330,23 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
     color: lightskyblue;
 }
 
+#ogrid-help-icon {
+    padding-top: 18px;
+    padding-right: 10px;
+    color: whitesmoke;
+}
+
+.no-underline-on-hover:hover { text-decoration: none; }
+.no-underline-on-hover { text-decoration: none; }
+
+/* mobile styles for help icon*/
+@media (max-width: 845px) {
+    #ogrid-help-icon {
+        padding-left: 10px;
+        font-size: 1.5em;
+    }
+}
+
 .header-center {
     display: flex;
     justify-content: center;
@@ -361,3 +378,4 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
     /* adjusted due to increase in search results panel height */
     margin-bottom: 4px !important;
 }
+

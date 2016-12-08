@@ -266,6 +266,11 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         //refvresh query list
         this._queryAdmin.setUser(e.message);
         this._queryAdmin.refreshQueries();
+
+        if (ogrid.Config.service.autologin) {
+            //logged in as anonymous user, disable saving of query
+            $('#savequery-panel').addClass('hide');
+        }
 		
 		// load auto-load query if option is set
 		if (ogrid.Config.advancedSearch.autoLoadQuery) {
@@ -273,7 +278,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 			
 			//auto-open Select Data pane
             this._expandPane($("#ogrid-select-data-pane"));
-			}
+        }
     },
 
 
