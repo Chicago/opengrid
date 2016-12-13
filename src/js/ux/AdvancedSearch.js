@@ -268,6 +268,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         this._queryAdmin.refreshQueries();
 
         if (ogrid.Config.service.autologin) {
+            //disable dropdown list of saved queries
+            $('#load-savedqueries').addClass('hide');
+
             //logged in as anonymous user, disable saving of query
             $('#savequery-panel').addClass('hide');
         }

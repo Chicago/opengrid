@@ -39,7 +39,7 @@
     width: 90%;
 }
 
-h1,h2,h3,h4,h5,h6,legend {
+#help-content h1, #help-content h2, #help-content h3, #help-content h4, #help-content h5, #help-content h6, #help-content legend {
     margin-top: 0;
     font-weight: 700;
     font-family: "Roboto Slab","ff-tisa-web-pro","Georgia",Arial,sans-serif;
