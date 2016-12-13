@@ -7,21 +7,30 @@
 
 ogrid.Search = {};
 
-ogrid.Search._getParams = function(filter) {
-    return 'q=' + encodeURI(JSON.stringify(filter));
+ogrid.Search._getFilterParam = function(filter) {
+    return JSON.stringify(filter).replace('&', encodeURIComponent('&')).replace('#', encodeURIComponent('#'));
+};
+
+
+ogrid.Search._getQParam = function(filter) {
+    //make sure we encode &, # here to prevent any syntax errors
+    return 'q=' + encodeURI(
+            JSON.stringify(filter)
+        ).replace('&', encodeURIComponent('&')).replace('#', encodeURIComponent('#'));
 };
 
 ogrid.Search._getOpts = function(geoFilter) {
     if (geoFilter) {
         var f = {"geoFilter": geoFilter};
-        return '&opts=' + encodeURI(JSON.stringify(f));
+        //return '&opts=' + encodeURI(JSON.stringify(f));
+        return JSON.stringify(f);
     } else
         return '';
 };
 
 ogrid.Search._preProcess = function(data, renditionOptions) {
     if (renditionOptions)
-        //apply rendition options to returning json
+    //apply rendition options to returning json
         data.meta.view.options.rendition = $.extend(data.meta.view.options.rendition, renditionOptions);
 
     //timestamp data
@@ -64,17 +73,77 @@ ogrid.Search._onAjaxError = function (opName, err, options, passThroughData, jqX
 /* renditionOptions override default rendition options on the response json
  */
 ogrid.Search.exec = function(options, passThroughData) {
-    //options {dataSetId, filter, geoFilter, renditionOptions, success, error}
+    //options {dataSetId, filter, renditionOptions, success, error}
     //passThroughData is additional info from the caller that is passed to success and error callbacks
     var me = this;
-    var q = this._getParams(options.filter);
+    var q = this._getFilterParam(options.filter);
+    var opts = this._getOpts(options.geoFilter);
+
+    var url = ogrid.Config.service.endpoint + '/datasets/' + options.dataSetId + '/query';
+    console.time("ogrid.Search.exec:" + options.dataSetId);
+
+    var fd = new FormData();
+    fd.append( 'q', q );
+    fd.append( 'n', (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults) );
+
+    if (!ogrid.isNull(options.sort)) {
+        fd.append( 's', options.sort );
+    }
+
+    if (opts) {
+        fd.append( 'opts', opts );
+    }
+
+    $.ajax({
+        url:  url,
+        type: 'POST',
+        async: true,
+        contentType: false,
+        timeout: ogrid.Config.service.timeout,
+        xhrFields: {
+            withCredentials: false
+        },
+        data: fd,
+        processData: false,
+        headers: {
+            // Set any custom headers here.
+            // If you set any non-simple headers, your server must include these
+            // headers in the 'Access-Control-Allow-Headers' response header.
+        },
+        success: function(data, txtStatus, jqXHR) {
+            console.timeEnd("ogrid.Search.exec:" + options.dataSetId);
+            me._onAjaxSuccess('Search', data, options, jqXHR, txtStatus, passThroughData);
+        },
+
+        error: function(jqXHR, txtStatus, errorThrown) {
+            console.timeEnd("ogrid.Search.exec");
+            me._onAjaxError('Search', {}, options, passThroughData, jqXHR, txtStatus, errorThrown);
+        },
+
+        statusCode: {
+            //placeholder
+            404: function() {
+                ogrid.Alert.error("The search service cannot be reached at this time. Make sure an internet connection is available then try again.");
+            }
+        }
+    });
+};
+
+//depreccated
+//previous version of ogrid.Search.exec
+ogrid.Search.execGet = function(options, passThroughData) {
+    //options {dataSetId, filter, renditionOptions, success, error}
+    //passThroughData is additional info from the caller that is passed to success and error callbacks
+    var me = this;
+    var q = this._getQParam(options.filter);
     var opts = this._getOpts(options.geoFilter);
 
     var url = ogrid.Config.service.endpoint + '/datasets/' + options.dataSetId + '/query?' + q  +
-        '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults)  + opts;
+        '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults) + opts;
     if (!ogrid.isNull(options.sort)) {
         url +='&s=' + encodeURI(options.sort);
     }
+    console.time("ogrid.Search.exec:" + options.dataSetId);
     $.ajax({
         url:  url,
         type: 'GET',
@@ -90,10 +159,12 @@ ogrid.Search.exec = function(options, passThroughData) {
             // headers in the 'Access-Control-Allow-Headers' response header.
         },
         success: function(data, txtStatus, jqXHR) {
+            console.timeEnd("ogrid.Search.exec:" + options.dataSetId);
             me._onAjaxSuccess('Search', data, options, jqXHR, txtStatus, passThroughData);
         },
 
         error: function(jqXHR, txtStatus, errorThrown) {
+            console.timeEnd("ogrid.Search.exec");
             me._onAjaxError('Search', {}, options, passThroughData, jqXHR, txtStatus, errorThrown);
         },
 
@@ -150,11 +221,11 @@ ogrid.Search.save = function(options) {
 
 ogrid.Search.list = function(options) {
     var me = this;
-    var q = this._getParams(options.filter);
+    var q = this._getQParam(options.filter);
 
     $.ajax({
         url: ogrid.Config.service.endpoint + '/queries/?' + q +
-            '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults),
+        '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults),
         type: 'GET',
         async: true,
         contentType: 'application/json',

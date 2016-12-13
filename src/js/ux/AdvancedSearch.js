@@ -246,7 +246,24 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
         ogrid.Event.on(ogrid.Event.types.CLEAR, $.proxy(this._onClear, this));
         ogrid.Event.on(ogrid.Event.types.LOGGED_IN, $.proxy(this._onLoggedIn, this));
+
+        ogrid.Event.on(ogrid.Event.types.MAP_EXTENT_CHANGED, $.proxy(this._onMapExtentChanged, this));
     },
+
+
+    _onMapExtentChanged: function() {
+        if (this._isMapExtentSelected()) {
+            //re-invoke submit
+            //TODO re-submit only when query has been run at least once
+            this._onSubmit();
+        }
+    },
+
+    _isMapExtentSelected: function() {
+        return (this._geoFilter.getBoundaryType() === 'within' &&
+        this._geoFilter.getWithinBoundaryOption() === '_map-extent');
+    },
+
 
 	_expandPane: function(pane) {
         //exclude color options which is independently controlled
@@ -308,12 +325,15 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         if (this._pendingQueries > 0 ) {
             this._pendingQueries--;
             if (this._pendingQueries === 0) {
-                //no more pending queries, we're ready to auto-zoom
-                this._options.map.zoomToResultBounds();
+                if (!this._isMapExtentSelected()) {
+                    this._options.map.zoomToResultBounds();
+                }
             }
         } else {
             //not exactly our responsibility but might as well do it to work for quick search results
-            this._options.map.zoomToResultBounds();
+            if (!this._isMapExtentSelected()) {
+                this._options.map.zoomToResultBounds();
+            }
         }
     },
 
@@ -684,7 +704,14 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 }
 
                 //immediate execution
-                ogrid.Search.exec(search, {origin: 'advancedSearch', search: search});
+                ogrid.Search.exec(search, {origin: 'advancedSearch', search: search,
+                    //set new object to handle refresh on map extent change
+                    //  only on map extent location and if callback function is passed as param
+                    regenerator: (me._isMapExtentSelected()) ? {handler: me, id: ogrid.guid()} : null,
+
+                    //new done callback for map extent change
+                    done: (typeof e == 'function') ? e : null
+                });
             });
 
              //auto-hide Advanced Search pane after Submit (no longer done in mobile mode only)
@@ -1033,9 +1060,17 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         $('#ogrid-ds-content .tab-pane').removeClass('active');
 
         this._loadNewTab(q);
-    }
+    },
 
 
     //public methods
 
+    //call back for map extent change, invoked by map component
+    regenerate: function(done) {
+        console.log("Regenerate called");
+        if (this._isMapExtentSelected()) {
+            //re-invoke submit, passing along done callback
+            this._onSubmit(done);
+        }
+    }
 });

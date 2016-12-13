@@ -387,6 +387,10 @@ h6 > a {
   font-weight: normal;
 }
 
+/* make heatmap appear on top of dots, just like in leaflet 0.7.3; this changed in leaflet 1.0.1 */
+.leaflet-map-pane canvas {
+  z-index: 250;
+}
 
 /* override some Leaflet styles */
 
