@@ -173,8 +173,10 @@ ogrid.Config = {
             none: {
                 label: "None"
             }
-        }
+        },
 
+        //flag to indicate whether to auto-resubmit query when map extent changes
+        autoRequery: true
     },
 
     //quick search plug-ins
