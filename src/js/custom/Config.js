@@ -57,9 +57,11 @@ ogrid.Config = {
                     htmlContent: true
                 }
             },
+            //hide some of the available buttons on the results grid by setting the flags below
             showHeatmap: true,
-            showTilemap: true,
+            showTilemap: false,
             showGraph: true,
+
             resizable: true
         }
     },
@@ -207,41 +209,10 @@ ogrid.Config = {
             {id:'citywide', displayName:'Citywide', data:ogrid.chicagoCityShapeMap().getData()},
             {id:'zip-code', displayName:'Zip Code', data: ogrid.chicagoZipShapeMap().getData()},
             {id:'ward', displayName:'Ward', data: ogrid.chicagoWardsShapeMap().getData()}
-        ], 
-		
-		autoLoadQuery: {
-              //_id:  "5797b9ad40c6662c52dca26f",
-            spec: [{
-                  "dataSetId" : "weather",
-                  "filters" : { },
-                  "rendition" : {
-                    "color" : "#FFD700",
-                    "opacity" : "85",
-                    "size" : "6"
-                  }
-                }, {
-                  "dataSetId" : "twitter",
-                  "filters" : { },
-                  "rendition" : {
-                    "color" : "#C71585",
-                    "opacity" : "85",
-                    "size" : "6"
-                  }
-                }],
-            sharedWith : {
-               "users" : [],
-               "groups" : []
-            },
-            owner: "system",
-            name: "New search",
-            geoFilter: {
-                "boundaryType" : "within",
-                "boundary" : "_map-extent"
-            },
-            isCommon: false,
-            autoRefresh: false,
-            refreshInterval: "30"
-          },
+        ],
+        //customize this with a query definition/object to autoload on start up
+        //sample query object is returned from /queries resource
+        autoLoadQuery: null
     },
 
 
@@ -263,7 +234,14 @@ ogrid.Config = {
     },
 
     service: {
-        endpoint: 'http://localhost:8080/opengridservice/rest',
+        //turn autologin for use cases where service is public or not secured
+        autologin: true,
+        autologinUserId: "NoAuth",
+        autologinPassword: "NoAuth",
+
+        //default endpoint to the same context root, customize as needed
+        //or override in config/EnvSettings.js if there are environment-specific endpoints
+        endpoint: document.location.href.split("/opengrid/")[0]+"/opengrid-service/rest",
         timeout: 60000,  //timeout in ms
         maxresults: 6000,
         authUrl: 'users/token',
@@ -276,5 +254,11 @@ ogrid.Config = {
         //used for converting string to data value for comparing dates on auto-refresh highlighting
         //date format is determined by the service
         dateFormat: 'MM/DD/YYYY hh:mm:ss aa'
+    },
+    help: {
+        //by default, the OpenGrid User documentation URL is on the main HTML file
+        //this setting overrides that
+        url: 'http://opengrid.readthedocs.org/en/latest/User%20Documentation',
+        type: 'icon' //valid values are 'button' or 'icon'
     }
 };

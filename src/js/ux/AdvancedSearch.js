@@ -266,6 +266,14 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         //refvresh query list
         this._queryAdmin.setUser(e.message);
         this._queryAdmin.refreshQueries();
+
+        if (ogrid.Config.service.autologin) {
+            //disable dropdown list of saved queries
+            $('#load-savedqueries').addClass('hide');
+
+            //logged in as anonymous user, disable saving of query
+            $('#savequery-panel').addClass('hide');
+        }
 		
 		// load auto-load query if option is set
 		if (ogrid.Config.advancedSearch.autoLoadQuery) {
@@ -273,7 +281,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 			
 			//auto-open Select Data pane
             this._expandPane($("#ogrid-select-data-pane"));
-			}
+        }
     },
 
 
@@ -416,9 +424,13 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _getRendition: function(tabId) {
         var c = $('#colorPicker_' + tabId + ' option').filter(':selected').data('color');
+
+        if (c === undefined || c === null)
+        {c = 'indianred';}
+
         return {
                 color: c,
-                fillColor: chroma.scale(['white', c])(0.5).hex(),
+                fillColor: (chroma.scale(['white', c])(0.5)).hex(),
                 opacity: $('#opacitySpin_' + tabId).val(),
                 size: $('#sizeSpin_' + tabId).val()
             };

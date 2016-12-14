@@ -36,12 +36,12 @@ html, body {
 @media (max-width: 450px) {
   #ogrid-search {
     /*width: 277px;*/
-    width: calc(100% - 120px);
-    margin-left: 10px;
+    width: calc(100% - 180px);
+    margin-left: 0px;
   }
   #ogrid-search.pull-left.col-xs-7 {
     padding: 0px;
-    width: calc(100% - 120px);
+    width: calc(100% - 180px);
   }
 }
 
