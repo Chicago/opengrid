@@ -75,6 +75,9 @@ ogrid.PointGeoFilter = ogrid.BaseGeoFilter.extend({
         $.each(me._options.shapeMap.getLayers(), function(i, v) {
             var c = L.circle(v.getLatLng(), me._getRadius());
 
+            //temp fix for Leaflet getBounds bug (https://github.com/Leaflet/Leaflet/issues/4978)
+            me._fixCircleGetBounds(c);
+
             var coordinates = me._getCoordinatesFromLatLngBounds(c.getBounds());
             multiGeo.features[0].geometry.coordinates.push(coordinates);
         });

@@ -79,6 +79,9 @@ ogrid.GeoLocationGeoFilter = ogrid.BaseGeoFilter.extend({
         //shapeMap for Near Me will contain the LatLng of the last location found
         var c = L.circle(this._options.shapeMap, this._getRadius());
 
+        //temp fix for Leaflet getBounds bug (https://github.com/Leaflet/Leaflet/issues/4978)
+        this._fixCircleGetBounds(c);
+
         var coordinates = this._getCoordinatesFromLatLngBounds(c.getBounds());
         var polyGeo =  this._getEmptyPolygon();
         polyGeo.features[0].geometry.coordinates = coordinates;

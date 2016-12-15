@@ -1,6 +1,5 @@
-<br>
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
-<h4 align="center">Version 1.1.0</h4>
+<h4 align="center">Version 1.3.0</h4>
 
 <!--
 ## Table of Contents
@@ -58,71 +57,87 @@
 [HTTP Status Codes on Responses](#http-status-codes-on-responses)
 //-->
 
-## 1.1 REST Service Resources
+## REST Service Resources
 
-<p>
-<i>Note: See Section 1.2 for information on error responses and other HTTP
-status codes used by the service. Also note that X-AUTH-TOKEN needs to
+<p><b>Note:</b> See Section 1.2 for information on error responses and other HTTP
+status codes used by the service. Also note that <b>X-AUTH-TOKEN</b> needs to
 be sent for each calls on the request header with the token obtained by
-calling /users/token as described in Section 1.1.1.</i>
+calling <b>/users/token</b> as described in Section 1.1.1.</p>
+
+<h2>HTTP Status Codes on Response</h2>
+
+<ul>
+<li><b>HTTP 401</b> is returned when users/token is called and authentication fails.</li>
+<br>
+<li><b>HTTP 403</b> is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.</li>
+<br>
+<li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li> </ul> 
+			<pre><code>
+					{
+						"error": {
+									"code": "&lt;error code&gt;",
+									"message": "&lt;error message&gt;"
+										}
+							}
+							</code> </pre>
+
+<ul>		
+<li>where <b>HTTP &lt;error code&gt;</b> is a code corresponding to the error that occurred and <b>HTTP &lt;error message&gt;</b> is a description of the error.</li>
+<li><b>HTTP 500</b> for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
+</li>
+<br>
+<li><b>HTTP 204</b> (No Content) is returned when an object is deleted successfully (DELETE method where applicable).</li>
+</ul>
+
+<h2>1.1.1 /users/token</h2>
+
+<b>Method</b>
+<p><b>POST</b> /users/token</p>
+
+<p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated. The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew.<b>(See 1.1.2 below)</b>
 </p>
 
-## 1.1.1 /users/token
-
-**Methods**
-
-<p><b>POST</b></p>
-
-
-<p>Return a JSON Web Tokn (JWT) token after user id and password have been successfully validated.</p>
-
-<p>
-The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew. (See 1.1.2 below)
-</p>
-
-<p><i>Note on security</i>:the password is currently expected to be sent in plain text (not encrypted).<br> This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.
-</p>
+<p><b>Note on security:</b>The password is currently expected to be sent in plain text (not encrypted). This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.</p>
 
 <p><b>Sample Request</b></p>
-<p><small><b>Request Payload</small></b>:<br>
-<code>
-{"username":"admin","password":"xxx"}
-</code>
-</p>
-
+<p><small><b>Request Payload:</b></small></p>
+```
+	{
+			"username": "admin",
+			"password": "xxx"
+		}
+```
 <p><b>Sample Response</b></p>
-<p>No response is returned but the authentication token, with key X-AUTH-TOKEN, is appended to the response header such as below:
-</p>
 
-<b>X-AUTH-TOKEN:</b> <br>
+<p>The authentication token is returned, the authentication token consist of three sections separated by dots(<b>.</b>): <b>HEADER.PAYLOAD.SIGNATURE</b>; the key X-AUTH-TOKEN is appended to the response header below: </p>
 ```
+X-AUTH-TOKEN:
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
-
 ```
-
 <p>
 This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See <a href="https://github.com/auth0/jwt-decode"> https://github.com/auth0/jwt-decode</a>)
 </p>
 
-<p><b>Error Codes</b><br>
-If user authentication fails, HTTP status code 401 (Unauthorized) is returned to the requester.
-</p>
+<p><b>Error Code</b></p>
+<p>If user authentication fails, HTTP status code 401 (Unauthorized) is returned to the requester.</p>
+
 
 ## 1.1.2 /users/renew
-**Methods**
-<p><b>POST</b><br>
-Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.
-</p>
 
-<p><b>Sample Response</b><br>
-No response is returned but the authentication token with a new expiration time is appended to the response header, replacing the previous one. See 1.1.1 above for a sample token value.
-</p>
+**Method**
+<p><b>POST</b> /users/renew</p>
+<p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.</p>
+
+<p><b>Sample Response</b></p>
+<p>No response is returned but the authentication token with a new expiration time is appended to the response header, replacing the previous one. See 1.1.1 above for a sample token value.</p>
+
 
 ## 1.1.3 /users
 
-**Methods**
-<p><b>GET</b><br>
-Return a list of users given a filter</p>
+**Method**
+
+<p><b>GET</b> /users</p>
+<p>Return a list of users given a filter</p>
 
 <p><b>Request Query Parameters</b></p>
 
@@ -153,172 +168,167 @@ Return a list of users given a filter</p>
 </table>
 </html>
 
-<p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/users?q={}&n=1000
-</code>
-</p>
+<p><b>Sample Request</b></p>
 
-<p><b>Or when URL encoded:</b><br>
-<code>
-&lt;Service URL&gt;/users?q=%7B%7D&n=1000
-</code>
-</p>
+```
+<Service URL> /users?q={}&n=1000
+```
+<p><b>Or when URL encoded:</b></p>
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp;[ 
-<br>
-&nbsp; &nbsp;{"&#95;id: {"$oid" : "55ca20b9c4aac050466bc1a3"}, 
-<br> &nbsp; &nbsp; &nbsp;
-"userId" : "tester1",
-<br> &nbsp; &nbsp; &nbsp;
-"password" : "password1",
-<br> &nbsp; &nbsp; &nbsp;
-"firstName" : "Tester",
-<br> &nbsp; &nbsp; &nbsp;
-"lastName" : "One",
-<br> &nbsp; &nbsp; &nbsp;
-"groups" : ["opengrid_users_L1"]
-<br> &nbsp; &nbsp; &nbsp;  } 
-<br> &nbsp;]
-</code>
-</p>
+```
+<Service URL>/users?q=%7B%7D&n=1000
+```
+<p><b>Sample Response</b></p>
 
-<p><b>POST</b><br>
-Create a new user. Returns object for newly created user, if successful.
-</p>
+```
+[
+ {"_id":
+       {"$oid":"55ca20b9c4aac050466bc1a3"}, 
+  "userId":"tester1",
+  "password":"password1",
+  "firstName":"Tester",
+  "lastName":"One",
+  "groups":["opengrid_users_L1"]
+ } 
+]
+```
 
-<p><b>Sample Request</b><br>
-<code>
-&nbsp;{"id":null,
-<br>&nbsp;&nbsp;&nbsp;"o":{"userId":"test3",
-<br> &nbsp; &nbsp; &nbsp; &nbsp;  "password":"testxxx",
-<br> &nbsp; &nbsp; &nbsp; &nbsp;  "firstName":"Test",
-<br> &nbsp; &nbsp; &nbsp; &nbsp;  "lastName":"Three",
-<br> &nbsp; &nbsp; &nbsp; &nbsp;  "groups":[]
-<br>&nbsp; &nbsp; &nbsp; &nbsp;}
-<br>&nbsp;&nbsp;}
-</code>
-</p>
+<p><b>POST</b> /users</p>
 
-<p><b>Sample Response</b>
-<br>
-<code>
-&nbsp;{"userId":"test3",
-<br>&nbsp;&nbsp;&nbsp;"password":"testxxx",
-<br>&nbsp;&nbsp;&nbsp;"firstName":"Test",
-<br>&nbsp;&nbsp;&nbsp;"lastName":"Three",
-<br>&nbsp;&nbsp;&nbsp;"groups":[ ],
-<br>&nbsp;&nbsp;&nbsp;"&#95;id":{"$oid":"55ca52dec4aac050466bc1a9"}
-<br>&nbsp;}
-</code>
-</p>
+<p>Create a new user. Returns object for newly created user, if successful.</p>
+
+<p><b>Sample Request</b></p>
+
+```
+{
+ "id":null,
+ "o":{"userId":"test3",
+      "password":"testxxx",
+      "firstName":"Test",
+      "lastName":"Three",
+      "groups":[]
+     }
+}
+```
+
+<p><b>Sample Response</b></p>
+
+```
+{
+	"userId":"test3",
+	"password":"testxxx",
+	"firstName":"Test",
+	"lastName":"Three",
+	"groups":[ ],
+	"_id":
+		{"$oid":"55ca52dec4aac050466bc1a9"}
+}
+```
 
 ## 1.1.4 /users/{user_id}
-**Methods**
+**Method**
 
-<p><b>GET</b></p>
-<br>
-Return a single user object given the user’s internal id.
-</p>
+<p><b>GET</b> /users/{user_id}</p>
 
-<p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/users/{"$oid":"55b63708a3db5f292c533c7b"} 
-</code> 
-</p>
+<p>Return a single user object given the user’s internal id.</p>
 
-<p><b>or when URL encoded:</b><br>
-<code>
-&lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
-</code>
-</p>
+<p><b>Sample Request</b></p>
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp;{
-<br>&nbsp;&nbsp;"&#95;id": {"$oid" : "55b63708a3db5f292c533c7b"},
-<br>&nbsp;&nbsp;"userId" : "TesterOne",
-<br>&nbsp;&nbsp;"password" : "test123",
-<br>&nbsp;&nbsp;"firstName" : "ABC Test",
-<br>&nbsp;&nbsp;"lastName" : "One Update",
-<br>&nbsp;&nbsp;"groups" : [ "opengrid_users_L1"]
-<br>&nbsp;}
-</code>
-</p>
+```
+<Service URL>/users/{"$oid":"55b63708a3db5f292c533c7b"} 
+```
 
-<p><b>PUT</b><br>
-Update a user’s information. Returns the updated user data, if successful.
-</p>
+<p><b>or when URL encoded:</b></p>
 
-<p><b>Sample Request</b>
-<br><b>URL:</b><br>
-<code>
-&lt;Service URL&gt;/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"}
-</code>
-</p>
+```
+<Service URL>/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
+```
 
-<p><b>or when URL encoded:</b><br>
-<code>
-&lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D
-</code>
-</p>
+<p><b>Sample Response</b></p>
 
-<p><b>Request Payload:</b><br>
-<code>
-&nbsp;{
-<br>&nbsp;&nbsp;&nbsp; "id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
-<br> &nbsp; &nbsp; &nbsp; "o":{"&#95;id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "userId":"twitterUser",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "password":"testxxx",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "firstName":"Twitter",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "lastName":"User",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groups":["opengrid_users_L1","opengrid_users_L2"]
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
-<br>&nbsp;}
-</code>
-</p>
+```
+{
+	 "_id":
+			{"$oid":"55b63708a3db5f292c533c7b"},
+	"userId":"TesterOne",
+	"password":"test123",
+	"firstName":"ABC Test",
+	"lastName":"One Update",
+	"groups":["opengrid_users_L1"]
+}
+```
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp;{
-<br>&nbsp;&nbsp;&nbsp; "userId":"test3",
-<br>&nbsp;&nbsp;&nbsp; "password":"testxxx",
-<br>&nbsp;&nbsp;&nbsp; "firstName":"Test",
-<br>&nbsp;&nbsp;&nbsp; "lastName":"3",
-<br>&nbsp;&nbsp;&nbsp; "groups":[ ]
-<br>&nbsp;}
-</code>
-</p>
+<p><b>PUT</b> /users/{user_id}</p>
+<p>Update a user’s information. Returns the updated user data, if successful.</p>
 
-<p><b>DELETE</b><br>
-Delete a user given the user’s internal Id on the URL path.
-</p>
+<p><b>Sample Request</b></p>
+<p><b>URL:</b></p>
 
-<p><b>Sample Request</b>
-<br>
-<code>
-&lt;Service URL&gt;/users/{"$oid": "55b63708a3db5f292c533c7b"}
-</code>
-</p>
+```
+<Service URL>/users/{"$oid":"55ccaca15fc6c6bf8a807cf2"}
+```
 
-<p><b>or when URL encoded:</b><br>
-<code>
-&lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
-</code>
-</p>
+<p><b>or when URL encoded:</b></p>
 
-<p><b>Sample Response</b>
-<br>
-No response is returned when a user is deleted successfully.
-</p>
+```
+<Service URL>/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D
+```
+
+<p><b>Request Payload:</b></p>
+
+```
+{
+	"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
+	"o":{
+			"_id":
+					{"$oid":"55ccaca15fc6c6bf8a807cf2"},
+			"userId":"twitterUser",
+			"password":"testxxx",
+			"firstName":"Twitter",
+			"lastName":"User",
+			"groups":[
+					"opengrid_users_L1",
+					"opengrid_users_L2"]
+			}
+}
+```
+
+<p><b>Sample Response</b></p>
+```
+{
+ 	"userId":"test3",
+	"password":"testxxx",
+	"firstName":"Test",
+	"lastName":"3",
+	"groups":[ ]
+}
+```
+
+<p><b>DELETE</b> /user/{user_id}</p>
+
+<p>Delete a user given the user’s internal Id on the URL path.</p>
+
+<p><b>Sample Request</b></p>
+
+```
+<Service URL>/users/{"$oid":"55b63708a3db5f292c533c7b"}
+```
+
+<p><b>or when URL encoded:</b></p>
+
+```
+<Service URL>/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
+```
+
+<p><b>Sample Response</b></p>
+
+<p>No response is returned when a user is deleted successfully.</p>
 
 ## 1.1.5 /groups
 **Methods**
-<p><b>GET</b><br>
-Return a list of OpenGrid groups (teams)
-</p>
+<p><b>GET /groups</b></p>
+
+<p>Return a list of OpenGrid groups (teams)</p>
 
 <p><b>Request Query Parameters</b></p>
 
@@ -354,406 +364,510 @@ The maximum number of records to return; If this parameter is not specified, no 
 </table>
 </html>
 
-<p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/groups?q={}&n=200
-</code> 
-</p>
+<p><b>Sample Request</b></p>
 
-<p><b>Or when URL encoded:</b><br>
-<code>
-&lt;Service URL&gt;/groups?q=%7B%7D&n=200
-</code>
-</p>
+```
+<Service URL>/groups?q={}&n=200
+```
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp;[
-<br>&nbsp;&nbsp;&nbsp;{ 
-<br>&nbsp;&nbsp;&nbsp; "&#95;id" : {"$oid" : "55c0c620a3db5f3058630eb3"},
-<br>&nbsp;&nbsp;&nbsp; "groupId" : "opengrid_users",
-<br>&nbsp;&nbsp;&nbsp; "name" : "OpenGrid Users",
-<br>&nbsp;&nbsp;&nbsp; "description" : "Group for all OpenGrid users", "enabled" : true,
-<br>&nbsp;&nbsp;&nbsp; "functions" : [ "Quick Search" , "Advanced Search"],
-<br>&nbsp;&nbsp;&nbsp; "datasets" : [ "twitter" , "weather"]
-<br>&nbsp;&nbsp;&nbsp;}
-<br>&nbsp;]
-</code>
-</p>
+<p><b>Or when URL encoded:</b></p>
 
-<p><b>POST</b><br>
-Create a new group. Returns object for newly created group, if successful.
-</p>
+```
+<Service URL>/groups?q=%7B%7D&n=200
+```
 
-<p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/groups
-</code>
-</p>
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp;{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "groupId" : "OPENGRID_NEWGROUP",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "name" : "ABC GROUP",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "description" : "ADD ABC GROUP",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "enabled" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "functions" : [ ],
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "datasets" : [ ] ,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "&#95;id" : { "$oid" : "55cb6362c4aa475d78d4bc40"}
-<br>&nbsp;}
-</code>
-</p>
+<p><b>Sample Response</b></p>
+
+```
+	[
+		{"_id" :
+				{"$oid":"55c0c620a3db5f3058630eb3"},
+		"groupId":"opengrid_users",
+		"name":"OpenGrid Users",
+		"description":"Group for all OpenGrid users", 
+		"enabled": true,
+		"functions": [
+					"Quick Search",
+					"Advanced Search"],
+		"datasets": [
+					"twitter",
+					"weather"]
+		}
+]
+```
+ 
+**Method**
+
+<p><b>POST</b> /groups</p>
+<p>Create a new group. Returns object for newly created group, if successful.</p>
+
+<p><b>Sample Request</b></p>
+
+```
+<Service URL>/groups
+```
+
+<p><b>Sample Response</b></p>
+
+```
+	{
+		"groupId" : "OPENGRID_NEWGROUP",
+		"name" : "ABC GROUP",
+		"description" : "ADD ABC GROUP",
+		"enabled" : true,
+		"functions" : [ ],
+		"datasets" : [ ],
+		"_id": {"$oid":"55cb6362c4aa475d78d4bc40"}
+		}
+```
 
 ## 1.1.6 /groups/{group_id}
-**Methods**
-<p><b><i>GET</i></b><br>
-Return a single group given a group’s internal id.
-</p>
 
-<p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/groups/{"$oid": "55c0c620a3db5f3058630eb3"}
-</code> 
-</p>
+**Method**
+<p><b>GET</b>/groups/{group_id}</p>
 
-<p><b>or when URL encoded:</b><br>
-<code>
-&lt;Service URL&gt;/groups/%7B%22%24oid%22%3A%20%2255c0c620a3db5f3058630eb3%22%7D
-</code>
-</p>
+<p>Return a single group given a group’s internal id.</p>
 
+<p><b>Sample Request</b></p>
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp;[
-<br> &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; "&#95;id" : {"$oid" : "55c0c620a3db5f3058630eb3"},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "groupId" : "opengrid_users",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "name" : "OpenGrid Users",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "description" : "Group for all OpenGrid users",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "enabled" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "functions" : ["Quick Search", "Advanced Search"],
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "datasets" : ["twitter", "weather"]
-<br> &nbsp; &nbsp; }
-<br>&nbsp;]
-</code>
-</p>
+```
+<Service URL>/groups/{"$oid": "55c0c620a3db5f3058630eb3"}
+```
 
-<p><b><i>PUT</i></b><br>
-Update a group (group-level attributes and members). Returns the updated group data, if successful.
-</p>
+<p><b>or when URL encoded:</b></p>
 
-<p><b>Sample Request</b><br>
-<b>URL:</b><br>
-<code>
-&lt;Service URL&gt;/groups/{"$oid":"55c525c6c4aae748132f4d06"}
-</code> 
-</p>
+```
+<Service URL>/groups/%7B%22%24oid%22%3A%20%2255c0c620a3db5f3058630eb3%22%7D
+```
 
-<p><b><small>or when URL encoded:</b></small><br>
-<code>
-&lt;Service URL&gt;/groups/%7B%22%24oid%22%3A%2255c525c6c4aae748132f4d06%22%7D
-</code> 
-</p>
+<p><b>Sample Response</b></p>
 
-<p><b><small>Request Payload:</b></small><br> 
-<code>
-&nbsp;{
-<br> &nbsp; &nbsp; &nbsp;"id":{"$oid":"55c525c6c4aae748132f4d06"},
-<br> &nbsp; &nbsp; &nbsp; "o":{"groupId":"opengrid_users_L2",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "name":"OpenGrid Users Level 2",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "description":"Users with access to weather data",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "enabled":true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "isAdmin":false,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "functions":["Quick Search","Advanced Search"],
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "datasets":["weather"]
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br>&nbsp;}
-</code>
-</p>
+```
+[
+  {
+    "_id" :
+           {"$oid" : "55c0c620a3db5f3058630eb3"},
+    "groupId" : "opengrid_users",
+    "name" : "OpenGrid Users",
+    "description" : "Group for all OpenGrid users",
+    "enabled" : true,
+    "functions" : [
+	    			"Quick Search",
+    				"Advanced Search"],
+    "datasets" : [
+    				"twitter",
+				"weather"]
+  }
+]
+```
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp;{
-<br> &nbsp; &nbsp; &nbsp; "groupId" : "opengrid_users_L2",
-<br> &nbsp; &nbsp; &nbsp; "name" : "OpenGrid Users Level 2",
-<br> &nbsp; &nbsp; &nbsp; "description" : "Users with access to weather data",
-<br> &nbsp; &nbsp; &nbsp; "enabled" : true,
-<br> &nbsp; &nbsp; &nbsp; "isAdmin" : false,
-<br> &nbsp; &nbsp; &nbsp; "functions" : ["Quick Search", "Advanced Search"],
-<br> &nbsp; &nbsp; &nbsp; "datasets" : ["weather"]
-<br> &nbsp;}
-</code>
-</p>
+<p><b>PUT</b>/groups/{group_id}</p>
+<p>Update a group (group-level attributes and members). Returns the updated group data, if successful.</p>
 
-<p><b><i>DELETE</i></b><br>
-Delete a group given the group’s internal Id on the URL path.
-</p>
+<p><b>Sample Request</b></p>
+<p><b>URL:</b></p>
 
-<p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/groups/{"$oid":"55cb6362c4aa475d78d4bc40"}
-</code>
-</p>
+```
+<Service URL>/groups/{"$oid":"55c525c6c4aae748132f4d06"}
+```
 
-<p><b>or when URL encoded:</b><br>
-<code>&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D
-</code>
-</p>
+<p><b><small>or when URL encoded:</small></b></p>
 
-<p><b>Sample Response</b><br>
-No response is returned when a group is deleted successfully.
-</p>
+```
+<Service URL>/groups/%7B%22%24oid%22%3A%2255c525c6c4aae748132f4d06%22%7D
+```
+
+<p><b><small>Request Payload:</small></b></p>
+
+```
+{
+ "id":{"$oid":"55c525c6c4aae748132f4d06"},
+ "o":{"groupId":"opengrid_users_L2",
+      "name":"OpenGrid Users Level 2",
+      "description":"Users with access to weather data",
+      "enabled":true,
+      "isAdmin":false,
+      "functions":[
+				"Quick Search",
+				"Advanced Search"],
+      "datasets":["weather"]
+     }
+}
+```
+
+<p><b>Sample Response</b></p>
+
+```
+{
+  "groupId" : "opengrid_users_L2",
+  "name" : "OpenGrid Users Level 2",
+  "description" : "Users with access to weather data",
+  "enabled" : true,
+  "isAdmin" : false,
+  "functions" : [
+  				"Quick Search",
+				"Advanced Search"],
+  "datasets" : ["weather"]
+}
+```
+
+<p><b>DELETE /groups/{group_id}</b></p>
+<p>Delete a group given the group’s internal Id on the URL path.</p>
+
+<p><b>Sample Request</b></p>
+
+```
+<Service URL>/groups/{"$oid":"55cb6362c4aa475d78d4bc40"}
+```
+
+<p><b>or when URL encoded:</b></p>
+
+```
+<Service URL>/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D
+```
+
+<p><b>Sample Response</b></p>
+<p>No response is returned when a group is deleted successfully.</p>
 
 ## 1.1.7 /datasets
-**Methods** 
-<p><b><i>GET</i></b><br>
-Return a list of available datasets. The response is a JSON array of descriptors for each available dataset.
-</p>
+**Method** 
+<p><b>GET</b> /datasets</p>
+<p>Return a list of available datasets. The response is a JSON array of descriptors for each available dataset.</p>
 
-<p><b>Sample Request</b><br>
-<code>&lt;Service URL&gt;/datasets
-</code>
-</p>
+<p><b>Sample Request</b></p>
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp; [
-<br> &nbsp; &nbsp; &nbsp; { "id" : "twitter",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Twitter",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "options" : {"rendition" :{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "icon" : "default", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; "color" : "#001F7A", "fillColor" : "#00FFFF",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; "opacity" : 85,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "size" : 6 }
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, "columns": 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [{ "id" : "&#95;id",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : false, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date", "filter" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 1},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id": "screenName",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Screen Name",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", "filter" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, "sortOrder" : 2,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "text", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Text",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder": 3},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "city", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "City",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 4,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" :"bio",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Bio",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 5},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "hashtags",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Hashtags",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 6},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 7},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 8 }
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ] },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "weather",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Weather",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "options" :
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "rendition" :
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "icon" : "default",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "color" : "#8c2d04", "fillColor" : "#fdae6b",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : 85, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "size" : 6
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, "columns" : 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  {"id :" "&#95;id", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : false, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "temp",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Temperature",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 1
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "windspeed",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Wind Speed",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 2
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "condition",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Condition",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 3
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "humidity",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Humidity",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 4
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "precipIntensity",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Precipitation Intensity",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 5
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 5
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "zipcode",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Zip Code",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 6 ,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "values" : [ 60601 , 60602], "groupBy" : true
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" :"forecast",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Today's Forecast",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true , "sortOrder" : 7
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "icon",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Icon",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "graphic", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true , "sortOrder" : 7
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 8
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float", "list" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 9
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
-<br> &nbsp; &nbsp; }
-<br> &nbsp;] 
-</code>
-</p>
+```
+<Service URL>/datasets
+```
 
+<p><b>Sample Response</b></p>
+
+```
+	[
+		{
+			"id" : "twitter",
+			"displayName" : "Twitter",
+			"options": {"rendition":
+									{
+										"icon" : "default",
+										"color" : "#001F7A",
+										"fillColor" : "#00FFFF",
+										"opacity" : 85,
+										"size" : 6
+										}		
+						},
+		"columns":
+				[
+					{
+						"id" : "_id",
+						"displayName" : "ID",
+						"dataType" : "string",
+						"filter" : false,
+						"popup" : false,
+						"list" : false
+							},
+					{
+						"id" : "date",
+						"displayName" : "Date",
+						"dataType" : "date",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 1
+							},
+					{				 
+						"id": "screenName",
+						"displayName" : "Screen Name",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 2,
+						"groupBy" : true
+							},
+					{	
+						"id" : "text",
+						"displayName" : "Text",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder": 3
+							},
+					{
+						"id" : "city",
+						"displayName" : "City",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 4,
+						"groupBy" : true
+							},
+					{
+						"id" :"bio",
+						"displayName" : "Bio",
+						"dataType" : "string",
+						"sortOrder" : 5
+							},
+					{
+						"id" : "hashtags",
+						"displayName" : "Hashtags",
+						"dataType" : "string",
+						"sortOrder" : 6
+							},
+					{
+						"id" : "lat",
+						"displayName" : "Latitude",
+						"dataType" : "float",
+						"list" : true,
+						"sortOrder" : 7
+							},
+					{
+						"id" : "long",
+						"displayName" : "Longitude",
+						"dataType" : "float",
+						"list" : true,
+						"sortOrder" : 8
+							}
+				]
+		},	
+	{
+		"id" : "weather",
+		"displayName" : "Weather",
+		"options" : {"rendition":
+									{
+										"icon" : "default",
+										"color" : "#8c2d04",
+										"fillColor" : "#fdae6b",
+										"opacity" : 85,
+										"size" : 6
+											}
+					},
+		"columns":
+					[
+						{ 
+								"id": "_id",
+								"displayName" : "ID",
+								"dataType" : "string",
+								"filter" : false,
+								"popup" : false,
+								"list" : false
+									},
+						{
+								"id" : "temp",
+								"displayName" : "Temperature",
+								"dataType" : "float",
+								"filter" : true,
+								"popup" : true,
+								"list" : true,
+								"sortOrder" : 1
+									},
+						{	
+								"id" : "windspeed",
+								"displayName" : "Wind Speed",
+								"dataType" : "float",
+								"filter" : true,
+								"popup" : true,
+								"list" : true,
+								"sortOrder" : 2
+									},
+						{
+								"id" : "condition",
+								"displayName" : "Condition",
+								"dataType" : "string",
+								"filter" : true,
+								"popup" : true,
+								"list" : true,
+								"sortOrder" : 3
+									},
+						{
+								"id" : "humidity",
+								"displayName" : "Humidity",
+								"dataType" : "float",
+								"filter" : true,
+								"popup" : true,
+								"list" : true,
+								"sortOrder" : 4
+									},
+						{
+								"id" : "precipIntensity",
+								"displayName" : "Precipitation Intensity",
+								"dataType" : "float",
+								"filter" : true,
+								"popup" : true,
+								"list" : true ,
+								"sortOrder" : 5
+									},
+						{
+							 	 "id" : "date",
+								 "displayName" : "Date",
+								 "dataType" : "date",
+								 "filter" : true,
+								 "popup" : true,
+								 "list" : true,
+								 "sortOrder" : 5
+						         	      },
+					         {
+								"id" : "zipcode",
+								"displayName" : "Zip Code",
+								"dataType" : "string",
+								"filter" : true,
+								"popup" : true,
+								"list" : true,
+								"sortOrder" : 6,
+								"values" : [ 60601 , 60602],
+								"groupBy" : true
+									},
+					      {
+							        "id" :"forecast",
+							        "displayName" : "Today's Forecast",
+							        "dataType" : "string",
+							        "popup" : true, 
+							        "list" : true ,
+							        "sortOrder" : 7
+							                },
+					      {
+							        "id" : "icon",
+							        "displayName" : "Icon",
+							        "dataType" : "graphic", 
+							        "popup" : true,
+							        "sortOrder" : 7
+							               },
+					      {
+							        "id" : "lat",
+							        "displayName" : "Latitude",
+							        "dataType" : "float",
+							        "list" : true ,
+							        "sortOrder" : 8
+							               },
+					      {
+							        "id" : "long",
+							        "displayName" : "Longitude",
+							        "dataType" : "float",
+							        "list" : true,
+							        "sortOrder" : 9
+							               }
+				   ]
+		    }
+   ]			     
+       
+```
   
 ## 1.1.8 /datasets/{dataset_id}
-**Methods**
-<p><b><i>GET</i></b><br>
-Return a single dataset descriptor. An HTTP 403 is returned when the user has no access to the dataset requested.
-</p>
 
-<p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/datasets/twitter
-</code>
-</p>
+**Method**
 
-<p><b>Sample Response</b><br>
-<code>
-<br> &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "id" : "twitter",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Twitter", "options" : 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "rendition" :
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "icon" : "default",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "color" : "#001F7A", "fillColor" : "#00FFFF", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : 85, "size" : 6
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "columns" : [ {"id" : "&#95;id",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : false, "popup" : false, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : false 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Date", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "date", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder": 1
-<br> &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "screenName",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Screen Name", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 2,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "text", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Text",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "popup" : true, "list" : true,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 3
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "city", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "City",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 4, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groupBy" : true
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{"id" : "bio",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Bio", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", "sortOrder" : 5
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "hashtags", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Hashtags",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 6
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Latitude",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "list" : true , "sortOrder" : 7
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Longitude", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "float", "list" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sortOrder" : 8
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; &nbsp; ]
-<br> &nbsp; &nbsp; &nbsp; }
-</code>
-</p>
+<p><b>GET</b> /datasets/(dataset_id}</p>
+<p>Return a single dataset descriptor. An HTTP 403 is returned when the user has no access to the dataset requested. </p>
+
+<p><b>Sample Request</b></p>
+
+```
+<Service URL>/datasets/twitter
+```
+
+<p><b>Sample Response</b></p>
+
+```
+{
+	"id" : "twitter",
+	"displayName" : "Twitter", 
+	"options" : 
+				{"rendition" :
+								{
+									"icon" : "default",
+									"color" : "#001F7A",
+									"fillColor" : "#00FFFF",
+									"opacity" : 85,
+									"size" : 6
+										}
+						},
+	"columns" :
+			[
+				{
+					"id" : "_id",
+					"displayName" : "ID",
+					"dataType" : "string",
+					"filter" : false,
+					"popup" : false,
+					"list" : false
+						},
+				{
+					"id" : "date",
+					"displayName" : "Date",
+					"dataType" : "date",
+					"filter" : true,
+					"popup" : true,
+					"list" : true,
+					"sortOrder": 1
+						},
+				{
+					"id" : "screenName",
+					"displayName" : "Screen Name",
+					"dataType" : "string",
+					"filter" : true,
+					"popup" : true,
+					"list" : true,
+					"sortOrder" : 2,
+					"groupBy" : true
+						},
+				{
+					"id" : "text",
+					"displayName" : "Text",
+					"dataType" : "string",
+					"filter" : true,
+					"popup" : true,
+					"list" : true,
+					"sortOrder" : 3
+						},
+				{
+					"id" : "city",
+					"displayName" : "City",
+					"dataType" : "string",
+					"filter" : true,
+					"popup" : true,
+					"list" : true ,
+					"sortOrder" : 4,
+					"groupBy" : true
+						},
+				{
+					"id" : "bio",
+					"displayName" : "Bio",
+					"dataType" : "string",
+					"sortOrder" : 5
+						},
+				{
+					"id" : "hashtags",
+					"displayName" : "Hashtags",
+					"dataType" : "string",
+					"sortOrder" : 6
+						},
+				{
+					"id" : "lat",
+					"displayName" : "Latitude",
+					"dataType" : "float",
+					"list" : true ,
+					"sortOrder" : 7
+						},
+				{
+					"id" : "long",
+					"displayName" : "Longitude",
+					"dataType" : "float",
+					"list" : true,
+					"sortOrder" : 8
+						}
+			]
+	}
+```
 
 ## 1.1.9 /datasets/{dataset_id}/query
 
-**Methods**
-<p><b>GET</b>
-<br>
-Execute a query against a specific dataset.
-</p>
+**Method**
+<p><b>GET</b>/datasets/{dataset_id}/query</p>
+
+<p>Execute a query against a specific dataset.</p>
 
 <p><b>Request Query Parameters</b></p>
 
@@ -800,65 +914,174 @@ It is recommended that this value be URL encoded.
 <p><b>Sample Request</b></p>
 
 ```
-&lt;Service URL&gt;/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1&opts={"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.63304710388184,41.89278978584501],[-87.61206150054932,41.89278978584501],[-87.61206150054932,41.88140002416609],[-87.63304710388184,41.88140002416609],[-87.63304710388184,41.89278978584501]]]]}}
+<Service URL>/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1&opts={"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.63304710388184,41.89278978584501],[-87.61206150054932,41.89278978584501],[-87.61206150054932,41.88140002416609],[-87.63304710388184,41.88140002416609],[-87.63304710388184,41.89278978584501]]]]}}
 ```
-
 
 <p><b><small>Or when URL encoded:</small></b></p>
+
 ```
-&lt;Service URL&gt;/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=6000&opts=%7B%22geoFilter%22:%7B%22type%22:%22MultiPolygon%22,%22coordinates%22:%5B%5B%5B%5B-87.63304710388184,41.89278978584501%5D,%5B-87.61206150054932,41.89278978584501%5D,%5B-87.61206150054932,41.88140002416609%5D,%5B-87.63304710388184,41.88140002416609%5D,%5B-87.63304710388184,41.89278978584501%5D%5D%5D%5D%7D%7D
+<Service URL>/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=6000&opts=%7B%22geoFilter%22:%7B%22type%22:%22MultiPolygon%22,%22coordinates%22:%5B%5B%5B%5B-87.63304710388184,41.89278978584501%5D,%5B-87.61206150054932,41.89278978584501%5D,%5B-87.61206150054932,41.88140002416609%5D,%5B-87.63304710388184,41.88140002416609%5D,%5B-87.63304710388184,41.89278978584501%5D%5D%5D%5D%7D%7D
 ```
 
-<p><b>Sample Response</b></br>
-<code>
-&nbsp; {
-<br> &nbsp; &nbsp; &nbsp; "type" : "FeatureCollection", 
-<br> &nbsp; &nbsp; &nbsp; "features" : [
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "type": "Feature", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "properties": 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { "&#95;id" : {"$oid" : "556e6f18aef407e1dc98685e"},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "date" : "05/02/2012 8:24 AM",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "screenName" : "DeeeEmmm", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways....",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "city" : "Chicago, IL", "bio" : "I'm the female version of Ari Gold!",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "lat" : 41.84770456 , "long" : -87.8521837,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "hashtags" : ""},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "geometry": {"type": "Point", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "coordinates": [-87.8521837,41.84770456]}, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "autoPopup": false }],
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "meta": { "view": { "id" : "twitter",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "Twitter", "options" : {"rendition" :
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"icon" : "default", "color" : "#001F7A", "fillColor" : "#00FFFF", "opacity" : 85 , "size" : 6}},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "columns" : [ {"id" : "&#95;id", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "displayName" : "ID", "dataType" : "string", "filter" : false, "popup" : false, "list" : false},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "date", "displayName" : "Date", "dataType" : "date", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, "list" : true, "sortOrder" : 1},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "screenName", "displayName" : "Screen Name", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "dataType" : "string", "filter" : true, "popup" : true, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "list" : true, "sortOrder" : 2, "groupBy" : true},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "text", "displayName" : "Text", "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, "list" : true, "sortOrder" : 3},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "city", "displayName" : "City", "dataType" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "filter" : true, "popup" : true, "list" : true, "sortOrder" : 4, "groupBy" : true},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "bio", "displayName" : "Bio", "dataType" : "string", "sortOrder" : 5},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "hashtags", "displayName" : "Hashtags", "dataType" : "string", "sortOrder" : 6},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "lat", "displayName" : "Latitude", "dataType" : "float", "list" : true, "sortOrder" : 7},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; {"id" : "long", "displayName" : "Longitude", "dataType" : "float", "list" : true , "sortOrder" : 8}
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; }
-</code>
-</p>
+<p><b>Sample Response</b></p>
+
+```
+{
+	"type" : "FeatureCollection", 
+	"features" :
+				[
+						{
+								"type": "Feature", 
+								"properties": 
+											{
+												"_id" : {"$oid" : "556e6f18aef407e1dc98685e"},
+												"date" : "05/02/2012 8:24 AM",
+												"screenName" : "DeeeEmmm",
+												"text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways....",
+												"city" : "Chicago, IL",
+												"bio" : "I'm the female version of Ari Gold!",
+												"lat" : 41.84770456,
+												"long" : -87.8521837,
+												"hashtags" : ""
+														},
+						"geometry":
+									{
+										"type": "Point",
+										"coordinates": [-87.8521837,41.84770456]
+												},
+						"autoPopup": false
+					}	
+				],
+
+	"meta":
+			{ 
+				"view":
+						{
+							"id" : "twitter",
+							"displayName" : "Twitter",
+				"options":
+							{"rendition" :
+											{
+												"icon" : "default",
+												"color" : "#001F7A",
+												"fillColor" : "#00FFFF",
+												"opacity" : 85,
+												"size" : 6
+													}
+							},
+	"columns" : 
+				[
+					{
+						"id" : "_id", 
+						"displayName" : "ID", 
+						"dataType" : "string",
+						"filter" : false,
+						"popup" : false,
+						"list" : false
+							},
+					{
+						"id" : "date",
+						"displayName" : "Date",
+						"dataType" : "date",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 1
+							},
+					{
+						"id" : "screenName",
+						"displayName" : "Screen Name",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 2,
+						"groupBy" : true
+							},
+					{
+						"id" : "text",
+						"displayName" : "Text",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 3
+							},
+					{	
+						"id" : "city",
+						"displayName" : "City",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 4,
+						"groupBy" : true
+							},
+					{
+						"id" : "bio",
+						"displayName" : "Bio",
+						"dataType" : "string",
+						"sortOrder" : 5
+							},
+					{
+						"id" : "hashtags",
+						"displayName" : "Hashtags",
+						"dataType" : "string",
+						"sortOrder" : 6
+							},
+					{
+						"id" : "lat",
+						"displayName" : "Latitude",
+						"dataType" : "float",
+						"list" : true,
+						"sortOrder" : 7
+							},
+					{		
+						"id" : "long",
+						"displayName" : "Longitude",
+						"dataType" : "float",
+						"list" : true,
+						"sortOrder" : 8
+								}
+				]
+			} 
+		}
+	}
+
+```
+**Method**
+<p><b>POST</b>/datasets/{dataset_id}/query</p>
+
+<p>Execute a query against a specific dataset. The POST method is now supported to accomodate bigger request payloads primarily due to geo-spatial filters (for OpenGrid services that support geo-spatial filtering)</p>
+
+<p><b>Request Parameters</b></p>
+The parameter names are the same as the ones on the GET method above except that they should be passed as form data. See Sample request payload below.
+
+<p><b>Sample Request Payload</b></p>
+```
+------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name="q"
+
+{}
+------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name="n"
+
+6000
+------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name="opts"
+
+{"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.65630722045898,41.89850786255543],[-87.60510921478273,41.89850786255543],[-87.60510921478273,41.87588812018588],[-87.65630722045898,41.87588812018588],[-87.65630722045898,41.89850786255543]]]]}}
+------WebKitFormBoundaryOvluSdchMLVGg7rd--
+```
+<p><b>Sample Response</b></p>
+See sample response for the GET method above.
 
 ## 1.1.10 /queries
 
-**Methods**
-<p><b>GET</b></p>
+**Method**
+<p><b>GET</b> /queries</p>
 
-<p>Return list of all queries that user has access to. A user has access to all queries he or she has created and those shared with his groups or shared with him directly by other users.
-</p>
+<p>Return list of all queries that user has access to. A user has access to all queries he or she has created and those shared with his groups or shared with him directly by other users.</p>
 
 <p><b>Request Query Parameters</b></p>
 
@@ -900,285 +1123,276 @@ maximum number of records to return; If this parameter is not specified, no reco
 </table>
 </html>
 
-<p><b>Sample Request</b><br>
-<code>&lt;Service URL&gt;/queries?n=1
-</code>
-</p>
+<p><b>Sample Request</b></p>
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp; [
-<br> &nbsp; &nbsp; {"&#95;id" :
-<br> &nbsp; &nbsp; &nbsp; {"$oid" : "5582f831a3db5f4190e4707a"},
-<br> &nbsp; &nbsp; &nbsp; "name" : "Weather Records for 60601", "owner" : "jsmith", "spec" :
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {"dataSetId" : "weather", "filters" : {"condition" : "AND", "rules" : 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [ {"id" : "zipcode", "field" : "zipcode", "type" : "string", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "input" : "text", "operator" : "equal", "value" : "60601"}
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ]
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "rendition" : {"color" : "#DC143C", "opacity" : 85, "size" : 6}
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ],
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "sharedWith" : { "users" : [ ], "groups" : [ ]}, 
-<br> &nbsp; "isCommon" : true}
-<br> &nbsp; ]
-</code>
-</p>
+```
+<Service URL>/queries?n=1
+```
+<p><b>Sample Response</b></p>
 
-<p><b>POST</b><br>
-Create a new query. Returns object for newly created query, if successful.
-</p>
+```
+[
+	{"_id" :
+      		{"$oid" : "5582f831a3db5f4190e4707a"},
+	 "name" : "Weather Records for 60601",
+	 "owner" : "jsmith",
+	 "spec" :
+			[
+				{
+					"dataSetId" : "weather",
+					"filters" : {
+									"condition" : "AND",
+									"rules" :  [
+						     					 {
+													"id" : "zipcode",
+													"field" : "zipcode",
+													"type" : "string",
+													"input" : "text",
+													"operator" : "equal",
+													"value" : "60601"
+																      }
+																		]
+				     			 },
+					"rendition" : {
+									"color" : "#DC143C",
+									"opacity" : 85,
+									"size" : 6
+												}
+				}
+			],
+	"sharedWith" :
+				{
+					"users" : [ ],
+					"groups" : [ ]
+							},
+	"isCommon" : true
+	}
+]
 
-<p><b>Sample Request</b>
-<br>
-<b><small>Request Payload</b></small><br>
-<code>
-&nbsp; {
-<br> &nbsp; &nbsp; "o":{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "name":"Tweets By Bud",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "owner":"user1","spec":
-<br> &nbsp; &nbsp; [
-<br> &nbsp; &nbsp; &nbsp; {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataSetId":"twitter",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "filters":{
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "condition":"AND","rules":[{
-<br> &nbsp; &nbsp; &nbsp; "id":"screenName",
-<br> &nbsp; &nbsp; &nbsp; "field":"screenName",
-<br> &nbsp; &nbsp; &nbsp; "type":"string","input":"text",
-<br> &nbsp; &nbsp; &nbsp; "operator":"contains","value":"bud"}]
-<br> &nbsp; &nbsp; &nbsp; },"rendition":{
-<br> &nbsp; &nbsp; &nbsp; "color":"#DC143C","opacity":"85","size":"6"}
-<br> &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; &nbsp; &nbsp; &nbsp; ],
-<br> &nbsp; &nbsp; &nbsp; "sharedWith":{
-<br> &nbsp; &nbsp; &nbsp; "users":[],
-<br> &nbsp; &nbsp; &nbsp; "groups":[]
-<br> &nbsp; &nbsp; },"isCommon":false,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "autoRefresh":false,"refreshInterval":"30",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "geoFilter":{"boundaryType":"within","boundary":""}
-<br> &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; }
-</code>
-</p>
+```
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp; {
-<br> &nbsp; &nbsp; &nbsp; "name" : "Tweets By Bud",
-<br> &nbsp; &nbsp; &nbsp; "owner" : "user1",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "spec" : [ {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataSetId" : "twitter",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filters" : { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; "condition" : "AND",
-<br> &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; "rules" : [ { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "screenName",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "field" : "screenName",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "type" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "input" : "text", 
-<br> &nbsp; &nbsp; &nbsp; "operator" : "contains" , "value" : "bud"}]
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "rendition" : {"color" : "#DC143C",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : "85", "size" : "6"
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }],
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "sharedWith" : { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "users" : [ ], 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "groups" : [ ] &nbsp;},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "isCommon" : false, 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "autoRefresh" : false, "refreshInterval" : "30",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "geoFilter" : { "boundaryType" : "within" , "boundary" : ""},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "&#95;id" : { "$oid" : "55df5ec39900ec81a481b0f6"}
-<br> &nbsp; }
-</code>
-</p>
+<p><b>POST</b>/queries</p>
+<p>Create a new query. Returns object for newly created query, if successful.</p>
+
+<p><b>Sample Request</b></p>
+
+<p><b><small>Request Payload</small></b></p>
+
+```
+{
+	"o":{
+			"name":"Tweets By Bud",
+			"owner":"user1",
+			"spec":[
+						{
+							"dataSetId":"twitter",
+							"filters":{
+											"condition":"AND",
+											"rules":[
+														{
+															"id":"screenName",
+															"field":"screenName",
+															"type":"string",
+															"input":"text",
+															"operator":"contains",
+															"value":"bud"
+																			}
+																				]
+								      },
+							"rendition":{
+											"color":"#DC143C",
+											"opacity":"85",
+											"size":"6"
+															}
+						}
+					],
+			"sharedWith":{
+							"users":[],
+							"groups":[]
+										},
+			"isCommon":false,
+			"autoRefresh":false,
+			"refreshInterval":"30",
+			"geoFilter":{
+							"boundaryType":"within",
+							"boundary": ""
+											}
+	}
+}
+
+```
+
+<p><b>Sample Response</b></p>
+
+```
+	{
+		"name" : "Tweets By Bud",
+		"owner" : "user1",
+		"spec" : [{
+					"dataSetId" : "twitter",
+					 "filters" : {
+									"condition" : "AND",
+									"rules" : [ {
+													"id" : "screenName",
+													"field" : "screenName",
+													"type" : "string",
+													"input" : "text",
+													"operator" : "contains",
+													"value" : "bud"
+																		}]
+								},
+					"rendition" : {
+									"color" : "#DC143C",
+									"opacity" : "85",
+									"size" : "6"
+													}
+					}],
+		"sharedWith" : {
+							"users" : [ ],
+							"groups" : [ ]
+											},
+		"isCommon" : false,
+		"autoRefresh" : false,
+		"refreshInterval" : "30",
+		"geoFilter" : 
+					{ 
+							"boundaryType" : "within",
+							"boundary" : ""
+											},
+		"_id" : { "$oid" : "55df5ec39900ec81a481b0f6"}
+	}
+
+```
 
 ## 1.1.11 /queries/{query_id}
 
-**Methods**
-<p><b>GET</b>
-<br>
-Return a single query given a query’s internal id.
-</p>
+**Method**
+<p><b>GET</b> /queries/{query_id}</p>
 
-<p><b>Sample Request</b>
-<br>
-<code>
-&lt;Service URL&gt;/queries/{"$oid":"5582f831a3db5f4190e4707a"} 
-</code> 
-</p>
+<p>Return a single query given a query’s internal id.</p>
 
-<p><b>or when URL encoded:</b>
-<br>
-<code>
-&lt;Service URL&gt;/queries/%7B%22$oid%22:%5582f831a3db5f4190e4707a%22%7D
-</code>
-</p>
+<p><b>Sample Request</b></p>
 
-<p><b>Sample Response</b>
-<br>
-<code>
-[
-<br> &nbsp; {"&#95;id" :
-<br> &nbsp; &nbsp; { "$oid" : "5582f831a3db5f4190e4707a"},
-<br> &nbsp; &nbsp; "name" : "Weather Records for 60601",
-<br> &nbsp; &nbsp; "owner" : "jsmith", "spec" : [ { "dataSetId" : "weather",
-<br> &nbsp; &nbsp; "filters" : { "condition" : "AND" , "rules" : 
-<br> &nbsp; &nbsp; &nbsp; [{ "id" : "zipcode" , "field" : "zipcode", 
-<br> &nbsp; &nbsp; &nbsp; "type" : "string", "input" : "text",
-<br> &nbsp; &nbsp; &nbsp; "operator" : "equal", "value" : "60601"
-<br> &nbsp; &nbsp; &nbsp; &nbsp; }]
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }, "rendition" : { "color" : "#DC143C", "opacity" : 85, "size" : 6}
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }], "sharedWith" : { "users" : [ ], "groups" : [ ]},
-<br> &nbsp; "isCommon" : true}
-<br> ]
-</code>
-</p>
+```
+<Service URL>/queries/{"$oid":"5582f831a3db5f4190e4707a"} 
+```
 
-<p><b>PUT</b><br>
-Update a query. Returns the updated query object, if successful.
-</p>
+<p><b>or when URL encoded:</b></p>
 
-<p><b>Sample Request</b>
-<br><b>URL:</b><br>
-<code>
-&lt;Service URL&gt;/queries/{"$oid":"55c52cf6c4aa31b24b04d620"} 
-</code> 
-</p>
+```
+<Service URL>/queries/%7B%22$oid%22:%5582f831a3db5f4190e4707a%22%7D
+```
+<p><b>Sample Response</b></p>
 
-<p><b><small>or when URL encoded:</b></small><br>
-<code>
-&lt;Service URL&gt;/queries/%7B%22$oid%22:%2255c52cf6c4aa31b24b04d620%22%7D
-</code>
-</p>
+```
+	[
+		{"_id":
+				{ "$oid" : "5582f831a3db5f4190e4707a"},
+		"name" : "Weather Records for 60601",
+		"owner" : "jsmith", 
+		"spec" : [{
+					"dataSetId" : "weather",
+					"filters" : { 
+									"condition" : "AND",
+									"rules" : 
+												[{
+													"id" : "zipcode",
+													"field" : "zipcode",
+													"type" : "string",
+													"input" : "text",
+													"operator" : "equal",
+													"value" : "60601"
+																		}]
+							    },
+					"rendition": {
+									"color" : "#DC143C",
+									"opacity" : 85,
+									"size" : 6
+													}
+					}],
+		"sharedWith" : {
+							"users" : [ ],
+							"groups" : [ ]
+												},
+		"isCommon" : true}
+	]
+```
 
-<p><b>Sample Response</b><br>
-<code>
-&nbsp; {
-<br> &nbsp; &nbsp; &nbsp; "name" : "Tweets on coupon",
-<br> &nbsp; &nbsp; &nbsp; "owner" : "user1", 
-<br> &nbsp; &nbsp; &nbsp; "spec" : [ { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "dataSetId" : "twitter", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "filters" : { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "condition" : "AND",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "rules" : [ { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "id" : "text",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "field" : "text",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "type" : "string",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "input" : "text",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "operator" : "contains", 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "value" : "coupon"}]
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "rendition" : { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "color" : "#DC143C",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "opacity" : "85",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "size" : "6"}
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }],
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "sharedWith" : { "users" : [ ],
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "groups" : [ ]
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  },
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "isCommon" : false,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "autoRefresh" : false,
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "refreshInterval" : "30",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "&#95;id" : { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "$oid" : "55c52cf6c4aa31b24b04d620"},
-<br> &nbsp; &nbsp; &nbsp; &nbsp; "geoFilter" : { 
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; "boundaryType" : "within",
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  "boundary" : ""}
-<br> &nbsp; }
-</code>
-</p>
+<p><b>PUT</b> /queries/{query_id}</p>
+<p>Update a query. Returns the updated query object, if successful.</p>
 
-<p><b>DELETE</b><br>
-Delete a query given the query’s internal Id on the URL path.
-</p>
+<p><b>Sample Request</b></p>
+<p><b>URL:</b></p>
 
-<p><b>Sample Request</b><br>
-<code>
-&lt;Service URL&gt;/queries/{"$oid":"55cb6362c4aa475d78d4bc40"}
-</code> 
-</p>
+```
+<Service URL>/queries/{"$oid":"55c52cf6c4aa31b24b04d620"} 
+``` 
 
-<p><b>or when URL encoded:</b><br>
-<code>
-&lt;Service URL&gt;/queries/%7B%22%24oid%22%3A%2255cb6362c4aa475d78d4bc40%22%7D 
-</code>
-</p>
+<p><b><small>or when URL encoded:</b></small></p>
 
-<p><b>Sample Response</b>
-<br>
-No response is returned when a query is deleted.
-</p>
+```
+<Service URL>/queries/%7B%22$oid%22:%2255c52cf6c4aa31b24b04d620%22%7D
+```
 
-## 1.1.12 /capabilities
-New since Release 1.1.0<br>
-**Methods**
-<p><b>GET</b>
-<br>
-Return a json object with service's capabilities flags. As of Release 1.1.0, only 'geoSpatialFiltering' flag is available.
-</p>
-<p><b>Sample Request</b>
-<br>
-<code>
-&lt;Service URL&gt;/capabilities 
-</code> 
-</p>
-<p><b>Sample Response</b><br>
-<code>
-&nbsp; {
-<br> &nbsp; &nbsp; &nbsp; "geoSpatialFiltering" : true
-<br> &nbsp; }
-</code>
-</p>
+<p><b>Sample Response</b></p>
 
-## 1.2 HTTP Status Codes on Response
+```
+	{
+		"name" : "Tweets on coupon",
+		"owner" : "user1", 
+		"spec" : [{ 
+						"dataSetId" : "twitter",
+						"filters": {
+									"condition" : "AND",
+									"rules" : [{
+												"id" : "text",
+												"field" : "text",
+												"type" : "string",
+												"input" : "text",
+												"operator" : "contains",
+												"value" : "coupon"
+																}]},
+						"rendition" : {
+									"color" : "#DC143C",
+									"opacity" : "85",
+									"size" : "6"
+												}
+												}],
+		"sharedWith" : {
+						"users" : [ ],
+						"groups" : [ ]
+										},
+		"isCommon" : false,
+		"autoRefresh" : false,
+		"refreshInterval" : "30",
+		"_id" : {"$oid" : "55c52cf6c4aa31b24b04d620"},
+			"geoFilter" : {
+								"boundaryType" : "within",
+								"boundary" : ""
+													}
+					}
+```
 
-<ul><li>HTTP 401 is returned when users/token is called and authentication fails.
-</li>
+<p><b>DELETE</b> /queries/{query_id}</p>
 
-<li>HTTP 403 is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.
-</li>
+<p>Delete a query given the query’s internal Id on the URL path.</p>
 
-<li>HTTP 200 is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:
-</li></ul>
+<p><b>Sample Request</b></p>
 
-<code>
-<<<<<<< HEAD
-&nbsp; {
-<br> &nbsp; &nbsp; “error”: {
-<br> &nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
-<br> &nbsp; &nbsp; &nbsp; &nbsp; “message”: “&lt;error message&gt;”
-<br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
-<br> &nbsp;&nbsp; }
-</code>
+```
+<Service URL>/queries/{"$oid":"55cb6362c4aa475d78d4bc40"}
+``` 
 
-{ 
-<p> “error”: {
-=======
-<p>&nbsp; { </p>
-<p>&nbsp; &nbsp; “error”: { 
-</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; “code”: “&lt;error code&gt;”
-</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; “message”: “&lt;error message&gt;”
-</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }
->>>>>>> df7c549d50d1400ec04f15d3c747fc5f50c7951c
-</p>
-<p>&nbsp;&nbsp; }
-</p>
-</code>
 
-<p>where <i>&lt;error code&gt;</i> is a code corresponding to the error that
-occurred and <i>&lt;error message&gt;</i> is a description of the error.
-</p>
+<p><b>or when URL encoded:</b></p>
 
-<ul><li>HTTP 500 for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
-</li>
+```
+<Service URL>/queries/%7B%22%24oid%22%3A%2255cb6362c4aa475d78d4bc40%22%7D 
+```
 
-<li>HTTP 204 (No Content) is returned when an object is deleted successfully (DELETE method where applicable).
-</li></ul>
+<p><b>Sample Response</b></p>
+
+<p>No response is returned when a query is deleted.</p>
 
 <br>
-
 <a href="#top">Back to top</a>

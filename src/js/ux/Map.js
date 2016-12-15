@@ -13,7 +13,9 @@ ogrid.Map = ogrid.Class.extend({
     _baseMapLayer: null,
     _markers: {},
     _locateControl: null,
-	 _legend: null,
+    _legend: null,
+    _lastZoom: 0,
+    _poppingMarker: false,
 
     _options: {
         //lime
@@ -37,7 +39,8 @@ ogrid.Map = ogrid.Class.extend({
         //this._addContextMenu(this._options.mapLibraryOptions);
 
         //had to do this now as leaflet is unable to derive the default path if JS is minified
-        L.Icon.Default.imagePath = this._options.mapLibraryOptions.imagePath;
+        //as of Leaflet 1.0.1, the '/' is needed
+        L.Icon.Default.imagePath = this._options.mapLibraryOptions.imagePath + "/";
 
         this._map = L.map(this._mapContainer.attr('id'), this._options.mapLibraryOptions);
 
@@ -65,8 +68,15 @@ ogrid.Map = ogrid.Class.extend({
         this._map.on("overlayremove", $.proxy(this._onOverlayRemove, this));
         this._map.on("overlayadd", $.proxy(this._onOverlayAdd, this));
 
-        ogrid.Event.on(ogrid.Event.types.LOGGED_IN, $.proxy(this._onLoggedIn, this));
+        if (ogrid.Config.map.autoRequery) {
+            this._map.on("moveend", $.proxy(this._onMapViewChanged, this));
+            //this._map.on("zoomend", $.proxy(this._onMapViewChanged, this));
+            //this._map.on("dragend", $.proxy(this._onMapViewChanged, this));
+        }
+        this._map.on("popupopen", $.proxy(this._onPopupOpen, this));
 
+        ogrid.Event.on(ogrid.Event.types.LOGGED_IN, $.proxy(this._onLoggedIn, this));
+        this._lastZoom = this._map.getZoom();
     },
 
     //private methods
@@ -75,6 +85,81 @@ ogrid.Map = ogrid.Class.extend({
         this._resetZoom();
     },
 
+    _onPopupOpen: function() {
+        try {
+            //temporarily set flag to let _onMapViewChanged that it got triggered due to popup appearing
+            this._poppingMarker = true;
+        } finally {
+            var me = this;
+            setTimeout(function() {
+                me._poppingMarker = false;
+            }, 1000);
+        }
+    },
+
+    _onMapViewChanged: function() {
+        //if movement is due to our popping marker, ignore
+        if (this._poppingMarker) return;
+
+        console.log('map view changed');
+        /*if (this._lastZoom !==0) {
+         if (this._map.getZoom() > this._lastZoom) {
+         console.log("zoomed in")
+         } else if (this._map.getZoom() < this._lastZoom) {
+         console.log("zoomed out")
+         }
+         }*/
+        this._lastZoom = this._map.getZoom();
+
+        //broadcast event only if results are active on the map
+        //if (this._hasActiveResults() ) {
+        //    ogrid.Event.raise(ogrid.Event.types.MAP_EXTENT_CHANGED);
+        //}
+
+        var me = this;
+        var regen = null;
+        var tileMapActive = false;
+        var heatMapActive = false;
+
+        this._map.eachLayer(function (layer) {
+            if (me._isOpenGridLayer(layer) ) {
+                if (layer.options.regenerator) {
+                    if (!regen) {
+                        //store regenerator object
+                        //assumption: only 1 regenerator is possible
+                        regen = layer.options.regenerator;
+                    }
+                    me._layerControl.removeLayer(layer);
+                    me._map.removeLayer(layer);
+                }
+            }
+        });
+        me._clearLegend();
+
+        //begin regeneration
+        if (regen) {
+            regen.handler.regenerate( function(evtData) {
+                //regenerate heatmap/tile map if previously active
+                console.log('Regeneration done. will Regen heat map or tile map');
+            });
+        }
+
+
+    },
+
+    _hasActiveResults: function() {
+        var me = this;
+        var r = false;
+        this._map.eachLayer(function (layer) {
+
+            if (me._isOpenGridLayer(layer) ) {
+                //found at least 1 results layer
+                r = true;
+                return;
+            }
+        });
+        return r;
+    },
 
     _addContextMenu: function(options) {
         options.contextmenu = true;
@@ -121,6 +206,9 @@ ogrid.Map = ogrid.Class.extend({
 
         this._locateControl =  L.control.locate();
         this._locateControl.options.strings.title = 'Show current location';
+
+        //we have to do this explicitly now bause the default icon changed and it's causing a dup icon on our toolbar
+        this._locateControl.options.icon = 'fa fa-location-arrow';
         this._locateControl.addTo(this._map);
 		
 		 //create legend
@@ -358,7 +446,10 @@ ogrid.Map = ogrid.Class.extend({
                         }
                     },
 
-                    className: 'layer-opengrid'
+                    className: 'layer-opengrid',
+
+                    //additions to support refresh on map extent change
+                    regenerator: evtData.message.options.passthroughData.regenerator
                 });
 
                 resultsLayer.addTo(this._map);
@@ -376,6 +467,11 @@ ogrid.Map = ogrid.Class.extend({
                 this._addLayerToControl(resultsLayer, data.meta.view, 'Data', this._GENERATED_LAYERS_LABEL);
 
                 ogrid.Event.raise(ogrid.Event.types.MAP_RESULTS_DONE, {resultSetId: evtData.message.resultSetId, passthroughData: evtData.message.options.passthroughData});
+
+                //invoke call back for map extent change refresh
+                if (evtData.message.options && evtData.message.options.passthroughData && evtData.message.options.passthroughData.done) {
+                    evtData.message.options.passthroughData.done(evtData);
+                }
             } else {
                 this._announceRecordCount(evtData.message,data.features.length);
                 ogrid.Event.raise(ogrid.Event.types.MAP_RESULTS_DONE, {resultSetId: evtData.message.resultSetId, passthroughData: evtData.message.options.passthroughData});
@@ -392,8 +488,13 @@ ogrid.Map = ogrid.Class.extend({
         m.options.passthroughData.monitorData && m.options.passthroughData.monitorData.monitorId);
     },
 
+
+    _isAutoRequery: function(m) {
+        return (m.options && m.options.passthroughData && m.options.passthroughData.done);
+    },
+
     _announceRecordCount: function(m, count) {
-        if (!this._isMonitored(m)) {
+        if (!this._isMonitored(m) && !this._isAutoRequery(m)) {
             //don't be so chatty when we're in monitoring mode
             if (count === 0)
                 ogrid.Alert.info('No results matched the search criteria.');
@@ -632,6 +733,19 @@ _clearLegend: function() {
             ogrid.Event.raise(ogrid.Event.types.MAP_OVERLAY_REMOVE, e.layer._leaflet_id);
     },
 
+    //use the bigger geo box used in QuickSearch
+    _withinMaxBounds: function(resultBounds) {
+        var b = this._getMaxBounds();
+        return b.contains(resultBounds);
+    },
+
+    _getMaxBounds: function() {
+        var a = ogrid.Config.quickSearch.plugInOptions.places.esriGeocodeBBox.split(',');
+        return L.latLngBounds(
+            L.latLng(a[1], a[0]), //southwest
+            L.latLng(a[3], a[2]) //northeast
+        );
+    },
 
     //public methods
     getMapCenter: function () {
@@ -676,6 +790,10 @@ _clearLegend: function() {
 
             var hl = L.heatLayer(data, options);
             hl.addTo(this._map);
+
+            //store opengrid data on the layer for later retrieval
+            hl.openGridData = {dataView: dataView, heatMapType: heatmapType};
+
             //hl.bringToFront();
             //this._map.addLayer(hl);
 
@@ -736,7 +854,8 @@ _clearLegend: function() {
     popupMarkerById: function(rsId, pointId) {
         //me._markers[evtData.message.resultSetId][ogrid.oid(feature)] = m;
         if (this._markers[rsId][pointId]) {
-            this._map.setView(this._markers[rsId][pointId].getLatLng());
+            //as of 11/14, we're not centering popups any more
+            //this._map.setView(this._markers[rsId][pointId].getLatLng());
             this._markers[rsId][pointId].openPopup();
         }
     },
@@ -762,8 +881,12 @@ _clearLegend: function() {
 
         //fit map to bounds
         if (fg.getLayers().length > 0) {
-            this._map.fitBounds(fg.getBounds());
-            console.log('zoomToResultBounds: ' +  JSON.stringify(fg.getBounds()));
+            var b = fg.getBounds();
+            if (!this._withinMaxBounds(b)) {
+                b = this._getMaxBounds();
+            }
+            this._map.fitBounds(b);
+            console.log('zoomToResultBounds: ' +  JSON.stringify(b));
         }
     },
 

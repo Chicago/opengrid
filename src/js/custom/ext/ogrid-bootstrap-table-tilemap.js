@@ -41,7 +41,6 @@
                     '</ul>',
                     '</div>'].join('')).appendTo($btnGroup);
 
-
                 //tilemapOptions.map
                 //tilemapOptions.tileAreas
 

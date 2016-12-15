@@ -217,6 +217,9 @@ ogrid.TableView = ogrid.Class.extend({
                 var idToUse = (rowData.hasOwnProperty('id.$oid') ? 'id.$oid' : 'id');
 
                 me._options.map.popupMarkerById($(this).data('resultSetId'), rowData[idToUse]);
+
+                //auto-close table, so map with bubble is displayed
+                me._onTableViewCaretClick();
             }
         });
 
