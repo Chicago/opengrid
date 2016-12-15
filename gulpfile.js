@@ -1,7 +1,7 @@
 // core Gulp
 var gulp = require('gulp'),
 
-    // Gulp plugins
+// Gulp plugins
     rimraf = require('rimraf'),
     jshint = require('gulp-jshint'),
     sass = require('gulp-sass'),
@@ -64,7 +64,7 @@ var third_party_sources = [
     'lib/bootstrap-3.3.5/js/bootstrap.js',
     'lib/bootstrap-3.3.5/js/moment-with-locales.js',
     'lib/bootstrap-table-1.8.1/js/bootstrap-table.js',
-    'lib/leaflet-0.7.3/js/leaflet-src.js',
+    'lib/leaflet-1.0.1/js/leaflet-src.js',
     'lib/jspdf-1.1.135/js/jspdf.js',
     'lib/**/*.js'
 ];
@@ -101,7 +101,7 @@ gulp.task('html-debug', function(){
                         return '!' + v;
                     })
                 ), {read: false}),
-                gulp.src(injectLastCss, {read: false})
+            gulp.src(injectLastCss, {read: false})
             ),
             { relative: false, addRootSlash: false, addPrefix: '..' }
         ))
@@ -110,7 +110,7 @@ gulp.task('html-debug', function(){
 
 gulp.task('leaflet-images-debug', function () {
     return gulp.src([
-        './lib/leaflet*/js/images/*.png'
+            './lib/leaflet*/js/images/*.png'
         ])
         .pipe(flatten())
         .pipe(gulp.dest('debug/images'));
@@ -135,12 +135,12 @@ gulp.task('clean', function (cb) {
 gulp.task('css-app', function() {
     //minify except for injectLastCss files
     return gulp.src([
-        'src/css/*.css'
+            'src/css/*.css'
         ].concat(
-            //negate/exclude our injectLastCss files
-            injectLastCss.map(function(v){
+        //negate/exclude our injectLastCss files
+        injectLastCss.map(function(v){
             return '!' + v;
-            })
+        })
         ))
         .pipe(minifyCss({compatibility: 'ie8'}))
         .pipe(concat('app.css'))
@@ -174,24 +174,24 @@ gulp.task('css', ['css-app', 'css-lib' ]);
 //some leaflet components expect their images on a specific folder
 gulp.task('images-leaflet1', function () {
     return gulp.src([
-        './lib/leaflet*/css/images/*',
-    ])
+            './lib/leaflet*/css/images/*',
+        ])
         .pipe(flatten())
         .pipe(gulp.dest('dist/css/images'));
 });
 
 gulp.task('images-leaflet2', function () {
     return gulp.src([
-        './lib/leaflet*/css/fullscreen*.png',
-    ])
+            './lib/leaflet*/css/fullscreen*.png',
+        ])
         .pipe(flatten())
         .pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('images-all', function () {
     return gulp.src([
-        './lib/**/*.png'
-    ])
+            './lib/**/*.png'
+        ])
         .pipe(flatten())
         .pipe(gulp.dest('dist/images'));
 });
@@ -207,8 +207,8 @@ gulp.task('images', ['images-leaflet1', 'images-leaflet2', 'images-all', 'images
 
 gulp.task('fonts', function () {
     return gulp.src([
-        './lib/**/fonts/*'
-    ])
+            './lib/**/fonts/*'
+        ])
         .pipe(flatten())
         .pipe(gulp.dest('dist/fonts'));
 });
@@ -250,7 +250,7 @@ gulp.task('env-settings',  function(cb) {
 
 gulp.task('env-settings-indiv', function () {
     return gulp.src([
-        './config/**/*', '!./config/EnvSettings*.js'
+            './config/**/*', '!./config/EnvSettings*.js'
         ])
         //use straight rename based on common hash
         .pipe(rename(function (filename) {
@@ -265,7 +265,7 @@ gulp.task('env-settings-indiv', function () {
 
 gulp.task('env-settings-root', function () {
     return gulp.src([
-        './config/EnvSettings.js'
+            './config/EnvSettings.js'
         ])
         .pipe(rev())
         .pipe(gulp.dest('dist/config'))
@@ -314,16 +314,16 @@ gulp.task('html-release', function(){
             addRootSlash: false
         }))
         .pipe(inject(gulp.src(
-                ['./dist/**/app*', '!./dist/**/app.js', './dist/config/EnvSettings*'].concat(
-                    //add our injectLastCss files from dist folder
-                    injectLastCss.map(function(v){
-                        var a = v.split('/');
-                        return './dist/css/' + revManifest[a[a.length-1]];
-                    })
-                ),
-                {read: false}
-                ),
-                {ignorePath: '/dist/', addRootSlash: false}
+            ['./dist/**/app*', '!./dist/**/app.js', './dist/config/EnvSettings*'].concat(
+                //add our injectLastCss files from dist folder
+                injectLastCss.map(function(v){
+                    var a = v.split('/');
+                    return './dist/css/' + revManifest[a[a.length-1]];
+                })
+            ),
+            {read: false}
+            ),
+            {ignorePath: '/dist/', addRootSlash: false}
             )
         )
         .pipe(gulp.dest('./dist'))
