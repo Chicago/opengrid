@@ -41,12 +41,6 @@
                     '</ul>',
                     '</div>'].join('')).appendTo($btnGroup);
 
-                if(ogrid.Config.tileMapHide) {
-                    $div.addClass('hide');
-                } else {
-                    $div.removeClass('hide');
-                }
-
                 //tilemapOptions.map
                 //tilemapOptions.tileAreas
 

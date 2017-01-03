@@ -62,6 +62,32 @@ ogrid.BaseGeoFilter = ogrid.Class.extend({
         ];
     },
 
+    //this one's more like a common private method
+    _fixCircleGetBounds: function(c) {
+        //overlay these Circle methods with code from Leaflet 0.73 that we know works previously
+        c._getLatRadius =  function () {
+            return (this._mRadius / 40075017) * 360;
+        };
+
+        if (!L.LatLng.DEG_TO_RAD) {
+            L.LatLng.DEG_TO_RAD = (Math.PI / 180);
+        }
+
+        c._getLngRadius = function () {
+            return this._getLatRadius() / Math.cos(L.LatLng.DEG_TO_RAD * this._latlng.lat);
+        };
+
+        c.getBounds = function () {
+            var lngRadius = this._getLngRadius(),
+                latRadius = (this._mRadius / 40075017) * 360,
+                latlng = this._latlng;
+
+            return new L.LatLngBounds(
+                [latlng.lat - latRadius, latlng.lng - lngRadius],
+                [latlng.lat + latRadius, latlng.lng + lngRadius]);
+        };
+    },
+
     //public methods
     filter: function(data) {
 

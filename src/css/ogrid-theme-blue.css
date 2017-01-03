@@ -32,7 +32,7 @@ html, body {
 .navbar-default .navbar-nav > li > a { color:#dfe6ec;}
 .navbar-default .navbar-nav > li > a:hover { color:#FFFFFF;}
 #qsearch-input { border-radius:9px;}
-#ogrid-task-advanced-search.ogrid-task-pane { background-color:#73c4e1; opacity:0.92;}
+#ogrid-task-advanced-search.ogrid-task-pane { background-color:#73c4e1; opacity:0.95;}
 #ogrid-adv-tabs.nav-tabs > li > a { border:none; background-color:transparent; color:#1a3f59;}
 #ogrid-adv-tabs.nav-tabs > li.active > a { border:none; background-color:transparent; color:#FFFFFF;}
 #ogrid-content .leaflet-popup-content-wrapper { background:#464e61; color:#DFE6EC;}
@@ -330,6 +330,23 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
     color: lightskyblue;
 }
 
+#ogrid-help-icon {
+    padding-top: 18px;
+    padding-right: 10px;
+    color: whitesmoke;
+}
+
+.no-underline-on-hover:hover { text-decoration: none; }
+.no-underline-on-hover { text-decoration: none; }
+
+/* mobile styles for help icon*/
+@media (max-width: 845px) {
+    #ogrid-help-icon {
+        padding-left: 10px;
+        font-size: 1.5em;
+    }
+}
+
 .header-center {
     display: flex;
     justify-content: center;
@@ -361,3 +378,4 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
     /* adjusted due to increase in search results panel height */
     margin-bottom: 4px !important;
 }
+

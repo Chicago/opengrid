@@ -305,9 +305,9 @@ ogrid.GeoFilter = ogrid.Class.extend({
     _activateGeoLocationControl: function(flag) {
         if (this._options.geoLocationControl)
             if (flag)
-                this._options.geoLocationControl.locate();
+                this._options.geoLocationControl.start();
             else
-                this._options.geoLocationControl.stopLocate();
+                this._options.geoLocationControl.stop();
     },
 
     //returns all boundary shapes drawn
@@ -534,6 +534,18 @@ ogrid.GeoFilter = ogrid.Class.extend({
 
         }
         return o;
+    },
+
+    getBoundaryType: function() {
+        return $('.adv-search-geofilter input[name="boundaryOption"]:checked').val();
+    },
+
+    getWithinBoundaryOption: function() {
+        return $('#geofilter-within-bounds').val();
+    },
+
+    getNearBoundaryOption: function() {
+        return $('#geofilter-near-bounds').val();
     }
 });
 

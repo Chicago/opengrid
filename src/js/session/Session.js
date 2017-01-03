@@ -228,8 +228,8 @@ ogrid.Session = ogrid.Class.extend({
 
         if(ogrid.Config.service.autologin) {
             $(".login-panel").attr("style", "visibility: hidden");
-            $('#ogrid-login-username').val('NoAuth');
-            $('#ogrid-login-password').val('NoAuth');
+            $('#ogrid-login-username').val(ogrid.Config.service.autologinUserId);
+            $('#ogrid-login-password').val(ogrid.Config.service.autologinPassword);
 
             var me = this;
             me._doLogin();

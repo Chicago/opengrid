@@ -1,5 +1,5 @@
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
-<h4 align="center">Version 1.1.0</h4>
+<h4 align="center">Version 1.3.0</h4>
 
 <!--
 ## Table of Contents
@@ -1049,6 +1049,32 @@ It is recommended that this value be URL encoded.
 	}
 
 ```
+**Method**
+<p><b>POST</b>/datasets/{dataset_id}/query</p>
+
+<p>Execute a query against a specific dataset. The POST method is now supported to accomodate bigger request payloads primarily due to geo-spatial filters (for OpenGrid services that support geo-spatial filtering)</p>
+
+<p><b>Request Parameters</b></p>
+The parameter names are the same as the ones on the GET method above except that they should be passed as form data. See Sample request payload below.
+
+<p><b>Sample Request Payload</b></p>
+```
+------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name="q"
+
+{}
+------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name="n"
+
+6000
+------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name="opts"
+
+{"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.65630722045898,41.89850786255543],[-87.60510921478273,41.89850786255543],[-87.60510921478273,41.87588812018588],[-87.65630722045898,41.87588812018588],[-87.65630722045898,41.89850786255543]]]]}}
+------WebKitFormBoundaryOvluSdchMLVGg7rd--
+```
+<p><b>Sample Response</b></p>
+See sample response for the GET method above.
 
 ## 1.1.10 /queries
 

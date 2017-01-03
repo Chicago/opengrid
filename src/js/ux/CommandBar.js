@@ -25,7 +25,10 @@ ogrid.CommandBar = ogrid.Class.extend({
         //setup event handlers on each button
         this._clrbutton.click($.proxy(this._onClearClick, this));
         $("#ogrid-advanced-btn").click($.proxy(this._onAdvancedSearchClick, this));
-        $("#ogrid-help-btn").click($.proxy(this._onHelpClick, this));
+
+        //init help
+        this._initHelp();
+
         $("#ogrid-manage-btn").click($.proxy(this._onManageClick, this));
         $("#ogrid-logout-item").click($.proxy(this._onLogout, this));
 
@@ -43,6 +46,18 @@ ogrid.CommandBar = ogrid.Class.extend({
 
 
     //private methods
+    _initHelp: function() {
+        if (ogrid.Config.help.type ==='button') {
+            $("#ogrid-help-btn").removeClass('hide');
+            $("#ogrid-help-btn").click($.proxy(this._onHelpClick, this));
+        } else if (ogrid.Config.help.type ==='icon') {
+            $("#ogrid-help-icon").removeClass('hide');
+            $("#ogrid-help-icon").attr('href', ogrid.Config.help.url);
+        }
+
+    },
+
+
     _onMobileModeChanged: function(e) {
         var mobileMode = e.message;
 
@@ -63,14 +78,18 @@ ogrid.CommandBar = ogrid.Class.extend({
             return;
         }
 
+        //this does not work with all URLs
+        //the 'button' type help option will mostly be used for custom help files
+        // that live within the same domain as this instance of OpenGrid
         $.ajax({
-            url: './help.html',
-            type: 'POST',
+            url: ogrid.Config.help.url,
+            type: 'GET',
             async: true,
             timeout: 60000,
             success: function(data, txtStatus, jqXHR) {
                 $("#ogrid-help")[0].innerHTML = data;
 
+                //TODO: confirm with Uturn what this is for
                 if(ogrid.Config.help.configSectionTitle) {
                     $('#config-section-div').removeClass('hide');
                     $('#config-section-title')[0].innerHTML = ogrid.Config.help.configSectionTitle;
@@ -171,15 +190,31 @@ ogrid.CommandBar = ogrid.Class.extend({
         //hide all secured functions by default (so they are disabled in case an error occurs)
         this._hideAllFunctions();
         user.getAccessList(function(accessList) {
+            if (!ogrid.Config.service.autologin) {
+                me._secureFunction(
+                    user,
+                    me,
+                    me._getRequiredAccess(ogrid.SecuredFunctions.MANAGE),
+                    '#ogrid-manage-btn',
+                    accessList);
+
+                //show the user dropdown menu, hidden by default
+                $('#ogrid-user-menu').removeClass('hide');
+            } else {
+                //if using anonymous login, user management function is disabled
+                $('#ogrid-manage-btn').addClass('hide');
+            }
+
             me._secureFunction(
+                user,
                 me,
-                me._getRequiredAccess(ogrid.SecuredFunctions.MANAGE),
-                '#ogrid-manage-btn',
-                accessList);
-            //me._secureFunction(
-                //me,
-                //me._getRequiredAccess(ogrid.SecuredFunctions.ADVANCED_SEARCH),
-                //‘#ogrid-advanced-btn', accessList);
+                me._getRequiredAccess(ogrid.SecuredFunctions.ADVANCED_SEARCH),
+                '#ogrid-advanced-btn', accessList);
+
+            // show Advanced Search pane on logged in and if not on mobile
+            if (!ogrid.App.mobileView()) {
+                me.toggleAdvancedSearchPane();
+            }
 
             //initialize Admin UI if not initialized and user is an admin
             if (me._noAdminUI() && !$('#ogrid-manage-btn').hasClass('hide')) {
@@ -205,10 +240,6 @@ ogrid.CommandBar = ogrid.Class.extend({
             $("#ogrid-admin-ui").addClass('hide'); //avoid sliding windows look
             this._onManageClick();
         }
-
-        if(ogrid.Config.helpButtonHide === undefined || !ogrid.Config.helpButtonHide) {
-            $('#ogrid-help-btn').removeClass('hide');
-        }
         //invoke clear
         this._onClearClick();
     },
@@ -218,11 +249,11 @@ ogrid.CommandBar = ogrid.Class.extend({
         return $("#ogrid-admin-ui-body");
     },
 
-    _secureFunction: function(context, fnList, btn, accessList) {
-        if (!context._userHasFunctionAccess(fnList, accessList)) {
-            $(btn).addClass('hide');
-        } else {
+    _secureFunction: function(user, context, fnList, btn, accessList) {
+        if (user.isAdmin() || context._userHasFunctionAccess(fnList, accessList)) {
             $(btn).removeClass('hide');
+        } else {
+            $(btn).addClass('hide');
         }
     },
 
@@ -276,8 +307,10 @@ ogrid.CommandBar = ogrid.Class.extend({
         if (ogrid.App.mobileView()) {
             this._hideMenu();
         }
-    }
+    },
 
     //public methods
-
+    toggleAdvancedSearchPane: function() {
+        this._onAdvancedSearchClick();
+    }
 });

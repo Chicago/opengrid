@@ -108,7 +108,7 @@ ogrid.QSearch = ogrid.Class.extend({
         }
     },
 
-    _onSearch: function() {
+        _onSearch: function(done) {
         // If main content is hidden remove it and disable help.
         if($("#ogrid-content").hasClass('hide')) {
             $("#ogrid-help").addClass('hide');
@@ -176,7 +176,17 @@ ogrid.QSearch = ogrid.Class.extend({
 
         //we're no longer sending clear flag after a quick search is executed
         //"no clear" disabled temporarily as of 08/19
-        ogrid.Event.raise(ogrid.Event.types.REFRESH_DATA, {resultSetId:ogrid.guid(), data: results, options: {clear:true}} );
+
+        ogrid.Event.raise(ogrid.Event.types.REFRESH_DATA, {
+            resultSetId:ogrid.guid(),
+            data: results,
+            options: {
+                clear: true,
+
+                //added support for refresh on map extent change
+                passthroughData: {regenerator: {handler:this} }
+            }
+        } );
     },
 
     _onExecError: function (err, rawErrorData, passThroughData) {
@@ -188,10 +198,15 @@ ogrid.QSearch = ogrid.Class.extend({
         } else {
             ogrid.Alert.error( (rawErrorData.jqXHR.responseText) ? rawErrorData.jqXHR.responseText : rawErrorData.txtStatus);
         }
-    }
-
+    },
 
 
     //public methods
+    //call back for map extent change, invoked by map component
+    regenerate: function(done) {
+        console.log("Quick search - regenerate called");
+        //re-invoke submit, passing along done callback
+        this._onSearch(done);
+    }
 
 });
