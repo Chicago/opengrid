@@ -4,6 +4,7 @@
  * Quick search UX component
  */
 
+/*jshint  expr: true */
 
 ogrid.QSearch = ogrid.Class.extend({
     //private attributes
@@ -31,19 +32,7 @@ ogrid.QSearch = ogrid.Class.extend({
         this._qsbutton = qsbutton;
         this._qsbutton.click($.proxy(this._onSearch, this));
 
-        //hint icon
-        $.get(ogrid.Config.quickSearch.helpFile, function(data) {
-            var $o = $("[data-toggle=popover]").popover({
-                html: true,
-                content: data,
-                container: 'body'
-                //title: 'Quick Search Help <a href="#" class="close" data-dismiss="alert">X</a>'
-            });
-
-            /*$(document).on("click", ".popover .close" , function(){
-                $(this).parents(".popover").popover('hide');
-            });*/
-        });
+       this._initPopup();
 
         this._input = qsinput;
         var me = this;
@@ -62,6 +51,34 @@ ogrid.QSearch = ogrid.Class.extend({
     },
 
 
+    _initPopup: function(done) {
+        var me = this;
+        $.get(ogrid.Config.quickSearch.helpFile, function(data) {
+            var $t = $('<div/>').html(data).contents();
+            //var $t = $($.parseHTML(data));
+
+            //builds html from new dataset quicksearch settings
+            var hintHtml = '';
+            if (me._options.datasets) {
+                var hints = [];
+                $.each(me._options.datasets, function(i, v) {
+                    if (v.quickSearch && v.quickSearch.enable) {
+                        v.quickSearch.hintCaption && (hintHtml += '<p><b>' + v.quickSearch.hintCaption + '</b><br>');
+                        v.quickSearch.hintExample && (hintHtml += v.quickSearch.hintExample);
+                        v.quickSearch.hintCaption && (hintHtml += '</p>');
+                        v.quickSearch.hintDescription && (hintHtml += '<p><i>' + v.quickSearch.hintDescription + '</i><p>');
+                    }
+                });
+            }
+            $t.find('#ogrid-quicksearchhelp').append(hintHtml);
+            var $o = $("[data-toggle=popover]").popover({
+                html: true,
+                content: $t.parent().html(),
+                container: 'body'
+                //title: 'Quick Search Help <a href="#" class="close" data-dismiss="alert">X</a>'
+            });
+        });
+    },
 
     //private methods
     _findQSearchFlexDataPlugin: function() {

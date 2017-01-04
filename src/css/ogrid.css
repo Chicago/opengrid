@@ -347,9 +347,15 @@ h6 > a {
   width: 500px;
 }
 
-#qsearch .popover-content {
+.popover {
+  width: 500px;
+}
+
+.popover-content {
   padding: 10px;
-  width: 100%;
+  width: 272px;
+  overflow-y: auto;
+  height: 600px;
 }
 
 #ogrid-adv-content .panel-heading {
@@ -358,7 +364,8 @@ h6 > a {
 
 /* mobile styles for quick search hint */
 @media (max-width: 480px) {
-  #qsearch .popover {
+  /*#qsearch .popover {*/
+  .popover {
     width: 230px;
   }
 }
