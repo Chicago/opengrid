@@ -3,12 +3,14 @@
     <p>
         <i>The quick search help feature assists users in performing a valid search. Each search is unique based on query type. Some are query by keyword and others are queried based off keyword followed by key phrase (descriptive text)</i>
     </p>
-    <p><b>Find an Address</b><br> 50 W. Washington St</p>
-    <p><b>Display area by Lat and Long</b><br> 41.8270, -87.6423</p>
-    <p><b>Search by Place Name</b><br> Daley Center</p>
-	<p>
-        <i>Additionally all datasets, that contain zip codes, can be searched using the datasetId(all lower case) and zip code.  The datasetId is the the dataset name, with '_' instead of spaces.  Below are examples.</i>
-    </p>
-	<p><b>Business Licenses in 60601</b><br>business_licenses 60601</p>
-	<p><b>Potholes Reported in 60602</b><br>311_service_requests_pot_holes_reported 60602</p>
+    <!-- As of release 1.3.1, this is dynamically built now from the dataset descriptors -->
+    <div id="ogrid-quicksearchhelp">
+        <p><b>Find an Address</b><br> 50 W. Washington St</p>
+        <p><b>Display area by Lat and Long</b><br> 41.8270, -87.6423</p>
+        <p><b>Search by Place Name</b><br> Daley Center</p>
+        <p>
+            <i>Additionally all datasets, that contain zip codes, can be searched using the datasetId(all lower case) and zip code.  The datasetId is the the dataset name, with '_' instead of spaces.  Below are examples.</i>
+        </p>
+        <!-- more appended programmatically -->
+    </div>
 </div>
