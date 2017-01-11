@@ -10,9 +10,21 @@ html, body {
   left: calc(100% - 32px);
 }
 
-
-#qsearch .popover {
+/*#qsearch .popover {
   top: 35px !important;
+}*/
+
+.popover {
+    top: 44px !important;
+    z-index: 5000;
+}
+
+.popover-content  {
+    font-size: small;
+}
+
+.popover-title .close {
+    font-size: small;
 }
 
 /* override bootstrap default to avoid having a 'fat' nav bar*/
