@@ -4,8 +4,7 @@
  * <description of class>
  */
 
-// Template class code
-// Copy this when creating a new class
+/*jshint  expr: true */
 
 ogrid.AdvancedSearch = ogrid.Class.extend({
     //private attributes
@@ -290,6 +289,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
             //logged in as anonymous user, disable saving of query
             $('#savequery-panel').addClass('hide');
+
+            //disable tab to manage saved queries
+            $('#ogrid-manage-queries').addClass('hide');
         }
 		
 		// load auto-load query if option is set
@@ -888,18 +890,40 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         };
     },
 
+    _getSupportedOps: function(ds, dataType, defaultOperators) {
+        var ret = null;
+        if (ds.options.supportedOperators) {
+            $.each(ds.options.supportedOperators, function(i, v) {
+                if (v.dataType === dataType) {
+                    ret = v.operators;
+
+                    //break
+                    return false;
+                }
+            });
+            if (ret) {
+                return ret;
+            }
+        }
+        //return default set of operators
+        return defaultOperators;
+    },
+
 
     _getFilters: function(typeId) {
         var a = [];
+
+        //default operators
         var date_ops = ['between', 'greater', 'less'];
         var numops = ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal', 'between'];
         var strops =  ['equal', 'not_equal', 'contains', 'begins_with'];
 
         var me = this;
-        $.each(this._options.allDataTypes, function(i, v) {
+        var defaultOps;
+        $.each(this._options.allDataTypes, function(i, ds) {
             //we don't want an exact type equality (i.e. 311 will not match '311')
-            if (v.id == typeId) {
-                $.each(v.columns, function(i, v) {
+            if (ds.id == typeId) {
+                $.each(ds.columns, function(i, v) {
                     //add only filterable properties
                     if (v.filter) {
                         var f = {
@@ -913,15 +937,19 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                                 //f.autocomplete =  me._getAutoComplete(v, me);
                                 me._getAutoComplete(f, v, me);
                             }
+                            //use default widget operators for strings
+                            defaultOps = null;
+
                         } else if (v.dataType==='float') {
                             f.type = 'double';
                             f.validation = {step: 0.01};
-                            f.operators = numops;
+                            f.operators = me._getSupportedOps(ds, v.dataType, strops);
+                            defaultOps = numops;
 
                         } else if (v.dataType==='number') {
                             f.type = 'integer';
                             f.validation = {step: 1};
-                            f.operators = numops;
+                            defaultOps = numops;
 
                         } else if (v.dataType==='date') {
                             f.validation = {format: 'MM/DD/YYYY hh:mm:ss a'};
@@ -946,11 +974,15 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                                     }
                                 }
                             };
-                            f.operators = date_ops;
+                            defaultOps = date_ops;
 
                         } else {
-                            f.operators = strops;
+                            defaultOps = strops;
                         }
+                        //if default ops is available, set the operators, otherwise leave to use widget defaults
+                        var ops = me._getSupportedOps(ds, v.dataType, defaultOps);
+                        ops && (f.operators = ops);
+
                         a.push(f);
                     }
                 });
