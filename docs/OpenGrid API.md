@@ -555,8 +555,27 @@ The maximum number of records to return; If this parameter is not specified, no 
 										"fillColor" : "#00FFFF",
 										"opacity" : 85,
 										"size" : 6
-										}		
-						},
+										},
+				"supportedOperators" : [    {
+                        			"dataType" : "string", 
+                        				"operators" : [
+                            						"equal", 
+                            						"not_equal", 
+                            						"in", 
+                            						"begins_with", 
+                            						"contains"
+                        				]
+                    				}		
+                		]
+			,
+		    "quickSearch" : {
+			"enable" : true, 
+			"triggerAlias" : "twe", 
+			"triggerWord" : "tweet", 
+			"hintCaption" : "Search Tweets", 
+			"hintExample" : "tweet 'food'"
+		    }
+		},
 		"columns":
 				[
 					{
@@ -584,7 +603,8 @@ The maximum number of records to return; If this parameter is not specified, no 
 						"popup" : true,
 						"list" : true,
 						"sortOrder" : 2,
-						"groupBy" : true
+						"groupBy" : true,
+						"quickSearch" : true
 							},
 					{	
 						"id" : "text",
@@ -593,7 +613,8 @@ The maximum number of records to return; If this parameter is not specified, no 
 						"filter" : true,
 						"popup" : true,
 						"list" : true,
-						"sortOrder": 3
+						"sortOrder": 3,
+						"quickSearch" : true
 							},
 					{
 						"id" : "city",
@@ -603,7 +624,8 @@ The maximum number of records to return; If this parameter is not specified, no 
 						"popup" : true,
 						"list" : true,
 						"sortOrder" : 4,
-						"groupBy" : true
+						"groupBy" : true,
+						"quickSearch" : true
 							},
 					{
 						"id" :"bio",
@@ -772,18 +794,36 @@ The maximum number of records to return; If this parameter is not specified, no 
 
 ```
 {
-	"id" : "twitter",
-	"displayName" : "Twitter", 
-	"options" : 
-				{"rendition" :
-								{
-									"icon" : "default",
-									"color" : "#001F7A",
-									"fillColor" : "#00FFFF",
-									"opacity" : 85,
-									"size" : 6
-										}
-						},
+			"id" : "twitter",
+			"displayName" : "Twitter",
+			"options": {"rendition":
+									{
+										"icon" : "default",
+										"color" : "#001F7A",
+										"fillColor" : "#00FFFF",
+										"opacity" : 85,
+										"size" : 6
+										},
+				"supportedOperators" : [    {
+                        			"dataType" : "string", 
+                        				"operators" : [
+                            						"equal", 
+                            						"not_equal", 
+                            						"in", 
+                            						"begins_with", 
+                            						"contains"
+                        				]
+                    				}		
+                		]
+			,
+		    "quickSearch" : {
+			"enable" : true, 
+			"triggerAlias" : "twe", 
+			"triggerWord" : "tweet", 
+			"hintCaption" : "Search Tweets", 
+			"hintExample" : "tweet 'food'"
+		    }
+		},
 	"columns" :
 			[
 				{
