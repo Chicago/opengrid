@@ -1,3 +1,39 @@
+<H2 align="center"><B>OpenGrid</B></H2>
+<H3 align="center">Functional Design</H3>
+<H4 align="center">Version 1.3.0</H4>
+<p align="center"><img src="https://github.com/Chicago/opengrid/blob/master/docs/media/image1.jpg"> </p>
+<p align="center"><b>Department of Innovation & Technology</b></p>
+
+# Table of Contents
+* [Getting Started](#getting-started)
+    * [Background and Overview](#background-and-overview)
+* [Acknowledgements](#acknowledgements)
+* [User Documentation](#user-documentation)
+    * [Supported Browsers](#supported-browsers)
+    * [Login/Logout](#loginlogout)
+    * [The Landing Page](#the-landing-page)
+    * [Session Timeout](#session-timeout)
+* [Base Map](#base-map)
+    * [Map Layers](#map-layers)
+    * [Map Legend](#map-legend)
+    * [Map Navigation](#map-navigation)
+    * [Measurement Tool](#measurement-tool)
+* [Types of Searches](#types-of-searches)
+    * [Quick Search](#quick-search)
+    * [Find Data Panel](#find-data-panel)
+    * [Advanced Search](#advanced-search)
+* [Existing Queries](#existing-queries)
+   * [Commonly Used Queries](#commonly-used-queries)
+* [Data Formation](#data-formation)
+   * [Map Grid](#map-grid)
+   * [Table Grid](#table-grid)
+   * [Components of the Table Grid](#components-of-the-table-grid)
+* [Saving Searches](#saving-searches)
+* [Administrator](#administrator)
+   * [Manage Users and Manage Groups](#manage-users-and-manage-groups)
+<br>
+<br>
+
 ## Getting Started
 ### Background and Overview
 <p>Open Grid is a geographical information systems developed for residents to access public city data in a more intuitive manner. The application supports situational awareness, incident responses and monitoring, historical data retrieval, and real-time advanced analytics.</p>
@@ -27,7 +63,7 @@ When the application is initially opened through a browser the login screen will
 </p>
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec12.jpg"></div>
-<div align="center"><b>Figure 1. OpenGrid Login Screen</b></div>
+<p align="center"><b>Figure 1. OpenGrid Login Screen</b></p>
 
 <br>
 <p>
@@ -38,7 +74,7 @@ If login failed, an error message will appear: <b>“Login failed due to invalid
 
 <p>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec13.jpg"></div><br>
-<div align="center"><b>Figure 2. Login Error Message</b></div>
+<p align="center"><b>Figure 2. Login Error Message</b></p>
 </p>
 
 <br>
@@ -47,7 +83,7 @@ If login was successful, the landing page will launch.
 
 <p>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec03.jpg"></div><br>
-<div align="center"><b>Figure 3. Landing Page</b></div>
+<p align="center"><b>Figure 3. Landing Page</b></p>
 </p>
 
 ### The Landing Page
@@ -225,7 +261,7 @@ Once the landing page has been displayed if there's been no server activity on t
 </p>
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec01.jpg"> </div>
-<div align="center"><b>Figure 4. Message when Session Times Out</b></div>
+<p align="center"><b>Figure 4. Message when Session Times Out</b></p>
 
 <br>
 ## Base Map
@@ -353,7 +389,7 @@ Tweet dataset provides real-time data and automatically refreshes with new data 
 ##### Advanced Search
 
 <center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec18.jpg)</center>
-<p align="left"><b>Figure 9. Find Data Panel</b></p>
+<p align="center"><b>Figure 9. Find Data Panel</b></p>
 
 <br>
 The Find Data Panel is where more defined searches are built, saved and existing searches are executed.
@@ -509,7 +545,7 @@ To further filter a search, a geo-spatial filter can be applied by drawing a sha
 <p align="left"><b>Figure 11b. NEAR Me</b></p>
 <br>
 <center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec11.jpg)</center>
-<p align="left"><b>Figure 11c. NEAR Marker </b></p>
+<p align="left"><b>Figure 11c. NEAR Marker</b></p>
 <p>
 Amongst applying boundaries to a search, auto refresh component can be setup for a search by the number of intervals in seconds (minimum of 30 seconds, maximum of 3600 seconds or 60 minutes).
 </p>
@@ -594,11 +630,11 @@ The table grid is located at the bottom of the map. The table becomes active whe
 
 ## Saving Searches
 <p>
-OpenGrid allows a user to create searches; there is also an option to save a search.  To save a query, define a name for your search within the <b>“Save Query As”</b> section of the Find Data Panel.  A successful save will return a message in the lower right corner “Query was successfully saved".  
+OpenGrid allows a user to create searches; there is also an option to save a search.  To save a query, define a name for your search within the <b>“Save Query As”</b> section of the Find Data Panel.  A successful save will return a message in the lower right corner, “Query was successfully saved".  
 </p>
 
 <p>
-A search is saved and stored in the manage queries panel. Saved searches are also accessible within the Load Save Queries drop list located in the Existing Queries section of the Find Data Panel.  Load Save Queries section stores the ten most recent saved searches. 
+A search is saved and stored in the <b>Manage Queries</b> panel. Saved searches are also accessible within the <b>Load Save Queries</b> drop list located in the <b>Existing Queries</b> section of the Find Data Panel.  Load Save Queries section stores the ten most recent saved searches. 
 </p>
 
 <p>
