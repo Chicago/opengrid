@@ -1,5 +1,4 @@
 <H1 align="center"><B>OpenGrid</B></H1>
-<H3 align="center">Functional Design</H3>
 <H4 align="center">Version 1.3.0</H4>
 <p align="center"><img src="https://github.com/Chicago/opengrid/blob/master/docs/media/image1.jpg"> </p>
 <p align="center"><b>Department of Innovation & Technology</b></p>
