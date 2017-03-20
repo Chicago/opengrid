@@ -310,10 +310,12 @@ By selecting the measurement icon, the measurement tool can be turned on to enab
 </p>
 
 <p>Linear Measurement</p>
-- Distance between points
+
+* Distance between points
 
 <p>Area Measurement</p>
-- Distance around a point
+
+* Distance around a point
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec23.jpg">
 </div>
