@@ -550,15 +550,15 @@ In the example below, it shows how the search was applied and how each data type
 To further filter a search, a geo-spatial filter can be applied by drawing a shape on a targeted area on a map or selecting one of the pre-defined boundaries from the Select Location section of the panel. Select Location has two geo-spatial options called <b>WITHIN</b> and <b>NEAR</b> (see images below).
 </p>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec09.jpg"> 
+<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec09.jpg"> 
 </div>
 <p align="left"><b>Figure 11a. WITHIN Boundary</b></p>
 <br>
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec10.jpg"> 
+<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec10.jpg"> 
 </div>
 <p align="left"><b>Figure 11b. NEAR Me</b></p>
 <br>
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec11.jpg"> 
+<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec11.jpg"> 
 </div>
 <p align="left"><b>Figure 11c. NEAR Marker</b></p>
 <p>
