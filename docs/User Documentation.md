@@ -254,7 +254,9 @@ Layers Icon <img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/im
 </table>
 
 <br>
-### Session Timeout
+
+<h3>Session Timeout</h3>
+
 <p>
 Once the landing page has been displayed if there's been no server activity on the application after four hours the user will be logged out automatically with a message appearing.  See Figure 4 below:
 </p>
@@ -262,31 +264,31 @@ Once the landing page has been displayed if there's been no server activity on t
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec01.jpg"> </div>
 <p align="center"><b>Figure 4. Message when Session Times Out</b></p>
 
-<br>
-## Base Map
-#### Map Layers
+
+<h2> Base Map</h2>
+<h3> Map Layers</h3>
 <p>
 The layers icon displays multiple basemap views and open weather layers. The list is built dynamically based on what's available through the Map Service provider. In the lower right hand corner on the grid, there is information and active links provided about the map services.  The initial launch page displays the default basemap, Street View. For all other basemaps see Figure 5a and 5b below.
 </p>
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec15.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec15.jpg"> 
+</div>
 <p align="center"><b>Figure 5a. Aerial View</b></p>
 
+
 <br>
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec17.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec17.jpg"> 
 <p align="center"><b>Figure 5b. Black and White View</b></p>
 
-<br>
-
-#### Map Legend
+<h4>Map Legend</h4>
 <p>
 A dynamic legend will display a representation of what type of search was executed. If, multiple types with same dataset is being displayed for a search; it will display the two datatypes based off color representation from the setup on the grid. 
 </p>
 
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec20.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec20.jpg"> 
 <p align="center"><b>Figure 6. Map Legend</b></p>
 <br>
 
-#### Map Navigation
+<h4>Map Navigation</h4>
 Navigation tools are used to aid users in finding their way around a map. Using navigational controls, the user should be able to:
 
 * zoom in/out
@@ -300,7 +302,7 @@ Navigation tools are used to aid users in finding their way around a map. Using 
 
 <br>
 
-#### Measurement Tool
+<h4> Measurement Tool</h4>
 <p>
 By selecting the measurement icon, the measurement tool can be turned on to enable measurements of the following:
 </p>
@@ -311,22 +313,22 @@ Linear Measurement
 <p>Area Measurement</p>
 - Distance around a point
 
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec23.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec23.jpg"> 
 <p align="center"><b>Figure 7a. Linear Measurement</b></p>
 
 <br>
 
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec21.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec21.jpg"> 
 <p align="center"><b>Figure 7b. Multiple Linear Measurement </b></p>
 <br><br>
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec26.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec26.jpg"> 
 <p align="center"><b>Figure 7c. Area Measurement</b></p>
 
 <br>
 <br>
 
-## Types of Searches
-### Quick Search
+<h2>Types of Searches</h2>
+<h3>Quick Search</h3>
 A Quick Search box can be used to perform common searches that will support the following commands/inputs:
 
 <table>
@@ -347,21 +349,22 @@ A Quick Search box can be used to perform common searches that will support the 
         <td width="10%">Address</td> <TD width="30%">Finds the specified address using the Map/GIS Service.</TD>	<TD>&lt;number&gt;&lt;direction&gt;&lt;streetname&gt;</TD> <TD>50 W. Washington</TD> <TD>Displayed as a marker on the map</TD>     
     </tr>
 
-	<tr>
+   <tr>
         <td>Latitude and Longitude</td>	<TD>Displays a marker to show location of latitude and longitude entered.</TD> <TD>&lt;latitude&gt;, &lt;longitude&gt;</TD> <TD>41.8270, -87.6423</TD> <TD>Displayed as a marker on the map</TD>   
     </tr>
 	
-	<tr>
+  <tr>
         <td>Place Name</td> <TD>Shows location of the place specified.</TD> <TD>&lt;name of place&gt;</TD> <TD>Daley Center</TD> <TD>Displayed as a marker on the map</TD>
     </tr>
 	<tr>
         <td>Tweets</td> <TD>Displays recent tweets matching keyword, if provided. Keyword can be a bareword or a double-quoted set of words.</TD> <TD>tweet &lt;keyword&gt;</TD> <TD>tweet</TD> <TD><ul><li>Date</li> <li>Screen Name</li> <li>Text</li> <li>City</li></ul></TD>
     </tr>
 	
-	<tr>
+  <tr>
         <td>Weather</td> <TD>Displays a point in the middle of the map showing weather information for the zip code.</TD> <TD>weather &lt;zip code&gt;</TD> <TD>weather 60601</TD> <TD><ul><li>Temperature in (Fahrenheit)</li>  <li>Wind</li> <li>Conditions</li> <li>Humidity</li> <li>Forecast</li></ul></TD>
     </tr>
-</table>
+    </table>
+
 <br>
 <p>
 The data results for the above search types and any other search form will appear as point/s, custom icons or markers on the map. Any search type information, whether its performed as a Quick Search or Advanced Search will display on the map and table grid. The table grid displays data as rows.
@@ -377,17 +380,17 @@ Tweet dataset provides real-time data and automatically refreshes with new data 
 
 <br>
 
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec25.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec25.jpg"> 
 <p align="center"><b>Figure 8. Quick Search on Tweets</b></p>
 
 <br>
-### Find Data Panel 
+<h3> Find Data Panel </h3> 
 
 <b><i>Note: Manage Queries, Load Saved Query and Save Query As seen in the image below are configurations that can be enabled and disabled within the application. These attributes does not appear in opengrid.io.</i></b>
 
-##### Advanced Search
+<h4>Advanced Search</h4>
 
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec18.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec18.jpg"> 
 <p align="center"><b>Figure 9. Find Data Panel</b></p>
 
 <br>
@@ -530,20 +533,20 @@ Simple, just add Business Licenses dataset twice, then set one with a filter  <b
 In the example below, it shows how the search was applied and how each data type is represented on the grid... Retail Food Establishments has the default color of Blue and Mobile Food Licenses is Red.
 </p>
 <br>
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec16.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec16.jpg"> 
 <p align="center"><b>Figure 10. Business Licenses Dataset Example </b></p>
 <br>
 <p>
 To further filter a search, a geo-spatial filter can be applied by drawing a shape on a targeted area on a map or selecting one of the pre-defined boundaries from the Select Location section of the panel. Select Location has two geo-spatial options called <b>WITHIN</b> and <b>NEAR</b> (see images below).
 </p>
 
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec09.jpg) </center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec09.jpg"> 
 <p align="left"><b>Figure 11a. WITHIN Boundary</b></p>
 <br>
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec10.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec10.jpg"> 
 <p align="left"><b>Figure 11b. NEAR Me</b></p>
 <br>
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec11.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec11.jpg"> 
 <p align="left"><b>Figure 11c. NEAR Marker</b></p>
 <p>
 Amongst applying boundaries to a search, auto refresh component can be setup for a search by the number of intervals in seconds (minimum of 30 seconds, maximum of 3600 seconds or 60 minutes).
@@ -553,8 +556,8 @@ Amongst applying boundaries to a search, auto refresh component can be setup for
 When a query is submitted, the application will display a message when the query times out. It will also display a message when the search service returns no data.
 </p>
 <br>
-### Existing Queries
-##### Commonly Used Queries
+<h3>Existing Queries</h3>
+<h4> Commonly Used Queries</h4>
 <p>
 Are popular searches that city residents are most likely to explore within the application. The drop menu has a list of predefined queries that a user can apply as a search. 
 </p>
@@ -563,27 +566,27 @@ Are popular searches that city residents are most likely to explore within the a
 Each query when selected displays its search parameters under the Select Data section. To run commonly used queries, select a search from the drop list and select Get Data.
 </p>
 <br>
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec27.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec27.jpg"> 
 <p align="center"><b>Figure 12. Commonly Used Queries</b></p>
 <br>
 
-## Data Formation
-### Map Grid 
+<h2> Data Formation</h2>
+<h3> Map Grid </h3>
 <p>
 The map grid is interactive, a user can navigate the map using a mouse, keyboard and for mobile devices by swiping using index finger.  The map displays the maximum of 1000 points. All data appears on the grid as points and/or markers. Places/Address search plot as markers and Datasets plot as points on the grid. The map legend appears on the grid when a search has been executed, displaying the color of the data point and the name of the data being displayed. A retractable information box appears to the bottom right of the grid when a search is performed, displaying the No. of records found or an error message pertaining to a search. The grid has an automatic refresh feature for updating and re-plotting data upon navigating around the map.
 </p>
 
 <br>
 
-### Table Grid
+<h3>Table Grid</h3>
 <p>
 The table grid is located at the bottom of the map. The table becomes active when a search has been performed and returns a set of results on the map. To access the table after a search, click on the black bar at the bottom of the map, there is a white carat displayed in the middle of the black bar below as an indicator that the bar is collapsible. After clicking on the bar, the table will expand upward exposing the table and its components.
 </p>
 <br>
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec29.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec29.jpg"> 
 <p align="center"><b>Figure 13. Table Grid</b></p>
 <br>
-### Components of the Table Grid
+<h3> Components of the Table Grid </h3>
 <b>Information Tab</b>
 
 - Search type (i.e. Place/Address, Business License).
@@ -627,7 +630,7 @@ The table grid is located at the bottom of the map. The table becomes active whe
 
 <br>
 
-## Saving Searches
+<h2>Saving Searches</h2>
 <p>
 OpenGrid allows a user to create searches; there is also an option to save a search.  To save a query, define a name for your search within the <b>“Save Query As”</b> section of the Find Data Panel.  A successful save will return a message in the lower right corner, “Query was successfully saved".  
 </p>
@@ -642,12 +645,12 @@ A saved search can also be overwritten upon user discretion. To overwrite a sear
 
 <br>
 
-<center>![](https://github.com/Chicago/opengrid/blob/dev/docs/media/dec14.jpg)</center>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec14.jpg"> 
 <p align="center"><b>Figure 14. Query Overwrite</b></p>
 <br>
 
-## Administrator
-##### Manage Users and Manage Groups
+<h2>Administrator</h2>
+<h4>Manage Users and Manage Groups</h4>
 <p>The admin screen is accessible by selecting the Manage Button.  Administrator capabilities are available for admin users only.  Manage Users and Manage Groups are active links; when selected their panel is exposed. Admin users can perform the following tasks:
 </p>
 
