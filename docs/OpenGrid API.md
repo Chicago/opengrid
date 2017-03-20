@@ -73,13 +73,14 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 <br>
 <li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li> </ul> 
 
-	```
-						{
-							"error": {
-									"code": "&lt;error code&gt;",													"message": "&lt;error message&gt;"
+```
+				{
+					"error": {
+							"code": "&lt;error code&gt;",
+							"message": "&lt;error message&gt;"
 								}
-						}
-	```
+					}
+```
 
 <ul>		
 <li>where <b>HTTP &lt;error code&gt;</b> is a code corresponding to the error that occurred and <b>HTTP &lt;error message&gt;</b> is a description of the error.</li>
