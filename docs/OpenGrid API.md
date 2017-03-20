@@ -72,14 +72,14 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 <li><b>HTTP 403</b> is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.</li>
 <br>
 <li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li> </ul> 
-			<pre><code>
-					{
-						"error": {
-									"code": "&lt;error code&gt;",
-									"message": "&lt;error message&gt;"
-										}
-							}
-							</code> </pre>
+
+	```
+						{
+							"error": {
+									"code": "&lt;error code&gt;",													"message": "&lt;error message&gt;"
+								}
+						}
+	```
 
 <ul>		
 <li>where <b>HTTP &lt;error code&gt;</b> is a code corresponding to the error that occurred and <b>HTTP &lt;error message&gt;</b> is a description of the error.</li>
@@ -101,19 +101,23 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 
 <p><b>Sample Request</b></p>
 <p><small><b>Request Payload:</b></small></p>
+
 ```
 	{
 			"username": "admin",
 			"password": "xxx"
 		}
 ```
+
 <p><b>Sample Response</b></p>
 
 <p>The authentication token is returned, the authentication token consist of three sections separated by dots(<b>.</b>): <b>HEADER.PAYLOAD.SIGNATURE</b>; the key X-AUTH-TOKEN is appended to the response header below: </p>
+
 ```
 X-AUTH-TOKEN:
 eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
 ```
+
 <p>
 This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See <a href="https://github.com/auth0/jwt-decode"> https://github.com/auth0/jwt-decode</a>)
 </p>
@@ -902,7 +906,7 @@ The maximum number of records to return; If this parameter is not specified, no 
 	}
 ```
 
-## 1.1.9 /datasets/{dataset_id}/query
+<h2>1.1.9 /datasets/{dataset_id}/query</h2>
 
 **Method**
 <p><b>GET</b>/datasets/{dataset_id}/query</p>
@@ -934,7 +938,6 @@ It is recommended that this value be URL encoded.
 </p>
 </td>
 </tr>
-
 <tr>
 <td>n</td>
 <td>Integer</td>
@@ -947,23 +950,25 @@ It is recommended that this value be URL encoded.
 <td><p>Optional parameters that can be passed depending on service capabilities. This value needs to be encoded for the call to work as expected. "geoFilter" is an attribute supported as of Release 1.1.0 and should be a valid geoJson geometry value.</p>
 </td>
 </tr>
-
 </table>
 </html>
 
 <p><b>Sample Request</b></p>
 
-```
+				```
 <Service URL>/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1&opts={"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.63304710388184,41.89278978584501],[-87.61206150054932,41.89278978584501],[-87.61206150054932,41.88140002416609],[-87.63304710388184,41.88140002416609],[-87.63304710388184,41.89278978584501]]]]}}
 ```
 
 <p><b><small>Or when URL encoded:</small></b></p>
 
+
 ```
 <Service URL>/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=6000&opts=%7B%22geoFilter%22:%7B%22type%22:%22MultiPolygon%22,%22coordinates%22:%5B%5B%5B%5B-87.63304710388184,41.89278978584501%5D,%5B-87.61206150054932,41.89278978584501%5D,%5B-87.61206150054932,41.88140002416609%5D,%5B-87.63304710388184,41.88140002416609%5D,%5B-87.63304710388184,41.89278978584501%5D%5D%5D%5D%7D%7D
 ```
 
+
 <p><b>Sample Response</b></p>
+
 
 ```
 {
@@ -1089,15 +1094,19 @@ It is recommended that this value be URL encoded.
 	}
 
 ```
-**Method**
+
+
+<p><b>Method</b></p>
 <p><b>POST</b>/datasets/{dataset_id}/query</p>
 
 <p>Execute a query against a specific dataset. The POST method is now supported to accomodate bigger request payloads primarily due to geo-spatial filters (for OpenGrid services that support geo-spatial filtering)</p>
 
 <p><b>Request Parameters</b></p>
-The parameter names are the same as the ones on the GET method above except that they should be passed as form data. See Sample request payload below.
+
+<p>The parameter names are the same as the ones on the GET method above except that they should be passed as form data. See Sample request payload below.</p>
 
 <p><b>Sample Request Payload</b></p>
+
 ```
 ------WebKitFormBoundaryOvluSdchMLVGg7rd
 Content-Disposition: form-data; name="q"
@@ -1110,15 +1119,34 @@ Content-Disposition: form-data; name="n"
 ------WebKitFormBoundaryOvluSdchMLVGg7rd
 Content-Disposition: form-data; name="opts"
 
-{"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.65630722045898,41.89850786255543],[-87.60510921478273,41.89850786255543],[-87.60510921478273,41.87588812018588],[-87.65630722045898,41.87588812018588],[-87.65630722045898,41.89850786255543]]]]}}
+	{
+		"geoFilter":
+				{"type":
+					"MultiPolygon",
+					"coordinates":[
+							[
+							   [
+							   	[-87.65630722045898,41.89850786255543],	
+								[-87.60510921478273,41.89850786255543],
+								[-87.60510921478273,41.87588812018588],	
+								[-87.65630722045898,41.87588812018588],
+								[-87.65630722045898,41.89850786255543]
+							  ]
+							]
+						    ]
+				 }
+	 }
 ------WebKitFormBoundaryOvluSdchMLVGg7rd--
 ```
+
 <p><b>Sample Response</b></p>
-See sample response for the GET method above.
+<p>See sample response for the GET method above.</p>
 
-## 1.1.10 /queries
 
-**Method**
+<h2>1.1.10 /queries</h2>
+
+<p><b>Method</b></p>
+
 <p><b>GET</b> /queries</p>
 
 <p>Return list of all queries that user has access to. A user has access to all queries he or she has created and those shared with his groups or shared with him directly by other users.</p>
@@ -1165,10 +1193,13 @@ maximum number of records to return; If this parameter is not specified, no reco
 
 <p><b>Sample Request</b></p>
 
+
 ```
 <Service URL>/queries?n=1
 ```
+
 <p><b>Sample Response</b></p>
+
 
 ```
 [
@@ -1221,42 +1252,42 @@ maximum number of records to return; If this parameter is not specified, no reco
 ```
 {
 	"o":{
-			"name":"Tweets By Bud",
-			"owner":"user1",
+		"name":"Tweets By Bud",
+		"owner":"user1",
 			"spec":[
-						{
-							"dataSetId":"twitter",
-							"filters":{
-											"condition":"AND",
-											"rules":[
-														{
-															"id":"screenName",
-															"field":"screenName",
-															"type":"string",
-															"input":"text",
-															"operator":"contains",
-															"value":"bud"
-																			}
-																				]
-								      },
-							"rendition":{
-											"color":"#DC143C",
-											"opacity":"85",
-											"size":"6"
-															}
+					{
+						"dataSetId":"twitter",
+						"filters":{
+								"condition":"AND",
+								"rules":[
+										{
+							 				"id":"screenName",
+											"field":"screenName",
+											"type":"string",
+											"input":"text",
+											"operator":"contains",
+											"value":"bud"
+													}
+																									]
+							     },
+						"rendition":{
+								"color":"#DC143C",
+								"opacity":"85",
+								"size":"6"
+						  		}
 						}
 					],
-			"sharedWith":{
-							"users":[],
-							"groups":[]
-										},
-			"isCommon":false,
-			"autoRefresh":false,
-			"refreshInterval":"30",
-			"geoFilter":{
-							"boundaryType":"within",
-							"boundary": ""
-											}
+		"sharedWith":{
+				"users":[],
+				"groups":[]
+				},
+		"isCommon":false,
+		"autoRefresh":false,
+		"refreshInterval":"30",
+		"geoFilter":{
+				"boundaryType":"within",
+				"boundary": ""
+				}
 	}
 }
 
@@ -1269,44 +1300,44 @@ maximum number of records to return; If this parameter is not specified, no reco
 		"name" : "Tweets By Bud",
 		"owner" : "user1",
 		"spec" : [{
-					"dataSetId" : "twitter",
-					 "filters" : {
-									"condition" : "AND",
-									"rules" : [ {
-													"id" : "screenName",
-													"field" : "screenName",
-													"type" : "string",
-													"input" : "text",
-													"operator" : "contains",
-													"value" : "bud"
-																		}]
-								},
-					"rendition" : {
-									"color" : "#DC143C",
-									"opacity" : "85",
-									"size" : "6"
-													}
-					}],
-		"sharedWith" : {
-							"users" : [ ],
-							"groups" : [ ]
-											},
+				"dataSetId" : "twitter",
+				 "filters" : {
+						"condition" : "AND",
+						"rules" : [ {
+								"id" : "screenName",
+								"field" : "screenName",
+								"type" : "string",
+								"input" : "text",
+								"operator" : "contains",
+								"value" : "bud"
+							       } ]
+						},
+				"rendition" : {
+			 				"color" : "#DC143C",
+							"opacity" : "85",
+							"size" : "6"
+							}
+			 }],
+		 "sharedWith" : {
+					"users" : [ ],
+					"groups" : [ ]
+						},
 		"isCommon" : false,
 		"autoRefresh" : false,
 		"refreshInterval" : "30",
 		"geoFilter" : 
-					{ 
-							"boundaryType" : "within",
-							"boundary" : ""
-											},
+				{ 
+					"boundaryType" : "within",
+					"boundary" : ""
+							},
 		"_id" : { "$oid" : "55df5ec39900ec81a481b0f6"}
 	}
 
 ```
 
-## 1.1.11 /queries/{query_id}
+<h2> 1.1.11 /queries/{query_id}</h2>
 
-**Method**
+<p><b>Method</b></p>
 <p><b>GET</b> /queries/{query_id}</p>
 
 <p>Return a single query given a query’s internal id.</p>
@@ -1327,33 +1358,33 @@ maximum number of records to return; If this parameter is not specified, no reco
 ```
 	[
 		{"_id":
-				{ "$oid" : "5582f831a3db5f4190e4707a"},
+			{ "$oid" : "5582f831a3db5f4190e4707a"},
 		"name" : "Weather Records for 60601",
 		"owner" : "jsmith", 
 		"spec" : [{
-					"dataSetId" : "weather",
-					"filters" : { 
-									"condition" : "AND",
-									"rules" : 
-												[{
-													"id" : "zipcode",
-													"field" : "zipcode",
-													"type" : "string",
-													"input" : "text",
-													"operator" : "equal",
-													"value" : "60601"
-																		}]
+				"dataSetId" : "weather",
+				"filters" : { 
+						"condition" : "AND",
+						"rules" : 
+								[{
+									"id" : "zipcode",
+									"field" : "zipcode",
+									"type" : "string",
+									"input" : "text",
+									"operator" : "equal",
+									"value" : "60601"
+											}]
 							    },
-					"rendition": {
-									"color" : "#DC143C",
-									"opacity" : 85,
-									"size" : 6
-													}
-					}],
+				"rendition": {
+						"color" : "#DC143C",
+						"opacity" : 85,
+						"size" : 6
+							}
+			  }],
 		"sharedWith" : {
-							"users" : [ ],
-							"groups" : [ ]
-												},
+					"users" : [ ],
+					"groups" : [ ]
+							},
 		"isCommon" : true}
 	]
 ```
@@ -1381,36 +1412,37 @@ maximum number of records to return; If this parameter is not specified, no reco
 		"name" : "Tweets on coupon",
 		"owner" : "user1", 
 		"spec" : [{ 
-						"dataSetId" : "twitter",
-						"filters": {
-									"condition" : "AND",
-									"rules" : [{
-												"id" : "text",
-												"field" : "text",
-												"type" : "string",
-												"input" : "text",
-												"operator" : "contains",
-												"value" : "coupon"
-																}]},
-						"rendition" : {
-									"color" : "#DC143C",
-									"opacity" : "85",
-									"size" : "6"
-												}
-												}],
+				"dataSetId" : "twitter",
+				"filters": {
+						"condition" : "AND",
+						"rules" : [{
+								"id" : "text",
+								"field" : "text",
+								"type" : "string",
+								"input" : "text",
+								"operator" : "contains",
+								"value" : "coupon"
+									}]
+						},
+		 		"rendition" : {
+		 					"color" : "#DC143C",
+							"opacity" : "85",
+							"size" : "6"
+									}
+			 }],
 		"sharedWith" : {
-						"users" : [ ],
-						"groups" : [ ]
-										},
+					"users" : [ ],
+					"groups" : [ ]
+							},
 		"isCommon" : false,
 		"autoRefresh" : false,
 		"refreshInterval" : "30",
 		"_id" : {"$oid" : "55c52cf6c4aa31b24b04d620"},
 			"geoFilter" : {
-								"boundaryType" : "within",
-								"boundary" : ""
-													}
-					}
+						"boundaryType" : "within",
+						"boundary" : ""
+								}
+	}
 ```
 
 <p><b>DELETE</b> /queries/{query_id}</p>
