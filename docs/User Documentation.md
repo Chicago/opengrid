@@ -277,6 +277,7 @@ The layers icon displays multiple basemap views and open weather layers. The lis
 
 <br>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec17.jpg"> 
+</div>
 <p align="center"><b>Figure 5b. Black and White View</b></p>
 
 <h4>Map Legend</h4>
@@ -285,11 +286,12 @@ A dynamic legend will display a representation of what type of search was execut
 </p>
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec20.jpg"> 
+</div>
 <p align="center"><b>Figure 6. Map Legend</b></p>
 <br>
 
-<h4>Map Navigation</h4>
-Navigation tools are used to aid users in finding their way around a map. Using navigational controls, the user should be able to:
+#### Map Navigation
+<p>Navigation tools are used to aid users in finding their way around a map. Using navigational controls, the user should be able to:</p>
 
 * zoom in/out
 * reset the map
@@ -302,26 +304,29 @@ Navigation tools are used to aid users in finding their way around a map. Using 
 
 <br>
 
-<h4> Measurement Tool</h4>
+#### Measurement Tool
 <p>
 By selecting the measurement icon, the measurement tool can be turned on to enable measurements of the following:
 </p>
 
-Linear Measurement
+<p>Linear Measurement</p>
 - Distance between points
 
 <p>Area Measurement</p>
 - Distance around a point
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec23.jpg"> 
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec23.jpg">
+</div>
 <p align="center"><b>Figure 7a. Linear Measurement</b></p>
 
 <br>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec21.jpg"> 
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec21.jpg">
+</div>
 <p align="center"><b>Figure 7b. Multiple Linear Measurement </b></p>
 <br><br>
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec26.jpg"> 
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec26.jpg">
+</div>
 <p align="center"><b>Figure 7c. Area Measurement</b></p>
 
 <br>
@@ -381,6 +386,7 @@ Tweet dataset provides real-time data and automatically refreshes with new data 
 <br>
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec25.jpg"> 
+</div>
 <p align="center"><b>Figure 8. Quick Search on Tweets</b></p>
 
 <br>
@@ -391,6 +397,7 @@ Tweet dataset provides real-time data and automatically refreshes with new data 
 <h4>Advanced Search</h4>
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec18.jpg"> 
+</div>
 <p align="center"><b>Figure 9. Find Data Panel</b></p>
 
 <br>
@@ -534,6 +541,7 @@ In the example below, it shows how the search was applied and how each data type
 </p>
 <br>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec16.jpg"> 
+</div>
 <p align="center"><b>Figure 10. Business Licenses Dataset Example </b></p>
 <br>
 <p>
@@ -541,12 +549,15 @@ To further filter a search, a geo-spatial filter can be applied by drawing a sha
 </p>
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec09.jpg"> 
+</div>
 <p align="left"><b>Figure 11a. WITHIN Boundary</b></p>
 <br>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec10.jpg"> 
+</div>
 <p align="left"><b>Figure 11b. NEAR Me</b></p>
 <br>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec11.jpg"> 
+</div>
 <p align="left"><b>Figure 11c. NEAR Marker</b></p>
 <p>
 Amongst applying boundaries to a search, auto refresh component can be setup for a search by the number of intervals in seconds (minimum of 30 seconds, maximum of 3600 seconds or 60 minutes).
@@ -567,6 +578,7 @@ Each query when selected displays its search parameters under the Select Data se
 </p>
 <br>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec27.jpg"> 
+</div>
 <p align="center"><b>Figure 12. Commonly Used Queries</b></p>
 <br>
 
@@ -584,6 +596,7 @@ The table grid is located at the bottom of the map. The table becomes active whe
 </p>
 <br>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec29.jpg"> 
+</div>
 <p align="center"><b>Figure 13. Table Grid</b></p>
 <br>
 <h3> Components of the Table Grid </h3>
@@ -646,6 +659,7 @@ A saved search can also be overwritten upon user discretion. To overwrite a sear
 <br>
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec14.jpg"> 
+</div>
 <p align="center"><b>Figure 14. Query Overwrite</b></p>
 <br>
 
