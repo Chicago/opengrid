@@ -956,140 +956,137 @@ It is recommended that this value be URL encoded.
 
 <p><b>Sample Request</b></p>
 
-				```
+```				```
 <Service URL>/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1&opts={"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.63304710388184,41.89278978584501],[-87.61206150054932,41.89278978584501],[-87.61206150054932,41.88140002416609],[-87.63304710388184,41.88140002416609],[-87.63304710388184,41.89278978584501]]]]}}
 ```
 
 <p><b><small>Or when URL encoded:</small></b></p>
 
-
 ```
 <Service URL>/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&n=6000&opts=%7B%22geoFilter%22:%7B%22type%22:%22MultiPolygon%22,%22coordinates%22:%5B%5B%5B%5B-87.63304710388184,41.89278978584501%5D,%5B-87.61206150054932,41.89278978584501%5D,%5B-87.61206150054932,41.88140002416609%5D,%5B-87.63304710388184,41.88140002416609%5D,%5B-87.63304710388184,41.89278978584501%5D%5D%5D%5D%7D%7D
 ```
 
-
 <p><b>Sample Response</b></p>
-
 
 ```
 {
 	"type" : "FeatureCollection", 
 	"features" :
-				[
-						{
-								"type": "Feature", 
-								"properties": 
-											{
-												"_id" : {"$oid" : "556e6f18aef407e1dc98685e"},
-												"date" : "05/02/2012 8:24 AM",
-												"screenName" : "DeeeEmmm",
-												"text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways....",
-												"city" : "Chicago, IL",
-												"bio" : "I'm the female version of Ari Gold!",
-												"lat" : 41.84770456,
-												"long" : -87.8521837,
-												"hashtags" : ""
-														},
-						"geometry":
-									{
-										"type": "Point",
-										"coordinates": [-87.8521837,41.84770456]
-												},
-						"autoPopup": false
+			[
+				{
+					"type": "Feature", 
+					"properties": 
+							{
+								"_id" : {"$oid" : "556e6f18aef407e1dc98685e"},
+								"date" : "05/02/2012 8:24 AM",
+								"screenName" : "DeeeEmmm",
+								"text" : "Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways....",
+								"city" : "Chicago, IL",
+								"bio" : "I'm the female version of Ari Gold!",
+								"lat" : 41.84770456,
+								"long" : -87.8521837,
+								"hashtags" : ""
+											},
+					"geometry":
+							{
+								"type": "Point",
+								"coordinates": [-87.8521837,41.84770456]
+										},
+					"autoPopup": false
 					}	
 				],
 
 	"meta":
 			{ 
 				"view":
-						{
-							"id" : "twitter",
-							"displayName" : "Twitter",
+					{
+						"id" : "twitter",
+						"displayName" : "Twitter",
 				"options":
-							{"rendition" :
-											{
-												"icon" : "default",
-												"color" : "#001F7A",
-												"fillColor" : "#00FFFF",
-												"opacity" : 85,
-												"size" : 6
-													}
+						 {"rendition" :
+									{
+										"icon" : "default",
+										"color" : "#001F7A",
+										"fillColor" : "#00FFFF",
+										"opacity" : 85,
+										"size" : 6
+												}
 							},
 	"columns" : 
-				[
-					{
-						"id" : "_id", 
-						"displayName" : "ID", 
-						"dataType" : "string",
-						"filter" : false,
-						"popup" : false,
-						"list" : false
+			[
+				{
+					"id" : "_id", 
+					"displayName" : "ID", 
+					"dataType" : "string",
+					"filter" : false,
+					"popup" : false,
+					"list" : false
 							},
-					{
-						"id" : "date",
-						"displayName" : "Date",
-						"dataType" : "date",
-						"filter" : true,
-						"popup" : true,
-						"list" : true,
-						"sortOrder" : 1
+				{
+					"id" : "date",
+					"displayName" : "Date",
+					"dataType" : "date",
+					"filter" : true,
+					"popup" : true,
+					"list" : true,
+					"sortOrder" : 1
 							},
-					{
-						"id" : "screenName",
-						"displayName" : "Screen Name",
-						"dataType" : "string",
-						"filter" : true,
-						"popup" : true,
-						"list" : true,
-						"sortOrder" : 2,
-						"groupBy" : true
+				{
+					"id" : "screenName",
+					"displayName" : "Screen Name",
+					"dataType" : "string",
+					"filter" : true,
+					"popup" : true,
+					"list" : true,
+					"sortOrder" : 2,
+					"groupBy" : true
 							},
-					{
-						"id" : "text",
-						"displayName" : "Text",
-						"dataType" : "string",
-						"filter" : true,
-						"popup" : true,
-						"list" : true,
-						"sortOrder" : 3
+				{
+					"id" : "text",
+					"displayName" : "Text",
+					"dataType" : "string",
+					"filter" : true,
+					"popup" : true,
+					"list" : true,
+					"sortOrder" : 3
+						},
+				{	
+					"id" : "city",
+					"displayName" : "City",
+					"dataType" : "string",
+					"filter" : true,
+					"popup" : true,
+					"list" : true,
+					"sortOrder" : 4,
+					"groupBy" : true
 							},
-					{	
-						"id" : "city",
-						"displayName" : "City",
-						"dataType" : "string",
-						"filter" : true,
-						"popup" : true,
-						"list" : true,
-						"sortOrder" : 4,
-						"groupBy" : true
+				{
+					"id" : "bio",
+					"displayName" : "Bio",
+					"dataType" : "string",
+					"sortOrder" : 5
 							},
-					{
-						"id" : "bio",
-						"displayName" : "Bio",
-						"dataType" : "string",
-						"sortOrder" : 5
+				{
+					"id" : "hashtags",
+					"displayName" : "Hashtags",
+					"dataType" : "string",
+					"sortOrder" : 6
 							},
-					{
-						"id" : "hashtags",
-						"displayName" : "Hashtags",
-						"dataType" : "string",
-						"sortOrder" : 6
-							},
-					{
-						"id" : "lat",
-						"displayName" : "Latitude",
-						"dataType" : "float",
-						"list" : true,
-						"sortOrder" : 7
-							},
-					{		
-						"id" : "long",
-						"displayName" : "Longitude",
-						"dataType" : "float",
-						"list" : true,
-						"sortOrder" : 8
-								}
-				]
+				{
+					"id" : "lat",
+					"displayName" : "Latitude",
+					"dataType" : "float",
+					"list" : true,
+					"sortOrder" : 7
+						},
+				{		
+					"id" : "long",
+					"displayName" : "Longitude",
+					"dataType" : "float",
+					"list" : true,
+					"sortOrder" : 8
+							}
+			]
 			} 
 		}
 	}
@@ -1161,7 +1158,6 @@ Content-Disposition: form-data; name="opts"
 <th>Value</th>
 <th>Description</th>
 </tr>
-
 <tr>
 <td>
 q</td>
@@ -1176,7 +1172,6 @@ It is recommended that this value be URL encoded.
 </p>
 </td>
 </tr>
-
 <tr>
 <td>n
 </td>
