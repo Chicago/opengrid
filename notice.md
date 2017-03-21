@@ -80,8 +80,9 @@ Notice file related to [MIT License](https://opensource.org/licenses/MIT).  Prov
 Notice file corresponding to section 3 of the [BSD License](https://opensource.org/licenses/BSD-2-Clause). Providing presentation and/or application layer support.
 
 <p>In the case of:<br></p>
-* [chroma.js](https://github.com/gka/chroma.js)<br>
-* [leaflet fullscreen](https://github.com/Leaflet/Leaflet.fullscreen)<br>
+
+* [chroma.js](https://github.com/gka/chroma.js)
+* [leaflet fullscreen](https://github.com/Leaflet/Leaflet.fullscreen)
 * [Leaflet heat](https://github.com/Leaflet/Leaflet.heat)
 
 <p>This product includes software developed as part of the OpenGrid Project.<br> All rights reserved.<br> <b>Copyright &copy; 2015, City Of Chicago - OpenGrid</b></p> 
@@ -102,10 +103,12 @@ NOTICE file corresponding to [ISC License](https://opensource.org/licenses/ISC).
 NOTICE FILE  in relation to [General Public License](http://www.gnu.org/licenses/).Providing presentation and/or application layer support.
 
 <p>In the case of:</p> 
+
 * [MongoDB-Server](https://www.mongodb.org/about/licensing/)
+
 * [HTML5 Shiv](https://github.com/afarkas/html5shiv)
 
-Copyright © 2007 [Free Software Foundation](http://fsf.org/), Inc. 
+Copyright © 2007 [Free Software Foundation](http://fsf.org/), Inc.
 
 <p>This product includes software developed as part of the OpenGrid Project.<br>
 <b>Copyright &copy; 2015, City Of Chicago - OpenGrid</b></p>
@@ -115,8 +118,11 @@ Copyright © 2007 [Free Software Foundation](http://fsf.org/), Inc.
 NOTICE file corresponding to [Eclispe Distribution License](https://eclipse.org/org/documents/edl-v10.php) AND/OR [Eclipse Public License](https://eclipse.org/org/documents/epl-v10.php). Providing presentation and/or application layer support.
 
 <p> In the case of: </p>
+
 * [Hibernate JPA API](https://github.com/hibernate/hibernate-jpa-api)
+
 * [JUnit](https://github.com/junit-team/junit)
+
 * [jQuery dragtable plugin](https://github.com/akottr/dragtable)
 
 Copyright (c) 2007, Eclipse Foundation, Inc. and its licensors.<br>
