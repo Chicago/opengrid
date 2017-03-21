@@ -74,12 +74,12 @@ calling <b>/users/token</b> as described in Section 1.1.1.</p>
 <li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li> </ul> 
 
 ```
-				{
-					"error": {
-							"code": "&lt;error code&gt;",
-							"message": "&lt;error message&gt;"
-								}
-					}
+        {
+          "error": {
+			"code": "<error code>",
+			"message": "<error message>"
+				}
+	}
 ```
 
 <ul>		
@@ -207,11 +207,12 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 ```
 {
  "id":null,
- "o":{"userId":"test3",
-      "password":"testxxx",
-      "firstName":"Test",
-      "lastName":"Three",
-      "groups":[]
+ "o":{
+ 	"userId":"test3",
+      	"password":"testxxx",
+      	"firstName":"Test",
+      	"lastName":"Three",
+      	"groups":[]
      }
 }
 ```
@@ -254,7 +255,7 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 ```
 {
 	 "_id":
-			{"$oid":"55b63708a3db5f292c533c7b"},
+		{"$oid":"55b63708a3db5f292c533c7b"},
 	"userId":"TesterOne",
 	"password":"test123",
 	"firstName":"ABC Test",
@@ -284,21 +285,22 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 ```
 {
 	"id":{"$oid":"55ccaca15fc6c6bf8a807cf2"},
-	"o":{
-			"_id":
-					{"$oid":"55ccaca15fc6c6bf8a807cf2"},
-			"userId":"twitterUser",
-			"password":"testxxx",
-			"firstName":"Twitter",
-			"lastName":"User",
-			"groups":[
-					"opengrid_users_L1",
-					"opengrid_users_L2"]
-			}
+	 "o":{
+		"_id":
+			{"$oid":"55ccaca15fc6c6bf8a807cf2"},
+		"userId":"twitterUser",
+		"password":"testxxx",
+		"firstName":"Twitter",
+		"lastName":"User",
+		"groups":[
+				"opengrid_users_L1",
+				"opengrid_users_L2"]
+		}
 }
 ```
 
 <p><b>Sample Response</b></p>
+
 ```
 {
  	"userId":"test3",
@@ -308,7 +310,7 @@ This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token
 	"groups":[ ]
 }
 ```
-
+<br>
 <p><b>DELETE</b> /user/{user_id}</p>
 
 <p>Delete a user given the user’s internal Id on the URL path.</p>
@@ -381,23 +383,22 @@ The maximum number of records to return; If this parameter is not specified, no 
 <Service URL>/groups?q=%7B%7D&n=200
 ```
 
-
 <p><b>Sample Response</b></p>
 
 ```
 	[
 		{"_id" :
-				{"$oid":"55c0c620a3db5f3058630eb3"},
+		        {"$oid":"55c0c620a3db5f3058630eb3"},
 		"groupId":"opengrid_users",
 		"name":"OpenGrid Users",
 		"description":"Group for all OpenGrid users", 
 		"enabled": true,
 		"functions": [
-					"Quick Search",
-					"Advanced Search"],
+				"Quick Search",
+				"Advanced Search"],
 		"datasets": [
-					"twitter",
-					"weather"]
+				"twitter",
+				"weather"]
 		}
 ]
 ```
@@ -458,15 +459,15 @@ The maximum number of records to return; If this parameter is not specified, no 
     "description" : "Group for all OpenGrid users",
     "enabled" : true,
     "functions" : [
-	    			"Quick Search",
-    				"Advanced Search"],
+	    		"Quick Search",
+    			"Advanced Search"],
     "datasets" : [
-    				"twitter",
-				"weather"]
+    			"twitter",
+			"weather"]
   }
 ]
 ```
-
+<br>
 <p><b>PUT</b>/groups/{group_id}</p>
 <p>Update a group (group-level attributes and members). Returns the updated group data, if successful.</p>
 
@@ -487,17 +488,18 @@ The maximum number of records to return; If this parameter is not specified, no 
 
 ```
 {
- "id":{"$oid":"55c525c6c4aae748132f4d06"},
- "o":{"groupId":"opengrid_users_L2",
-      "name":"OpenGrid Users Level 2",
-      "description":"Users with access to weather data",
-      "enabled":true,
-      "isAdmin":false,
-      "functions":[
+ 	"id":{"$oid":"55c525c6c4aae748132f4d06"},
+ 	"o": {
+		"groupId":"opengrid_users_L2",
+      		"name":"OpenGrid Users Level 2",
+      		"description":"Users with access to weather data",
+      		"enabled":true,
+      		"isAdmin":false,
+      		"functions":[
 				"Quick Search",
 				"Advanced Search"],
-      "datasets":["weather"]
-     }
+      		"datasets":["weather"]
+     		}
 }
 ```
 
@@ -511,8 +513,8 @@ The maximum number of records to return; If this parameter is not specified, no 
   "enabled" : true,
   "isAdmin" : false,
   "functions" : [
-  				"Quick Search",
-				"Advanced Search"],
+  			"Quick Search",
+			"Advanced Search"],
   "datasets" : ["weather"]
 }
 ```
@@ -554,230 +556,229 @@ The maximum number of records to return; If this parameter is not specified, no 
 			"id" : "twitter",
 			"displayName" : "Twitter",
 			"options": {"rendition":
-									{
-										"icon" : "default",
-										"color" : "#001F7A",
-										"fillColor" : "#00FFFF",
-										"opacity" : 85,
-										"size" : 6
-										},
-				"supportedOperators" : [    {
-                        			"dataType" : "string", 
-                        				"operators" : [
-                            						"equal", 
-                            						"not_equal", 
-                            						"in", 
-                            						"begins_with", 
-                            						"contains"
-                        				]
-                    				}		
-                		]
-			,
-		    "quickSearch" : {
-			"enable" : true, 
-			"triggerAlias" : "twe", 
-			"triggerWord" : "tweet", 
-			"hintCaption" : "Search Tweets", 
-			"hintExample" : "tweet 'food'"
-		    }
-		},
-		"columns":
-				[
-					{
-						"id" : "_id",
-						"displayName" : "ID",
-						"dataType" : "string",
-						"filter" : false,
-						"popup" : false,
-						"list" : false
-							},
-					{
-						"id" : "date",
-						"displayName" : "Date",
-						"dataType" : "date",
-						"filter" : true,
-						"popup" : true,
-						"list" : true,
-						"sortOrder" : 1
-							},
-					{				 
-						"id": "screenName",
-						"displayName" : "Screen Name",
-						"dataType" : "string",
-						"filter" : true,
-						"popup" : true,
-						"list" : true,
-						"sortOrder" : 2,
-						"groupBy" : true,
-						"quickSearch" : true
-							},
-					{	
-						"id" : "text",
-						"displayName" : "Text",
-						"dataType" : "string",
-						"filter" : true,
-						"popup" : true,
-						"list" : true,
-						"sortOrder": 3,
-						"quickSearch" : true
-							},
-					{
-						"id" : "city",
-						"displayName" : "City",
-						"dataType" : "string",
-						"filter" : true,
-						"popup" : true,
-						"list" : true,
-						"sortOrder" : 4,
-						"groupBy" : true,
-						"quickSearch" : true
-							},
-					{
-						"id" :"bio",
-						"displayName" : "Bio",
-						"dataType" : "string",
-						"sortOrder" : 5
-							},
-					{
-						"id" : "hashtags",
-						"displayName" : "Hashtags",
-						"dataType" : "string",
-						"sortOrder" : 6
-							},
-					{
-						"id" : "lat",
-						"displayName" : "Latitude",
-						"dataType" : "float",
-						"list" : true,
-						"sortOrder" : 7
-							},
-					{
-						"id" : "long",
-						"displayName" : "Longitude",
-						"dataType" : "float",
-						"list" : true,
-						"sortOrder" : 8
-							}
-				]
-		},	
-	{
-		"id" : "weather",
-		"displayName" : "Weather",
-		"options" : {"rendition":
-									{
-										"icon" : "default",
-										"color" : "#8c2d04",
-										"fillColor" : "#fdae6b",
-										"opacity" : 85,
-										"size" : 6
-											}
-					},
-		"columns":
-					[
-						{ 
-								"id": "_id",
+						{
+			    				"icon" : "default",
+							"color" : "#001F7A",
+							"fillColor" : "#00FFFF",
+							"opacity" : 85,
+							"size" : 6
+									},
+					"supportedOperators" : [    {
+                        						"dataType" : "string", 
+                        						"operators" : [
+                            								"equal", 
+                            								"not_equal", 
+                            								"in", 
+                            								"begins_with", 
+                            								"contains"
+                        										]
+                    								}		
+                						],
+		    			"quickSearch" : {
+								"enable" : true, 
+								"triggerAlias" : "twe", 
+								"triggerWord" : "tweet", 
+								"hintCaption" : "Search Tweets", 
+								"hintExample" : "tweet 'food'"
+		    										}
+					},				
+				"columns":
+						[
+							{
+								"id" : "_id",
 								"displayName" : "ID",
 								"dataType" : "string",
 								"filter" : false,
 								"popup" : false,
 								"list" : false
-									},
-						{
-								"id" : "temp",
-								"displayName" : "Temperature",
-								"dataType" : "float",
+										},
+							{
+								"id" : "date",
+								"displayName" : "Date",
+								"dataType" : "date",
 								"filter" : true,
 								"popup" : true,
 								"list" : true,
 								"sortOrder" : 1
-									},
-						{	
-								"id" : "windspeed",
-								"displayName" : "Wind Speed",
-								"dataType" : "float",
-								"filter" : true,
-								"popup" : true,
-								"list" : true,
-								"sortOrder" : 2
-									},
-						{
-								"id" : "condition",
-								"displayName" : "Condition",
+										},
+							{				 
+								"id": "screenName",
+								"displayName" : "Screen Name",
 								"dataType" : "string",
 								"filter" : true,
 								"popup" : true,
 								"list" : true,
-								"sortOrder" : 3
-									},
-						{
-								"id" : "humidity",
-								"displayName" : "Humidity",
-								"dataType" : "float",
+								"sortOrder" : 2,
+								"groupBy" : true,
+								"quickSearch" : true
+											},
+							{	
+								"id" : "text",
+								"displayName" : "Text",
+								"dataType" : "string",
 								"filter" : true,
 								"popup" : true,
 								"list" : true,
-								"sortOrder" : 4
-									},
-						{
-								"id" : "precipIntensity",
-								"displayName" : "Precipitation Intensity",
-								"dataType" : "float",
+								"sortOrder": 3,
+								"quickSearch" : true
+											},
+							{
+								"id" : "city",
+								"displayName" : "City",
+								"dataType" : "string",
 								"filter" : true,
 								"popup" : true,
-								"list" : true ,
+								"list" : true,
+								"sortOrder" : 4,
+								"groupBy" : true,
+								"quickSearch" : true
+											},
+							{
+								"id" :"bio",
+								"displayName" : "Bio",
+								"dataType" : "string",
 								"sortOrder" : 5
-									},
-						{
-							 	 "id" : "date",
-								 "displayName" : "Date",
-								 "dataType" : "date",
-								 "filter" : true,
-								 "popup" : true,
-								 "list" : true,
-								 "sortOrder" : 5
-						         	      },
-					         {
-								"id" : "zipcode",
-								"displayName" : "Zip Code",
+											},
+							{
+								"id" : "hashtags",
+								"displayName" : "Hashtags",
 								"dataType" : "string",
-								"filter" : true,
-								"popup" : true,
+								"sortOrder" : 6
+											},
+							{
+								"id" : "lat",
+								"displayName" : "Latitude",
+								"dataType" : "float",
 								"list" : true,
-								"sortOrder" : 6,
-								"values" : [ 60601 , 60602],
-								"groupBy" : true
+								"sortOrder" : 7
+											},
+							{
+								"id" : "long",
+								"displayName" : "Longitude",
+								"dataType" : "float",
+								"list" : true,
+								"sortOrder" : 8
+											}
+						]
+			},	
+		{
+			"id" : "weather",
+			"displayName" : "Weather",
+			"options" : {"rendition":
+						   {
+							"icon" : "default",
+							"color" : "#8c2d04",
+							"fillColor" : "#fdae6b",
+							"opacity" : 85,
+							"size" : 6
+									}
+					},
+			"columns":
+					[
+					    { 
+						"id": "_id",
+						"displayName" : "ID",
+						"dataType" : "string",
+						"filter" : false,
+						"popup" : false,
+						"list" : false
 									},
-					      {
-							        "id" :"forecast",
-							        "displayName" : "Today's Forecast",
-							        "dataType" : "string",
-							        "popup" : true, 
-							        "list" : true ,
-							        "sortOrder" : 7
+					    {
+						"id" : "temp",
+						"displayName" : "Temperature",
+						"dataType" : "float",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 1
+									},
+					    {	
+						"id" : "windspeed",
+						"displayName" : "Wind Speed",
+						"dataType" : "float",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 2
+									},
+					   {
+						"id" : "condition",
+						"displayName" : "Condition",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 3
+									},
+					{
+						"id" : "humidity",
+						"displayName" : "Humidity",
+						"dataType" : "float",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 4
+									},
+					{
+						"id" : "precipIntensity",
+						"displayName" : "Precipitation Intensity",
+						"dataType" : "float",
+						"filter" : true,
+						"popup" : true,
+						"list" : true ,
+						"sortOrder" : 5
+									},
+					{
+					 	 "id" : "date",
+						 "displayName" : "Date",
+						 "dataType" : "date",
+						 "filter" : true,
+						 "popup" : true,
+						 "list" : true,
+						 "sortOrder" : 5
+						         	      },
+				         {
+						"id" : "zipcode",
+						"displayName" : "Zip Code",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 6,
+						"values" : [ 60601 , 60602],
+						"groupBy" : true
+									},
+				      {
+					        "id" :"forecast",
+					        "displayName" : "Today's Forecast",
+					        "dataType" : "string",
+					        "popup" : true, 
+					        "list" : true ,
+					        "sortOrder" : 7
 							                },
-					      {
-							        "id" : "icon",
-							        "displayName" : "Icon",
-							        "dataType" : "graphic", 
-							        "popup" : true,
-							        "sortOrder" : 7
+				      {
+					        "id" : "icon",
+					        "displayName" : "Icon",
+					        "dataType" : "graphic", 
+					        "popup" : true,
+					        "sortOrder" : 7
 							               },
-					      {
-							        "id" : "lat",
-							        "displayName" : "Latitude",
-							        "dataType" : "float",
-							        "list" : true ,
-							        "sortOrder" : 8
+				      {
+					        "id" : "lat",
+					        "displayName" : "Latitude",
+					        "dataType" : "float",
+					        "list" : true ,
+					        "sortOrder" : 8
 							               },
-					      {
-							        "id" : "long",
-							        "displayName" : "Longitude",
-							        "dataType" : "float",
-							        "list" : true,
-							        "sortOrder" : 9
+				      {
+					        "id" : "long",
+					        "displayName" : "Longitude",
+					        "dataType" : "float",
+					        "list" : true,
+					        "sortOrder" : 9
 							               }
-				   ]
-		    }
+		   ]
+	    }
    ]			     
        
 ```
@@ -799,110 +800,110 @@ The maximum number of records to return; If this parameter is not specified, no 
 
 ```
 {
-			"id" : "twitter",
-			"displayName" : "Twitter",
-			"options": {"rendition":
-									{
-										"icon" : "default",
-										"color" : "#001F7A",
-										"fillColor" : "#00FFFF",
-										"opacity" : 85,
-										"size" : 6
-										},
-				"supportedOperators" : [    {
+	"id" : "twitter",
+	"displayName" : "Twitter",
+	"options": {"rendition":
+	    			  { 
+  					"icon" : "default",
+					"color" : "#001F7A",
+					"fillColor" : "#00FFFF",
+					"opacity" : 85,
+					"size" : 6
+								},
+		   "supportedOperators" : [  
+		   			     {
                         			"dataType" : "string", 
-                        				"operators" : [
-                            						"equal", 
-                            						"not_equal", 
-                            						"in", 
-                            						"begins_with", 
-                            						"contains"
-                        				]
+                        			"operators" : [
+                            					"equal", 
+                            					"not_equal", 
+                            					"in", 
+                            					"begins_with", 
+                            					"contains"
+                        							]
                     				}		
-                		]
-			,
+               		        	  ],
 		    "quickSearch" : {
-			"enable" : true, 
-			"triggerAlias" : "twe", 
-			"triggerWord" : "tweet", 
-			"hintCaption" : "Search Tweets", 
-			"hintExample" : "tweet 'food'"
-		    }
-		},
+					"enable" : true, 
+					"triggerAlias" : "twe", 
+					"triggerWord" : "tweet", 
+					"hintCaption" : "Search Tweets", 
+					"hintExample" : "tweet 'food'"
+									    }
+			},
 	"columns" :
 			[
-				{
-					"id" : "_id",
-					"displayName" : "ID",
-					"dataType" : "string",
-					"filter" : false,
-					"popup" : false,
-					"list" : false
-						},
-				{
-					"id" : "date",
-					"displayName" : "Date",
-					"dataType" : "date",
-					"filter" : true,
-					"popup" : true,
-					"list" : true,
-					"sortOrder": 1
-						},
-				{
-					"id" : "screenName",
-					"displayName" : "Screen Name",
-					"dataType" : "string",
-					"filter" : true,
-					"popup" : true,
-					"list" : true,
-					"sortOrder" : 2,
-					"groupBy" : true
-						},
-				{
-					"id" : "text",
-					"displayName" : "Text",
-					"dataType" : "string",
-					"filter" : true,
-					"popup" : true,
-					"list" : true,
-					"sortOrder" : 3
-						},
-				{
-					"id" : "city",
-					"displayName" : "City",
-					"dataType" : "string",
-					"filter" : true,
-					"popup" : true,
-					"list" : true ,
-					"sortOrder" : 4,
-					"groupBy" : true
-						},
-				{
-					"id" : "bio",
-					"displayName" : "Bio",
-					"dataType" : "string",
-					"sortOrder" : 5
-						},
-				{
-					"id" : "hashtags",
-					"displayName" : "Hashtags",
-					"dataType" : "string",
-					"sortOrder" : 6
-						},
-				{
-					"id" : "lat",
-					"displayName" : "Latitude",
-					"dataType" : "float",
-					"list" : true ,
-					"sortOrder" : 7
-						},
-				{
-					"id" : "long",
-					"displayName" : "Longitude",
-					"dataType" : "float",
-					"list" : true,
-					"sortOrder" : 8
-						}
+		           {
+				"id" : "_id",
+				"displayName" : "ID",
+				"dataType" : "string",
+				"filter" : false,
+				"popup" : false,
+				"list" : false
+							},
+			    {
+				"id" : "date",
+				"displayName" : "Date",
+				"dataType" : "date",
+				"filter" : true,
+				"popup" : true,
+				"list" : true,
+				"sortOrder": 1
+							},
+			    {
+				"id" : "screenName",
+				"displayName" : "Screen Name",
+				"dataType" : "string",
+				"filter" : true,
+				"popup" : true,
+				"list" : true,
+				"sortOrder" : 2,
+				"groupBy" : true
+							},
+			    {
+				"id" : "text",
+				"displayName" : "Text",
+				"dataType" : "string",
+				"filter" : true,
+				"popup" : true,
+				"list" : true,
+				"sortOrder" : 3
+							},
+			    {
+				"id" : "city",
+				"displayName" : "City",
+				"dataType" : "string",
+				"filter" : true,
+				"popup" : true,
+				"list" : true ,
+				"sortOrder" : 4,
+				"groupBy" : true
+							},
+			    {
+				"id" : "bio",
+				"displayName" : "Bio",
+				"dataType" : "string",
+				"sortOrder" : 5
+							},
+			     {
+			 	"id" : "hashtags",
+				"displayName" : "Hashtags",
+				"dataType" : "string",
+				"sortOrder" : 6
+							},
+			     {
+				"id" : "lat",
+				"displayName" : "Latitude",
+				"dataType" : "float",
+				"list" : true ,
+				"sortOrder" : 7
+							},
+			      {
+				"id" : "long",
+				"displayName" : "Longitude",
+				"dataType" : "float",
+				"list" : true,
+				"sortOrder" : 8
+							}
 			]
 	}
 ```
@@ -956,7 +957,7 @@ It is recommended that this value be URL encoded.
 
 <p><b>Sample Request</b></p>
 
-```				```
+```	
 <Service URL>/datasets/twitter/query?q={"$and":[{"text":{"$regex":"happy"}}]}&n=1&opts={"geoFilter":{"type":"MultiPolygon","coordinates":[[[[-87.63304710388184,41.89278978584501],[-87.61206150054932,41.89278978584501],[-87.61206150054932,41.88140002416609],[-87.63304710388184,41.88140002416609],[-87.63304710388184,41.89278978584501]]]]}}
 ```
 
@@ -995,102 +996,100 @@ It is recommended that this value be URL encoded.
 					"autoPopup": false
 					}	
 				],
-
 	"meta":
-			{ 
-				"view":
-					{
-						"id" : "twitter",
-						"displayName" : "Twitter",
-				"options":
-						 {"rendition" :
-									{
-										"icon" : "default",
-										"color" : "#001F7A",
-										"fillColor" : "#00FFFF",
-										"opacity" : 85,
-										"size" : 6
+		{ 
+			"view":
+		          	 {
+					"id" : "twitter",
+					"displayName" : "Twitter",
+					"options":
+					           {"rendition" :
+						           	  {
+									"icon" : "default",
+									"color" : "#001F7A",
+									"fillColor" : "#00FFFF",
+									"opacity" : 85,
+									"size" : 6
 												}
 							},
-	"columns" : 
-			[
-				{
-					"id" : "_id", 
-					"displayName" : "ID", 
-					"dataType" : "string",
-					"filter" : false,
-					"popup" : false,
-					"list" : false
-							},
-				{
-					"id" : "date",
-					"displayName" : "Date",
-					"dataType" : "date",
-					"filter" : true,
-					"popup" : true,
-					"list" : true,
-					"sortOrder" : 1
-							},
-				{
-					"id" : "screenName",
-					"displayName" : "Screen Name",
-					"dataType" : "string",
-					"filter" : true,
-					"popup" : true,
-					"list" : true,
-					"sortOrder" : 2,
-					"groupBy" : true
-							},
-				{
-					"id" : "text",
-					"displayName" : "Text",
-					"dataType" : "string",
-					"filter" : true,
-					"popup" : true,
-					"list" : true,
-					"sortOrder" : 3
-						},
-				{	
-					"id" : "city",
-					"displayName" : "City",
-					"dataType" : "string",
-					"filter" : true,
-					"popup" : true,
-					"list" : true,
-					"sortOrder" : 4,
-					"groupBy" : true
-							},
-				{
-					"id" : "bio",
-					"displayName" : "Bio",
-					"dataType" : "string",
-					"sortOrder" : 5
-							},
-				{
-					"id" : "hashtags",
-					"displayName" : "Hashtags",
-					"dataType" : "string",
-					"sortOrder" : 6
-							},
-				{
-					"id" : "lat",
-					"displayName" : "Latitude",
-					"dataType" : "float",
-					"list" : true,
-					"sortOrder" : 7
-						},
-				{		
-					"id" : "long",
-					"displayName" : "Longitude",
-					"dataType" : "float",
-					"list" : true,
-					"sortOrder" : 8
-							}
-			]
-			} 
+			"columns" : 
+					[
+					   {
+						"id" : "_id", 
+						"displayName" : "ID", 
+						"dataType" : "string",
+						"filter" : false,
+						"popup" : false,
+						"list" : false
+									},
+					   {
+						"id" : "date",
+						"displayName" : "Date",
+						"dataType" : "date",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 1
+									},
+					   {
+						"id" : "screenName",
+						"displayName" : "Screen Name",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 2,
+						"groupBy" : true
+									},
+					   {
+						"id" : "text",
+						"displayName" : "Text",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 3
+									},
+					   {	
+						"id" : "city",
+						"displayName" : "City",
+						"dataType" : "string",
+						"filter" : true,
+						"popup" : true,
+						"list" : true,
+						"sortOrder" : 4,
+							"groupBy" : true
+									 },
+					   {
+						"id" : "bio",
+						"displayName" : "Bio",
+						"dataType" : "string",
+						"sortOrder" : 5
+									},
+					   {
+						"id" : "hashtags",
+						"displayName" : "Hashtags",
+						"dataType" : "string",
+						"sortOrder" : 6
+									},
+					   {
+						"id" : "lat",
+						"displayName" : "Latitude",
+						"dataType" : "float",
+						"list" : true,
+						"sortOrder" : 7
+									},
+					   {		
+						"id" : "long",
+						"displayName" : "Longitude",
+						"dataType" : "float",
+						"list" : true,
+						"sortOrder" : 8
+									}
+					]
+				} 
 		}
 	}
-
 ```
 
 
