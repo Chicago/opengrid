@@ -1195,7 +1195,6 @@ maximum number of records to return; If this parameter is not specified, no reco
 
 <p><b>Sample Response</b></p>
 
-
 ```
 [
 	{"_id" :
@@ -1203,36 +1202,36 @@ maximum number of records to return; If this parameter is not specified, no reco
 	 "name" : "Weather Records for 60601",
 	 "owner" : "jsmith",
 	 "spec" :
-			[
-				{
-					"dataSetId" : "weather",
-					"filters" : {
-									"condition" : "AND",
-									"rules" :  [
-						     					 {
-													"id" : "zipcode",
-													"field" : "zipcode",
-													"type" : "string",
-													"input" : "text",
-													"operator" : "equal",
-													"value" : "60601"
-																      }
-																		]
-				     			 },
-					"rendition" : {
-									"color" : "#DC143C",
-									"opacity" : 85,
-									"size" : 6
-												}
+		   [
+			{
+		           "dataSetId" : "weather",
+			   "filters" : {
+			      		  "condition" : "AND",
+					  "rules" :  [
+							{
+								"id" : "zipcode",
+								"field" : "zipcode",
+								"type" : "string",
+								"input" : "text",
+								"operator" : "equal",
+								"value" : "60601"
+										      }
+						              					]
+				     	 },
+			   "rendition" : {
+				            "color" : "#DC143C",
+					    "opacity" : 85,
+					    "size" : 6
+								}
 				}
-			],
-	"sharedWith" :
-				{
-					"users" : [ ],
-					"groups" : [ ]
-							},
-	"isCommon" : true
-	}
+			 ],
+	    "sharedWith" :
+	     		    {
+				"users" : [ ],
+				"groups" : [ ]
+						},
+	    "isCommon" : true
+	  }
 ]
 
 ```
@@ -1246,46 +1245,45 @@ maximum number of records to return; If this parameter is not specified, no reco
 
 ```
 {
-	"o":{
+       "o":{
 		"name":"Tweets By Bud",
 		"owner":"user1",
 			"spec":[
-					{
-						"dataSetId":"twitter",
-						"filters":{
-								"condition":"AND",
-								"rules":[
-										{
-							 				"id":"screenName",
-											"field":"screenName",
-											"type":"string",
-											"input":"text",
-											"operator":"contains",
-											"value":"bud"
-													}
-																									]
-							     },
-						"rendition":{
-								"color":"#DC143C",
-								"opacity":"85",
-								"size":"6"
-						  		}
-						}
-					],
-		"sharedWith":{
-				"users":[],
-				"groups":[]
-				},
-		"isCommon":false,
-		"autoRefresh":false,
-		"refreshInterval":"30",
-		"geoFilter":{
-				"boundaryType":"within",
-				"boundary": ""
-				}
+		                   {
+				      "dataSetId":"twitter",
+				      "filters":{
+							"condition":"AND",
+							"rules":[
+						        	    {
+							 		"id":"screenName",
+									"field":"screenName",
+									"type":"string",
+									"input":"text",
+									"operator":"contains",
+									"value":"bud"
+												}
+									]
+						     },
+				    "rendition":{
+							"color":"#DC143C",
+							"opacity":"85",
+							"size":"6"
+							  		}
+					}
+				  ],
+		  "sharedWith":{
+					"users":[],
+					"groups":[]
+							},
+		  "isCommon":false,
+		  "autoRefresh":false,
+		  "refreshInterval":"30",
+	  	  "geoFilter":{
+					"boundaryType":"within",
+					"boundary": ""
+							}
 	}
 }
-
 ```
 
 <p><b>Sample Response</b></p>
@@ -1352,12 +1350,12 @@ maximum number of records to return; If this parameter is not specified, no reco
 
 ```
 	[
-		{"_id":
-			{ "$oid" : "5582f831a3db5f4190e4707a"},
-		"name" : "Weather Records for 60601",
-		"owner" : "jsmith", 
-		"spec" : [{
-				"dataSetId" : "weather",
+	    {"_id":
+	             { "$oid" : "5582f831a3db5f4190e4707a"},
+	      "name" : "Weather Records for 60601",
+	      "owner" : "jsmith", 
+	      "spec" : [{
+		        	"dataSetId" : "weather",
 				"filters" : { 
 						"condition" : "AND",
 						"rules" : 
@@ -1368,13 +1366,13 @@ maximum number of records to return; If this parameter is not specified, no reco
 									"input" : "text",
 									"operator" : "equal",
 									"value" : "60601"
-											}]
-							    },
+												}]
+						   },
 				"rendition": {
 						"color" : "#DC143C",
 						"opacity" : 85,
 						"size" : 6
-							}
+								}
 			  }],
 		"sharedWith" : {
 					"users" : [ ],
@@ -1417,25 +1415,25 @@ maximum number of records to return; If this parameter is not specified, no reco
 								"input" : "text",
 								"operator" : "contains",
 								"value" : "coupon"
-									}]
-						},
+												}]
+					},
 		 		"rendition" : {
 		 					"color" : "#DC143C",
 							"opacity" : "85",
 							"size" : "6"
-									}
+										}
 			 }],
 		"sharedWith" : {
 					"users" : [ ],
 					"groups" : [ ]
-							},
+								},
 		"isCommon" : false,
 		"autoRefresh" : false,
 		"refreshInterval" : "30",
 		"_id" : {"$oid" : "55c52cf6c4aa31b24b04d620"},
-			"geoFilter" : {
-						"boundaryType" : "within",
-						"boundary" : ""
+		"geoFilter" : {
+				"boundaryType" : "within",
+				"boundary" : ""
 								}
 	}
 ```
