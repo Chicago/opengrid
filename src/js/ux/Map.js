@@ -366,6 +366,16 @@ ogrid.Map = ogrid.Class.extend({
 
     },
 
+    //Issue #294
+    //override Leaflet circlemarker _empty method, the renderer object does not seem to be updated on 'moveend' when we refresh our dots
+    //regen is an indicator that auto-requery is turned on; we might need this later
+    _getOverrideCircleMarkerIsEmpty: function (that, regen) {
+        return $.proxy(function() {
+            return !this._radius;
+        }, that);
+    },
+
+
     _onRefreshData: function (evtData) {
     	try {
             //console.log('map refresh: ' + JSON.stringify(evtData));
@@ -429,6 +439,9 @@ ogrid.Map = ogrid.Class.extend({
                                 fillOpacity:  (o.opacity/100), //pct
                                 fillColor:    o.fillColor
                             });
+
+                            //Issue #294 Override _emepty method; missing dots look to be due to Leaflet renderer being out of sync at 'moveend'
+                            cm._empty = me._getOverrideCircleMarkerIsEmpty(cm, evtData.message.options.passthroughData.regenerator);
                             me._markers[rsId][ogrid.oid(feature)] = cm;
                             return cm;
                         }
