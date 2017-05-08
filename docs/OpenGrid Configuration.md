@@ -61,3 +61,10 @@ Various table-related settings; these are *pass-through* settings that normally 
 * *authRenewUrl* - the URL of the operation to use for renewing a security token
 * *errorHandler* - internal setting to indicate the class to use for handling some exceptions
 * *dateFormat* - data format used for converting string to date value for comparing dates on auto-refresh highlighting; this is dependent on the format used by the underlying service
+* *autoLogin* - flag to indicate if login page will be displayed or if application will automatically login using credentials specified in *autologinUserId* and *autologinPassword*
+* *autologinUserId* - user id to use for internal login when autoLogin is set to 'true'
+* *autologinPassword* - password to use for internal login when autoLogin is set to 'true'
+
+#### help
+* *url* - url to use for the application help link
+* *type* - the type of help link: 'icon' or 'button'
