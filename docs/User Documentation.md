@@ -50,7 +50,7 @@
 OpenGrid was developed with the support of Bloomberg Philanthropies. 
 
 ## User Documentation
-<p>User documentation is designed to assist end users with the use of OpenGrid product and services. Upon usage of documentation the user will gain appropriate knowledge and capabilities to navigate the system. The user will inherit an understanding of the system and its processes and have the foundation to execute queries for navigation.</p>
+<p>User documentation is designed to assist end users with the use of OpenGrid product and services. Upon usage of documentation the user will gain appropriate knowledge and capabilities to navigate the system. The user will inherit an understanding of the system, its processes and have the foundation to execute queries for navigation.</p>
  
 #### Supported Browsers
 <p>OpenGrid supports both mobile and desktop versions search engines. Mobile Android devices support Firefox version 40&#43; and Chrome 44&#43;. Ios devices support Chrome 45&#43;, Safari 8.1&#43; and Firefox 40&#43;. Desktop versions support Firefox 42&#43; and Chrome 46&#43;; Internet Explorer is supported from IE10&#43; no older versions will be continued. All browsers must have cookies enabled and support JavaScript/ECMAScript version 5.1.</p>
