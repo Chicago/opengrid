@@ -5,7 +5,7 @@
 
 ### Table of Contents
 * [Getting Started](#getting-started)
-    * [Background and Overview](#background-and-overview)
+    * [Overview](#overview)
 * [Acknowledgements](#acknowledgements)
 * [User Documentation](#user-documentation)
     * [Supported Browsers](#supported-browsers)
