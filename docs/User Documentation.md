@@ -34,7 +34,7 @@
 <br>
 
 ## Getting Started
-### Background and Overview
+### Overview
 <p>Open Grid is a geographical information systems developed for residents to access public city data in a more intuitive manner. The application supports situational awareness, incident responses and monitoring, historical data retrieval, and real-time advanced analytics.</p>
 
 <p>OpenGrid design has a three-layer service architecture: Presentation, Business and Data. The presentation layer provides the application’s user interface which is a static HTML/JavaScript based GUI that presents a more intuitive and modernized approach that support usage and accessibility on any mobile device and terminals in public safety vehicles.</p>
