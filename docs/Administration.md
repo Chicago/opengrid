@@ -1,8 +1,8 @@
-#Administration
-### Overview
+<h1>Administration</h1>
+<h3> Overview </h3>
 <p>Administration has the authority to manage users’ responsibilities; as well as provide arrangements and tasks needed to control the users operation. They also allow access to specified functionalities.</p>
 
-The Administration has the authority to:<br>
+<p>The Administration has the authority to: </p><br>
 
 - Add a new User
 - Remove a User
