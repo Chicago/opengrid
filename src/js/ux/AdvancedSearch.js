@@ -23,7 +23,10 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _queryAdmin: null,
 
+
     _isLoadingQuery: false,
+    _isLoggedIn: false,
+    _geoFilterInitDeferred: $.Deferred(),
 
     //cache for lookup values
     _lookup: {
@@ -66,8 +69,8 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         this._queryAdmin = new ogrid.QueryAdmin(
             $('#ogrid-admin-queries'),
             ogrid.App.getSession().getCurrentUser(), {
-                onOpen: $.proxy(this._onManageQueryOpen(false), this),
-                onPlay: $.proxy(this._onManageQueryOpen(true), this),
+                onOpen: $.proxy(this._onManageQueryOpenSetUrl(false, this), this),
+                onPlay: $.proxy(this._onManageQueryOpenSetUrl(true, this), this),
                 postDelete: $.proxy(this._postManageQueryDelete, this)
             }
         );
@@ -80,22 +83,83 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         this._onReset();
     },
 
-    _onManageQueryOpen: function(autoExec) {
-        return function(query) {
-            this._loadQuery(query);
-            //if shared query and we're not the owner, create a 'copy' of the query
-            if (this._sharedNotOwned(query)) {
-                this._activeQuery = null;
-            }
-            if (autoExec) {
-                this._onSubmit();
-            } else {
-                //set our active tab to Build Query
-                $('#ogrid-adv-tabs a[href="#build-query"]').tab('show');
+    _postQueryOpen: function(context, query, autoexec) {
+        if (autoexec) {
+            context._executeSearch(query);
+        } else {
+            //set our active tab to Build Query
+            $('#ogrid-adv-tabs a[href="#build-query"]').tab('show');
 
-                //focus on query name for now
-                //avoid annoying keyboard popup when on mobile mode
-                if (!ogrid.App.mobileView()) $('#saveQueryAs').focus();
+            //focus on query name for now
+            //avoid annoying keyboard popup when on mobile mode
+            if (!ogrid.App.mobileView()) $('#saveQueryAs').focus();
+        }
+    },
+
+    //set map center and zoom level, then wait
+    //we need to wait here until the view has been set to our desired center and zoom level
+    _setMapViewWithWait: function(me, loc) {
+        //disable map change event handler
+        me._options.map.enableMapViewChangeHandler(false);
+
+         //move our map first
+         var a = loc.split(',');
+         me._options.map.setMapView(
+             L.latLng(a[0], a[1]), //lat,long
+             a[2] //zoom
+         );
+
+         //wait for a max of 5 secs
+        return ogrid.waitForCondition(5000, function(deferred) {
+            var c = me._options.map.getMapCenter();
+            if (c.lng == a[1] && c.lat == a[0] && me._options.map.getMapZoom() == a[2]) {
+                me._options.map.enableMapViewChangeHandler(true);
+
+                //we're done waiting, signal calling thread
+                deferred.resolve('done');
+            }
+        });
+     },
+
+    _openQuery: function(context, query, loc, autoexec) {
+        context._loadQuery(query);
+        //if shared query and we're not the owner, create a 'copy' of the query
+        if (context._sharedNotOwned(query)) {
+            context._activeQuery = null;
+        }
+        if (loc) {
+            //map extent (map center) was passed
+            $.when( context._setMapViewWithWait(context, loc) ).done(function ( result ) {
+                //now we're ready to submit our query
+                context._postQueryOpen(context, query, autoexec);
+            });
+        } else {
+            context._postQueryOpen(context, query, autoexec);
+        }
+    },
+
+    _onManageQueryOpenSetUrl: function(autoexec, context) {
+        return function(query) {
+            context._updateHashWithQuery(query, autoexec);
+        };
+    },
+
+
+    _onManageQueryOpen: function(autoexec, context) {
+        //query-> query def, optional loc->map center and zoom
+        return function(query, loc) {
+            //this can be called while the page is still loading
+            if (!context._isLoggedIn) {
+                ogrid.Event.on(ogrid.Event.types.ADVANCED_INIT_DONE, function() {
+                    context._openQuery(context, query, loc, autoexec);
+
+                    if (autoexec) {
+                        //after 1 second get rid of focus on "Find Data" due to timing issue
+                        setTimeout(context._hideMe, 1000);
+                    }
+                });
+            } else {
+                context._openQuery(context, query, loc, autoexec);
             }
         };
     },
@@ -110,6 +174,8 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         return (query.isCommon &&
         (query.owner != ogrid.App.getSession().getCurrentUser().getProfile().loginId) );
     },
+
+
 
     _setupWindowResizeHandler: function() {
         $(window).resize(this._onWindowResize);
@@ -202,6 +268,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         $('#advSearchSave').removeClass('disabled');
     },
 
+
     _initEventHandlers: function() {
         $('#beginDate').datetimepicker();
         $('#endDate').datetimepicker();
@@ -238,6 +305,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         $('#autoRefreshSpinUp').click(this._getSpinEventHandler('#autoRefreshInterval', 1));
         $('#autoRefreshSpinDn').click(this._getSpinEventHandler('#autoRefreshInterval', -1));
 
+
         $('#saveQueryAs').keyup($.proxy(this._onQueryNameKeyup, this));
 
         if (ogrid.Config.map.zoomToResultsExtent)
@@ -245,7 +313,6 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
         ogrid.Event.on(ogrid.Event.types.CLEAR, $.proxy(this._onClear, this));
         ogrid.Event.on(ogrid.Event.types.LOGGED_IN, $.proxy(this._onLoggedIn, this));
-
         ogrid.Event.on(ogrid.Event.types.MAP_EXTENT_CHANGED, $.proxy(this._onMapExtentChanged, this));
     },
 
@@ -297,10 +364,13 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 		// load auto-load query if option is set
 		if (ogrid.Config.advancedSearch.autoLoadQuery) {
 			this._loadQuery(ogrid.Config.advancedSearch.autoLoadQuery);
-			
-			//auto-open Select Data pane
+
+            //auto-open Select Data pane
             this._expandPane($("#ogrid-select-data-pane"));
-        }
+		}
+        this._isLoggedIn = true;
+        ogrid.Event.raise(ogrid.Event.types.ADVANCED_INIT_DONE);
+
     },
 
 
@@ -330,6 +400,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         if (this._pendingQueries > 0 ) {
             this._pendingQueries--;
             if (this._pendingQueries === 0) {
+                //no more pending queries, we're ready to auto-zoom
                 if (!this._isMapExtentSelected()) {
                     this._options.map.zoomToResultBounds();
                 }
@@ -344,6 +415,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _onReset: function() {
         this._clear();
+        this._resetHash();
     },
 
     _onQueryLoad: function(e) {
@@ -352,15 +424,6 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                 //selected blank, clear screen
                 this._clearQueryElements();
             } else {
-                /*var q = $(e.target).children(":selected").data('qspec');
-                var geoFilter = $(e.target).children(":selected").data('geoFilter');
-
-                var autoRefresh = $(e.target).children(":selected").data('autoRefresh');
-                var refreshInterval = $(e.target).children(":selected").data('refreshInterval');
-
-                var queryId = $(e.target).children(":selected").data('queryId');
-                var queryName = $(e.target).children(":selected").text();
-                */
                 this._loadQuery({
                     _id:  $(e.target).children(":selected").data('queryId'),
                     spec: $(e.target).children(":selected").data('qspec'),
@@ -444,6 +507,24 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         }
     },
 
+    //support dot sizer option now
+    _getSize: function(tabId) {
+        if ($('#spinnerGroup_' + tabId).hasClass('hidden')) {
+            //dot sizer must have been selected
+            var s = $("#dotSizerFields_" + tabId).val();
+            if (s === '') {
+                throw ogrid.error('Save Error', 'No available field for dot size');
+            } else {
+                return {
+                    columnId: $("#dotSizerFields_" + tabId).children(":selected").val(),
+                    calculator: $("#dotSizerFields_" + tabId).children(":selected").data('calc')
+                };
+            }
+        } else {
+            return $('#sizeSpin_' + tabId).val();
+        }
+    },
+
     _getRendition: function(tabId) {
         var c = $('#colorPicker_' + tabId + ' option').filter(':selected').data('color');
 
@@ -451,11 +532,11 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         {c = 'indianred';}
 
         return {
-                color: c,
-                fillColor: (chroma.scale(['white', c])(0.5)).hex(),
-                opacity: $('#opacitySpin_' + tabId).val(),
-                size: $('#sizeSpin_' + tabId).val()
-            };
+            color: c,
+            fillColor: chroma.scale(['white', c])(0.5).hex(),
+            opacity: $('#opacitySpin_' + tabId).val(),
+            size: this._getSize(tabId)
+        };
     },
 
     _getQueryName: function() {
@@ -480,62 +561,67 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         }
     },
 
+    _getQuerySpec: function(queryId, isCommon) {
+        var me = this;
+        var q = {
+            name: this._getQueryName(),
+            owner: ogrid.App.getSession().getCurrentUser().getProfile().loginId,
+            spec: [],
+            sharedWith: {users:[], groups:[]}, //no sharing implemented for Sprint 2
+            isCommon: isCommon ? isCommon : false, //make sure the isCommonFlag is not discarded
+            autoRefresh: $('#autoRefreshCheckbox').prop('checked'),
+            refreshInterval: $("#autoRefreshInterval").val()
+        };
+
+        if (queryId)
+            q._id = queryId;
+
+        //get all query builders
+        $.each($('#ogrid-ds-content').find('.query-builder'), function(i,v) {
+            //for each data type selected, build query to save
+            var typeId = $(v).data('typeId');
+            var tabId = $(v).data('parentId');
+            var r = me._getRendition(tabId);
+            delete r.fillColor; //fillColor is calculated, no need to save
+
+            $(v)[0].queryBuilder.setOptions({display_errors: !me._hasEmptyFilter(v)});
+            //get mongo-specific query
+            var f = $(v).queryBuilder('getMongo');
+
+            console.log("filter: " + JSON.stringify(f));
+            if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
+                console.log(JSON.stringify($(v).queryBuilder('getRules')));
+                //alert(JSON.stringify($(v).queryBuilder('getRules')));
+                q.spec.push({
+                    dataSetId: typeId,
+                    filters: $(v).queryBuilder('getRules'),
+                    rendition: r
+                });
+            } else if (me._hasEmptyFilter(v)) {
+                q.spec.push({
+                    dataSetId: typeId,
+                    filters: {},
+                    rendition: r
+                });
+            } else {
+                throw ogrid.error('Search Error', 'Search criteria is invalid.');
+            }
+        });
+
+        //get geo-filter settings
+        q.geoFilter = this._geoFilter.getSettings();
+        return q;
+    },
+
+    //the parameters passed are attributes from original query that we want to keep and cannot be changed from the UI
     _saveCurrentQuery: function(queryId, isCommon) {
         try {
-            var me = this;
-            var q = {
-                name: this._getQueryName(),
-                owner: ogrid.App.getSession().getCurrentUser().getProfile().loginId,
-                spec: [],
-                sharedWith: {users:[], groups:[]}, //no sharing implemented for Sprint 2
-                isCommon: isCommon ? isCommon : false, //make sure the isCommonFlag is not discarded
-                autoRefresh: $('#autoRefreshCheckbox').prop('checked'),
-                refreshInterval: $("#autoRefreshInterval").val()
-            };
-
-            if (queryId)
-                q._id = queryId;
-
-            //get all query builders
-            $.each($('#ogrid-ds-content').find('.query-builder'), function(i,v) {
-                //for each data type selected, build query to save
-                var typeId = $(v).data('typeId');
-                var tabId = $(v).data('parentId');
-                var r = me._getRendition(tabId);
-                delete r.fillColor; //fillColor is calculated, no need to save
-
-                $(v)[0].queryBuilder.setOptions({display_errors: !me._hasEmptyFilter(v)});
-                //get mongo-specific query
-                var f = $(v).queryBuilder('getMongo');
-
-                console.log("filter: " + JSON.stringify(f));
-
-                if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
-                    console.log(JSON.stringify($(v).queryBuilder('getRules')));
-                    //alert(JSON.stringify($(v).queryBuilder('getRules')));
-                    q.spec.push({
-                        dataSetId: typeId,
-                        filters: $(v).queryBuilder('getRules'),
-                        rendition: r
-                    });
-                } else if (me._hasEmptyFilter(v)) {
-                    q.spec.push({
-                        dataSetId: typeId,
-                        filters: {},
-                        rendition: r
-                    });
-                } else {
-                    throw ogrid.error('Search Error', 'Search criteria is invalid.');
-                }
-            });
-
-            //get geo-filter settings
-            q.geoFilter = this._geoFilter.getSettings();
+            var q = this._getQuerySpec(queryId, isCommon);
 
             ogrid.Search.save({
                 query: q,
-                success: $.proxy(me._onSaveSuccess, me),
-                error: $.proxy(me._onSaveError, me)
+                success: $.proxy(this._onSaveSuccess, this),
+                error: $.proxy(this._onSaveError, this)
             });
         } catch (ex) {
             ogrid.Alert.error(ex.message);
@@ -642,9 +728,66 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
         //remove focus from button
         $('#ogrid-advanced-btn').blur();
+        console.log("_hideMe");
     },
 
-    _onSubmit: function(e) {
+    _getMapLocation: function() {
+        //lat,long,zoom
+        var c = this._options.map.getMapCenter();
+        return (
+            c.lat + ',' +
+            c.lng + ',' +
+            this._options.map.getMapZoom()
+        );
+    },
+
+    _updateHashWithQuery: function(query, autoexec) {
+        //we need to add some random value on the URL so it will always trigger a hasher change
+        var randomData = '&_=' + Math.floor(new Date().valueOf() * Math.random());
+        //register with browser history
+        if (query.geoFilter && query.geoFilter.boundary === '_map-extent') {
+            hasher.setHash("query?q=" + JSON.stringify(query) + "&loc=" + this._getMapLocation() + "&run=" + autoexec + randomData);
+        } else {
+            hasher.setHash("query?q=" + JSON.stringify(query) + "&run=" + autoexec + randomData);
+        }
+    },
+
+    _resetHash: function() {
+        hasher.setHash("");
+    },
+
+    _isShapeDataLoaded: function(me, query) {
+        //wait for a max of 5 secs
+        return ogrid.waitForCondition(10000, function(deferred) {
+            try {
+                //try restore again
+                me._geoFilter.restoreSettings(query.geoFilter);
+
+                me._geoFilter.getGeoFilter();
+                deferred.resolve('done');
+            } catch (ex) {
+                console.log(ex.message);
+            }
+        });
+    },
+
+    _doSearch: function(me, search, e) {
+        //if geoSpatial filtering is supported by service, send geoSpatial filters
+        if ( ogrid.App.serviceCapabilities().geoSpatialFiltering && me._geoFilter.getSettings().boundary) {
+            search.geoFilter = me._geoFilter.getGeoFilter();
+        }
+        //immediate execution
+        ogrid.Search.exec(search, {origin: 'advancedSearch', search: search,
+            //set new object to handle refresh on map extent change
+            //  only on map extent location and if callback function is passed as param
+            regenerator: (me._isMapExtentSelected()) ? {handler: me, id: ogrid.guid()} : null,
+
+            //new done callback for map extent change
+            done: (typeof e == 'function') ? e : null
+        });
+    },
+
+    _executeSearch: function(query) {
         try {
             var me = this;
 
@@ -658,12 +801,10 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             $.each($('#ogrid-ds-content').find('.query-builder'), function(i,v) {
                 var f = $(v).queryBuilder('getMongo');
 
-                //console.log("filter: " + JSON.stringify(f));
-
                 //allow empty filters
                 //Issue #118
                 //if (!ogrid.isNull(f) && !$.isEmptyObject(f)) {
-                    me._pendingQueries++;
+                me._pendingQueries++;
                 //}
             });
 
@@ -703,25 +844,39 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
                     throw ogrid.error('Search Error', 'Search criteria is invalid.');
                 }
 
-                //if geoSpatial filtering is supported by service, send geoSpatial filters
-                if ( ogrid.App.serviceCapabilities().geoSpatialFiltering && me._geoFilter.getSettings().boundary) {
-                    search.geoFilter = me._geoFilter.getGeoFilter();
+                //var wait = 0;
+                //if (me._geoFilter.getSettings().boundary && !me._isShapeDataLoaded()) {wait = 5000; console.log("Shape data not loaded yet. Waiting for X seconds");}
+
+                //now that we are supporting invoking query via URL, we have to handle condition
+                // where boundaries are not quite loaded yet
+                if ( me._geoFilter.getSettings().boundary) {
+                    $.when( me._isShapeDataLoaded(me, query) ).done(function () {
+                        me._doSearch(me, search);
+                    });
+                } else {
+                    me._doSearch(me, search);
                 }
 
-                //immediate execution
-                ogrid.Search.exec(search, {origin: 'advancedSearch', search: search,
-                    //set new object to handle refresh on map extent change
-                    //  only on map extent location and if callback function is passed as param
-                    regenerator: (me._isMapExtentSelected()) ? {handler: me, id: ogrid.guid()} : null,
-
-                    //new done callback for map extent change
-                    done: (typeof e == 'function') ? e : null
-                });
             });
 
-             //auto-hide Advanced Search pane after Submit (no longer done in mobile mode only)
+            //auto-hide Advanced Search pane after Submit (no longer done in mobile mode only)
             me._hideMe();
 
+        } catch (ex) {
+            ogrid.Alert.error(ex.message);
+        }
+    },
+
+    //now query submission is just triggering hash change
+    _onSubmit: function(e) {
+        try {
+            var id = null;
+            //if loaded from a previously saved query, maintain the query ID
+            if (this._activeQuery && this._activeQuery._id) {
+                id = this._activeQuery._id;
+            }
+            var q = this._getQuerySpec(id);
+            this._updateHashWithQuery(q, true);
         } catch (ex) {
             ogrid.Alert.error(ex.message);
         }
@@ -742,11 +897,14 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
     _onSubmitSuccess: function(data, passThroughData) {
         try {
-            //if geoSpatial filtering is not supported by service, implement filtering locally
+           //if geoSpatial filtering is not supported by service, implement filtering locally
             if ( !ogrid.App.serviceCapabilities().geoSpatialFiltering ) {
                 //apply additional geo-spatial filter, if any is specified
-                if (this._geoFilter.getSettings().boundary)
+                if (this._geoFilter.getSettings().boundary) {
+                    console.time("geoFilter.filterData:" + data.meta.view.id);
                     data = this._geoFilter.filterData(data);
+                    console.timeEnd("geoFilter.filterData:" + data.meta.view.id);
+                }
             }
 
             var rsId = ogrid.guid();
@@ -801,10 +959,10 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         if (!this._options.allDataTypes) {
             //get all available data type descriptors from the service
             //ogrid.ajax(this, function(data) {
-            me._options.allDataTypes = this._options.datasets;
-            $('#dtTemplate').tmpl(this._options.datasets).appendTo('#ogrid-dtlist');
+                me._options.allDataTypes = this._options.datasets;
+                $('#dtTemplate').tmpl(this._options.datasets).appendTo('#ogrid-dtlist');
 
-            $('#ogrid-dtlist').find('li').click($.proxy(me._onDataTypeAdd, me));
+                $('#ogrid-dtlist').find('li').click($.proxy(me._onDataTypeAdd, me));
             //}, {url: '/datasets'});
         }
     },
@@ -824,7 +982,7 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         return t;
     },
 
-//caches look up values
+    //caches look up values
     _lookupLov: function(listId, done, me) {
         if (me._lookupLov[listId]) {
             done(me._lookupLov[listId]);
@@ -844,6 +1002,18 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         }
     },
 
+    _getAutoComplete2: function(filter, column, me) {
+        me._lookupLov(column.listOfValuesId,
+            function(data){
+                filter.autocomplete =  {
+                    lookup: data,
+                    onSelect: function (suggestion) {
+                        //alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+                    }
+                };
+            },
+            me);
+    },
 
     _filterSuggestions: function(query, data) {
         var a =  $.map(data.suggestions, function(v, i) {
@@ -991,8 +1161,30 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         });
         return a;
     },
-	
- _onColorOptionsClick: function(e) {
+
+    _getDotSizers: function(ds) {
+        var a = [];
+        $.each(ds.columns, function(i, v) {
+            if (v.dotSizer) {
+                a.push ({
+                    columnId: v.id,
+                    displayName: v.displayName,
+                    calculator: v.dotSizer.calculator
+                });
+            }
+        });
+        if (a.length === 0) {
+            //default
+            a.push ({
+                columnId: '',
+                displayName: '(No fields available)',
+                calculator: ''
+            });
+        }
+        return a;
+    },
+
+    _onColorOptionsClick: function(e) {
         if ($(e.target).hasClass('panel-collapsed')) {
             // expand the panel
             $(e.target).parent().find('.panel-body').slideDown();
@@ -1007,15 +1199,25 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
         }
     },
 
+    _getDotSizersSelect: function(ds) {
+        var a = this._getDotSizers(ds);
+        var s = "";
+        $.each(a, function(i, v) {
+            s+='<option value="' + v.columnId + '" data-calc="' + v.calculator  + '">' + v.displayName  +  '</option>"';
+        });
+        return s;
+    },
+
     _loadNewTab: function(qspec) {
         $('#ogrid-ds-tabs').find('li').removeClass('active');
         $('#ogrid-ds-content .tab-pane').removeClass('active');
 
         var tabId = ogrid.guid();
+        var ds = this._lookupDataType(qspec.dataSetId);
 
         $('#newDTTemplate').tmpl({
             tabName: tabId,
-            label: this._lookupDataType(qspec.dataSetId).displayName
+            label: ds.displayName
         }).prependTo('#ogrid-ds-tabs');
 
         //setup close event handler for X button on each data type tab
@@ -1058,17 +1260,42 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
 
         //set values
-        $('#sizeSpin_' + tabId).val(qspec.rendition.size);
         $('#opacitySpin_' + tabId).val(qspec.rendition.opacity);
-		
-		//assign click handler for this clickable link
+
+        //assign click handler for this clickable link
         $("#colorOptions_" + tabId).click(this._onColorOptionsClick);
 
         //hide color options explicitly
         $("#colorOptions_" + tabId).addClass("panel-collapsed");
         $("#colorOptions_" + tabId).parent().find('.panel-body').css("display", "none!important");
 
-        //$('#saveQueryAs').val(qspec.name);
+        $("#sizeSwitch_" + tabId).bootstrapToggle();
+
+        //populate dot sizer fields
+        //use raw Html, using nested jquery template does not seem to be working
+        $("#dotSizerFields_" + tabId).append(this._getDotSizersSelect(ds));
+
+        $("#sizeSwitch_" + tabId).change(function() {
+            if ($(this).prop('checked')) {
+                $("#spinnerGroup_" + tabId).addClass('hidden');
+                $("#dotSizerFields_" + tabId).removeClass('hidden');
+            } else {
+                $("#dotSizerFields_" + tabId).addClass('hidden');
+                $("#spinnerGroup_" + tabId).removeClass('hidden');
+            }
+        });
+
+        if (_.isObject(qspec.rendition.size)) {
+            //dot sizer was selected
+            $("#sizeSwitch_" + tabId).bootstrapToggle('on');
+            $("#dotSizerFields_" + tabId).val(qspec.rendition.size.columnId);
+            //$("#spinnerGroup_" + tabId).addClass('hidden');
+            //$("#dotSizerFields_" + tabId).removeClass('hidden');
+        } else {
+            $('#sizeSpin_' + tabId).val(qspec.rendition.size);
+            //$("#dotSizerFields_" + tabId).addClass('hidden');
+            //$("#spinnerGroup_" + tabId).removeClass('hidden');
+        }
     },
 
     _getSpinEventHandler: function(inputSelector, delta) {
@@ -1084,11 +1311,10 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             name: '',
             filters: {},
             rendition: {
-                //defaults- get from config later
                 //color: this._options.defaultPointColor,
-                color: $(e.target).data('color'),
-                opacity: $(e.target).data('opacity'),
-                size: $(e.target).data('size')
+            	color: $(e.target).data('color'),
+               	opacity: $(e.target).data('opacity'),
+               	size: $(e.target).data('size')
             }
         };
         $('#ogrid-ds-tabs').find('li').removeClass('active');
@@ -1107,5 +1333,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
             //re-invoke submit, passing along done callback
             this._onSubmit(done);
         }
+    },
+
+    getQueryOpener: function(autorun, context) {
+        return this._onManageQueryOpen(autorun, context);
     }
 });

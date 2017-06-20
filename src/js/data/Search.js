@@ -8,29 +8,33 @@
 ogrid.Search = {};
 
 ogrid.Search._getFilterParam = function(filter) {
-    return JSON.stringify(filter).replace('&', encodeURIComponent('&')).replace('#', encodeURIComponent('#'));
+    var s = JSON.stringify(filter);
+    //GH issue #235 - fixup for array support
+    s.replace('&', encodeURIComponent('&')).replace('#', encodeURIComponent('#'));
+    s = s.replace('\\\\', '');
+    return s;
 };
 
 
 ogrid.Search._getQParam = function(filter) {
     //make sure we encode &, # here to prevent any syntax errors
     return 'q=' + encodeURI(
-            JSON.stringify(filter)
-        ).replace('&', encodeURIComponent('&')).replace('#', encodeURIComponent('#'));
+     JSON.stringify(filter)
+     ).replace('&', encodeURIComponent('&')).replace('#', encodeURIComponent('#'));
 };
 
 ogrid.Search._getOpts = function(geoFilter) {
-    if (geoFilter) {
-        var f = {"geoFilter": geoFilter};
+  if (geoFilter) {
+       var f = {"geoFilter": geoFilter};
         //return '&opts=' + encodeURI(JSON.stringify(f));
-        return JSON.stringify(f);
+      return JSON.stringify(f);
     } else
         return '';
 };
 
 ogrid.Search._preProcess = function(data, renditionOptions) {
     if (renditionOptions)
-    //apply rendition options to returning json
+        //apply rendition options to returning json
         data.meta.view.options.rendition = $.extend(data.meta.view.options.rendition, renditionOptions);
 
     //timestamp data
@@ -77,6 +81,7 @@ ogrid.Search.exec = function(options, passThroughData) {
     //passThroughData is additional info from the caller that is passed to success and error callbacks
     var me = this;
     var q = this._getFilterParam(options.filter);
+
     var opts = this._getOpts(options.geoFilter);
 
     var url = ogrid.Config.service.endpoint + '/datasets/' + options.dataSetId + '/query';
@@ -225,7 +230,7 @@ ogrid.Search.list = function(options) {
 
     $.ajax({
         url: ogrid.Config.service.endpoint + '/queries/?' + q +
-        '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults),
+            '&n=' + (!ogrid.isNull(options.maxResults) ?  options.maxResults : ogrid.Config.service.maxresults),
         type: 'GET',
         async: true,
         contentType: 'application/json',
