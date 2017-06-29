@@ -74,6 +74,9 @@ ogrid.Main = ogrid.Class.extend({
                 match = re.exec(query);
             }
             console.log(o);
+	
+	    //#issue 115; replace hash here or we'll get an error
+            o.q = o.q.replace(encodeURIComponent('#'), "#");
 
             me._loadQuery(
                 o.q,
