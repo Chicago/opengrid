@@ -63,7 +63,8 @@ ogrid.Config = {
             showGraph: true,
 
             resizable: true
-        }
+        },
+        arrayPopoverMax: 100
     },
 
     map: {
