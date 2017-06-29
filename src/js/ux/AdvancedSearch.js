@@ -744,11 +744,14 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
     _updateHashWithQuery: function(query, autoexec) {
         //we need to add some random value on the URL so it will always trigger a hasher change
         var randomData = '&_=' + Math.floor(new Date().valueOf() * Math.random());
+
+        //#issue 115; replace hash here since Hasher does not do it
+
         //register with browser history
         if (query.geoFilter && query.geoFilter.boundary === '_map-extent') {
-            hasher.setHash("query?q=" + JSON.stringify(query) + "&loc=" + this._getMapLocation() + "&run=" + autoexec + randomData);
+            hasher.setHash("query?q=" + JSON.stringify(query).replace('#', encodeURIComponent('#')) + "&loc=" + this._getMapLocation() + "&run=" + autoexec + randomData);
         } else {
-            hasher.setHash("query?q=" + JSON.stringify(query) + "&run=" + autoexec + randomData);
+            hasher.setHash("query?q=" + JSON.stringify(query).replace('#', encodeURIComponent('#')) + "&run=" + autoexec + randomData);
         }
     },
 
