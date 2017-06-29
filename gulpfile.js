@@ -66,6 +66,11 @@ var third_party_sources = [
     'lib/bootstrap-table-1.8.1/js/bootstrap-table.js',
     'lib/leaflet-1.0.1/js/leaflet-src.js',
     'lib/jspdf-1.1.135/js/jspdf.js',
+
+    //load first before crossroads.js
+    'lib/misc/js/signals.js',
+    'lib/misc/js/hasher.js',
+
     'lib/**/*.js'
 ];
 

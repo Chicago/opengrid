@@ -67,6 +67,9 @@ ogrid.TableView = ogrid.Class.extend({
             $('#tableview').collapse('show');
         } else {
             $('#tableview').collapse('hide');
+
+            //hide all popovers
+            $("a[data-toggle=popover][class=ogrid-arraycell]").popover('hide');
         }
     },
 
@@ -170,6 +173,7 @@ ogrid.TableView = ogrid.Class.extend({
     _populateTableRows: function(resultSetId, tableId, columns, data, showAutorefresh, lastRefreshed, creationTSColumn) {
         //$('#' + tableId).addClass('no-wrap');
 
+        var chartOptions = this._getChartXAxisInfo(data.meta.view);
         this._tableOptions = $.extend(ogrid.Config.table.bootstrapTableOptions, {
             //our geoJson data in its original structure (data attribute is flattened post table creation)
             origData: data,
@@ -181,7 +185,9 @@ ogrid.TableView = ogrid.Class.extend({
                 map: ogrid.App.map()
             },
             graphOptions: {
-                groupFields: this._getGroupFields(data.meta.view.columns)
+                groupFields: this._getGroupFields(data.meta.view.columns),
+                xAxisField: chartOptions.xAxisField,
+                xAxisLabel: chartOptions.xAxisLabel
             },
             columns: columns,
             height: this._getTableHeight(),
@@ -223,6 +229,10 @@ ogrid.TableView = ogrid.Class.extend({
             }
         });
 
+        //events to handle re-activation of popovers (for now, use the same event handler)
+        $t.on('page-change.bs.table', $.proxy(this._onPageChange, this));
+        $t.on('sort.bs.table', $.proxy(this._onPageChange, this));
+
         //highlight of clicked row
         $t.on('click', 'tbody tr', function(e) {
             $(this).addClass('highlight').siblings().removeClass('highlight');
@@ -232,18 +242,49 @@ ogrid.TableView = ogrid.Class.extend({
         //  by overriding existing event handler on export
         this._overrideExportBehavior($t);
 
-        //make sure height attribute is reflected, not doing it on init population
-        //fix unaligned headers and columns on data update
-        //$t.bootstrapTable('resetView');
+        //with delay
+        this._activatePopovers(2000);
+    },
 
-        /*$t.on('all.bs.table', function (e, name, args) {
-            console.log(name, args);
-            if (name === 'post-header.bs.table') {
-                setTimeout(function() {
-                    $t.bootstrapTable('resetView');
-                }, 500);
-            }
-        });*/
+    _activatePopovers: function(delay) {
+        setTimeout(function() {
+            //instantiate popovers for this page
+            var $po = $("a[data-toggle=popover][class=ogrid-arraycell]").popover({
+                container: 'body'});
+
+            //add our custom class to table popover so we can apply custom style
+            $.each( $po, function(i, v) {
+                var popover = $($("a[data-toggle=popover][class=ogrid-arraycell]").popover()[i]).data('bs.popover');
+                var $tip = popover.tip();
+                $tip.addClass('ogrid-arraycell-popover');
+
+                //only for debugging
+                $(v).on('shown.bs.popover', function (e) {
+                    $tip.find('.close').bind('click', function () {
+                        popover.hide();
+                    });
+                    //close other open popups when showing this popup
+                    $("a[data-toggle=popover][class=ogrid-arraycell]").not($(v)).popover('hide');
+                });
+                $(v).on('hidden.bs.popover', function (e) {
+                    //Fix issue with bootstrap popovers where instate.click is not reset on 'hide'
+                    popover.inState.click = false;
+                });
+            });
+        }, delay);
+    },
+
+    _onCellClick: function(e, field, value, row) {
+        if (field === 'properties.what.violations') {
+            alert('properties.what.violations');
+        }
+        console.log(field);
+    },
+
+    _onPageChange: function(e, number, size) {
+        console.log(e);
+
+        this._activatePopovers(0);
     },
 
 
@@ -253,6 +294,21 @@ ogrid.TableView = ogrid.Class.extend({
                 return {label: v.displayName, name: v.id };
             }
         });
+    },
+
+    _getChartXAxisInfo: function(view) {
+       if (view.options.chart) {
+           return view.options.chart;
+       } else {
+           if (!view.options.creationTimestamp) {
+               throw ogrid.error('Configuration Error', 'No "creationTimestamp" field defined for this dataset (Table View)');
+           }
+           return {
+               //by default, use creation timestamp column
+               "xAxisField": view.options.creationTimestamp,
+               "xAxisLabel": "Creation Date"
+           };
+       }
     },
 
 
@@ -307,16 +363,187 @@ ogrid.TableView = ogrid.Class.extend({
         return 0;
     },
 
+    _showDetails: function() {
+        console.log("show details");
+    },
+
+    _isDateField: function(field) {
+        return (field.indexOf("$numberLong") > -1);
+    },
+
+    //parses column names from
+    _getPopoverColumnsMock: function(row, field) {
+        //{field: 'properties.' + data.meta.view.columns[i].id, title: data.meta.view.columns[i].displayName, sortable:true};
+        return [
+            {field: 'date', title: 'Date', sortable:false},
+            {field: 'description', title: 'Description', sortable:false},
+            {field: 'type', title: 'Type', sortable:false},
+        ];
+    },
+
+    _titleCase: function(str) {
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    },
+
+    _getPopoverColumns: function(row, field) {
+        var me = this;
+        var a = $.map(row, function(value, key) {
+            //flattened name example: properties.<field name>.0.<child object field>
+            var flatName = 'properties.' + field + '.0.'; //first element
+            var n = key.indexOf(flatName);
+
+            //if found, parse rest of child object key name
+            if (n > -1) {
+                n+= flatName.length;
+
+                //clean name
+                var rawName = key.substr(n, key.length-1);
+                return {
+                    field: rawName,
+                    title: me._titleCase(rawName.replace('.$numberLong','')),
+                    sortable: false
+                };
+            }
+        });
+        if (a.length === 0) {
+            //default dummy column for simple types
+            a.push({
+                field: '_value',
+                title: 'Value',
+                sortable: false
+            });
+        }
+        return a;
+    },
+
+    _getPopoverDataMock: function(row, field) {
+        return [
+            { date: '01/01/2016', description: 'some desc', type: 'some type'},
+            { date: '01/02/2016', description: 'some des2c', type: 'some type2'}
+        ];
+    },
+
+    _getPopoverData: function(row, field, subColumns) {
+        var i = 0;
+        var a = [];
+        var me = this;
+
+        //max of X detailed records
+        for (i=0; i < ogrid.Config.table.arrayPopoverMax; i++) {
+            var o = {};
+            $.each(subColumns, function(k, v) {
+                $.each(row, function(j, key) {
+                    //flattened name example: properties.<field name>.0.<child object field>
+                    //check if our 'reserved' simple array field
+                    var flatName = 'properties.' + field + '.' + i;
+                    if (v.field !== '_value')
+                        flatName += '.' + v.field;
+                    if (!row.hasOwnProperty(flatName))
+                        //break;
+                        return false;
+                    if (me._isDateField(v.field)) {
+                        o[v.field] = moment(parseInt(row[flatName])).toString();
+                    } else {
+                        o[v.field] = row[flatName];
+                    }
+                });
+            });
+            if (!$.isEmptyObject(o))
+                a.push(o);
+        }
+        return a;
+    },
+
+    _escapeHTML: function(html) {
+        var htmlEscapes = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#x27;',
+            '/': '&#x2F;'
+        };
+        // Regex containing the keys listed immediately above.
+        var htmlEscaper = /[&<>"'\/]/g;
+
+        return ('' + html).replace(htmlEscaper, function(match) {
+            return htmlEscapes[match];
+        });
+    },
+
+    //returns HTML for detail popover table
+    _getDetailHtml: function(row, field) {
+        var container = $("#ogrid-table-popover");
+        var id = 'ogrid-popover-table_' + ogrid.guid();
+        var close = '<button type="button" class="close">&times;</button>';
+        var html = close + '<table id=' + id + '></table>';
+
+        container.html(html);
+        var cols = this._getPopoverColumns(row, field);
+        $('#' + id).bootstrapTable({
+            data: this._getPopoverData(row, field, cols),
+            columns: cols,
+            height: 200,
+        });
+        //hide the fixed table header to keep table lean
+        container.find('.fixed-table-header').remove();
+
+        //return escaped html
+        return this._escapeHTML(container.html());
+    },
+
+    //context => this
+    _getActionFormatter: function(displayName, field, context) {
+        return function(value, row, index) {
+            return [
+                '<a class="ogrid-arraycell" href="javascript:void(0)" title="' + displayName + '"  data-trigger="click hover" data-toggle="popover" data-html="true" data-placement="top"',
+                'data-content="' + context._getDetailHtml(row, field),
+                '">View details</a>'
+            ].join(' ');
+        };
+    },
+
+    _getDateFormatter: function(format) {
+        return function(value, row, index) {
+            return moment(value).format(format);
+        };
+    },
+
     _transformData: function(data) {
         var a = [];
+        var me = this;
+
+        //event handlers for table cells
+        //placeholder only, currently not used
+        var actionEvents = {
+            'mouseover .ogrid-arraycell': function (e, value, row) {
+                //console.log(row);
+            },
+            'click .ogrid-arraycell': function (e, value, row) {
+                //prevent click on link to trigger table row click
+                e.stopPropagation();
+            }
+        };
+
         for (var i in data.meta.view.columns) {
             if (data.meta.view.columns[i].list) {
                 //s += '<th>' + data.meta.view.columns[i].displayName + '</th>';
                 //build datatables column map at the same time
                 var col = {field: 'properties.' + data.meta.view.columns[i].id, title: data.meta.view.columns[i].displayName, sortable:true};
+
+                //TODO #235 Honor new 'array' attribute
+                if ( data.meta.view.columns[i].array ) {
+                    //set custom formatter for arrays
+                    col.formatter =  me._getActionFormatter(data.meta.view.columns[i].displayName, data.meta.view.columns[i].id, me);
+                    col.events = actionEvents;
+                }
                 if ( data.meta.view.columns[i].dataType === 'date' ) {
                     //add a custom sorter for date columns
                     col.sorter = $.proxy(this._sortDateValues, this);
+
+                    if (data.meta.view.columns[i].format) {
+                        col.formatter = me._getDateFormatter(data.meta.view.columns[i].format);
+                    }
                 }
                 a.push( col );
             }

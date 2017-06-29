@@ -120,7 +120,7 @@ ogrid.Util = {
 			},
 			error: function(jqXHR, txtStatus, errorThrown) {
 				if (txtStatus === 'timeout') {
-					console.log('Search has timed out.');
+					console.log('Service call has timed out.');
 					//ogrid.Alert.error('Search has timed out.');
 				} else {
 					console.log( (jqXHR.responseText) ? jqXHR.responseText : txtStatus);
@@ -166,6 +166,26 @@ ogrid.Util = {
 
 		return new Date().today() + " " + new Date().timeNow();*/
 		return moment();
+	},
+
+	waitForCondition: function(maxTime, fn) {
+		var d = $.Deferred();
+
+		//async loop
+		var _loop = function (i) {
+			setTimeout(function() {
+				if (d.state() === 'pending') {
+					fn(d);
+				}
+			}, i * 500);
+		};
+
+		var n = (maxTime / 500);
+		//max of 5 seconds, we're anticipating some wasted cycles here
+		for (var i = 0; i < n; i++) {
+			_loop(i);
+		}
+		return d;
 	}
 };
 
@@ -183,3 +203,16 @@ ogrid.ajax = ogrid.Util.ajax;
 ogrid.oid = ogrid.Util.getGeoJsonFeatureId;
 ogrid.hereDoc = ogrid.Util.hereDoc;
 ogrid.now = ogrid.Util.now;
+ogrid.waitForCondition = ogrid.Util.waitForCondition;
+
+//more "native" bind implementation
+if (!Function.prototype.bind) { // check if native implementation available
+	Function.prototype.bind = function(){
+		var fn = this, args = Array.prototype.slice.call(arguments),
+			object = args.shift();
+		return function(){
+			return fn.apply(object,
+				args.concat(Array.prototype.slice.call(arguments)));
+		};
+	};
+}
