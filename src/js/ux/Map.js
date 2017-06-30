@@ -15,7 +15,7 @@ ogrid.Map = ogrid.Class.extend({
     _locateControl: null,
     _legend: null,
     _lastZoom: 0,
-    _poppingMarker: false,
+    _handleMapViewChange: false,
 
     _options: {
         //lime
@@ -88,18 +88,18 @@ ogrid.Map = ogrid.Class.extend({
     _onPopupOpen: function() {
         try {
             //temporarily set flag to let _onMapViewChanged that it got triggered due to popup appearing
-            this._poppingMarker = true;
+            this._handleMapViewChange = false;
         } finally {
             var me = this;
             setTimeout(function() {
-                me._poppingMarker = false;
+                me._handleMapViewChange = true;
             }, 1000);
         }
     },
 
     _onMapViewChanged: function() {
         //if movement is due to our popping marker, ignore
-        if (this._poppingMarker) return;
+        if (!this._handleMapViewChange) return;
 
         console.log('map view changed');
         /*if (this._lastZoom !==0) {
@@ -160,6 +160,20 @@ ogrid.Map = ogrid.Class.extend({
         });
         return r;
     },
+
+    _onZoomEnd: function() {
+        /*if (this._lastZoom !==0) {
+            if (this._map.getZoom() > this._lastZoom) {
+                console.log("zoomed in")
+            } else {
+                console.log("zoomed out")
+            }
+        } else {
+            console.log("zoomed init")
+        }*/
+        this._lastZoom = this._map.getZoom();
+    },
+
 
     _addContextMenu: function(options) {
         options.contextmenu = true;
@@ -366,15 +380,46 @@ ogrid.Map = ogrid.Class.extend({
 
     },
 
-    //Issue #294
-    //override Leaflet circlemarker _empty method, the renderer object does not seem to be updated on 'moveend' when we refresh our dots
-    //regen is an indicator that auto-requery is turned on; we might need this later
-    _getOverrideCircleMarkerIsEmpty: function (that, regen) {
-        return $.proxy(function() {
-            return !this._radius;
-        }, that);
+    _getCalcCircleSize: function(sz, datasetId, properties) {
+        if (_.isObject(sz)) {
+            //size based on dotsizer
+            var n = properties[sz.columnId];
+            if (n!==null) {
+                //replace token with actual value, and evaluate expression
+                try {
+                    var v = eval(sz.calculator.replace("@v", n));
+                    return v;
+                } catch (ex) {
+                    console.log("dot size evaluation error: "+ ex.message);
+                }
+            } else {
+                console.log("Warning: Minimum dot size is being assigned due to NULL value. datasetId=" + datasetId + ", columnId=" + sz.columnId);
+                return 2;
+            }
+        }
+        return sz;
     },
 
+
+    //override Leaflet circlemarker _empty method while we are investigating this more
+    //regen is an indicator that auto-requery is turned on
+    _getOverrideCircleMarkerIsEmpty: function (that, regen) {
+        return $.proxy(function() {
+            //if (!regen) {
+            //    return this._radius && !this._renderer._bounds.intersects(this._pxBounds);
+            //} else {
+                //TODO ignore render bound for the time being when auto-requery is on
+                return !this._radius;
+            //}
+            /*//TODO Remove later - for debugging only
+             if (this._radius && !this._renderer._bounds.intersects(this._pxBounds)) {
+             console.log('!!!!- Empty circlemarker; radius=' + this._radius + ', pxBound=' + JSON.stringify(this._pxBounds) + ', renderer bounds: ' + JSON.stringify(this._renderer._bounds));
+             } else {
+             console.log('!!!!- Non-empty circlemarker; radius=' + this._radius + ', pxBound=' + JSON.stringify(this._pxBounds) + ', renderer bounds: ' + JSON.stringify(this._renderer._bounds));
+             }
+             return this._radius && !this._renderer._bounds.intersects(this._pxBounds);*/
+        }, that);
+    },
 
     _onRefreshData: function (evtData) {
     	try {
@@ -398,7 +443,6 @@ ogrid.Map = ogrid.Class.extend({
 
                 //we need this for highlighting new data
                 var latestDataTs = me._getLatestDataTs(data);
-
                 var resultsLayer = L.geoJson(data, {
                     style: function (feature) {
                         //can't use feature.properties.marker-color due to the dash on the name
@@ -428,8 +472,11 @@ ogrid.Map = ogrid.Class.extend({
                             //return new L.Circle(latlng, data.meta.view.size, {
                             var o = data.meta.view.options.rendition;
 
+                            //TODO #239, bubbles on map prototype
+                            var sz = me._getCalcCircleSize(o.size, data.meta.view.id, feature.properties);
+
                             var cm =  new L.CircleMarker(latlng, {
-                                radius:       o.size,
+                                radius:       sz,
                                 color:        me._getBorderColor(
                                     o.color,
                                     feature,
@@ -437,12 +484,14 @@ ogrid.Map = ogrid.Class.extend({
                                     me._markers[rsId].latestDataTs
                                 ),
                                 fillOpacity:  (o.opacity/100), //pct
-                                fillColor:    o.fillColor
+                                fillColor:    o.fillColor,
+                                weight: data.meta.view.options.rendition.borderWidth
                             });
-
-                            //Issue #294 Override _emepty method; missing dots look to be due to Leaflet renderer being out of sync at 'moveend'
+                            //TODO Temp solution, while we're investigating missing dots due to Leaflet renderer being out of sync
                             cm._empty = me._getOverrideCircleMarkerIsEmpty(cm, evtData.message.options.passthroughData.regenerator);
+
                             me._markers[rsId][ogrid.oid(feature)] = cm;
+
                             return cm;
                         }
                     },
@@ -495,12 +544,10 @@ ogrid.Map = ogrid.Class.extend({
         }
     },
 
-
     _isMonitored: function(m) {
         return (m.options && m.options.passthroughData &&
         m.options.passthroughData.monitorData && m.options.passthroughData.monitorData.monitorId);
     },
-
 
     _isAutoRequery: function(m) {
         return (m.options && m.options.passthroughData && m.options.passthroughData.done);
@@ -567,15 +614,15 @@ ogrid.Map = ogrid.Class.extend({
         }
         throw ogrid.error('Data Error', 'GeoJson data is not formatted properly. Unable to find meta/view attributes for column \'' + p + '\'.');
     },
-	
-_clearLegend: function() {
+
+    _clearLegend: function() {
         var legendDiv = this._legend.getContainer();
         legendDiv.innerHTML = '';
 
         //hide, since we have nothing to show
         $(legendDiv).addClass('hide');
     },
-	
+
     _clear: function() {
         var me = this;
         this._map.eachLayer(function (layer) {
@@ -596,10 +643,9 @@ _clearLegend: function() {
 
         //clear any remaining generated layers
         me._clearOwnLayersFromLayerControl();
-		
-		 //clear legend
+
+        //clear legend
         me._clearLegend();
-		
     },
 
     //clear our own generated layers if any remains (usually unchecked ones that do not appear as a layer on the map)
@@ -760,15 +806,19 @@ _clearLegend: function() {
         );
     },
 
+
     //public methods
     getMapCenter: function () {
         return this._map.getCenter();
     },
 
+    getMapZoom: function () {
+        return this._map.getZoom();
+    },
+
     getMap: function () {
         return this._map;
     },
-
 
     addHeatMapLayerFromExistingLayer: function(layer) {
 
@@ -802,6 +852,7 @@ _clearLegend: function() {
             options.className = 'layer-opengrid';
 
             var hl = L.heatLayer(data, options);
+
             hl.addTo(this._map);
 
             //store opengrid data on the layer for later retrieval
@@ -905,5 +956,19 @@ _clearLegend: function() {
 
     getGeoLocationControl: function() {
         return this._locateControl;
+    },
+
+    //for temporarily disabling _mapViewChange event handler
+    enableMapViewChangeHandler: function(flag) {
+        this._handleMapViewChange = flag;
+    },
+
+
+    setMapView: function(center, zoom) {
+        console.log("map::setMapView");
+        this._map.setView(
+            center,
+            zoom
+        );
     }
 });

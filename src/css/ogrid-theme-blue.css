@@ -5,35 +5,39 @@ html, body {
 
 /* crez css styles */
 #ogrid-qsearch-hint {
-  position: relative;
-  top: -34px;
-  left: calc(100% - 32px);
+    position: relative;
+    top: -34px;
+    left: calc(100% - 32px);
 }
 
-/*#qsearch .popover {
-  top: 35px !important;
-}*/
-
-.popover {
+/*quick search popover */
+.ogrid-qsearch-popover  {
     top: 44px !important;
     z-index: 5000;
 }
 
-.popover-content  {
+.ogrid-qsearch-popover .popover-content  {
     font-size: small;
+    padding: 10px;
+    width: 272px;
+    overflow-y: auto;
+    height: 600px;
 }
 
-.popover-title .close {
-    font-size: small;
+/* mobile styles for quick search hint */
+@media (max-width: 480px) {
+    .ogrid-qsearch-popover {
+        width: 230px;
+    }
 }
 
 /* override bootstrap default to avoid having a 'fat' nav bar*/
 #ogrid-search .input-group {
-  display: block;
+    display: block;
 }
 
 #ogrid-search .form-group {
-  margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .col-pdng-lft-0 { padding-left:0;}
@@ -77,7 +81,7 @@ html, body {
 
 
 .query-builder .rules-group-container {
-   padding: 5px 5px 0px 0px;
+    padding: 5px 5px 0px 0px;
 
     border:none !important;
     background: none !important;
@@ -89,51 +93,51 @@ html, body {
 #advSearchSave {color:#fff !important; background-color:#28303D !important; border-color:#2E6DA4 !important;}
 .query-builder .rules-group-container .btn-danger:hover {opacity: 0.6; }
 
-	::-webkit-scrollbar-button:start:decrement,
-    ::-webkit-scrollbar-button:end:increment { height: 0px; display: block; background-color: black;}
-        
-    ::-webkit-scrollbar-track-piece {
-        background-color: #73c4e1;          /*Global Track Peice(the slider noob.)*/
-        -webkit-border-radius: 6px;		
-    }       
-    ::-webkit-scrollbar-thumb:vertical {
-        height: 50px;
-        background-color: #2b323c;            /* Up/Down slider background*/
-        -webkit-border-radius: 6px;
-    }        
-    ::-webkit-scrollbar-thumb:horizontal {
-        width: 50px;
-        background-color: #666;            /* Side/Side slider background*/
-        -webkit-border-radius: 3px;
-    }
-	
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment { height: 0px; display: block; background-color: black;}
 
-	::-moz-scrollbar {width: 8px;height: 6px;}
-    ::-webkit-scrollbar {width: 8px;height: 6px;}
-	
-    ::-moz-scrollbar-button:start:decrement,
-    ::-moz-scrollbar-button:start:decrement { height: 0px; display: block; background-color: black;}
-	
-	::-moz-scrollbar-track-piece {
-        background-color: #2b323c;          /*Global Track Peice(the slider noob.)*/
-        -webkit-border-radius: 6px;
-    }
-	::-moz-scrollbar-thumb:vertical {
-        height: 50px;
-        background-color: #666;            /* Up/Down slider background*/
-        -webkit-border-radius: 6px;
-    } 
-	::-moz-scrollbar-thumb:horizontal {
-        width: 50px;
-        background-color: #666;            /* Side/Side slider background*/
-        -webkit-border-radius: 3px;
-    }
+::-webkit-scrollbar-track-piece {
+    background-color: #73c4e1;          /*Global Track Peice(the slider noob.)*/
+    -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:vertical {
+    height: 50px;
+    background-color: #2b323c;            /* Up/Down slider background*/
+    -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+    width: 50px;
+    background-color: #666;            /* Side/Side slider background*/
+    -webkit-border-radius: 3px;
+}
 
 
-    /* hide search button */
-    #qsearch-button {
-      display: none;
-    }
+::-moz-scrollbar {width: 8px;height: 6px;}
+::-webkit-scrollbar {width: 8px;height: 6px;}
+
+::-moz-scrollbar-button:start:decrement,
+::-moz-scrollbar-button:start:decrement { height: 0px; display: block; background-color: black;}
+
+::-moz-scrollbar-track-piece {
+    background-color: #2b323c;          /*Global Track Peice(the slider noob.)*/
+    -webkit-border-radius: 6px;
+}
+::-moz-scrollbar-thumb:vertical {
+    height: 50px;
+    background-color: #666;            /* Up/Down slider background*/
+    -webkit-border-radius: 6px;
+}
+::-moz-scrollbar-thumb:horizontal {
+    width: 50px;
+    background-color: #666;            /* Side/Side slider background*/
+    -webkit-border-radius: 3px;
+}
+
+
+/* hide search button */
+#qsearch-button {
+    display: none;
+}
 
 html, body {
     /*font-size: 12px !important;*/
@@ -141,7 +145,7 @@ html, body {
     /*font-size: 12px;*/
     /*font-weight: 300;*/
     /*font-family: 'Lato', sans-serif;*/
-    overflow-y: auto;;
+    //overflow-y: auto;;
 }
 
 .ogrid-task-pane .control-label {
@@ -203,14 +207,14 @@ html, body {
 
 #advSearchSubmit {
     margin-left: 35px;
-	position: fixed;
-	bottom: 35px;
+    position: fixed;
+    bottom: 35px;
 }
 
- #advSearchReset {
-	position: fixed;
-	bottom: 35px;
-	margin-left: 165px;
+#advSearchReset {
+    position: fixed;
+    bottom: 35px;
+    margin-left: 165px;
 }
 
 .ogrid-color-panel {
@@ -241,7 +245,7 @@ html, body {
         padding-left: 0px;
     }
     .navbar-brand {
-       display:none;
+        display:none;
     }
 
     #ogrid-search {
@@ -391,3 +395,33 @@ div#ogrid-dataset-filters.panel-body,  div#ogrid-geo-filters.panel-body {
     margin-bottom: 4px !important;
 }
 
+/* popovers in the table view */
+.ogrid-arraycell-popover {
+    z-index: 5000;
+    width: 600px;
+    max-width: 600px;
+}
+
+.ogrid-arraycell-popover .popover-content  {
+    font-size: small;
+    padding: 10px;
+    width: 600px;
+    overflow-y: auto;
+    height: auto;
+}
+
+.ogrid-arraycell-popover .popover-title {
+    font-size: small;
+    background:#2b323c;
+    color:#FFFFFF;
+}
+
+
+.ogrid-arraycell-popover button.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color:#FFFFFF;
+    font-weight: normal;
+    opacity: 0.8;
+}

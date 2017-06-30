@@ -79,32 +79,32 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <p class="navbar-btn ogrid-nav-btn">
-                <a id="ogrid-advanced-btn" href="#" class="btn btn-default hide">Find Data</a>
+                <a id="ogrid-advanced-btn" href="javascript:void(0)" class="btn btn-default hide">Find Data</a>
               </p>
             </li>
             <li>
               <p class="navbar-btn ogrid-nav-btn">
-                <a id="ogrid-clear-btn" href="#" class="btn btn-default">Clear Data</a>
+                <a id="ogrid-clear-btn" href="javascript:void(0)" class="btn btn-default">Clear Data</a>
               </p>
             </li>
             <li>
               <p class="navbar-btn ogrid-nav-btn">
-                <a id="ogrid-help-btn" href="#" class="btn btn-default hide">Help</a>
+                <a id="ogrid-help-btn" href="javascript:void(0)" class="btn btn-default hide">Help</a>
               </p>
             </li>
             <li>
               <p class="navbar-btn ogrid-nav-btn">
-                <a id="ogrid-manage-btn" href="#" class="btn btn-default hide">Manage</a>
+                <a id="ogrid-manage-btn" href="javascript:void(0)" class="btn btn-default hide">Manage</a>
               </p>
             </li>
             <li id="ogrid-user-menu" class="dropdown hide">
-              <a id="ogrid-user-name" class="dropdown-toggle" data-toggle="dropdown" href="#">Guest
+              <a id="ogrid-user-name" class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">Guest
                 <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
-                <!--<li><a href="#">My Subscriptions...</a></li>
+                <!--<li><a href="javascript:void(0)">My Subscriptions...</a></li>
                 <li class="divider"></li>-->
-                <li><a id="ogrid-logout-item" href="#">Logout</a></li>
+                <li><a id="ogrid-logout-item" href="javascript:void(0)">Logout</a></li>
               </ul>
             </li>
             <a id="ogrid-help-icon" class="fa fa-question-circle hide" alt="OpenGrid Help" href="http://opengrid.readthedocs.org/en/latest/User%20Documentation" target="_blank"></a>
@@ -119,6 +119,9 @@
 
       <!--chart modal -->
       <div id="table-chart"></div>
+
+      <!-- popover detail -->
+      <div id="ogrid-table-popover"></div>
 
       <!-- advanced search container, modularize later -->
       <div id="ogrid-task-advanced-search" class="ogrid-task-pane">
@@ -171,11 +174,11 @@
                         <li class="active regtab"><a href="#${tabName}" role="tab" data-toggle="tab"><button class="close closeTab" type="button" ><i class="fa fa-times-circle"></i></button>${label}</a></li>
                       </script>
                       <li>
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Add dataset <span class="glyphicon glyphicon-plus-sign"></span></a>
+                        <a class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown">Add dataset <span class="glyphicon glyphicon-plus-sign"></span></a>
                         <ul id="ogrid-dtlist" class="dropdown-menu"></ul>
                         <!-- JQuery template -->
                         <script type="text/x-jquery-tmpl" id="dtTemplate">
-                            <li><a data-type-id="${id}" data-color="${options.rendition.color}" data-opacity="${options.rendition.opacity}" data-size="${options.rendition.size}" href="#">${displayName}</a></li>
+                            <li><a data-type-id="${id}" data-color="${options.rendition.color}" data-opacity="${options.rendition.opacity}" data-size="${options.rendition.size}" href="javascript:void(0)">${displayName}</a></li>
                         </script>
                       </li>
                     </ul>
@@ -220,25 +223,31 @@
                                                     </div>
                                                     &nbsp;
                                                     <div class="form-group">
-                                                        <label for="sizeSpin" class="control-label">Size</label>
-                                                        <div class="input-group spinner">
+                                                        <label for="sizeSpin_${tabName}" class="control-label">Size</label>
+                                                        <label class="checkbox-inline">
+                                                          <input id="sizeSwitch_${tabName}" type="checkbox" data-style="android" data-toggle="toggle" data-on=" " data-off=" " data-size="mini">
+                                                        </label>
+                                                        <div id="spinnerGroup_${tabName}" class="input-group spinner">
                                                             <input id="sizeSpin_${tabName}" type="text" class="form-control" value="6">
                                                             <div class="input-group-btn-vertical">
                                                                 <button id="sizeSpinUp_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
                                                                 <button id="sizeSpinDn_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
                                                             </div>
                                                         </div>
+                                                        <select id="dotSizerFields_${tabName}" data-placement="bottom" data-toggle="tooltip" title="Select field to base size of dot on" class="form-control hidden">
+                                                        </select>
                                                     </div>
-                                                    &nbsp;
-                                                    <div class="form-group">
-                                                        <label for="opacitySpin" class="control-label">Opacity</label>
-                                                        <div class="input-group spinner">
-                                                            <input id="opacitySpin_${tabName}" type="text" class="form-control" value="85">
-                                                            <div class="input-group-btn-vertical">
-                                                                <button id="opacitySpinUp_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                                                                <button id="opacitySpinDn_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
-                                                            </div>
-                                                        </div>
+                                                    <div class="row" style="margin-left: 0px;">
+                                                      <div class="form-group">
+                                                          <label for="opacitySpin_${tabName}" class="control-label">Opacity</label>
+                                                          <div class="input-group spinner">
+                                                              <input id="opacitySpin_${tabName}" type="text" class="form-control" value="85">
+                                                              <div class="input-group-btn-vertical">
+                                                                  <button id="opacitySpinUp_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+                                                                  <button id="opacitySpinDn_${tabName}" class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
                                                     </div>
                                                 </form>
                                             </div>

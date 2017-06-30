@@ -176,6 +176,7 @@ ogrid.QSearch = ogrid.Class.extend({
     },
 
     _onExecDone: function (results) {
+        var autoRequery = this._isGeoFilterableData(results);
         //if geoSpatial filtering is not supported by service, implement filtering locally
         if ( !ogrid.App.serviceCapabilities().geoSpatialFiltering && this._isGeoFilterableData(results)) {
             if ( !this._geoFilter ) {

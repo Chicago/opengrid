@@ -30,30 +30,39 @@
                     '<button class="btn btn-default dropdown-toggle" ' +
                     'data-toggle="dropdown" type="button">',
                     '<i class="fa fa-pie-chart"></i> ',
-                    '<span class="caret"></span>',
                     '</button>',
-                    '<ul class="dropdown-menu" role="menu">',
-                    '</ul>',
                     '</div>'].join('')).appendTo($btnGroup);
 
                 var $menu = $div.find('.dropdown-menu'),
                     groupFields = this.options.graphOptions.groupFields;
 
-                $.each(groupFields, function (i, type) {
+                /*$.each(groupFields, function (i, type) {
                     $menu.append(['<li data-type="' + type.name + '">',
                         '<a href="javascript:void(0)">',
                         type.label,
                         '</a>',
                         '</li>'].join(''));
-                });
+                });*/
 
-                $menu.find('li').click(function () {
-                    var fieldDisplayName = _getGroupField(that.options.graphOptions.groupFields, $(this).data('type')).label;
+                var groupByFields=null;
+
+                if (that.options.graphOptions.groupFields && that.options.graphOptions.groupFields.length > 0) {
+                    groupByFields = that.options.graphOptions.groupFields;
+                }
+                $div.find('button').click(function () {
+                    //var fieldDisplayName = _getGroupField(that.options.graphOptions.groupFields, $(this).data('type')).label;
                     var g = new ogrid.Chart(
                         $('#table-chart'), {
                             data: that.options.origData,
-                            groupBy: $(this).data('type'),
-                            title: that.options.origData.meta.view.displayName + ' Data Grouped by ' + fieldDisplayName
+                            //groupBy: $(this).data('type'),
+                            //title: that.options.origData.meta.view.displayName + ' Data Grouped by ' + fieldDisplayName,
+
+                            //TODO: use the creation time field as defined on the dataset
+                            //dateField: 'when.shardtime',
+                            xAxisField: that.options.graphOptions.xAxisField,
+                            xAxisLabel: that.options.graphOptions.xAxisLabel,
+                            dataName: that.options.origData.meta.view.displayName,
+                            groupByFields: groupByFields
                         }
                     );
                     g.showModal();

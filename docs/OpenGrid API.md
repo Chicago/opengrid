@@ -1,5 +1,5 @@
 <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
-<h4 align="center">Version 1.3.0</h4>
+<h4 align="center">Version 1.4.0</h4>
 
 <!--
 ## Table of Contents
@@ -822,14 +822,18 @@ The maximum number of records to return; If this parameter is not specified, no 
                         							]
                     				}		
                		        	  ],
-		    "quickSearch" : {
+			"chart" : {
+                    "xAxisField" : "date", 
+                    "xAxisLabel" : "Post Date"
+                }								  
+			},
+			"quickSearch" : {
 					"enable" : true, 
 					"triggerAlias" : "twe", 
 					"triggerWord" : "tweet", 
 					"hintCaption" : "Search Tweets", 
 					"hintExample" : "tweet 'food'"
 									    }
-			},
 	"columns" :
 			[
 		           {
@@ -907,7 +911,16 @@ The maximum number of records to return; If this parameter is not specified, no 
 			]
 	}
 ```
-
+<h4>New in 1.4.0</h4>
+Two new column properties were introduced as part of the 1.4.0 release:
+<ul>
+<li><b>array</b> - a flag to indicate that the column contains array-type values</li>
+<li><b>dotSizer</b> - an object specifying how the dot size will be calculated dynamically. </li>
+</ul>
+For example, a value like below will calculate the dot size using the given formula depending on the value of this column as represented by the @v token:<br>
+"dotSizer" : {
+	"calculator" : "(Math.sqrt(@v) * 2.5) + 2"
+}
 <h2>1.1.9 /datasets/{dataset_id}/query</h2>
 
 **Method**
