@@ -55,7 +55,6 @@ OpenGrid was developed with the support of Bloomberg Philanthropies.
 #### Supported Browsers
 <p>OpenGrid supports both mobile and desktop versions search engines. Mobile Android devices support Firefox version 40&#43; and Chrome 44&#43;. Ios devices support Chrome 45&#43;, Safari 8.1&#43; and Firefox 40&#43;. Desktop versions support Firefox 42&#43; and Chrome 46&#43;; Internet Explorer is supported from IE10&#43; no older versions will be continued. All browsers must have cookies enabled and support JavaScript/ECMAScript version 5.1.</p>
 
-
 ### Login/Logout
 <p>
 When the application is initially opened through a browser the login screen will appear (If authentication feature is activated). Prompting a cursor within the username textbox; the login button is initially disabled until both username and password has been entered. Once the user information has been provided and the login button has been selected, the user credentials will become validated against the system.
@@ -324,7 +323,7 @@ By selecting the measurement icon, the measurement tool can be turned on to enab
 <br>
 
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec21.jpg">
-</div>
++</div>
 <p align="center"><b>Figure 7b. Multiple Linear Measurement </b></p>
 <br><br>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec26.jpg">
