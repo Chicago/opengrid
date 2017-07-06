@@ -265,8 +265,8 @@ Once the landing page has been displayed if there's been no server activity on t
 <p align="center"><b>Figure 4. Message when Session Times Out</b></p>
 
 
-<h2> Base Map</h2>
-<h3> Map Layers</h3>
+<h2>Base Map</h2>
+<h4>Map Layers</h4>
 <p>
 The layers icon displays multiple basemap views and open weather layers. The list is built dynamically based on what's available through the Map Service provider. In the lower right hand corner on the grid, there is information and active links provided about the map services.  The initial launch page displays the default basemap, Street View. For all other basemaps see Figure 5a and 5b below.
 </p>
@@ -280,7 +280,7 @@ The layers icon displays multiple basemap views and open weather layers. The lis
 </div>
 <p align="center"><b>Figure 5b. Black and White View</b></p>
 
-<h4>Map Legend</h4>
+#### Map Legend
 <p>
 A dynamic legend will display a representation of what type of search was executed. If, multiple types with same dataset is being displayed for a search; it will display the two datatypes based off color representation from the setup on the grid. 
 </p>
@@ -387,12 +387,11 @@ Tweet dataset provides real-time data and automatically refreshes with new data 
 
 <br>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec25.jpg"> 
-</div>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec25.jpg"></div>
 <p align="center"><b>Figure 8. Quick Search on Tweets</b></p>
 
 <br>
-<h3> Find Data Panel </h3> 
+<h3>Find Data Panel</h3> 
 
 <b><i>Note: Manage Queries, Load Saved Query and Save Query As seen in the image below are configurations that can be enabled and disabled within the application. These attributes does not appear in opengrid.io.</i></b>
 
@@ -570,7 +569,7 @@ When a query is submitted, the application will display a message when the query
 </p>
 <br>
 <h3>Existing Queries</h3>
-<h4> Commonly Used Queries</h4>
+<h4>Commonly Used Queries</h4>
 <p>
 Are popular searches that city residents are most likely to explore within the application. The drop menu has a list of predefined queries that a user can apply as a search. 
 </p>
@@ -584,8 +583,8 @@ Each query when selected displays its search parameters under the Select Data se
 <p align="center"><b>Figure 12. Commonly Used Queries</b></p>
 <br>
 
-<h2> Data Formation</h2>
-<h3> Map Grid </h3>
+<h2>Data Formation</h2>
+<h3>Map Grid</h3>
 <p>
 The map grid is interactive, a user can navigate the map using a mouse, keyboard and for mobile devices by swiping using index finger.  The map displays the maximum of 1000 points. All data appears on the grid as points and/or markers. Places/Address search plot as markers and Datasets plot as points on the grid. The map legend appears on the grid when a search has been executed, displaying the color of the data point and the name of the data being displayed. A retractable information box appears to the bottom right of the grid when a search is performed, displaying the No. of records found or an error message pertaining to a search. The grid has an automatic refresh feature for updating and re-plotting data upon navigating around the map.
 </p>
@@ -601,7 +600,7 @@ The table grid is located at the bottom of the map. The table becomes active whe
 </div>
 <p align="center"><b>Figure 13. Table Grid</b></p>
 <br>
-<h3> Components of the Table Grid </h3>
+<h3>Components of the Table Grid</h3>
 <b>Information Tab</b>
 
 - Search type (i.e. Place/Address, Business License).
