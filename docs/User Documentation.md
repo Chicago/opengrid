@@ -1,7 +1,6 @@
 <h1 align="center"><B>OpenGrid</B></h1>
 <h4 align="center">Version 1.3.0</h4>
-
-![](media/image1.jpg)
+<p align="center"><img src="https://github.com/Chicago/opengrid/blob/master/docs/media/image1.jpg"> </p>
 <p align="center"><b>Department of Innovation & Technology</b></p>
 
 ### Table of Contents
