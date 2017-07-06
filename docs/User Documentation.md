@@ -264,15 +264,14 @@ Once the landing page has been displayed if there's been no server activity on t
 <p align="center"><b>Figure 4. Message when Session Times Out</b></p>
 
 
-<h2> Base Map</h2>
-<h3> Map Layers</h3>
+<h2>Base Map</h2>
+<h4>Map Layers</h4>
 <p>
 The layers icon displays multiple basemap views and open weather layers. The list is built dynamically based on what's available through the Map Service provider. In the lower right hand corner on the grid, there is information and active links provided about the map services.  The initial launch page displays the default basemap, Street View. For all other basemaps see Figure 5a and 5b below.
 </p>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec15.jpg"> 
 </div>
 <p align="center"><b>Figure 5a. Aerial View</b></p>
-
 
 <br>
 <div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec17.jpg"> 
@@ -304,9 +303,8 @@ A dynamic legend will display a representation of what type of search was execut
 <br>
 
 #### Measurement Tool
-<p>
-By selecting the measurement icon, the measurement tool can be turned on to enable measurements of the following:
-</p>
+
+<p>By selecting the measurement icon, the measurement tool can be turned on to enable measurements of the following:</p>
 
 <p>Linear Measurement</p>
 
@@ -322,12 +320,12 @@ By selecting the measurement icon, the measurement tool can be turned on to enab
 
 <br>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec21.jpg">
-+</div>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec21.jpg"></div>
 <p align="center"><b>Figure 7b. Multiple Linear Measurement </b></p>
+
 <br><br>
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec26.jpg">
-</div>
+
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec26.jpg"></div>
 <p align="center"><b>Figure 7c. Area Measurement</b></p>
 
 <br>
@@ -386,22 +384,21 @@ Tweet dataset provides real-time data and automatically refreshes with new data 
 
 <br>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec25.jpg"> 
-</div>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec25.jpg"></div>
 <p align="center"><b>Figure 8. Quick Search on Tweets</b></p>
 
 <br>
-<h3> Find Data Panel </h3> 
+<h3>Find Data Panel</h3> 
 
 <b><i>Note: Manage Queries, Load Saved Query and Save Query As seen in the image below are configurations that can be enabled and disabled within the application. These attributes does not appear in opengrid.io.</i></b>
 
 <h4>Advanced Search</h4>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec18.jpg"> 
-</div>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec18.jpg"></div>
 <p align="center"><b>Figure 9. Find Data Panel</b></p>
 
 <br>
+
 The Find Data Panel is where more defined searches are built, saved and existing searches are executed.
 <table>
 <tr>
@@ -540,36 +537,40 @@ Simple, just add Business Licenses dataset twice, then set one with a filter  <b
 <p>
 In the example below, it shows how the search was applied and how each data type is represented on the grid... Retail Food Establishments has the default color of Blue and Mobile Food Licenses is Red.
 </p>
+
 <br>
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec16.jpg"> 
-</div>
+
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec16.jpg"></div>
 <p align="center"><b>Figure 10. Business Licenses Dataset Example </b></p>
+
 <br>
+
 <p>
 To further filter a search, a geo-spatial filter can be applied by drawing a shape on a targeted area on a map or selecting one of the pre-defined boundaries from the Select Location section of the panel. Select Location has two geo-spatial options called <b>WITHIN</b> and <b>NEAR</b> (see images below).
 </p>
 
-<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec09.jpg"> 
-</div>
+<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec09.jpg"></div>
 <p align="left"><b>Figure 11a. WITHIN Boundary</b></p>
+
 <br>
-<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec10.jpg"> 
-</div>
+
+<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec10.jpg"></div>
 <p align="left"><b>Figure 11b. NEAR Me</b></p>
+
 <br>
-<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec11.jpg"> 
-</div>
+<div align="left"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec11.jpg"></div>
 <p align="left"><b>Figure 11c. NEAR Marker</b></p>
-<p>
-Amongst applying boundaries to a search, auto refresh component can be setup for a search by the number of intervals in seconds (minimum of 30 seconds, maximum of 3600 seconds or 60 minutes).
-</p>
+
+<p>Amongst applying boundaries to a search, auto refresh component can be setup for a search by the number of intervals in seconds (minimum of 30 seconds, maximum of 3600 seconds or 60 minutes).</p>
 
 <p>
 When a query is submitted, the application will display a message when the query times out. It will also display a message when the search service returns no data.
 </p>
+
 <br>
+
 <h3>Existing Queries</h3>
-<h4> Commonly Used Queries</h4>
+<h4>Commonly Used Queries</h4>
 <p>
 Are popular searches that city residents are most likely to explore within the application. The drop menu has a list of predefined queries that a user can apply as a search. 
 </p>
@@ -583,8 +584,8 @@ Each query when selected displays its search parameters under the Select Data se
 <p align="center"><b>Figure 12. Commonly Used Queries</b></p>
 <br>
 
-<h2> Data Formation</h2>
-<h3> Map Grid </h3>
+<h2>Data Formation</h2>
+<h3>Map Grid</h3>
 <p>
 The map grid is interactive, a user can navigate the map using a mouse, keyboard and for mobile devices by swiping using index finger.  The map displays the maximum of 1000 points. All data appears on the grid as points and/or markers. Places/Address search plot as markers and Datasets plot as points on the grid. The map legend appears on the grid when a search has been executed, displaying the color of the data point and the name of the data being displayed. A retractable information box appears to the bottom right of the grid when a search is performed, displaying the No. of records found or an error message pertaining to a search. The grid has an automatic refresh feature for updating and re-plotting data upon navigating around the map.
 </p>
@@ -600,7 +601,7 @@ The table grid is located at the bottom of the map. The table becomes active whe
 </div>
 <p align="center"><b>Figure 13. Table Grid</b></p>
 <br>
-<h3> Components of the Table Grid </h3>
+<h3>Components of the Table Grid</h3>
 <b>Information Tab</b>
 
 - Search type (i.e. Place/Address, Business License).
@@ -659,8 +660,7 @@ A saved search can also be overwritten upon user discretion. To overwrite a sear
 
 <br>
 
-<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec14.jpg"> 
-</div>
+<div align="center"><img src="https://github.com/Chicago/opengrid/blob/dev/docs/media/dec14.jpg"></div>
 <p align="center"><b>Figure 14. Query Overwrite</b></p>
 <br>
 
@@ -677,12 +677,10 @@ A saved search can also be overwritten upon user discretion. To overwrite a sear
 - Add/Remove Group
 
 <p>
-To setup a group under the Manage Group link, select the green new group.  The administrator will need to provide a Group ID, the group ID when initially created and saved will no longer be editable; name of the group and a description for the group, in which both are editable. There are two check boxes <b> “Is Admin Group” </b> which is an optional configuration that signifies the group is for admin use only; <b> “Enabled” </b>, activates the new group for usage. To save the new group, select the Submit button, this action will cause the group to be saved and stored within the manage groups panel list. Once a new group has been created the administrator can begin assigning the group to users.
+To setup a group under the Manage Group link, select the green new group.  The administrator will need to provide a Group ID, the group ID when initially created and saved will no longer be editable; name of the group and a description for the group, in which both are editable. There are two check boxes <b> “Is Admin Group” </b> which is an optional configuration that signifies the group is for admin use only; <b> “Enabled” </b>, activates the new group for usage. To save the new group, select the Submit button, this action will cause the group to be saved and stored within the manage groups panel list. Once a new group has been created the administrator can begin assigning the group to users. 
 </p>
 
-<p>
-Manage Group Panel provides information about the different types of groups created within the application and its components.
-</p>
+<p>Manage Group Panel provides information about the different types of groups created within the application and its components.</p>
 
 * Edit Functions (update and delete icons)
 * New Group Button
@@ -690,14 +688,9 @@ Manage Group Panel provides information about the different types of groups crea
 * Functions
 * Data Types
 
-<p>
-The group details column provides the name and the description of the group. The Functions columns provides a drop list of available options that are applied to a group. The administrator will have access to all options and users only has access to the advanced search option.
-</p>
+<p>The group details column provides the name and the description of the group. The Functions columns provides a drop list of available options that are applied to a group. The administrator will have access to all options and users only has access to the advanced search option.</p>
 
-
-<p>
-The manage users link displays a list of all available users and components. 
-</p>
+<p>The manage users link displays a list of all available users and components.</p>
 
 * Edits functions (update and delete icons)
 * New User Button
@@ -710,12 +703,8 @@ The manage users link displays a list of all available users and components.
 The new user button performs two functionalities, finding a User and Adding a User. To find a user, select <b>“Find By User ID”</b> or <b>“Find By Name”</b>.  “Find By Name” search provides multiple search options to find existing or future user/s by first name, last name, or combination of both. To look-up a user select the Find button, this action will search for a user profile.
 </p>
 
-<p>
-To add a new user, search for the user by name or userid. When the appropriate user is found click on the submit button. This action will add the user to the application.
-</p>
+<p>To add a new user, search for the user by name or userid. When the appropriate user is found click on the submit button. This action will add the user to the application.</p>
 
-<p>
-To verify, if user was successfully added navigate to the Manage Users panel, scroll down the list until the username is found.
-</p>
+<p>To verify, if user was successfully added navigate to the Manage Users panel, scroll down the list until the username is found.</p>
 
 <a href="#top">Back to Top</a>
