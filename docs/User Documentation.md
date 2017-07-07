@@ -275,6 +275,7 @@ The layers icon displays multiple basemap views and open weather layers. The lis
 <p align="center"><b>Figure 5a. Aerial View</b></p>
 
 <br>
+<img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/dec17.jpg">
 
 ![](media/dec17.jpg)
 
