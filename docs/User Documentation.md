@@ -1,6 +1,5 @@
 <h1 align="center"><B>OpenGrid</B></h1>
 <h4 align="center">Version 1.3.0</h4>
-
 <div align="center"><img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/image1.jpg"></div>
 <p align="center"><b>Department of Innovation & Technology</b></p>
 
