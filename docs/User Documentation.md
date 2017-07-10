@@ -398,6 +398,7 @@ Tweet dataset provides real-time data and automatically refreshes with new data 
 <p align="center"><b>Figure 8. Quick Search on Tweets</b></p>
 
 <br>
+
 ### Find Data Panel 
 
 <b><i>Note: Manage Queries, Load Saved Query and Save Query As seen in the image below are configurations that can be enabled and disabled within the application. These attributes does not appear in opengrid.io.</i></b>
