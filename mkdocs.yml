@@ -4,6 +4,7 @@ site_description: Explore your space with OpenGrid
 site_author: City of Chicago
 
 repo_url: https://github.com/Chicago/opengrid
+theme: readthedocs
 
 pages:
 - Home: index.md
