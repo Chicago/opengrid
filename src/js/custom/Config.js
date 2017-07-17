@@ -105,7 +105,7 @@ ogrid.Config = {
         overlayLayers: [{
             groupName: 'Open Weather Layers',
             name: 'Cloud Cover',
-            url: 'http://{s}.tile.openweathermap.org/clouds/precipitation/{z}/{x}/{y}.png',
+            url: 'http://{s}.tile.openweathermap.org/clouds/precipitation/{z}/{x}/{y}.png?APPID=fd57bfb55e1024a2dd5556ab34d96580',
             useEsri: false,
             options: {
                 attribution: 'Map data (c) OpenWeatherMap',
@@ -115,7 +115,7 @@ ogrid.Config = {
         },{
             groupName: 'Open Weather Layers',
             name: 'Quantity of Precipitation',
-            url: 'http://{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png',
+            url: 'http://{s}.tile.openweathermap.org/map/precipitation/{z}/{x}/{y}.png?APPID=fd57bfb55e1024a2dd5556ab34d96580',
             useEsri: false,
             options: {
                 attribution: 'Map data (c) OpenWeatherMap',
@@ -125,7 +125,7 @@ ogrid.Config = {
         }, {
             groupName: 'Open Weather Layers',
             name: 'Sea Level Pressure',
-            url: 'http://{s}.tile.openweathermap.org/map/pressure_cntr/{z}/{x}/{y}.png',
+            url: 'http://{s}.tile.openweathermap.org/map/pressure_cntr/{z}/{x}/{y}.png?APPID=fd57bfb55e1024a2dd5556ab34d96580',
             useEsri: false,
             options: {
                 attribution: 'Map data (c) OpenWeatherMap',
@@ -135,7 +135,7 @@ ogrid.Config = {
         }, {
             groupName: 'Open Weather Layers',
             name: 'Temperature',
-            url: 'http://{s}.tile.openweathermap.org/map/temp/{z}/{x}/{y}.png',
+            url: 'http://{s}.tile.openweathermap.org/map/temp/{z}/{x}/{y}.png?APPID=fd57bfb55e1024a2dd5556ab34d96580',
             useEsri: false,
             options: {
                 attribution: 'Map data (c) OpenWeatherMap',
