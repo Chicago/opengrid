@@ -74,7 +74,6 @@ If login failed, an error message will appear: <b>“Login failed due to invalid
 
 <div align="center"><img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/dec13.jpg"></div>
 
-
 <p align="center"><b>Figure 2. Login Error Message</b></p>
 
 <br>
