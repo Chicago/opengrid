@@ -149,7 +149,7 @@ User Manual Icon – Link to accessing the user manual.
 <li>
 </td>
 <td>
-Zoom In and Zoom Out Icon  <img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/image34.jpg">
+Zoom In and Zoom Out Icon <img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/image34.jpg">
 </td>
 </ol>
 </tr>
@@ -160,7 +160,7 @@ Zoom In and Zoom Out Icon  <img src="https://raw.githubusercontent.com/Chicago/o
 <li>
 </td>
 <td>
-Reset Map View and Area Zoom Icon  <img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/rest.jpg">
+Reset Map View and Area Zoom Icon <img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/rest.jpg">
 </td>
 </ol>
 </tr>
@@ -194,7 +194,7 @@ Zoom specification Icon <img src="https://raw.githubusercontent.com/Chicago/open
 </td>
 <td>
 <p>
-Layers Icon <img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/image39.jpg"> <br> Consist of a list of grid views and weather layers.
+Layers Icon <img src="https://raw.githubusercontent.com/Chicago/opengrid/dev/docs/media/image39.jpg"> <br> Consist of list of grid views and weather layers.
 </p>
 
 <p>
@@ -397,6 +397,7 @@ Tweet dataset provides real-time data and automatically refreshes with new data 
 <p align="center"><b>Figure 8. Quick Search on Tweets</b></p>
 
 <br>
+
 ### Find Data Panel 
 
 <b><i>Note: Manage Queries, Load Saved Query and Save Query As seen in the image below are configurations that can be enabled and disabled within the application. These attributes does not appear in opengrid.io.</i></b>
