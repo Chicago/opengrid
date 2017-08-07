@@ -48,7 +48,7 @@ After the release package has been built deploy the files under the ./dist folde
 
 ## Submit a bug
 
-We would like to hear about any bugs or odd behavior that you uncover. Use the [issue tracker](../../../issues/) to open a new item. When describing the issue, we recommend that you discuss the following items:
+We would like to hear about any bugs or odd behavior that you uncover. Use the [issue tracker](../../issues/) to open a new item. When describing the issue, we recommend that you discuss the following items:
 
   * Describe the bug
   * Describe the steps you did to discover the bug

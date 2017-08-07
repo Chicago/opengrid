@@ -749,9 +749,9 @@ ogrid.AdvancedSearch = ogrid.Class.extend({
 
         //register with browser history
         if (query.geoFilter && query.geoFilter.boundary === '_map-extent') {
-            hasher.setHash("query?q=" + JSON.stringify(query).replace('#', encodeURIComponent('#')) + "&loc=" + this._getMapLocation() + "&run=" + autoexec + randomData);
+            hasher.setHash("query?q=" + JSON.stringify(query).replace(/#/g, encodeURIComponent('#')) + "&loc=" + this._getMapLocation() + "&run=" + autoexec + randomData);
         } else {
-            hasher.setHash("query?q=" + JSON.stringify(query).replace('#', encodeURIComponent('#')) + "&run=" + autoexec + randomData);
+            hasher.setHash("query?q=" + JSON.stringify(query).replace(/#/g, encodeURIComponent('#')) + "&run=" + autoexec + randomData);
         }
     },
 

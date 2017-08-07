@@ -50,6 +50,7 @@ When you are ready to submit a pull request, please following these instructions
   	git push origin my-fix-branch
   	```
 
+  * Sign the [Contributor License Agreement](https://www.clahub.com/agreements/Chicago/opengrid). If you have any questions or issues, please visit the [license agreement's repository](https://github.com/Chicago/contributor-license-agreement).
   * In GitHub, send a pull request to `opengrid:dev`. Please add a descriptive title and description of the changes. Please reference issues or prior conversations, if applicable.
   * Interact with the development team as questions and conversation arises.
 

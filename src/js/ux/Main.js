@@ -75,8 +75,10 @@ ogrid.Main = ogrid.Class.extend({
             }
             console.log(o);
 	
-	    //#issue 115; replace hash here or we'll get an error
-            o.q = o.q.replace(encodeURIComponent('#'), "#");
+	    var regex = new RegExp(encodeURIComponent('#'),'g');
+
+            //#issue 115; replace hash here or we'll get an error
+            o.q = o.q.replace(regex, '#');
 
             me._loadQuery(
                 o.q,
