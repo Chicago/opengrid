@@ -232,6 +232,7 @@ ogrid.TableView = ogrid.Class.extend({
         //events to handle re-activation of popovers (for now, use the same event handler)
         $t.on('page-change.bs.table', $.proxy(this._onPageChange, this));
         $t.on('sort.bs.table', $.proxy(this._onPageChange, this));
+        $t.on('column-switch.bs.table', $.proxy(this._onPageChange, this));
 
         //highlight of clicked row
         $t.on('click', 'tbody tr', function(e) {
