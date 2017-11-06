@@ -301,9 +301,6 @@ ogrid.TableView = ogrid.Class.extend({
        if (view.options.chart) {
            return view.options.chart;
        } else {
-           if (!view.options.creationTimestamp) {
-               throw ogrid.error('Configuration Error', 'No "creationTimestamp" field defined for this dataset (Table View)');
-           }
            return {
                //by default, use creation timestamp column
                "xAxisField": view.options.creationTimestamp,
