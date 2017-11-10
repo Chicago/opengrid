@@ -105,7 +105,7 @@ ogrid.Config = {
         overlayLayers: [{
             groupName: 'Open Weather Layers',
             name: 'Cloud Cover',
-            url: 'http://{s}.tile.openweathermap.org/clouds/{z}/{x}/{y}.png?APPID=8e0f9d1de886ff78c6bab40f2e6d1afe',
+            url: 'http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png?APPID=8e0f9d1de886ff78c6bab40f2e6d1afe',
             useEsri: false,
             options: {
                 attribution: 'Map data (c) OpenWeatherMap',
