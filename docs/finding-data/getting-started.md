@@ -94,15 +94,14 @@ Multiple data searches can be queried simultaneously returning multiple results 
             Commonly Used Queries are predefined searches that end users utilize to search around the chicagoland area.
         </td>
     </tr>
-    
     <tr>
         <td>
-           4.
+            4.
         </td> 
         <td>
             Select Data, is a collapsible link that is used to run advanced searches within the find data panel. <br> <br>
-            It has an <b>"Add Dataset"</b> link; that is used to start the process of creating a search, when selected it displays a droplist of available city datasets. <p> When a dataset is selected an additional textbox appears
-            with AND/OR operands with an additional droplist that displays the dataset searchable datatypes.</p> There is also a color option link underneath the datatype selector search box, that provides the user with the option to change the data point color, size and transparency.
+            It has an <b>"Add Dataset"</b> link; that is used to start the process of creating a search, when selected it displays a                 droplist of available city datasets. 
+	<p> When a dataset is selected an additional textbox appears with AND/OR operands with an additional droplist that displays the             dataset searchable datatypes. </p> There is also a color option link underneath the datatype selector search box, that 		    provides the user with the option to change the data point color, size and transparency.
         </td>
     </tr>
     <tr>
