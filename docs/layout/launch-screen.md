@@ -23,16 +23,14 @@ See Launch Screen shown above.
 		<th><b> Element No.</b></th>
 		<th><b>Element Name/Description</b></th>
 	</tr>
-
 	<tr>
 		<td>
 			1.
 		</td>
 		<td>
-			Quick Search box is used to perform basic searches on datasets. The question mark icon within the Quick Search box displays a cheat sheet for quick search syntax.
+		   	Quick Search box is used to perform basic searches on datasets. The question mark icon within the Quick Search 				box displays a cheat sheet for quick search syntax.
 		</td>
 	</tr>
-
 	<tr>
 		<td>
 			2.
@@ -44,8 +42,6 @@ See Launch Screen shown above.
 			</ul>
 		</td>
 	</tr>
-
-	
 	<tr>
 		<td>
 			4.
@@ -57,7 +53,6 @@ See Launch Screen shown above.
 			</ul>
 		</td>
 	</tr>
-
 	<tr>
 		<td>
 			5.
@@ -65,8 +60,8 @@ See Launch Screen shown above.
 		<td>
 			Zoom In and Zoom Out Icon  <img alt src = "../../media/image34.jpg">
 		</td>
-    </tr>
-    <tr>
+    	</tr>
+    	<tr>
         <td>
             6.
         </td>
@@ -158,7 +153,7 @@ The layers’ icon displays multiple basemap views and [open weather layers](../
 
 ### Map Key/Legend
 
-Map key provides essential information of understanding a map. WindyGrid uses colors to signify what type of search has been executed; the key explains what the color represents. The legend is located at the bottom right of the map. If, multiple types with same dataset is being displayed for a search; it will display the two datatypes based off color representation from the setup on the grid.
+Map key provides essential information of understanding a map. OpenGrid uses colors to signify what type of search has been executed; the key explains what the color represents. The legend is located at the bottom right of the map. If, multiple parameter types with same dataset is being displayed for a search; it will display the two datatypes based off color representation from the setup on the grid.
 
 ![Map Key provides a legend to show the color-coding for data](../media/mpkey.jpg)
 <p align="center"><b>Map Grid and Key/Legend</b></p>
