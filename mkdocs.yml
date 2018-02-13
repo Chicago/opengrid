@@ -16,6 +16,24 @@ pages:
     - Build Procedures: Build Procedures.md
     - Configuration: OpenGrid Configuration.md
     - Administration: Administration.md
+- WindyGrid Layout:
+        - 'Launch Screen': 'layout/launch-screen.md'
+        - 'Table Grid': 'layout/table-grid.md'
+- Finding Data:
+        - 'Getting Started': 'finding-data/getting-started.md'
+        - 'Advanced Filtering': 'finding-data/advanced-filtering.md'
+        - 'Autpmatically Refresh Searches': 'finding-data/auto-refresh-search.md'
+        - 'Commonly Used Queries': 'finding-data/commonly-used-queries.md'
+        - 'Searching with Relative Time': 'finding-data/relative-time-searches.md'
+- Search by Location:
+        - 'Within an Area': 'search-location/within-geospatial-filter.md'
+        - 'Near a Location': 'search-location/near-geospatial-filter.md'
+- Customize the Look: 'customize-look/index.md'
+- Charts and Heatmaps
+        - 'Heatmaps': 'charts-heatmaps/heatmaps.md'
+        - 'Tile map': 'charts-heatmaps/tile-map.md'
+- Map Layers: 'map-layers/index.md'
+- Measure Distance: 'measure-distances/index.md'
 - Developers:
     - API: OpenGrid API.md
 
