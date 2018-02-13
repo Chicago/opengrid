@@ -6,10 +6,10 @@ Color Options is a collapsible link; where data points appearances are manipulat
 
 By default, each dataset is tied to a particular color, but can be adjusted. Change the color of a data point for a dataset by selecting the "Color" option. There is a pre-loaded palette of colors that you may select. 
 
-![](./media/color.png)
+![](../media/color.png)
 <p align= "center"><b>default color option screen when size slider is not fill places data points on the map</b></p>
 
-![](./media/clopt.png)
+![](../media/clopt.png)
 <p align= "center"><b>options color pallet and how it correlates to data points on the grid</b></p>
 
 # Changing the size of all dots
