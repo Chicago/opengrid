@@ -58,7 +58,7 @@ Multiple data searches can be queried simultaneously returning multiple results 
 
 ## Find Data Panel
 
-![](../media/Find_Panel.jpg)
+![](../media/og_fp.png)
 <p align="center"><b>Find Data Panel</b></p>
 
 <table>
