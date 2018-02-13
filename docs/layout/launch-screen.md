@@ -10,7 +10,7 @@ of records found or an error message pertaining to a search, if any occurs.
 
 The grid has an automatic refresh mechanism for replotting and repositioning data points on the grid; when the grid is being moved or manipulated.
 
-![WindyGrid landing page with various icons highlighted and numbered](../media/landingPg.jpg)
+![OpenGrid landing page with various icons highlighted and numbered](../media/og_landp.png)
 <p align="center"><b>Launch Screen</b></p>
 
 
@@ -37,14 +37,14 @@ See Launch Screen shown above.
 		</td>
 		<td>
 			<ul>
-				<li>Find Data Button displays the advanced search panel utilize to create more defined searches.</li> <br/>
-				<li>Clear Data Button, clears any search options with the panel, textbox and the map grid.</li> <br/>
+				<li>Find Data Button displays the advanced search panel utilize to create more defined searches.</li>
+				<li>Clear Data Button, clears any search options with the panel, textbox and the map grid.</li>
 			</ul>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			4.
+			3.
 		</td>
 		<td>
 			User Manual Link 
@@ -55,40 +55,48 @@ See Launch Screen shown above.
 	</tr>
 	<tr>
 		<td>
-			5.
+			4.
 		</td>
 		<td>
-			Zoom In and Zoom Out Icon  <img alt src = "../../media/image34.jpg">
+			Zoom In and Zoom Out Icon <img alt src = ".././media/image34.jpg">
 		</td>
     	</tr>
     	<tr>
-        <td>
-            6.
-        </td>
-        <td>
-            Reset Map View and Area Zoom Icon <img alt src="../../media/rest.jpg">
-        </td>
-    </tr>
+        	<td>
+            		5.
+        	</td>
+      		<td>
+            		Reset Map View and Area Zoom Icon <img alt src=".././media/rest.jpg">
+        	</td>
+      </tr>
     <tr>
-        <td>
-            7.
-        </td>	
-        <td>
-            Zoom Specification Icon <img alt src="../../media/image37.jpg">
+        	<td>
+            		6.
+        	</td>	
+        	<td>
+            		Zoom Specification Icon <img alt src=".././media/image37.jpg">
         <br> <br>
-            Full-Screen Icon <img alt src="../../media/image38.jpg"> 
+            		Full-Screen Icon <img alt src=".././media/image38.jpg"> 
         <br> <br>
-            Geo-Location Icon <img alt src="../../media/image36.jpg">
-        </td>
+           		 Geo-Location Icon <img alt src=".././media/image36.jpg">
+        	</td>
     </tr>
-    <tr>
-        <td>
-            8.
-         </td>
-        <td>
-            Layers Icon <img alt src="../../media/image39.jpg"> 
+   	 <tr>
+        	<td>
+           		 7.
+         	</td>
+	    	<td>
+			Measurement Tool <img alt src=".././media/Measure.jpg">
+		</td>
+	   </tr>	
+	<tr>
+		<td>
+			8.
+		</td>
+	    	<td>
+            		Layers Icon <img alt src=".././media/image39.jpg"> 
         <br> 
-            Consist of list of grid views and weather layers.
+			Consist of list of grid views and weather layers.
         <br>
             <b>Base Layers Views:</b>
                     <ul> <ul> <ul>
@@ -103,19 +111,11 @@ See Launch Screen shown above.
                             <li>Sea Level Pressure</li>
                             <li>Temperature</li>
                     </ul></ul></ul>
-        </td>
-    </tr>
-    <tr>
+        	</td>
+    	</tr>
+      <tr>
         <td>
-            9. 
-        </td>
-        <td>
-            Measurement Tool <img alt src="../../media/Measure.jpg">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            10.
+            9.
         </td>
         <td>
             Expandable Table View Panel
@@ -123,7 +123,7 @@ See Launch Screen shown above.
     </tr>
     <tr>
         <td>
-            11.
+            10.
         </td>
         <td>
             Map attribution; display's a link for any copyright information, terms of usage, etc.
@@ -131,7 +131,7 @@ See Launch Screen shown above.
     </tr>
     <tr>
         <td>
-            12.
+            11.
         </td>
         <td>
             Main Map Display
