@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="City of Chicago">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Map Layers - OpenGrid</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Map Layers";
+    var mkdocs_page_input_path = "map-layers\\index.md";
+    var mkdocs_page_url = "/map-layers/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> OpenGrid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">User Guide</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../User%20Documentation/">End-user documentation</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">System administration</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../Architecture/">App Architecture</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Installation%20and%20Setup/">Installation and Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Build%20Procedures/">Build Procedures</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../OpenGrid%20Configuration/">Configuration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../Administration/">Administration</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">WindyGrid Layout</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../layout/launch-screen/">Launch Screen</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../layout/table-grid/">Table Grid</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Finding Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../finding-data/getting-started/">Getting Started</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finding-data/advanced-filtering/">Advanced Filtering</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finding-data/auto-refresh-search/">Autpmatically Refresh Searches</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finding-data/commonly-used-queries/">Commonly Used Queries</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finding-data/relative-time-searches/">Searching with Relative Time</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search by Location</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../search-location/within-geospatial-filter/">Within an Area</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../search-location/near-geospatial-filter/">Near a Location</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../customize-look/">Customize the Look</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Charts and Heatmaps</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../charts-heatmaps/heatmaps/">Heatmaps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../charts-heatmaps/tile-map/">Tile map</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Map Layers</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#opening-layers">Opening Layers</a></li>
+    
+
+    <li class="toctree-l2"><a href="#available-layers">Available Layers</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#open-weather-maps">Open Weather Maps</a></li>
+        
+            <li><a class="toctree-l3" href="#retrieving-information-from-layers">Retrieving Information from Layers</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../measure-distances/">Measure Distance</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Developers</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../OpenGrid%20API/">API</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">OpenGrid</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Map Layers</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Chicago/opengrid/edit/master/docs/map-layers\index.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="opening-layers">Opening Layers<a class="headerlink" href="#opening-layers" title="Permanent link"></a></h1>
+<p>Layers display geographic information on a map as layer. The layers are displayed in different formats, shapes or icons such as images, tiles, icons, etc. Layers control the way a user sees different classes of information and how to apply a layer on a map. There are multiple layers used to monitor, track or provide visualization on what's happening around the City of Chicago. Layers also provide information about the area of where the layers overlay. To apply a layer on a map, hover on the layer icon; once a layer has appeared select a layer type and expand the layer by collapsing all possible layers within its category.</p>
+<p><img alt="" src="../media/Layerspic_001.jpg" /></p>
+<h1 id="available-layers">Available Layers<a class="headerlink" href="#available-layers" title="Permanent link"></a></h1>
+<ol>
+    <li><b>Base Layers</b> - Displays different views that can be applied on a map.
+        <ul>
+            <li>Streets</li>
+            <li>Black and White</li>
+            <li>Aerial</li>
+        </ul>
+    <br>
+
+    <li><b>Open Weather Layers</b> - Visual representation of weather data layered on a map.  Weather layers include current and historical information.
+        <ul>
+            <li>Cloud Cover</li>
+            <li>Quantity of Precipitation</li>
+            <li>Sea Level Pressure</li>
+            <li>Temperature</li>
+        </ul>
+
+    <br />
+
+    <li><b>Generated Layers</b> - Are specialized layers derived from an executed quick search or advanced search. The generated layer/s allows the executed data to act as a layer such as being removed from the grid by deselecting the dataset name in the Generated Layers section.
+        <ul>
+            <li>Data</li>
+            <li>Heatmap</li>
+            <li>Tilemap</li>
+        </ul>
+</ol>
+
+<h2 id="open-weather-maps">Open Weather Maps<a class="headerlink" href="#open-weather-maps" title="Permanent link"></a></h2>
+<p>Open weather layers are weather data that includes information about the climate. Weather maps are layered on top of existing base map and available via web apps and mobile devices. Weather layers can be applied to basemap without an executed query. To add a weather layer -&gt; expand the layers icon; click on open weather layers and select a layer.</p>
+<ul>
+<li><strong>Cloud Cover</strong> - Overcast by clouds covering the sky. </li>
+</ul>
+<p><img alt="" src="../media/cloudy.png" /></p>
+<ul>
+<li><strong>Quantity of Precipitation</strong> - Responsible for depositing fresh water on the planet by rain, sleet, snow or any act of liquid forms. </li>
+</ul>
+<p><img alt="" src="../media/precipitation.png" /></p>
+<ul>
+<li><strong>Sea Level Pressure</strong> - The level of the ocean's surface between high and low tides that measures heights and depths. Sea level changes regularly with the tides and irregularity due to wind and currents.</li>
+</ul>
+<p><img alt="" src="../media/slevel.png" /></p>
+<ul>
+<li><strong>Temperature</strong> - Displayed in heat matrix of degree of hotness and coldness on a map.
+<img alt="" src="../media/owlt.png" /></li>
+</ul>
+<h2 id="retrieving-information-from-layers">Retrieving Information from Layers<a class="headerlink" href="#retrieving-information-from-layers" title="Permanent link"></a></h2>
+<p>To obtain information about a layer; hover over a layer on the map within the selected area when the mouse cursor turns into a pointing hand; simply click on the layer and the information from that layer will appear on the grid.</p>
+<p><img alt="" src="../media/SampleLayer.jpg" />
+<p align="center"><b>Community Area Layer</b></p></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../measure-distances/" class="btn btn-neutral float-right" title="Measure Distance">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../charts-heatmaps/tile-map/" class="btn btn-neutral" title="Tile map"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2015-2016 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Chicago/opengrid" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../charts-heatmaps/tile-map/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../measure-distances/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

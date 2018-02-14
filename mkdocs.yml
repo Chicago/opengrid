@@ -29,7 +29,7 @@ pages:
         - 'Within an Area': 'search-location/within-geospatial-filter.md'
         - 'Near a Location': 'search-location/near-geospatial-filter.md'
 - Customize the Look: 'customize-look/index.md'
-- Charts and Heatmaps
+- Charts and Heatmaps:
         - 'Heatmaps': 'charts-heatmaps/heatmaps.md'
         - 'Tile map': 'charts-heatmaps/tile-map.md'
 - Map Layers: 'map-layers/index.md'
