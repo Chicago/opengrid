@@ -8,11 +8,10 @@
 
 4. Identify the parameters from the drop list.
 
-5. Add location boundary (Select Location Section), if needed.
+5. Add location boundary (see "_Select Location_" section), if needed.
 
 6. Execute the search, select "Get Data".
 
-WindyGrid will search for data within the map. Move the map or change the zoom to update the search.
 
 ## Search Examples
 
@@ -32,24 +31,25 @@ Search that is based off Address Only. Return all data pertaining to that addres
 
 ### Single Search With Multiple Parameters
 
-A user may want to run multiple Business Licenses criteria in a single search for comparison purposes. Using food establishments as an example, a user can search for restaurants and food trucks in Chicago, the two search criteria are listed under a single dataset, called Business Licenses.
+Search that returns multiple criteria from a dataset. An example would be searching for multiple Business Licenses criteria for comparison purposes. Using food establishments as an example, search for restaurants and food trucks in the Chicagoland area. Both search criteria are listed under a single dataset, called Business Licenses. Each dataset point has a designated color; for Business Licenses the default color is Indian red.
 
-What should a user do since there is a one-color limitation and default color per dataset setup?
+What should a user do about querying multiple parameters for a single dataset?
 
+How will a user distinguished between the data when the points plotted on the grid will be the same color?
 
-Add Business Licenses dataset twice, set one with a filter of license_description = “Retail Food Establishment” and the other of license_description = “Mobile Food License”.  
+Add Business Licenses dataset twice, set one with a parameter of license_description = “Retail Food Establishment” and the other with license_description = “Mobile Food License”.  
 
-Datasets are assigned a specific color point that plots on the map to represent each dataset, since we are applying the same dataset twice with different parameters for each subset the color of the dataset will be the same which would make it hard for a user the differentiate between the filtered datasets.
+Datasets are assigned a specific color point that plots on the map to represent each dataset, since we are applying the same dataset twice with separate parameters the points on the grid will be the same color in which would make it hard for a user to differentiate between the data.
 
-To differentiate the data points for an individual dataset with multiple filters assign each dataset a different color by selecting the “Color Option” link beneath search window.
+When setting up the search for each parameter; define each datapoint with a different color by selecting from the color palette located in the ["Color Options"](../customize-look/index.md#color-options) link below the setup panel. 
 
-The example below displays how the search setup and each data type is represented on the grid...Retail Food Establishments has the default color of Blue and Mobile Food Licenses is Red.
+The image below displays how the search setup and each data type is represented on the grid...Retail Food Establishments data displays as Blue and Mobile Food Licenses displays as Red on the grid.
 
 ![](../media/blicense.jpg)
 <p align="center"><b>Single Search With Multiple Parameters</b></p>
 
 
-###  Multiple Search With Single Parameter
+### Multiple Search With Single Parameter
 
 Multiple data searches can be queried simultaneously returning multiple results on the grid. Repeat twice, select Add dataset link, apply single parameter and execute the search.
 
@@ -59,7 +59,6 @@ Multiple data searches can be queried simultaneously returning multiple results 
 ## Find Data Panel
 
 ![](../media/og_fp.png)
-<p align="center"><b>Find Data Panel</b></p>
 
 <table>
     <tr>
@@ -83,7 +82,7 @@ Multiple data searches can be queried simultaneously returning multiple results 
             2.
         </td>
         <td>
-             Existing Queries is a collapsible link that displays "Commonly Used Searches".
+             Existing Queries is a collapsible link that displays "Commonly Used Queries".
         </td>
     </tr>
     <tr>
@@ -99,9 +98,10 @@ Multiple data searches can be queried simultaneously returning multiple results 
             4.
         </td> 
         <td>
-            Select Data, is a collapsible link that is used to run advanced searches within the find data panel. <br> <br>
-            It has an <b>"Add Dataset"</b> link; that is used to start the process of creating a search, when selected it displays a                 droplist of available city datasets. 
-	<p> When a dataset is selected an additional textbox appears with AND/OR operands with an additional droplist that displays the             dataset searchable datatypes. </p> There is also a color option link underneath the datatype selector search box, that 		    provides the user with the option to change the data point color, size and transparency.
+<p> Select Data, is a collapsible link that is used to run advanced searches within the find data panel.</p>
+<p> It has an <b>"Add Dataset"</b> link; that is used to start the process of creating a search, when selected it displays a              droplist of available city datasets. </p>
+<p> When a dataset is selected an additional textbox appears with AND/OR operands with an additional droplist that displays the           dataset searchable datatypes. </p> 
+<p> There is also a color option link underneath the datatype selector search box, that provides the user with the option to change       the data point color, size and transparency. </p>
         </td>
     </tr>
     <tr>
@@ -109,10 +109,9 @@ Multiple data searches can be queried simultaneously returning multiple results 
              5.
         </td>
         <td>
-            Select Location, is a collapsible link that interacts with the Search Data section of the Find Data Panel; providing geo-spatial filtering against the dataset. 
-			<p> There are two filter parameters within the Selection Location section called <b>"WITHIN"</b> and <b>"NEAR"</b>. </p> 
-			Within has a droplist of available geo spatial filterings that are used to search within a specific filter type. 
-			<p> Near activates the geo locator <b>(ME)</b> or marker feature <b>(MARKER)</b>. For more details see "WITHIN" and "NEAR" section later in the document. </p>
+<p> Select Location, is a collapsible link that interacts with the Search Data section of the Find Data Panel; providing geo-spatial filtering against the dataset. There are two filter parameters within the Selection Location section called <b>"WITHIN"</b> and <b>"NEAR"</b>. </p>
+<p>Within has a droplist of available geo spatial filterings that are used to search within a specific filter type. </p>
+<p> Near activates the geo locator <b>(ME)</b> or marker feature <b>(MARKER)</b>. For more details see "WITHIN" and "NEAR" section later in the document. </p>
         </td>
     </tr>
     <tr>

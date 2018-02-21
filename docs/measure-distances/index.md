@@ -1,6 +1,6 @@
 ## Measurement Tool
 
-Measurement tool is an interactive feature that allows a user to measure lines and areas on the map. You can use the tool to draw a linear or polygon shape on a map. Selecting the measurement icon will enable the measurement tool to perform the following:
+Measurement tool is an interactive feature that allows a user to measure lines and areas on a map. You can use the tool to draw a linear or polygon shape on a map. Selecting the measurement icon will enable the measurement tool to perform the following:
 
 ##### Linear Measurement
 
@@ -17,7 +17,7 @@ Measurement tool is an interactive feature that allows a user to measure lines a
 
 <br>
 
-<img src="../media/multi.jpg">
+<img src="../media/mltmeas.jpg">
 
 <p align="center"><b>Multiple Linear Measurement</b></p>
 

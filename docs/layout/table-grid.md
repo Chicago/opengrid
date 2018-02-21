@@ -11,7 +11,7 @@ The table grid is located at the bottom of the map. The table becomes active whe
 
 ### Information Tab
 
-Search type (i.e. Place/Address, Business License).
+Search Type (i.e. Place/Address, Business License).
 
 ### Search Textbox
 

@@ -1,12 +1,7 @@
-Auto refresh is an optional feature within the application that
-could be applied to a search. It’s displayed by the number of intervals
-in seconds (default is 30 seconds and maximum of 3600 seconds (60 minutes)).
-Refresh component in a map can be used for monitoring, performance or updates.
+Auto refresh is an optional feature within the application that can be applied to a search. 
+The refresh component is used for monitoring, performance, or updates related to data. &nbsp; Auto-refresh keeps the map in sync with tha latest data while the map is open.
 
-When a search is submitted with auto-refresh; the data refreshes and re-plots 
-itself keeping your map in sync with the latest data while the map is open.
-A user can observe the latest data on the map whether it’s using the application
-within the browser on a desktop or mobile device. 
+When active, it refreshes in intervals of seconds (default is 30 seconds and maximum of 3600 seconds (60 minutes)); it refreshes and replots the latest data on the map whether its using the application on a desktop or mobile device.
 
 ![](../media/ar.jpg)
 <p align="center"><b>Auto-refresh example using markers on a map.</b></p>
@@ -20,13 +15,9 @@ As the map continues to refresh, three things can occur since the initial load:
 ### Steps to auto refresh
 To enable auto-refresh of your data and base map, in
 the Find Data panel -> go the auto refresh section.
-Check the box for <b>“Auto-Refresh Every (SECONDS)”</b>.
+Check the box <b>“Auto-Refresh Every (SECONDS)”</b>. &nbsp;
 Select the number of seconds required for desired auto-refresh
-by using incrementing/decrementing counter or enter the number
-of seconds in the auto-refresh textbox.  Select Get Data. See an
-example of a WindyGrid dataset that refreshes every 20 seconds.
+by using the increment/decrement counter or enter the number
+of seconds in the auto-refresh textbox. &nbsp; Select "Get Data". 
 
 ![](../media/arf.png)
-
-
-

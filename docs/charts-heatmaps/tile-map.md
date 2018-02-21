@@ -2,10 +2,16 @@
 
 Tile maps (choropleth) will use shading, instead of individual points, to show the amount of data by different regions. Tile maps can be generated from the table grid window.
 
-  1. Plot the data you want to display
-  2. Click on the Table Grid bar
-	![](../media/tmap.png)  
-  3. Click on the Tile Map icon and select which region you want to display data
+  1. Plot the data you want to display.
+
+
+  2. Expand the table grid and hover on the Tile Map icon and select the tile type you want to display.
+  		
+	![](../media/tmap.png)
+	
+	<br>
+
+
 	![](../media/timap.png)
 	<p align ="center"><b>Tile Map by Zipcode </b></p>
 

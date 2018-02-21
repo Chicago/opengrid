@@ -1,29 +1,32 @@
-# Map
-
-### Map Grid
-The map grid is interactive, a user can navigate the map using a mouse,
+## Map Grid
+The grid is interactive, a user can navigate the map using a mouse,
 keyboard and for mobile devices by swiping using index finger or pin. 
 The map displays the maximum of 1000 points. 
 
-All data appears on the grid as points and/or markers. Places/Address search plots as markers and Datasets plots as points on the grid. A retractable information box appears to the bottom right of the grid when a search is executed, displaying the No. 
-of records found or an error message pertaining to a search, if any occurs.
+All data appears on the grid as points and/or markers. &nbsp; Place/Address search plots
+as markers and Datasets plots as points on the grid. &nbsp; A retractable information box 
+appears to the bottom right of the grid when a search is executed, displaying the no. of 
+records found or an error message pertaining to a search, if any occurs.
 
-The grid has an automatic refresh mechanism for replotting and repositioning data points on the grid; when the grid is being moved or manipulated.
+The grid has an automatic refresh mechanism for replotting and repositioning data points
+on the grid; when the grid is being moved or manipulated.
 
+<!--
 ![OpenGrid landing page with various icons highlighted and numbered](../media/og_landp.png)
-<p align="center"><b>Launch Screen</b></p>
-
+ <p align="center"><b>Launch Screen</b></p>
+n-->
 
 ## The Launch Screen
 
-See Launch Screen shown above.
+![Opengrid landing page with varius icons highlighted and numbered](../media/og_landp.png)
+
 
 <table>
 	<tr>
 		<th><b> Element No.</b></th>
 		<th><b>Element Name/Description</b></th>
 	</tr>
-	<tr>
+        <tr>
 		<td>
 			1.
 		</td>
@@ -38,7 +41,7 @@ See Launch Screen shown above.
 		<td>
 			<ul>
 				<li>Find Data Button displays the advanced search panel utilize to create more defined searches.</li>
-				<li>Clear Data Button, clears any search options with the panel, textbox and the map grid.</li>
+				<li>Clear Data Button, resets the map.</li>
 			</ul>
 		</td>
 	</tr>
@@ -78,7 +81,7 @@ See Launch Screen shown above.
         <br> <br>
             		Full-Screen Icon <img alt src=".././media/image38.jpg"> 
         <br> <br>
-           		 Geo-Location Icon <img alt src=".././media/image36.jpg">
+           		Geo-Location Icon <img alt src=".././media/image36.jpg">
         	</td>
     </tr>
    	 <tr>

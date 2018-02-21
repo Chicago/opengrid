@@ -1,6 +1,6 @@
 # Advanced Filtering
 
-There are multiple ways to filter for the exact data that you need. You can specify multiple criteria to find data and then choose whether all of those criteria need to be met or only one criteria. For instance, you can request all 311 calls that were completed by the city _and_ were reported more than a week ago. Likewise, you can find 311 calls that were completed by the city _or_ were reported more than a week ago. 
+Filtering is a useful way to view data you want displayed. There are mulitple ways to filter data. A user can query on mulitple conditions using AND/OR operator. The AND operand, returns values when all conditions are true. The OR operand, returns values when one or more conditions are true.
 
 ![](../media/and.jpg)
 <p align="center"><b>Operator Connector</b></p>
