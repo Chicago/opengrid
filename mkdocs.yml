@@ -36,11 +36,11 @@ pages:
 - Measure Distance: measure-distances/index.md
 - Developers:
     - API: OpenGrid-API.md
-- System administration:
-    - App Architecture: Architecture.md
-    - Installation and Setup: Installation-and-Setup.md
-    - Build Procedures: Build-Procedures.md
-    - Configuration: OpenGrid-Configuration.md
+- System Administration:
+    - App Architecture: system-administration/Architecture.md
+    - Installation and Setup: system-administration/installation-and-setup.md
+    - Build Procedures: system-administration/build-procedures.md
+    - Configuration: system-administration/openGrid-configuration.md
      
 markdown_extensions:
     - toc:
