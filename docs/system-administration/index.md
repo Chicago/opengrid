@@ -13,7 +13,7 @@ OpenGrid can be used for real-time data analysis, refreshing frequently to provi
 
 ### Technical Architecture
 
-OpenGrid is designed to be flexible with different types of data sources. Whether it's MongoDB, a RESTful API, or other data sources, programmers can use OpenGrid's API and Service Layer to program it to work with other data sources.
+OpenGrid is designed to be flexible with different types of data sources. Whether it's MongoDB, a RESTful API, or other data sources, programmers can use [OpenGrid's API](../opengrid-api.md#/opengrid-api) and Service Layer to program it to work with other data sources.
 
 ### Open Source
 
