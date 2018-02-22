@@ -10,12 +10,6 @@ pages:
 - Home: index.md
 #- User Guide:
 #   - End-user documentation: User Documentation.md
-#- System administration:
-#     - App Architecture: Architecture.md
-#     - Installation and Setup: Installation and Setup.md
-#     - Build Procedures: Build Procedures.md
-#     - Configuration: OpenGrid Configuration.md
-#    - Administration: Administration.md
 - OpenGrid Layout:
         - Launch Screen: layout/launch-screen.md
         - Table Grid: layout/table-grid.md

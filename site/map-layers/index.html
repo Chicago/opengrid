@@ -54,45 +54,7 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">User Guide</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../User%20Documentation/">End-user documentation</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">System administration</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../Architecture/">App Architecture</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../Installation%20and%20Setup/">Installation and Setup</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../Build%20Procedures/">Build Procedures</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../OpenGrid%20Configuration/">Configuration</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../Administration/">Administration</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">WindyGrid Layout</span>
+    <span class="caption-text">OpenGrid Layout</span>
     <ul class="subnav">
                 <li class="">
                     
@@ -119,7 +81,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../finding-data/auto-refresh-search/">Autpmatically Refresh Searches</a>
+    <a class="" href="../finding-data/auto-refresh-search/">Automatically Refresh Searches</a>
                 </li>
                 <li class="">
                     
@@ -127,7 +89,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../finding-data/relative-time-searches/">Searching with Relative Time</a>
+    <a class="" href="../finding-data/relative-time-searches/">Searching With Relative Time</a>
                 </li>
     </ul>
 	    </li>
@@ -138,11 +100,11 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../search-location/within-geospatial-filter/">Within an Area</a>
+    <a class="" href="../search-location/within-geospatial-filter/">Within An Area</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../search-location/near-geospatial-filter/">Near a Location</a>
+    <a class="" href="../search-location/near-geospatial-filter/">Near A Location</a>
                 </li>
     </ul>
 	    </li>
@@ -181,8 +143,6 @@
         
             <li><a class="toctree-l3" href="#open-weather-maps">Open Weather Maps</a></li>
         
-            <li><a class="toctree-l3" href="#retrieving-information-from-layers">Retrieving Information from Layers</a></li>
-        
         </ul>
     
 
@@ -200,7 +160,30 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../OpenGrid%20API/">API</a>
+    <a class="" href="../OpenGrid-API/">API</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">System Administration</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../system-administration/Architecture/">App Architecture</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../system-administration/installation-and-setup/">Installation and Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../system-administration/build-procedures/">Build Procedures</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../system-administration/openGrid-configuration/">Configuration</a>
                 </li>
     </ul>
 	    </li>
@@ -241,8 +224,8 @@
             <div class="section">
               
                 <h1 id="opening-layers">Opening Layers<a class="headerlink" href="#opening-layers" title="Permanent link"></a></h1>
-<p>Layers display geographic information on a map as layer. The layers are displayed in different formats, shapes or icons such as images, tiles, icons, etc. Layers control the way a user sees different classes of information and how to apply a layer on a map. There are multiple layers used to monitor, track or provide visualization on what's happening around the City of Chicago. Layers also provide information about the area of where the layers overlay. To apply a layer on a map, hover on the layer icon; once a layer has appeared select a layer type and expand the layer by collapsing all possible layers within its category.</p>
-<p><img alt="" src="../media/Layerspic_001.jpg" /></p>
+<p>Layers display geographic information on a map. Layers are displayed in different formats, shapes or icons such as images, tiles, icons, etc. Layers control the way a user sees different classes of information and how to apply a layer on a map. There are multiple layers used to monitor, track or provide visualization on what's happening around the City of Chicago. Layers also provide information about the area of where the layers overlay. To apply a layer on a map, hover over the layer icon and select a layer type.
+<img alt="" src="../media/Layerspic_001.jpg" /></p>
 <h1 id="available-layers">Available Layers<a class="headerlink" href="#available-layers" title="Permanent link"></a></h1>
 <ol>
     <li><b>Base Layers</b> - Displays different views that can be applied on a map.
@@ -272,7 +255,7 @@
 </ol>
 
 <h2 id="open-weather-maps">Open Weather Maps<a class="headerlink" href="#open-weather-maps" title="Permanent link"></a></h2>
-<p>Open weather layers are weather data that includes information about the climate. Weather maps are layered on top of existing base map and available via web apps and mobile devices. Weather layers can be applied to basemap without an executed query. To add a weather layer -&gt; expand the layers icon; click on open weather layers and select a layer.</p>
+<p>Open weather layers are weather data that includes information about the climate. Weather maps are layered on top of existing base map and available via web apps and mobile devices. Weather layers can be applied to the map without a search. To add a weather layer -&gt; expand the layers icon; click on open weather layers and select a layer type.</p>
 <ul>
 <li><strong>Cloud Cover</strong> - Overcast by clouds covering the sky. </li>
 </ul>
@@ -284,15 +267,11 @@
 <ul>
 <li><strong>Sea Level Pressure</strong> - The level of the ocean's surface between high and low tides that measures heights and depths. Sea level changes regularly with the tides and irregularity due to wind and currents.</li>
 </ul>
-<p><img alt="" src="../media/slevel.png" /></p>
+<p><img alt="" src="../media/slevel.jpg" /></p>
 <ul>
-<li><strong>Temperature</strong> - Displayed in heat matrix of degree of hotness and coldness on a map.
-<img alt="" src="../media/owlt.png" /></li>
+<li><strong>Temperature</strong> - Displayed in heat matrix of degree of hotness and coldness on a map.</li>
 </ul>
-<h2 id="retrieving-information-from-layers">Retrieving Information from Layers<a class="headerlink" href="#retrieving-information-from-layers" title="Permanent link"></a></h2>
-<p>To obtain information about a layer; hover over a layer on the map within the selected area when the mouse cursor turns into a pointing hand; simply click on the layer and the information from that layer will appear on the grid.</p>
-<p><img alt="" src="../media/SampleLayer.jpg" />
-<p align="center"><b>Community Area Layer</b></p></p>
+<p><img alt="" src="../media/tmpog.jpg" /></p>
               
             </div>
           </div>

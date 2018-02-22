@@ -4,66 +4,22 @@
     
     <url>
      <loc>http://www.opengrid.io/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
-    
-
-    
-        
-    <url>
-     <loc>http://www.opengrid.io/User Documentation/</loc>
-     <lastmod>2018-02-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>http://www.opengrid.io/Architecture/</loc>
-     <lastmod>2018-02-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>http://www.opengrid.io/Installation and Setup/</loc>
-     <lastmod>2018-02-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>http://www.opengrid.io/Build Procedures/</loc>
-     <lastmod>2018-02-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>http://www.opengrid.io/OpenGrid Configuration/</loc>
-     <lastmod>2018-02-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>http://www.opengrid.io/Administration/</loc>
-     <lastmod>2018-02-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
     
 
     
         
     <url>
      <loc>http://www.opengrid.io/layout/launch-screen/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://www.opengrid.io/layout/table-grid/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -73,31 +29,31 @@
         
     <url>
      <loc>http://www.opengrid.io/finding-data/getting-started/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://www.opengrid.io/finding-data/advanced-filtering/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://www.opengrid.io/finding-data/auto-refresh-search/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://www.opengrid.io/finding-data/commonly-used-queries/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://www.opengrid.io/finding-data/relative-time-searches/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -107,13 +63,13 @@
         
     <url>
      <loc>http://www.opengrid.io/search-location/within-geospatial-filter/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://www.opengrid.io/search-location/near-geospatial-filter/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -122,7 +78,7 @@
     
     <url>
      <loc>http://www.opengrid.io/customize-look/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -131,13 +87,13 @@
         
     <url>
      <loc>http://www.opengrid.io/charts-heatmaps/heatmaps/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>http://www.opengrid.io/charts-heatmaps/tile-map/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -146,7 +102,7 @@
     
     <url>
      <loc>http://www.opengrid.io/map-layers/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -154,7 +110,7 @@
     
     <url>
      <loc>http://www.opengrid.io/measure-distances/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -162,8 +118,36 @@
     
         
     <url>
-     <loc>http://www.opengrid.io/OpenGrid API/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <loc>http://www.opengrid.io/OpenGrid-API/</loc>
+     <lastmod>2018-02-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>http://www.opengrid.io/system-administration/Architecture/</loc>
+     <lastmod>2018-02-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://www.opengrid.io/system-administration/installation-and-setup/</loc>
+     <lastmod>2018-02-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://www.opengrid.io/system-administration/build-procedures/</loc>
+     <lastmod>2018-02-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>http://www.opengrid.io/system-administration/openGrid-configuration/</loc>
+     <lastmod>2018-02-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
