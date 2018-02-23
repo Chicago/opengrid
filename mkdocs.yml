@@ -28,10 +28,10 @@ pages:
         - Tile map: charts-heatmaps/tile-map.md
 - Map Layers: map-layers/index.md
 - Measure Distance: measure-distances/index.md
-# - Developers:
-#    - API: opengrid-api.md
+#- Developers:
+# - API: opengrid-api.md
 - System Administration:
-        - API: system-administration/opengrid-api.md   
+    - API: system-administration/opengrid-api.md   
     - App Architecture: system-administration/Architecture.md
     - Installation and Setup: system-administration/installation-and-setup.md
     - Build Procedures: system-administration/build-procedures.md
