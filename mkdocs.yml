@@ -31,12 +31,12 @@ pages:
 #- Developers:
 # - API: opengrid-api.md
 - System Administration:
-    - API: system-administration/opengrid-api.md   
+    - API: system-administration/opengrid-api.md
     - App Architecture: system-administration/Architecture.md
     - Installation and Setup: system-administration/installation-and-setup.md
     - Build Procedures: system-administration/build-procedures.md
     - Configuration: system-administration/openGrid-configuration.md
-     
+
 markdown_extensions:
     - toc:
         permalink: 

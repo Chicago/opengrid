@@ -2,7 +2,7 @@
 
 OpenGrid consists of a user interface layer that is seen by the user in the web browser and a service layer. The service layer is responsible for interpreting commands from the user interface to an underlying data layer. In turn, the user interface communicates with the service layer through an [Application Programmer Interface (API)](http://docs.opengrid.io/en/latest/OpenGrid%20API/). 
 
-![App Architecture](media/application-architecture-diagram.png)
+![App Architecture](../media/application-architecture-diagram.png)
 
 The service layer share the same API to communicate with the user interface, but are compatible with different data store engines. This approach will make it easier to maintain a consistent user interface, but allow it to be compatible with different databases and APIs as these tend to change or different data storage engines often change over time.
 
@@ -25,7 +25,7 @@ Use this end-point to test any changes you have made to the OpenGrid application
 ## Links
 
 * [OpenGrid user interface repo](https://github.com/Chicago/opengrid)
-* [OpenGrid Serivce layer API](OpenGrid%20API/)
+* [OpenGrid Serivce layer API](../system-administration/OpenGrid-API/)
 * [MongoDB-compatible service layer repo](https://github.com/Chicago/opengrid-svc-layer)
 * [Plenario service layer repo](https://github.com/smartchicago/opengrid-svc-plenario)
 * [Plenario serice layer development end-point](http://opengrid-service-dev-1134290206.us-west-2.elb.amazonaws.com/opengrid-service/)
