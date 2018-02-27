@@ -6,9 +6,7 @@ There are operators used in conjunction with dates and time being applied to a s
 
 - **less** - returns all data that’s before than the date/time specified.
 
-To add a date to a query, enter specify search parameters in Add data-set section in the find data panel.
-
-In the parameter drop-list select a date parameter from the drop-list of the specified data-set.
+To add a date to a query, enter specific search parameters in Add data-set section in the find data panel. In the parameter drop-list select a date parameter from the drop-list of the specified data-set.
 
 When the date parameter is applied, the operand “between” and two search fields will appear called <b>“ENTER FILTER VALUE”</b> as the default. Place the mouse into <b> “ENTER FILTER VALUE”</b> field, to add time and date, the calendar appears with current date as the default. The calendar has optional ways on how a user can enter and display date into the application when setting up a search. 
 

@@ -17,16 +17,18 @@ Searches within a city zip code.
 Drawn Extent is located in the Find Data panel under Select Location; it is used to create polygon and/or rectangle shapes to run results from a specific location on a map. When the Drawn Extent feature is activated the shape, edit, and delete buttons appears on the grid.
 
 ### How to use drawn extent:
-1. In the find data panel, setup a search and activate drawn extent in the select location section.
+<ol>
+<li> In the find data panel, setup a search and activate drawn extent in the select location section.</li>
 
-2. Select a shape image on the grid, when hovering on a button, it provides information about the button.
+<li> Select a shape image on the grid, when hovering on a button, it provides information about the button.</li>
 
-3. To draw polygon shape, select the polygon image on the map, the image will activate, a cursor will appear with text "Click to start drawing a shape".
+<li> To draw polygon shape, select the polygon image on the map, the image will activate, a cursor will appear with text "Click to start drawing a shape".</li>
 
-4. Begin adding points on the map in the area desired after last point is complete, text will appear "Click first point to close this shape". To complete the shape, click finish on the polygon icon.
+<li> Begin adding points on the map in the area desired after last point is complete, text will appear "Click first point to close this shape". To complete the shape, click finish on the polygon icon.</li>
 
-5. To draw rectangle shape, select the rectangle image on the map, a cursor will appear with text "Click and Drag to draw a rectangle". To complete the shape release the mouse to complete the drawing.
+<li> To draw rectangle shape, select the rectangle image on the map, a cursor will appear with text "Click and Drag to draw a rectangle". To complete the shape release the mouse to complete the drawing.</li>
 
-6. Select Get Data to executed the search, all available results will appear within the shapes on the map.
+<li> Select Get Data to executed the search, all available results will appear within the shapes on the map.</li>
+</ol>
 
 ![](../media/mt.png)
