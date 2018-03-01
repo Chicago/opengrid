@@ -3,7 +3,10 @@ You can search around a particular location, such as an address or your current 
 
 ## Search Around Me (current location)
  1. Select "Me" from the drop-down menu. For privacy reasons, the user is asked permission to access location information.
+
  2. Allow the browser access to your location (this data is not stored). The coordinates are estimated and the accuracy of the coordinates depends on your internet service provider. A blue circle will appear, which shows the estimated area of your current location.
+
+
  3. Select a radius, the application will use the blue dot as the starting point for your location.
     - Radius in Feet – Min (100ft) and Max (1000ft) in 100 foot increments.
     - Radius in Miles – Min (1/8mi) and Max (1mi) in 1/8th mile increments.
