@@ -32,10 +32,10 @@ pages:
 # - API: opengrid-api.md
 - System Administration:
     - API: system-administration/opengrid-api.md
-    - App Architecture: system-administration/Architecture.md
+    - App Architecture: system-administration/architecture.md
     - Installation and Setup: system-administration/installation-and-setup.md
     - Build Procedures: system-administration/build-procedures.md
-    - Configuration: system-administration/openGrid-configuration.md
+    - Configuration: system-administration/opengrid-configuration.md
 
 markdown_extensions:
     - toc:
