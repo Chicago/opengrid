@@ -396,27 +396,27 @@
             "title": "1.1.8 /datasets/{dataset_id}"
         },
         {
-            "location": "/system-administration/Architecture/",
+            "location": "/system-administration/architecture/",
             "text": "Application Architecture\n\uf0c1\n\n\nOpenGrid consists of a user interface layer that is seen by the user in the web browser and a service layer. The service layer is responsible for interpreting commands from the user interface to an underlying data layer. In turn, the user interface communicates with the service layer through an \nApplication Programmer Interface (API)\n. \n\n\n\n\nThe service layer share the same API to communicate with the user interface, but are compatible with different data store engines. This approach will make it easier to maintain a consistent user interface, but allow it to be compatible with different databases and APIs as these tend to change or different data storage engines often change over time.\n\n\nOpenGrid is compatible with \nMongoDB\n or \nPlenario\n. MongoDB's service layer was created by the City of Chicago and \navailable in this repository\n. The service layer for Plenario was created by Smart Chicago Collaborative and \navailable here\n.\n\n\nMongoDB or Plenario?\n\uf0c1\n\n\nMongoDB is a flexible, JSON-based data engine that lets you easily store data with minimal concerns about designing a schema. Plenario is a storage engine which quickly and easily stores open data from \nSocrata\n, such as \nCity of Chicago\n, or CKAN like the \nU.S. government\n data portals. Plenario makes all of these data available through a simple API.\n\n\nMongoDB is a great solution for on-site deployments or when using data not readily available on Socrata or CKAN. It is an open-source, supurbly documented database that can be installed on-site and behind a firewall. The City of Chicago, for instance, uses OpenGrid + MongoDB to power an internal version of OpenGrid, dubbed \nWindyGrid\n, that loads data from internal systems.\n\n\nPlenario quickly ingests data from popular open data portal platforms, Socrata and CKAN. But it is more difficult to upload data from other sources, such as databases. Therefore, pairing OpenGrid with Plenario (with the corresponding service layer) works great to visualize open data. Adding data from an open data portal is simple, see \nPlenario's documentation for adding a data set\n. An example of OpenGrid + Plenario can be seen at \nhttps://chicago.opengrid.io\n. \n\n\nPlenar.io test service layer\n\uf0c1\n\n\nA publicly-available instance of the Plenar.io service layer is at \nhttp://opengrid-service-dev-1134290206.us-west-2.elb.amazonaws.com/opengrid-service/\n\n\nUse this end-point to test any changes you have made to the OpenGrid application that relies on Plenario, but does not require the setup of the service layer.\n\n\nLinks\n\uf0c1\n\n\n\n\nOpenGrid user interface repo\n\n\nOpenGrid Serivce layer API\n\n\nMongoDB-compatible service layer repo\n\n\nPlenario service layer repo\n\n\nPlenario serice layer development end-point",
             "title": "App Architecture"
         },
         {
-            "location": "/system-administration/Architecture/#application-architecture",
+            "location": "/system-administration/architecture/#application-architecture",
             "text": "OpenGrid consists of a user interface layer that is seen by the user in the web browser and a service layer. The service layer is responsible for interpreting commands from the user interface to an underlying data layer. In turn, the user interface communicates with the service layer through an  Application Programmer Interface (API) .    The service layer share the same API to communicate with the user interface, but are compatible with different data store engines. This approach will make it easier to maintain a consistent user interface, but allow it to be compatible with different databases and APIs as these tend to change or different data storage engines often change over time.  OpenGrid is compatible with  MongoDB  or  Plenario . MongoDB's service layer was created by the City of Chicago and  available in this repository . The service layer for Plenario was created by Smart Chicago Collaborative and  available here .",
             "title": "Application Architecture"
         },
         {
-            "location": "/system-administration/Architecture/#mongodb-or-plenario",
+            "location": "/system-administration/architecture/#mongodb-or-plenario",
             "text": "MongoDB is a flexible, JSON-based data engine that lets you easily store data with minimal concerns about designing a schema. Plenario is a storage engine which quickly and easily stores open data from  Socrata , such as  City of Chicago , or CKAN like the  U.S. government  data portals. Plenario makes all of these data available through a simple API.  MongoDB is a great solution for on-site deployments or when using data not readily available on Socrata or CKAN. It is an open-source, supurbly documented database that can be installed on-site and behind a firewall. The City of Chicago, for instance, uses OpenGrid + MongoDB to power an internal version of OpenGrid, dubbed  WindyGrid , that loads data from internal systems.  Plenario quickly ingests data from popular open data portal platforms, Socrata and CKAN. But it is more difficult to upload data from other sources, such as databases. Therefore, pairing OpenGrid with Plenario (with the corresponding service layer) works great to visualize open data. Adding data from an open data portal is simple, see  Plenario's documentation for adding a data set . An example of OpenGrid + Plenario can be seen at  https://chicago.opengrid.io .",
             "title": "MongoDB or Plenario?"
         },
         {
-            "location": "/system-administration/Architecture/#plenario-test-service-layer",
+            "location": "/system-administration/architecture/#plenario-test-service-layer",
             "text": "A publicly-available instance of the Plenar.io service layer is at  http://opengrid-service-dev-1134290206.us-west-2.elb.amazonaws.com/opengrid-service/  Use this end-point to test any changes you have made to the OpenGrid application that relies on Plenario, but does not require the setup of the service layer.",
             "title": "Plenar.io test service layer"
         },
         {
-            "location": "/system-administration/Architecture/#links",
+            "location": "/system-administration/architecture/#links",
             "text": "OpenGrid user interface repo  OpenGrid Serivce layer API  MongoDB-compatible service layer repo  Plenario service layer repo  Plenario serice layer development end-point",
             "title": "Links"
         },
@@ -511,67 +511,67 @@
             "title": "Deploy"
         },
         {
-            "location": "/system-administration/openGrid-configuration/",
+            "location": "/system-administration/opengrid-configuration/",
             "text": "OpenGrid Configuration\n\uf0c1\n\n\nOne easy way to customize OpenGrid's behavior is to set the various available configuration options in \nsrc/js/custom/Config.js\n.\n\n\nThe settings are described below.\n\n\nAvailable Settings\n\uf0c1\n\n\nbrand\n\uf0c1\n\n\n\n\napplicationName\n - application name used on login screen, window title, and top navigation pane\n\n\ncopyright\n - placeholder for copyright information; not currently used by application (internal use only)\n\n\nversion\n - placeholder for version info; not currently  used by application (internal use only)\n\n\n\n\nsession\n\uf0c1\n\n\n\n\ntimeout\n - session timeout, in minutes; if no user activity is detected (including mouse, keyboard and query requests) within this \ntime period, the user is automatically logged out and redirected to the login screen\n\n\ntokenRenewalInterval\n - token renewal interval in minutes; the application uses tokens to securely send credential information \nto the service layer; the security token is initially generated by the service and has an expiration (4 hours by default); this setting should \nbe set to a value less than the expiration period on the service side to prevent any session interruptions (manifest as permission errors on the UI) caused by\nexpired token\n\n\n\n\nalerts\n\uf0c1\n\n\n\n\nautoCloseDuration\n - number of milliseconds the alert message will be displayed; this is the window that displays when there are informational or error messages\n\n\n\n\ntable\n\uf0c1\n\n\nVarious table-related settings; these are \npass-through\n settings that normally don't need to be changed\n\n\nmap\n\uf0c1\n\n\n\n\nbaseLayers\n - layer information including Leaflet-supported URL of the layer (See http://leafletjs.com/reference.html#tilelayer for more info)\n\n\noverlayLayers\n - layer information for overlays; much like the baseLayers, the overlayLayers need URLs that point to a Leaflet-supported map service\n\n\nmapLibraryOptions.center\n - default map center in Latitude/Longitude\n\n\nmapLibraryOptions.zoom\n - default map zoom (use higher value to zoom in)\n\n\nmapLibraryOptions.minZoom\n - map's minimum zoom level\n\n\nmapLibraryOptions.imagePath\n - default path for images used by Leaflet; there is no need to change this, in most cases\n\n\nzoomToResultsExtent\n - flag to indicate if the map will auto-zoom after a 'manual' search (via quick or advanced search, not auto-refresh)\n\n\nmeasureOptions\n - some settings used by the measuring tool class\n\n\ntileMapOptions\n - tile map options to be made available on the UI; shapeMap setting is an instance of ogrid.ShapeMap class that exposes a shape map data (geoJson) representing a boundary\n\n\n\n\nquickSearch\n\uf0c1\n\n\n\n\nmock\n - for testing use only (deprecated)\n\n\nplugins\n - list of plug-ins for handling quick searches\n\n\nhelpFile\n - quick search help content\n\n\nplugInOptions\n - options used by quick search plug-ins; right now, only the Places plug-in, the default plug-in that gets called when no other plug-in matches the quick search text, is reading these settings\n\n\nplaces.esriGeocodeBBox\n - the bounding box used for the ArcGIS World Geocoder service to perform the address/POI search within the given extent; bounding rectangle coordinates can be entered as a simple comma-separated string in the format \n,\n\n\nplaces.esriGeocodeLocation\n - Longitude/Latitude value that represents the center of the search area; if more than 1 search results are returned by the service, the results nearest to this point will appear first on the list of results\n\n\nplaces.esriGeocodeMaxResults\n - maximum results to be returned by the ArcGIS Geocode service\n\n\nplaces.esriGeocodeFilterUsingShape\n - when specific address/locations are returned by the ArcGIS Geocoder service, the search results are filtered to make sure only results inside this \nshape\n or boundary are returned\n\n\n\n\nadvancedSearch\n\uf0c1\n\n\n\n\ngeoFilterBoundaries\n - boundaries used on Advanced Search; the data attribute should be set to a geoJson value that represents the boundary\n\n\n\n\ncommandBar\n\uf0c1\n\n\n\n\ncommands\n - list of buttons and required security level\n\n\nmobileBreakPointWidth\n - width value of the browser window used for internally determining if application is in \nmobile mode\n or in normal mode (note that this should be in sync with the value used by Bootstrap/bootstrap.css for its media queries)\n\n\n\n\nservice\n\uf0c1\n\n\n\n\nendpoint\n - the endpoint of the service layer that OpenGrid application calls; this is the default setting used which is overriden by the one found in \nconfig/EnvSettings.js\n\n\ntimeout\n - the timeout value of every service call, in milliseconds; if a service call times out, an alert message is displayed\n\n\nmaxresults\n - the maximum number of rows to return for a query\n\n\nauthUrl\n - the URL of the operation to use for retrieving a security token during the login process; there is usually no need to change this unless the service layer is configured or developed to use a different URL\n\n\nauthRenewUrl\n - the URL of the operation to use for renewing a security token\n\n\nerrorHandler\n - internal setting to indicate the class to use for handling some exceptions\n\n\ndateFormat\n - data format used for converting string to date value for comparing dates on auto-refresh highlighting; this is dependent on the format used by the underlying service\n\n\nautoLogin\n - flag to indicate if login page will be displayed or if application will automatically login using credentials specified in \nautologinUserId\n and \nautologinPassword\n\n\nautologinUserId\n - user id to use for internal login when autoLogin is set to 'true'\n\n\nautologinPassword\n - password to use for internal login when autoLogin is set to 'true'\n\n\n\n\nhelp\n\uf0c1\n\n\n\n\nurl\n - url to use for the application help link\n\n\ntype\n - the type of help link: 'icon' or 'button'",
             "title": "Configuration"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#opengrid-configuration",
+            "location": "/system-administration/opengrid-configuration/#opengrid-configuration",
             "text": "One easy way to customize OpenGrid's behavior is to set the various available configuration options in  src/js/custom/Config.js .  The settings are described below.",
             "title": "OpenGrid Configuration"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#available-settings",
+            "location": "/system-administration/opengrid-configuration/#available-settings",
             "text": "",
             "title": "Available Settings"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#brand",
+            "location": "/system-administration/opengrid-configuration/#brand",
             "text": "applicationName  - application name used on login screen, window title, and top navigation pane  copyright  - placeholder for copyright information; not currently used by application (internal use only)  version  - placeholder for version info; not currently  used by application (internal use only)",
             "title": "brand"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#session",
+            "location": "/system-administration/opengrid-configuration/#session",
             "text": "timeout  - session timeout, in minutes; if no user activity is detected (including mouse, keyboard and query requests) within this \ntime period, the user is automatically logged out and redirected to the login screen  tokenRenewalInterval  - token renewal interval in minutes; the application uses tokens to securely send credential information \nto the service layer; the security token is initially generated by the service and has an expiration (4 hours by default); this setting should \nbe set to a value less than the expiration period on the service side to prevent any session interruptions (manifest as permission errors on the UI) caused by\nexpired token",
             "title": "session"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#alerts",
+            "location": "/system-administration/opengrid-configuration/#alerts",
             "text": "autoCloseDuration  - number of milliseconds the alert message will be displayed; this is the window that displays when there are informational or error messages",
             "title": "alerts"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#table",
+            "location": "/system-administration/opengrid-configuration/#table",
             "text": "Various table-related settings; these are  pass-through  settings that normally don't need to be changed",
             "title": "table"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#map",
+            "location": "/system-administration/opengrid-configuration/#map",
             "text": "baseLayers  - layer information including Leaflet-supported URL of the layer (See http://leafletjs.com/reference.html#tilelayer for more info)  overlayLayers  - layer information for overlays; much like the baseLayers, the overlayLayers need URLs that point to a Leaflet-supported map service  mapLibraryOptions.center  - default map center in Latitude/Longitude  mapLibraryOptions.zoom  - default map zoom (use higher value to zoom in)  mapLibraryOptions.minZoom  - map's minimum zoom level  mapLibraryOptions.imagePath  - default path for images used by Leaflet; there is no need to change this, in most cases  zoomToResultsExtent  - flag to indicate if the map will auto-zoom after a 'manual' search (via quick or advanced search, not auto-refresh)  measureOptions  - some settings used by the measuring tool class  tileMapOptions  - tile map options to be made available on the UI; shapeMap setting is an instance of ogrid.ShapeMap class that exposes a shape map data (geoJson) representing a boundary",
             "title": "map"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#quicksearch",
+            "location": "/system-administration/opengrid-configuration/#quicksearch",
             "text": "mock  - for testing use only (deprecated)  plugins  - list of plug-ins for handling quick searches  helpFile  - quick search help content  plugInOptions  - options used by quick search plug-ins; right now, only the Places plug-in, the default plug-in that gets called when no other plug-in matches the quick search text, is reading these settings  places.esriGeocodeBBox  - the bounding box used for the ArcGIS World Geocoder service to perform the address/POI search within the given extent; bounding rectangle coordinates can be entered as a simple comma-separated string in the format  ,  places.esriGeocodeLocation  - Longitude/Latitude value that represents the center of the search area; if more than 1 search results are returned by the service, the results nearest to this point will appear first on the list of results  places.esriGeocodeMaxResults  - maximum results to be returned by the ArcGIS Geocode service  places.esriGeocodeFilterUsingShape  - when specific address/locations are returned by the ArcGIS Geocoder service, the search results are filtered to make sure only results inside this  shape  or boundary are returned",
             "title": "quickSearch"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#advancedsearch",
+            "location": "/system-administration/opengrid-configuration/#advancedsearch",
             "text": "geoFilterBoundaries  - boundaries used on Advanced Search; the data attribute should be set to a geoJson value that represents the boundary",
             "title": "advancedSearch"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#commandbar",
+            "location": "/system-administration/opengrid-configuration/#commandbar",
             "text": "commands  - list of buttons and required security level  mobileBreakPointWidth  - width value of the browser window used for internally determining if application is in  mobile mode  or in normal mode (note that this should be in sync with the value used by Bootstrap/bootstrap.css for its media queries)",
             "title": "commandBar"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#service",
+            "location": "/system-administration/opengrid-configuration/#service",
             "text": "endpoint  - the endpoint of the service layer that OpenGrid application calls; this is the default setting used which is overriden by the one found in  config/EnvSettings.js  timeout  - the timeout value of every service call, in milliseconds; if a service call times out, an alert message is displayed  maxresults  - the maximum number of rows to return for a query  authUrl  - the URL of the operation to use for retrieving a security token during the login process; there is usually no need to change this unless the service layer is configured or developed to use a different URL  authRenewUrl  - the URL of the operation to use for renewing a security token  errorHandler  - internal setting to indicate the class to use for handling some exceptions  dateFormat  - data format used for converting string to date value for comparing dates on auto-refresh highlighting; this is dependent on the format used by the underlying service  autoLogin  - flag to indicate if login page will be displayed or if application will automatically login using credentials specified in  autologinUserId  and  autologinPassword  autologinUserId  - user id to use for internal login when autoLogin is set to 'true'  autologinPassword  - password to use for internal login when autoLogin is set to 'true'",
             "title": "service"
         },
         {
-            "location": "/system-administration/openGrid-configuration/#help",
+            "location": "/system-administration/opengrid-configuration/#help",
             "text": "url  - url to use for the application help link  type  - the type of help link: 'icon' or 'button'",
             "title": "help"
         }
