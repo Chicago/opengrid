@@ -13,7 +13,6 @@ Layers display geographic information on a map. Layers are displayed in differen
 			<li>Aerial</li>
 		</ul>
 	<br>
-
 	<li><b>Open Weather Layers</b> - Visual representation of weather data layered on a map.  Weather layers include current and historical information.
 		<ul>
 			<li>Cloud Cover</li>
@@ -21,9 +20,7 @@ Layers display geographic information on a map. Layers are displayed in differen
 			<li>Sea Level Pressure</li>
 			<li>Temperature</li>
 		</ul>
-
-	<br />
-
+	<br>
 	<li><b>Generated Layers</b> - Are specialized layers derived from an executed quick search or advanced search. The generated layer/s allows the executed data to act as a layer such as being removed from the grid by deselecting the dataset name in the Generated Layers section.
 		<ul>
 			<li>Data</li>
