@@ -1,5 +1,7 @@
 [![OpenGrid](../media/OpenGrid_Logo_Horizontal_3Color.png)](https://chicago.opengrid.io/opengrid/)
 
+![OpenGrid](../media/OpenGrid_Logo_Horizontal_3Color.png)
+
 <p>
 Welcome to OpenGrid, an open source interactive map that allows users to explore city data in an easy to use interface. OpenGrid offers real-time or historical insights of event-based data based on time and location; whether its 311 calls, crimes, tweets, or other data sources.
 </p>
