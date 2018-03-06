@@ -1,7 +1,7 @@
 # Opening Layers
 
 Layers display geographic information on a map. Layers are displayed in different formats, shapes or icons such as images, tiles, icons, etc. Layers control the way a user sees different classes of information and how to apply a layer on a map. There are multiple layers used to monitor, track or provide visualization on what's happening around the City of Chicago. Layers also provide information about the area of where the layers overlay. To apply a layer on a map, hover over the layer icon and select a layer type.
-![](./media/Layerspic_001.jpg)
+![](../media/Layerspic_001.jpg)
 
 # Available Layers
 
@@ -35,17 +35,16 @@ Open weather layers are weather data that includes information about the climate
 
 - **Cloud Cover** - Overcast by clouds covering the sky. 
 
-<img src="./media/cloudy.png">
-![](./media/cloudy.png)
+![Cloudy](../media/cloudy.png)
 
 - **Quantity of Precipitation** - Responsible for depositing fresh water on the planet by rain, sleet, snow or any act of liquid forms. 
 
-![](./media/precipitation.png)
+![Precipitation](../media/precipitation.png)
 
 - **Sea Level Pressure** - The level of the ocean's surface between high and low tides that measures heights and depths. Sea level changes regularly with the tides and irregularity due to wind and currents.
 
-![](./media/slevel.jpg)
+![Sea Level](../media/slevel.jpg)
 
 - **Temperature** - Displayed in heat matrix of degree of hotness and coldness on a map.
 
-![](./media/tmpog.jpg)
+![Temperature](../media/tmpog.jpg)
