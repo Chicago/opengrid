@@ -35,6 +35,7 @@ Open weather layers are weather data that includes information about the climate
 
 - **Cloud Cover** - Overcast by clouds covering the sky. 
 
+<img src="./media/cloudy.png">
 ![](./media/cloudy.png)
 
 - **Quantity of Precipitation** - Responsible for depositing fresh water on the planet by rain, sleet, snow or any act of liquid forms. 
