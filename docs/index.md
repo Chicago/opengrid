@@ -1,4 +1,4 @@
-[![OpenGrid](./media/Opengrid_Logo_Horizontal_3Color.png)](https://chicago.opengrid.io/opengrid/)
+[![OpenGrid](./media/OpenGrid_Logo_Horizontal_3Color.png)](https://chicago.opengrid.io/opengrid)
 
 <p>
 Welcome to OpenGrid, an open source interactive map that allows users to explore city data in an easy to use interface. OpenGrid offers real-time or historical insights of event-based data based on time and location; whether its 311 calls, crimes, tweets, or other data sources.
@@ -13,7 +13,7 @@ OpenGrid can be used for real-time data analysis, refreshing frequently to provi
 
 ### Technical Architecture
 
-OpenGrid is designed to be flexible with different types of data sources. Whether it's MongoDB, a RESTful API, or other data sources, programmers can use [OpenGrid's API](../system-administration/opengrid-api/#rest-service-resources) and [Service Layer](../system-administration/installation-and-setup/#service-layer) to program it to work with other data sources.
+OpenGrid is designed to be flexible with different types of data sources. Whether it's MongoDB, a RESTful API, or other data sources, programmers can use [OpenGrid's API](./system-administration/opengrid-api/#rest-service-resources) and [Service Layer](./system-administration/installation-and-setup/#service-layer) to program it to work with other data sources.
 
 ### Open Source
 
