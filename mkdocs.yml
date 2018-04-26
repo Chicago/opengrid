@@ -13,6 +13,7 @@ pages:
 - OpenGrid Layout:
         - Launch Screen: layout/launch-screen.md
         - Table Grid: layout/table-grid.md
+- Quick Search: quick-search/quick-search.md
 - Finding Data:
         - Getting Started: finding-data/getting-started.md
         - Advanced Filtering: finding-data/advanced-filtering.md
