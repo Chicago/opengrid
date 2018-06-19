@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="City of Chicago">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Tile map - OpenGrid</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Tile map";
+    var mkdocs_page_input_path = "charts-heatmaps\\tile-map.md";
+    var mkdocs_page_url = "/charts-heatmaps/tile-map/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OpenGrid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">OpenGrid Layout</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../layout/launch-screen/">Launch Screen</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../layout/table-grid/">Table Grid</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Finding Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../finding-data/getting-started/">Getting Started</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/advanced-filtering/">Advanced Filtering</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/auto-refresh-search/">Automatically Refresh Searches</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/commonly-used-queries/">Commonly Used Queries</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/relative-time-searches/">Searching With Relative Time</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search by Location</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../search-location/within-geospatial-filter/">Within An Area</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../search-location/near-geospatial-filter/">Near A Location</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../customize-look/">Customize the Look</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Charts and Heatmaps</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../heatmaps/">Heatmaps</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Tile map</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#how-to-create-a-tile-map">How to Create a Tile Map</a></li>
+    
+
+    <li class="toctree-l3"><a href="#removinghiding-tile-map">Removing/Hiding Tile Map</a></li>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../map-layers/">Map Layers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../measure-distances/">Measure Distance</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">System Administration</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../system-administration/opengrid-api/">API</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/architecture/">App Architecture</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/installation-and-setup/">Installation and Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/build-procedures/">Build Procedures</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/opengrid-configuration/">Configuration</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OpenGrid</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Charts and Heatmaps &raquo;</li>
+        
+      
+    
+    <li>Tile map</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Chicago/opengrid/edit/master/docs/charts-heatmaps\tile-map.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="how-to-create-a-tile-map">How to Create a Tile Map<a class="headerlink" href="#how-to-create-a-tile-map" title="Permanent link"></a></h1>
+<p>Tile maps (choropleth) will use shading, instead of individual points, to show the amount of data by different regions. Tile maps can be generated from the table grid window.</p>
+<ol>
+<li>
+<p>Plot the data you want to display.</p>
+</li>
+<li>
+<p>Expand the table grid and hover on the Tile Map icon and select the tile type you want to display.</p>
+</li>
+</ol>
+<p><img alt="" src="../../media/tmap.png" /></p>
+<p><br></p>
+<p><img alt="" src="../../media/timap.png" />
+<p align ="center"><b>Tile Map by Zipcode </b></p></p>
+<h1 id="removinghiding-tile-map">Removing/Hiding Tile Map<a class="headerlink" href="#removinghiding-tile-map" title="Permanent link"></a></h1>
+<p>To remove the tile from the grid select the option "None" from the droplist. Alternatively, you can click on the "Layer" button and temporarily hide the tile map from the <a href="../../map-layers/#available-layers">"Generated Layers"</a> section.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../map-layers/" class="btn btn-neutral float-right" title="Map Layers">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../heatmaps/" class="btn btn-neutral" title="Heatmaps"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2015-2016 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Chicago/opengrid" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../heatmaps/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../map-layers/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

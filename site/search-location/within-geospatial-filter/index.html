@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="City of Chicago">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Within An Area - OpenGrid</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Within An Area";
+    var mkdocs_page_input_path = "search-location\\within-geospatial-filter.md";
+    var mkdocs_page_url = "/search-location/within-geospatial-filter/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OpenGrid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">OpenGrid Layout</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../layout/launch-screen/">Launch Screen</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../layout/table-grid/">Table Grid</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Finding Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../finding-data/getting-started/">Getting Started</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/advanced-filtering/">Advanced Filtering</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/auto-refresh-search/">Automatically Refresh Searches</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/commonly-used-queries/">Commonly Used Queries</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/relative-time-searches/">Searching With Relative Time</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search by Location</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">Within An Area</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#searching-within-an-area">Searching Within an Area</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#map-extent">Map Extent</a></li>
+        
+            <li><a class="toctree-l4" href="#citywide">Citywide</a></li>
+        
+            <li><a class="toctree-l4" href="#ward">Ward</a></li>
+        
+            <li><a class="toctree-l4" href="#zip-code">Zip Code</a></li>
+        
+            <li><a class="toctree-l4" href="#drawn-extent">Drawn Extent</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../near-geospatial-filter/">Near A Location</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../customize-look/">Customize the Look</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Charts and Heatmaps</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../charts-heatmaps/heatmaps/">Heatmaps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../charts-heatmaps/tile-map/">Tile map</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../map-layers/">Map Layers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../measure-distances/">Measure Distance</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">System Administration</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../system-administration/opengrid-api/">API</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/architecture/">App Architecture</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/installation-and-setup/">Installation and Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/build-procedures/">Build Procedures</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/opengrid-configuration/">Configuration</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OpenGrid</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Search by Location &raquo;</li>
+        
+      
+    
+    <li>Within An Area</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Chicago/opengrid/edit/master/docs/search-location\within-geospatial-filter.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="searching-within-an-area">Searching Within an Area<a class="headerlink" href="#searching-within-an-area" title="Permanent link"></a></h1>
+<p>You can search within a pre-defined area on the map, including an feature to let you draw on the map to find the data you need.</p>
+<h2 id="map-extent">Map Extent<a class="headerlink" href="#map-extent" title="Permanent link"></a></h2>
+<p>A map extent is the portion of area shown in a map. Map extents usually have a rectangular shape. Map extent can be changed by zooming and panning.</p>
+<h2 id="citywide">Citywide<a class="headerlink" href="#citywide" title="Permanent link"></a></h2>
+<p>Searches boundaries within the City of Chicago.</p>
+<h2 id="ward">Ward<a class="headerlink" href="#ward" title="Permanent link"></a></h2>
+<p>Searches within a city ward.</p>
+<h2 id="zip-code">Zip Code<a class="headerlink" href="#zip-code" title="Permanent link"></a></h2>
+<p>Searches within a city zip code.</p>
+<h2 id="drawn-extent">Drawn Extent<a class="headerlink" href="#drawn-extent" title="Permanent link"></a></h2>
+<p>Drawn Extent is located in the Find Data panel under Select Location; it is used to create polygon and/or rectangle shapes to run results from a specific location on a map. When the Drawn Extent feature is activated the shape, edit, and delete buttons appears on the grid.</p>
+<h3 id="how-to-use-drawn-extent">How to use drawn extent:<a class="headerlink" href="#how-to-use-drawn-extent" title="Permanent link"></a></h3>
+<p><ol>
+<li> In the find data panel, setup a search and activate drawn extent in the select location section.</li></p>
+<li> Select a shape image on the grid, when hovering on a button, it provides information about the button.</li>
+
+<li> To draw polygon shape, select the polygon image on the map, the image will activate, a cursor will appear with text "Click to start drawing a shape".</li>
+
+<li> Begin adding points on the map in the area desired after last point is complete, text will appear "Click first point to close this shape". To complete the shape, click finish on the polygon icon.</li>
+
+<li> To draw rectangle shape, select the rectangle image on the map, a cursor will appear with text "Click and Drag to draw a rectangle". To complete the shape release the mouse to complete the drawing.</li>
+
+<li> Select Get Data to executed the search, all available results will appear within the shapes on the map.</li>
+
+</ol>
+
+<p><img alt="" src="../../media/mt.png" /></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../near-geospatial-filter/" class="btn btn-neutral float-right" title="Near A Location">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../finding-data/relative-time-searches/" class="btn btn-neutral" title="Searching With Relative Time"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2015-2016 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Chicago/opengrid" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../finding-data/relative-time-searches/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../near-geospatial-filter/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

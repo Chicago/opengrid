@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="City of Chicago">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Near A Location - OpenGrid</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Near A Location";
+    var mkdocs_page_input_path = "search-location\\near-geospatial-filter.md";
+    var mkdocs_page_url = "/search-location/near-geospatial-filter/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OpenGrid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">OpenGrid Layout</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../layout/launch-screen/">Launch Screen</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../layout/table-grid/">Table Grid</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Finding Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../finding-data/getting-started/">Getting Started</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/advanced-filtering/">Advanced Filtering</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/auto-refresh-search/">Automatically Refresh Searches</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/commonly-used-queries/">Commonly Used Queries</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/relative-time-searches/">Searching With Relative Time</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search by Location</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../within-geospatial-filter/">Within An Area</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Near A Location</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#searching-near-a-location">Searching Near a Location</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#search-around-me-current-location">Search Around Me (current location)</a></li>
+        
+            <li><a class="toctree-l4" href="#search-around-a-marker">Search Around a Marker</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../customize-look/">Customize the Look</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Charts and Heatmaps</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../charts-heatmaps/heatmaps/">Heatmaps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../charts-heatmaps/tile-map/">Tile map</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../map-layers/">Map Layers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../measure-distances/">Measure Distance</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">System Administration</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../system-administration/opengrid-api/">API</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/architecture/">App Architecture</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/installation-and-setup/">Installation and Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/build-procedures/">Build Procedures</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../system-administration/opengrid-configuration/">Configuration</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OpenGrid</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Search by Location &raquo;</li>
+        
+      
+    
+    <li>Near A Location</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Chicago/opengrid/edit/master/docs/search-location\near-geospatial-filter.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="searching-near-a-location">Searching Near a Location<a class="headerlink" href="#searching-near-a-location" title="Permanent link"></a></h1>
+<p>You can search around a particular location, such as an address or your current location. Set the radius around the point and find any data within that circle. To search around a particular location, click on "Select Location" within the "Find Data" panel.</p>
+<h2 id="search-around-me-current-location">Search Around Me (current location)<a class="headerlink" href="#search-around-me-current-location" title="Permanent link"></a></h2>
+<ol>
+<li>
+<p>Select "Me" from the drop-down menu. For privacy reasons, the user is asked permission to access location information.</p>
+</li>
+<li>
+<p>Allow the browser access to your location (this data is not stored). The coordinates are estimated and the accuracy of the coordinates depends on your internet service provider. A blue circle will appear, which shows the estimated area of your current location.</p>
+</li>
+<li>
+<p>Select a radius, the application will use the blue dot as the starting point for your location.</p>
+<ul>
+<li>Radius in Feet – Min (100ft) and Max (1000ft) in 100 foot increments.</li>
+<li>Radius in Miles – Min (1/8mi) and Max (1mi) in 1/8th mile increments.</li>
+</ul>
+</li>
+</ol>
+<p><img alt="" src="../../media/me.jpg" />
+<p align="center"><b>Geo-Location Filter</b></p></p>
+<h2 id="search-around-a-marker">Search Around a Marker<a class="headerlink" href="#search-around-a-marker" title="Permanent link"></a></h2>
+<ol>
+<li>Select "Marker" from the drop-down menu; the marker icon will appear on the grid.</li>
+<li>Click on the marker icon and begin plotting markers on the map.</li>
+<li>Define the radius for the marker/s; if multiple markers are plotted on the map, the search will plot around each marker based off the radius defined.</li>
+</ol>
+<p><img alt="" src="../../media/marker.jpg" />
+<p align="center"><b>Near Marker</b></p></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../customize-look/" class="btn btn-neutral float-right" title="Customize the Look">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../within-geospatial-filter/" class="btn btn-neutral" title="Within An Area"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2015-2016 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Chicago/opengrid" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../within-geospatial-filter/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../customize-look/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

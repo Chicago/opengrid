@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="City of Chicago">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Configuration - OpenGrid</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Configuration";
+    var mkdocs_page_input_path = "system-administration\\opengrid-configuration.md";
+    var mkdocs_page_url = "/system-administration/opengrid-configuration/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OpenGrid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">OpenGrid Layout</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../layout/launch-screen/">Launch Screen</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../layout/table-grid/">Table Grid</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Finding Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../finding-data/getting-started/">Getting Started</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/advanced-filtering/">Advanced Filtering</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/auto-refresh-search/">Automatically Refresh Searches</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/commonly-used-queries/">Commonly Used Queries</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/relative-time-searches/">Searching With Relative Time</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search by Location</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../search-location/within-geospatial-filter/">Within An Area</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../search-location/near-geospatial-filter/">Near A Location</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../customize-look/">Customize the Look</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Charts and Heatmaps</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../charts-heatmaps/heatmaps/">Heatmaps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../charts-heatmaps/tile-map/">Tile map</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../map-layers/">Map Layers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../measure-distances/">Measure Distance</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">System Administration</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../opengrid-api/">API</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../architecture/">App Architecture</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../installation-and-setup/">Installation and Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../build-procedures/">Build Procedures</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">Configuration</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#opengrid-configuration">OpenGrid Configuration</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#available-settings">Available Settings</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OpenGrid</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>System Administration &raquo;</li>
+        
+      
+    
+    <li>Configuration</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Chicago/opengrid/edit/master/docs/system-administration\opengrid-configuration.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="opengrid-configuration">OpenGrid Configuration<a class="headerlink" href="#opengrid-configuration" title="Permanent link"></a></h2>
+<p>One easy way to customize OpenGrid's behavior is to set the various available configuration options in <code>src/js/custom/Config.js</code>.</p>
+<p>The settings are described below.</p>
+<h3 id="available-settings">Available Settings<a class="headerlink" href="#available-settings" title="Permanent link"></a></h3>
+<h4 id="brand">brand<a class="headerlink" href="#brand" title="Permanent link"></a></h4>
+<ul>
+<li><em>applicationName</em> - application name used on login screen, window title, and top navigation pane</li>
+<li><em>copyright</em> - placeholder for copyright information; not currently used by application (internal use only)</li>
+<li><em>version</em> - placeholder for version info; not currently  used by application (internal use only)</li>
+</ul>
+<h4 id="session">session<a class="headerlink" href="#session" title="Permanent link"></a></h4>
+<ul>
+<li><em>timeout</em> - session timeout, in minutes; if no user activity is detected (including mouse, keyboard and query requests) within this 
+time period, the user is automatically logged out and redirected to the login screen</li>
+<li><em>tokenRenewalInterval</em> - token renewal interval in minutes; the application uses tokens to securely send credential information 
+to the service layer; the security token is initially generated by the service and has an expiration (4 hours by default); this setting should 
+be set to a value less than the expiration period on the service side to prevent any session interruptions (manifest as permission errors on the UI) caused by
+expired token</li>
+</ul>
+<h4 id="alerts">alerts<a class="headerlink" href="#alerts" title="Permanent link"></a></h4>
+<ul>
+<li><em>autoCloseDuration</em> - number of milliseconds the alert message will be displayed; this is the window that displays when there are informational or error messages</li>
+</ul>
+<h4 id="table">table<a class="headerlink" href="#table" title="Permanent link"></a></h4>
+<p>Various table-related settings; these are <em>pass-through</em> settings that normally don't need to be changed</p>
+<h4 id="map">map<a class="headerlink" href="#map" title="Permanent link"></a></h4>
+<ul>
+<li><em>baseLayers</em> - layer information including Leaflet-supported URL of the layer (See http://leafletjs.com/reference.html#tilelayer for more info)</li>
+<li><em>overlayLayers</em> - layer information for overlays; much like the baseLayers, the overlayLayers need URLs that point to a Leaflet-supported map service</li>
+<li><em>mapLibraryOptions.center</em> - default map center in Latitude/Longitude</li>
+<li><em>mapLibraryOptions.zoom</em> - default map zoom (use higher value to zoom in)</li>
+<li><em>mapLibraryOptions.minZoom</em> - map's minimum zoom level</li>
+<li><em>mapLibraryOptions.imagePath</em> - default path for images used by Leaflet; there is no need to change this, in most cases</li>
+<li><em>zoomToResultsExtent</em> - flag to indicate if the map will auto-zoom after a 'manual' search (via quick or advanced search, not auto-refresh)</li>
+<li><em>measureOptions</em> - some settings used by the measuring tool class</li>
+<li><em>tileMapOptions</em> - tile map options to be made available on the UI; shapeMap setting is an instance of ogrid.ShapeMap class that exposes a shape map data (geoJson) representing a boundary</li>
+</ul>
+<h4 id="quicksearch">quickSearch<a class="headerlink" href="#quicksearch" title="Permanent link"></a></h4>
+<ul>
+<li><em>mock</em> - for testing use only (deprecated)</li>
+<li><em>plugins</em> - list of plug-ins for handling quick searches</li>
+<li><em>helpFile</em> - quick search help content</li>
+<li><em>plugInOptions</em> - options used by quick search plug-ins; right now, only the Places plug-in, the default plug-in that gets called when no other plug-in matches the quick search text, is reading these settings</li>
+<li><em>places.esriGeocodeBBox</em> - the bounding box used for the ArcGIS World Geocoder service to perform the address/POI search within the given extent; bounding rectangle coordinates can be entered as a simple comma-separated string in the format <lower left corner>,<upper right corner></li>
+<li><em>places.esriGeocodeLocation</em> - Longitude/Latitude value that represents the center of the search area; if more than 1 search results are returned by the service, the results nearest to this point will appear first on the list of results</li>
+<li><em>places.esriGeocodeMaxResults</em> - maximum results to be returned by the ArcGIS Geocode service</li>
+<li><em>places.esriGeocodeFilterUsingShape</em> - when specific address/locations are returned by the ArcGIS Geocoder service, the search results are filtered to make sure only results inside this <em>shape</em> or boundary are returned</li>
+</ul>
+<h4 id="advancedsearch">advancedSearch<a class="headerlink" href="#advancedsearch" title="Permanent link"></a></h4>
+<ul>
+<li><em>geoFilterBoundaries</em> - boundaries used on Advanced Search; the data attribute should be set to a geoJson value that represents the boundary</li>
+</ul>
+<h4 id="commandbar">commandBar<a class="headerlink" href="#commandbar" title="Permanent link"></a></h4>
+<ul>
+<li><em>commands</em> - list of buttons and required security level</li>
+<li><em>mobileBreakPointWidth</em> - width value of the browser window used for internally determining if application is in <em>mobile mode</em> or in normal mode (note that this should be in sync with the value used by Bootstrap/bootstrap.css for its media queries)</li>
+</ul>
+<h4 id="service">service<a class="headerlink" href="#service" title="Permanent link"></a></h4>
+<ul>
+<li><em>endpoint</em> - the endpoint of the service layer that OpenGrid application calls; this is the default setting used which is overriden by the one found in <code>config/EnvSettings.js</code></li>
+<li><em>timeout</em> - the timeout value of every service call, in milliseconds; if a service call times out, an alert message is displayed</li>
+<li><em>maxresults</em> - the maximum number of rows to return for a query</li>
+<li><em>authUrl</em> - the URL of the operation to use for retrieving a security token during the login process; there is usually no need to change this unless the service layer is configured or developed to use a different URL</li>
+<li><em>authRenewUrl</em> - the URL of the operation to use for renewing a security token</li>
+<li><em>errorHandler</em> - internal setting to indicate the class to use for handling some exceptions</li>
+<li><em>dateFormat</em> - data format used for converting string to date value for comparing dates on auto-refresh highlighting; this is dependent on the format used by the underlying service</li>
+<li><em>autoLogin</em> - flag to indicate if login page will be displayed or if application will automatically login using credentials specified in <em>autologinUserId</em> and <em>autologinPassword</em></li>
+<li><em>autologinUserId</em> - user id to use for internal login when autoLogin is set to 'true'</li>
+<li><em>autologinPassword</em> - password to use for internal login when autoLogin is set to 'true'</li>
+</ul>
+<h4 id="help">help<a class="headerlink" href="#help" title="Permanent link"></a></h4>
+<ul>
+<li><em>url</em> - url to use for the application help link</li>
+<li><em>type</em> - the type of help link: 'icon' or 'button'</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../build-procedures/" class="btn btn-neutral" title="Build Procedures"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2015-2016 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Chicago/opengrid" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../build-procedures/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>

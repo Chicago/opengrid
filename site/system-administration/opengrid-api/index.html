@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="City of Chicago">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>API - OpenGrid</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "API";
+    var mkdocs_page_input_path = "system-administration\\opengrid-api.md";
+    var mkdocs_page_url = "/system-administration/opengrid-api/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> OpenGrid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">OpenGrid Layout</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../layout/launch-screen/">Launch Screen</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../layout/table-grid/">Table Grid</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Finding Data</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../finding-data/getting-started/">Getting Started</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/advanced-filtering/">Advanced Filtering</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/auto-refresh-search/">Automatically Refresh Searches</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/commonly-used-queries/">Commonly Used Queries</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../finding-data/relative-time-searches/">Searching With Relative Time</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Search by Location</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../search-location/within-geospatial-filter/">Within An Area</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../search-location/near-geospatial-filter/">Near A Location</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../customize-look/">Customize the Look</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Charts and Heatmaps</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../charts-heatmaps/heatmaps/">Heatmaps</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../charts-heatmaps/tile-map/">Tile map</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../map-layers/">Map Layers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../measure-distances/">Measure Distance</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">System Administration</span>
+    <ul class="subnav">
+                <li class=" current">
+                    
+    <a class="current" href="./">API</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#rest-service-resources">REST Service Resources</a></li>
+    
+
+    <li class="toctree-l3"><a href="#112-usersrenew">1.1.2 /users/renew</a></li>
+    
+
+    <li class="toctree-l3"><a href="#113-users">1.1.3 /users</a></li>
+    
+
+    <li class="toctree-l3"><a href="#114-usersuser_id">1.1.4 /users/{user_id}</a></li>
+    
+
+    <li class="toctree-l3"><a href="#115-groups">1.1.5 /groups</a></li>
+    
+
+    <li class="toctree-l3"><a href="#116-groupsgroup_id">1.1.6 /groups/{group_id}</a></li>
+    
+
+    <li class="toctree-l3"><a href="#117-datasets">1.1.7 /datasets</a></li>
+    
+
+    <li class="toctree-l3"><a href="#118-datasetsdataset_id">1.1.8 /datasets/{dataset_id}</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../architecture/">App Architecture</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../installation-and-setup/">Installation and Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../build-procedures/">Build Procedures</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../opengrid-configuration/">Configuration</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">OpenGrid</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>System Administration &raquo;</li>
+        
+      
+    
+    <li>API</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/Chicago/opengrid/edit/master/docs/system-administration\opengrid-api.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 align="center">OpenGrid REST Service <br> Application Programming Interface (API)</h1>
+
+<h4 align="center">Version 1.4.0</h4>
+
+<!--
+## Table of Contents
+//-->
+
+<!--
+[REST Service Resources](#rest-service-resources)
+//-->
+
+<!--
+[users/token](#userstoken)
+//-->
+
+<!--
+[users/renew](#usersrenew)
+//-->
+
+<!--
+[users](#users)
+//-->
+
+<!--
+[users/user_id](#usersuser_id)
+//-->
+
+<!--
+[groups](#groups)
+//-->
+
+<!--
+[groups/group_id](#groupsgroup_id)
+//-->
+
+<!--
+[datasets](#datasets)
+//-->
+
+<!--
+[datasets/dataset_id](#datasetsdataset_id)
+//-->
+
+<!--
+[datasets/dataset_id/query](#datasetsdataset_idquery)
+//-->
+
+<!--
+[queries](#queries)
+//-->
+
+<!--
+[queries/query_id](#queriesquery_id)
+//-->
+
+<!--
+[HTTP Status Codes on Responses](#http-status-codes-on-responses)
+//-->
+
+<h2 id="rest-service-resources">REST Service Resources<a class="headerlink" href="#rest-service-resources" title="Permanent link"></a></h2>
+<p><b>Note:</b> See Section 1.2 for information on error responses and other HTTP
+status codes used by the service. Also note that <b>X-AUTH-TOKEN</b> needs to
+be sent for each calls on the request header with the token obtained by
+calling <b>/users/token</b> as described in Section 1.1.1.</p>
+
+<h2>HTTP Status Codes on Response</h2>
+
+<ul>
+<li><b>HTTP 401</b> is returned when users/token is called and authentication fails.</li>
+<br>
+<li><b>HTTP 403</b> is returned when current user does not have appropriate permissions to access a requested resource. This error code is also returned when the authentication database is unavailable.</li>
+<br>
+<li><b>HTTP 200</b> is returned for any successful request or any handled exceptions. To detect a failure, look for an error object. In case of failure, an error object is returned with the format below:</li> </ul>
+
+<pre><code>        {
+          &quot;error&quot;: {
+            &quot;code&quot;: &quot;&lt;error code&gt;&quot;,
+            &quot;message&quot;: &quot;&lt;error message&gt;&quot;
+                }
+    }
+</code></pre>
+
+<ul>        
+<li>where <b>HTTP &lt;error code&gt;</b> is a code corresponding to the error that occurred and <b>HTTP &lt;error message&gt;</b> is a description of the error.</li>
+<li><b>HTTP 500</b> for any unhandled system errors. The response body will contain details about the error. In most cases, (and this depends on the server infrastructure where the service is deployed) the response body will be an HTML-formatted text.
+</li>
+<br>
+<li><b>HTTP 204</b> (No Content) is returned when an object is deleted successfully (DELETE method where applicable).</li>
+</ul>
+
+<h2>1.1.1 /users/token</h2>
+
+<p><b>Method</b>
+<p><b>POST</b> /users/token</p></p>
+<p>Return a JSON Web Token (JWT) token after user id and password have been successfully validated. The JavaScript Web Token expire after 4 hours. The authentication token needs to be renewed prior to expiration by calling /users/renew.<b>(See 1.1.2 below)</b>
+</p>
+
+<p><b>Note on security:</b>The password is currently expected to be sent in plain text (not encrypted). This is partly done to avoid unnecessary complexity. We believe it is best to rely on transport security (HTTPS) to encrypt user credentials.</p>
+
+<p><b>Sample Request</b></p>
+
+<p><small><b>Request Payload:</b></small></p>
+
+<pre><code>    {
+            &quot;username&quot;: &quot;admin&quot;,
+            &quot;password&quot;: &quot;xxx&quot;
+        }
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<p>The authentication token is returned, the authentication token consist of three sections separated by dots(<b>.</b>): <b>HEADER.PAYLOAD.SIGNATURE</b>; the key X-AUTH-TOKEN is appended to the response header below: </p>
+
+<pre><code>X-AUTH-TOKEN:
+eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTQzOTMzNjQwNywianRpIjoiYWRtaW4iLCJyb2xlcyI6Im9wZW5ncmlkX2FkbWlucyIsImZuYW1lIjoiT3BlbkdyaWQiLCJsbmFtZSI6IkFkbWluIn0.nShqceUs52ykIxu0RBRp4vZ8zaQqfdZ2haZn8AWMqyq5GJHRQkddoOaaLtKABktr32C0zha1pMJJBrjuYoPHIQ
+</code></pre>
+
+<p>
+This token can be parsed using the <b><i>jwt_decode</i></b> JavaScript Web Token library (See <a href="https://github.com/auth0/jwt-decode"> https://github.com/auth0/jwt-decode</a>)
+</p>
+
+<p><b>Error Code</b></p>
+
+<p>If user authentication fails, HTTP status code 401 (Unauthorized) is returned to the requester.</p>
+
+<h2 id="112-usersrenew">1.1.2 /users/renew<a class="headerlink" href="#112-usersrenew" title="Permanent link"></a></h2>
+<p><strong>Method</strong>
+<p><b>POST</b> /users/renew</p>
+<p>Renew the expiration date on an existing JSON Web Token (JWT) token. The existing token needs to be on the request header under key <i>X-AUTH-TOKEN</i>.</p></p>
+<p><b>Sample Response</b></p>
+
+<p>No response is returned but the authentication token with a new expiration time is appended to the response header, replacing the previous one. See 1.1.1 above for a sample token value.</p>
+
+<h2 id="113-users">1.1.3 /users<a class="headerlink" href="#113-users" title="Permanent link"></a></h2>
+<p><strong>Method</strong></p>
+<p><b>GET</b> /users</p>
+
+<p>Return a list of users given a filter</p>
+
+<p><b>Request Query Parameters</b></p>
+
+<p><html>
+<table>
+<tr>
+<th align="left">Parameter</th>
+<th>Value</th>
+<th>Description</th>
+</tr></p>
+<tr>
+<td>q</td>
+<td>String</td>
+<td>
+<p>Filter expression to use to search against the Open Grid user repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.<br> The query filter must follow the MongoDB query syntax, as with all other API calls that has a query filter parameter.<br> It is recommended that this value be URL encoded.
+</p>
+</td>
+</tr>
+
+<tr>
+<td>n</td>
+<td>Integer</td>
+<td>
+<p>The maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0)</p>
+</td>
+</tr>
+
+<p></table>
+</html></p>
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt; /users?q={}&amp;n=1000
+</code></pre>
+
+<p><b>Or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/users?q=%7B%7D&amp;n=1000
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>[
+ {&quot;_id&quot;:
+       {&quot;$oid&quot;:&quot;55ca20b9c4aac050466bc1a3&quot;}, 
+  &quot;userId&quot;:&quot;tester1&quot;,
+  &quot;password&quot;:&quot;password1&quot;,
+  &quot;firstName&quot;:&quot;Tester&quot;,
+  &quot;lastName&quot;:&quot;One&quot;,
+  &quot;groups&quot;:[&quot;opengrid_users_L1&quot;]
+ } 
+]
+</code></pre>
+
+<p><b>POST</b> /users</p>
+
+<p>Create a new user. Returns object for newly created user, if successful.</p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>{
+ &quot;id&quot;:null,
+ &quot;o&quot;:{
+    &quot;userId&quot;:&quot;test3&quot;,
+        &quot;password&quot;:&quot;testxxx&quot;,
+        &quot;firstName&quot;:&quot;Test&quot;,
+        &quot;lastName&quot;:&quot;Three&quot;,
+        &quot;groups&quot;:[]
+     }
+}
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>{
+    &quot;userId&quot;:&quot;test3&quot;,
+    &quot;password&quot;:&quot;testxxx&quot;,
+    &quot;firstName&quot;:&quot;Test&quot;,
+    &quot;lastName&quot;:&quot;Three&quot;,
+    &quot;groups&quot;:[ ],
+    &quot;_id&quot;:
+        {&quot;$oid&quot;:&quot;55ca52dec4aac050466bc1a9&quot;}
+}
+</code></pre>
+
+<h2 id="114-usersuser_id">1.1.4 /users/{user_id}<a class="headerlink" href="#114-usersuser_id" title="Permanent link"></a></h2>
+<p><strong>Method</strong></p>
+<p><b>GET</b> /users/{user_id}</p>
+
+<p>Return a single user object given the user’s internal id.</p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/users/{&quot;$oid&quot;:&quot;55b63708a3db5f292c533c7b&quot;} 
+</code></pre>
+
+<p><b>or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>{
+     &quot;_id&quot;:
+        {&quot;$oid&quot;:&quot;55b63708a3db5f292c533c7b&quot;},
+    &quot;userId&quot;:&quot;TesterOne&quot;,
+    &quot;password&quot;:&quot;test123&quot;,
+    &quot;firstName&quot;:&quot;ABC Test&quot;,
+    &quot;lastName&quot;:&quot;One Update&quot;,
+    &quot;groups&quot;:[&quot;opengrid_users_L1&quot;]
+}
+</code></pre>
+
+<p><b>PUT</b> /users/{user_id}</p>
+
+<p>Update a user’s information. Returns the updated user data, if successful.</p>
+
+<p><b>Sample Request</b></p>
+
+<p><b>URL:</b></p>
+
+<pre><code>&lt;Service URL&gt;/users/{&quot;$oid&quot;:&quot;55ccaca15fc6c6bf8a807cf2&quot;}
+</code></pre>
+
+<p><b>or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/users/%7B%22$oid%22:%2255ccaca15fc6c6bf8a807cf2%22%7D
+</code></pre>
+
+<p><b>Request Payload:</b></p>
+
+<pre><code>{
+    &quot;id&quot;:{&quot;$oid&quot;:&quot;55ccaca15fc6c6bf8a807cf2&quot;},
+     &quot;o&quot;:{
+        &quot;_id&quot;:
+            {&quot;$oid&quot;:&quot;55ccaca15fc6c6bf8a807cf2&quot;},
+        &quot;userId&quot;:&quot;twitterUser&quot;,
+        &quot;password&quot;:&quot;testxxx&quot;,
+        &quot;firstName&quot;:&quot;Twitter&quot;,
+        &quot;lastName&quot;:&quot;User&quot;,
+        &quot;groups&quot;:[
+                &quot;opengrid_users_L1&quot;,
+                &quot;opengrid_users_L2&quot;]
+        }
+}
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>{
+    &quot;userId&quot;:&quot;test3&quot;,
+    &quot;password&quot;:&quot;testxxx&quot;,
+    &quot;firstName&quot;:&quot;Test&quot;,
+    &quot;lastName&quot;:&quot;3&quot;,
+    &quot;groups&quot;:[ ]
+}
+</code></pre>
+
+<p><br>
+<p><b>DELETE</b> /user/{user_id}</p></p>
+<p>Delete a user given the user’s internal Id on the URL path.</p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/users/{&quot;$oid&quot;:&quot;55b63708a3db5f292c533c7b&quot;}
+</code></pre>
+
+<p><b>or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/users/%7B%22%24oid%22%3A%20%2255b63708a3db5f292c533c7b%22%7D
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<p>No response is returned when a user is deleted successfully.</p>
+
+<h2 id="115-groups">1.1.5 /groups<a class="headerlink" href="#115-groups" title="Permanent link"></a></h2>
+<p><strong>Methods</strong>
+<p><b>GET /groups</b></p></p>
+<p>Return a list of OpenGrid groups (teams)</p>
+
+<p><b>Request Query Parameters</b></p>
+
+<p><html>
+<table>
+<tr>
+<th align="left">Parameter</th>
+<th>Value</th>
+<th>Description</th>
+</tr></p>
+<tr>
+<td>
+q
+</td>
+<td>String</td>
+<td>
+<p>Filter expression to use to search against the Open Grid group repository. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether. <br>
+It is recommended that this value be URL encoded.
+</p>
+</td>
+</tr>
+
+<tr>
+<td>n</td>
+<td>Integer</td>
+<td>
+<p>
+The maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0)
+</p>
+</td>
+</tr>
+
+<p></table>
+</html></p>
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/groups?q={}&amp;n=200
+</code></pre>
+
+<p><b>Or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/groups?q=%7B%7D&amp;n=200
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>    [
+        {&quot;_id&quot; :
+                {&quot;$oid&quot;:&quot;55c0c620a3db5f3058630eb3&quot;},
+        &quot;groupId&quot;:&quot;opengrid_users&quot;,
+        &quot;name&quot;:&quot;OpenGrid Users&quot;,
+        &quot;description&quot;:&quot;Group for all OpenGrid users&quot;, 
+        &quot;enabled&quot;: true,
+        &quot;functions&quot;: [
+                &quot;Quick Search&quot;,
+                &quot;Advanced Search&quot;],
+        &quot;datasets&quot;: [
+                &quot;twitter&quot;,
+                &quot;weather&quot;]
+        }
+]
+</code></pre>
+
+<p><strong>Method</strong></p>
+<p><b>POST</b> /groups</p>
+
+<p>Create a new group. Returns object for newly created group, if successful.</p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/groups
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>    {
+        &quot;groupId&quot; : &quot;OPENGRID_NEWGROUP&quot;,
+        &quot;name&quot; : &quot;ABC GROUP&quot;,
+        &quot;description&quot; : &quot;ADD ABC GROUP&quot;,
+        &quot;enabled&quot; : true,
+        &quot;functions&quot; : [ ],
+        &quot;datasets&quot; : [ ],
+        &quot;_id&quot;: {&quot;$oid&quot;:&quot;55cb6362c4aa475d78d4bc40&quot;}
+        }
+</code></pre>
+
+<h2 id="116-groupsgroup_id">1.1.6 /groups/{group_id}<a class="headerlink" href="#116-groupsgroup_id" title="Permanent link"></a></h2>
+<p><strong>Method</strong>
+<p><b>GET</b>/groups/{group_id}</p></p>
+<p>Return a single group given a group’s internal id.</p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/groups/{&quot;$oid&quot;: &quot;55c0c620a3db5f3058630eb3&quot;}
+</code></pre>
+
+<p><b>or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/groups/%7B%22%24oid%22%3A%20%2255c0c620a3db5f3058630eb3%22%7D
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>[
+  {
+    &quot;_id&quot; :
+           {&quot;$oid&quot; : &quot;55c0c620a3db5f3058630eb3&quot;},
+    &quot;groupId&quot; : &quot;opengrid_users&quot;,
+    &quot;name&quot; : &quot;OpenGrid Users&quot;,
+    &quot;description&quot; : &quot;Group for all OpenGrid users&quot;,
+    &quot;enabled&quot; : true,
+    &quot;functions&quot; : [
+                &quot;Quick Search&quot;,
+                &quot;Advanced Search&quot;],
+    &quot;datasets&quot; : [
+                &quot;twitter&quot;,
+            &quot;weather&quot;]
+  }
+]
+</code></pre>
+
+<p><br>
+<p><b>PUT</b>/groups/{group_id}</p>
+<p>Update a group (group-level attributes and members). Returns the updated group data, if successful.</p></p>
+<p><b>Sample Request</b></p>
+
+<p><b>URL:</b></p>
+
+<pre><code>&lt;Service URL&gt;/groups/{&quot;$oid&quot;:&quot;55c525c6c4aae748132f4d06&quot;}
+</code></pre>
+
+<p><b><small>or when URL encoded:</small></b></p>
+
+<pre><code>&lt;Service URL&gt;/groups/%7B%22%24oid%22%3A%2255c525c6c4aae748132f4d06%22%7D
+</code></pre>
+
+<p><b><small>Request Payload:</small></b></p>
+
+<pre><code>{
+    &quot;id&quot;:{&quot;$oid&quot;:&quot;55c525c6c4aae748132f4d06&quot;},
+    &quot;o&quot;: {
+        &quot;groupId&quot;:&quot;opengrid_users_L2&quot;,
+            &quot;name&quot;:&quot;OpenGrid Users Level 2&quot;,
+            &quot;description&quot;:&quot;Users with access to weather data&quot;,
+            &quot;enabled&quot;:true,
+            &quot;isAdmin&quot;:false,
+            &quot;functions&quot;:[
+                &quot;Quick Search&quot;,
+                &quot;Advanced Search&quot;],
+            &quot;datasets&quot;:[&quot;weather&quot;]
+            }
+}
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>{
+  &quot;groupId&quot; : &quot;opengrid_users_L2&quot;,
+  &quot;name&quot; : &quot;OpenGrid Users Level 2&quot;,
+  &quot;description&quot; : &quot;Users with access to weather data&quot;,
+  &quot;enabled&quot; : true,
+  &quot;isAdmin&quot; : false,
+  &quot;functions&quot; : [
+            &quot;Quick Search&quot;,
+            &quot;Advanced Search&quot;],
+  &quot;datasets&quot; : [&quot;weather&quot;]
+}
+</code></pre>
+
+<p><b>DELETE /groups/{group_id}</b></p>
+
+<p>Delete a group given the group’s internal Id on the URL path.</p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/groups/{&quot;$oid&quot;:&quot;55cb6362c4aa475d78d4bc40&quot;}
+</code></pre>
+
+<p><b>or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/groups/%7B%22$oid%22:%2255cb6362c4aa475d78d4bc40%22%7D
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<p>No response is returned when a group is deleted successfully.</p>
+
+<h2 id="117-datasets">1.1.7 /datasets<a class="headerlink" href="#117-datasets" title="Permanent link"></a></h2>
+<p><strong>Method</strong> 
+<p><b>GET</b> /datasets</p>
+<p>Return a list of available datasets. The response is a JSON array of descriptors for each available dataset.</p></p>
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/datasets
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>    [
+        {
+            &quot;id&quot; : &quot;twitter&quot;,
+            &quot;displayName&quot; : &quot;Twitter&quot;,
+            &quot;options&quot;: {&quot;rendition&quot;:
+                        {
+                                &quot;icon&quot; : &quot;default&quot;,
+                            &quot;color&quot; : &quot;#001F7A&quot;,
+                            &quot;fillColor&quot; : &quot;#00FFFF&quot;,
+                            &quot;opacity&quot; : 85,
+                            &quot;size&quot; : 6
+                                    },
+                    &quot;supportedOperators&quot; : [    {
+                                                &quot;dataType&quot; : &quot;string&quot;, 
+                                                &quot;operators&quot; : [
+                                                            &quot;equal&quot;, 
+                                                            &quot;not_equal&quot;, 
+                                                            &quot;in&quot;, 
+                                                            &quot;begins_with&quot;, 
+                                                            &quot;contains&quot;
+                                                                ]
+                                                    }       
+                                        ],
+                        &quot;quickSearch&quot; : {
+                                &quot;enable&quot; : true, 
+                                &quot;triggerAlias&quot; : &quot;twe&quot;, 
+                                &quot;triggerWord&quot; : &quot;tweet&quot;, 
+                                &quot;hintCaption&quot; : &quot;Search Tweets&quot;, 
+                                &quot;hintExample&quot; : &quot;tweet 'food'&quot;
+                                                    }
+                    },              
+                &quot;columns&quot;:
+                        [
+                            {
+                                &quot;id&quot; : &quot;_id&quot;,
+                                &quot;displayName&quot; : &quot;ID&quot;,
+                                &quot;dataType&quot; : &quot;string&quot;,
+                                &quot;filter&quot; : false,
+                                &quot;popup&quot; : false,
+                                &quot;list&quot; : false
+                                        },
+                            {
+                                &quot;id&quot; : &quot;date&quot;,
+                                &quot;displayName&quot; : &quot;Date&quot;,
+                                &quot;dataType&quot; : &quot;date&quot;,
+                                &quot;filter&quot; : true,
+                                &quot;popup&quot; : true,
+                                &quot;list&quot; : true,
+                                &quot;sortOrder&quot; : 1
+                                        },
+                            {                
+                                &quot;id&quot;: &quot;screenName&quot;,
+                                &quot;displayName&quot; : &quot;Screen Name&quot;,
+                                &quot;dataType&quot; : &quot;string&quot;,
+                                &quot;filter&quot; : true,
+                                &quot;popup&quot; : true,
+                                &quot;list&quot; : true,
+                                &quot;sortOrder&quot; : 2,
+                                &quot;groupBy&quot; : true,
+                                &quot;quickSearch&quot; : true
+                                            },
+                            {   
+                                &quot;id&quot; : &quot;text&quot;,
+                                &quot;displayName&quot; : &quot;Text&quot;,
+                                &quot;dataType&quot; : &quot;string&quot;,
+                                &quot;filter&quot; : true,
+                                &quot;popup&quot; : true,
+                                &quot;list&quot; : true,
+                                &quot;sortOrder&quot;: 3,
+                                &quot;quickSearch&quot; : true
+                                            },
+                            {
+                                &quot;id&quot; : &quot;city&quot;,
+                                &quot;displayName&quot; : &quot;City&quot;,
+                                &quot;dataType&quot; : &quot;string&quot;,
+                                &quot;filter&quot; : true,
+                                &quot;popup&quot; : true,
+                                &quot;list&quot; : true,
+                                &quot;sortOrder&quot; : 4,
+                                &quot;groupBy&quot; : true,
+                                &quot;quickSearch&quot; : true
+                                            },
+                            {
+                                &quot;id&quot; :&quot;bio&quot;,
+                                &quot;displayName&quot; : &quot;Bio&quot;,
+                                &quot;dataType&quot; : &quot;string&quot;,
+                                &quot;sortOrder&quot; : 5
+                                            },
+                            {
+                                &quot;id&quot; : &quot;hashtags&quot;,
+                                &quot;displayName&quot; : &quot;Hashtags&quot;,
+                                &quot;dataType&quot; : &quot;string&quot;,
+                                &quot;sortOrder&quot; : 6
+                                            },
+                            {
+                                &quot;id&quot; : &quot;lat&quot;,
+                                &quot;displayName&quot; : &quot;Latitude&quot;,
+                                &quot;dataType&quot; : &quot;float&quot;,
+                                &quot;list&quot; : true,
+                                &quot;sortOrder&quot; : 7
+                                            },
+                            {
+                                &quot;id&quot; : &quot;long&quot;,
+                                &quot;displayName&quot; : &quot;Longitude&quot;,
+                                &quot;dataType&quot; : &quot;float&quot;,
+                                &quot;list&quot; : true,
+                                &quot;sortOrder&quot; : 8
+                                            }
+                        ]
+            },  
+        {
+            &quot;id&quot; : &quot;weather&quot;,
+            &quot;displayName&quot; : &quot;Weather&quot;,
+            &quot;options&quot; : {&quot;rendition&quot;:
+                           {
+                            &quot;icon&quot; : &quot;default&quot;,
+                            &quot;color&quot; : &quot;#8c2d04&quot;,
+                            &quot;fillColor&quot; : &quot;#fdae6b&quot;,
+                            &quot;opacity&quot; : 85,
+                            &quot;size&quot; : 6
+                                    }
+                    },
+            &quot;columns&quot;:
+                    [
+                        { 
+                        &quot;id&quot;: &quot;_id&quot;,
+                        &quot;displayName&quot; : &quot;ID&quot;,
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;filter&quot; : false,
+                        &quot;popup&quot; : false,
+                        &quot;list&quot; : false
+                                    },
+                        {
+                        &quot;id&quot; : &quot;temp&quot;,
+                        &quot;displayName&quot; : &quot;Temperature&quot;,
+                        &quot;dataType&quot; : &quot;float&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 1
+                                    },
+                        {   
+                        &quot;id&quot; : &quot;windspeed&quot;,
+                        &quot;displayName&quot; : &quot;Wind Speed&quot;,
+                        &quot;dataType&quot; : &quot;float&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 2
+                                    },
+                       {
+                        &quot;id&quot; : &quot;condition&quot;,
+                        &quot;displayName&quot; : &quot;Condition&quot;,
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 3
+                                    },
+                    {
+                        &quot;id&quot; : &quot;humidity&quot;,
+                        &quot;displayName&quot; : &quot;Humidity&quot;,
+                        &quot;dataType&quot; : &quot;float&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 4
+                                    },
+                    {
+                        &quot;id&quot; : &quot;precipIntensity&quot;,
+                        &quot;displayName&quot; : &quot;Precipitation Intensity&quot;,
+                        &quot;dataType&quot; : &quot;float&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true ,
+                        &quot;sortOrder&quot; : 5
+                                    },
+                    {
+                         &quot;id&quot; : &quot;date&quot;,
+                         &quot;displayName&quot; : &quot;Date&quot;,
+                         &quot;dataType&quot; : &quot;date&quot;,
+                         &quot;filter&quot; : true,
+                         &quot;popup&quot; : true,
+                         &quot;list&quot; : true,
+                         &quot;sortOrder&quot; : 5
+                                          },
+                         {
+                        &quot;id&quot; : &quot;zipcode&quot;,
+                        &quot;displayName&quot; : &quot;Zip Code&quot;,
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 6,
+                        &quot;values&quot; : [ 60601 , 60602],
+                        &quot;groupBy&quot; : true
+                                    },
+                      {
+                            &quot;id&quot; :&quot;forecast&quot;,
+                            &quot;displayName&quot; : &quot;Today's Forecast&quot;,
+                            &quot;dataType&quot; : &quot;string&quot;,
+                            &quot;popup&quot; : true, 
+                            &quot;list&quot; : true ,
+                            &quot;sortOrder&quot; : 7
+                                            },
+                      {
+                            &quot;id&quot; : &quot;icon&quot;,
+                            &quot;displayName&quot; : &quot;Icon&quot;,
+                            &quot;dataType&quot; : &quot;graphic&quot;, 
+                            &quot;popup&quot; : true,
+                            &quot;sortOrder&quot; : 7
+                                           },
+                      {
+                            &quot;id&quot; : &quot;lat&quot;,
+                            &quot;displayName&quot; : &quot;Latitude&quot;,
+                            &quot;dataType&quot; : &quot;float&quot;,
+                            &quot;list&quot; : true ,
+                            &quot;sortOrder&quot; : 8
+                                           },
+                      {
+                            &quot;id&quot; : &quot;long&quot;,
+                            &quot;displayName&quot; : &quot;Longitude&quot;,
+                            &quot;dataType&quot; : &quot;float&quot;,
+                            &quot;list&quot; : true,
+                            &quot;sortOrder&quot; : 9
+                                           }
+           ]
+        }
+   ]                 
+
+</code></pre>
+
+<h2 id="118-datasetsdataset_id">1.1.8 /datasets/{dataset_id}<a class="headerlink" href="#118-datasetsdataset_id" title="Permanent link"></a></h2>
+<p><strong>Method</strong></p>
+<p><b>GET</b> /datasets/(dataset_id}</p>
+
+<p>Return a single dataset descriptor. An HTTP 403 is returned when the user has no access to the dataset requested. </p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/datasets/twitter
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>{
+    &quot;id&quot; : &quot;twitter&quot;,
+    &quot;displayName&quot; : &quot;Twitter&quot;,
+    &quot;options&quot;: {&quot;rendition&quot;:
+                      { 
+                    &quot;icon&quot; : &quot;default&quot;,
+                    &quot;color&quot; : &quot;#001F7A&quot;,
+                    &quot;fillColor&quot; : &quot;#00FFFF&quot;,
+                    &quot;opacity&quot; : 85,
+                    &quot;size&quot; : 6
+                                },
+           &quot;supportedOperators&quot; : [  
+                         {
+                                    &quot;dataType&quot; : &quot;string&quot;, 
+                                    &quot;operators&quot; : [
+                                                &quot;equal&quot;, 
+                                                &quot;not_equal&quot;, 
+                                                &quot;in&quot;, 
+                                                &quot;begins_with&quot;, 
+                                                &quot;contains&quot;
+                                                    ]
+                                    }       
+                                  ],
+            &quot;chart&quot; : {
+                    &quot;xAxisField&quot; : &quot;date&quot;, 
+                    &quot;xAxisLabel&quot; : &quot;Post Date&quot;
+                }                                 
+            },
+            &quot;quickSearch&quot; : {
+                    &quot;enable&quot; : true, 
+                    &quot;triggerAlias&quot; : &quot;twe&quot;, 
+                    &quot;triggerWord&quot; : &quot;tweet&quot;, 
+                    &quot;hintCaption&quot; : &quot;Search Tweets&quot;, 
+                    &quot;hintExample&quot; : &quot;tweet 'food'&quot;
+                                        }
+    &quot;columns&quot; :
+            [
+                   {
+                &quot;id&quot; : &quot;_id&quot;,
+                &quot;displayName&quot; : &quot;ID&quot;,
+                &quot;dataType&quot; : &quot;string&quot;,
+                &quot;filter&quot; : false,
+                &quot;popup&quot; : false,
+                &quot;list&quot; : false
+                            },
+                {
+                &quot;id&quot; : &quot;date&quot;,
+                &quot;displayName&quot; : &quot;Date&quot;,
+                &quot;dataType&quot; : &quot;date&quot;,
+                &quot;filter&quot; : true,
+                &quot;popup&quot; : true,
+                &quot;list&quot; : true,
+                &quot;sortOrder&quot;: 1
+                            },
+                {
+                &quot;id&quot; : &quot;screenName&quot;,
+                &quot;displayName&quot; : &quot;Screen Name&quot;,
+                &quot;dataType&quot; : &quot;string&quot;,
+                &quot;filter&quot; : true,
+                &quot;popup&quot; : true,
+                &quot;list&quot; : true,
+                &quot;sortOrder&quot; : 2,
+                &quot;groupBy&quot; : true
+                            },
+                {
+                &quot;id&quot; : &quot;text&quot;,
+                &quot;displayName&quot; : &quot;Text&quot;,
+                &quot;dataType&quot; : &quot;string&quot;,
+                &quot;filter&quot; : true,
+                &quot;popup&quot; : true,
+                &quot;list&quot; : true,
+                &quot;sortOrder&quot; : 3
+                            },
+                {
+                &quot;id&quot; : &quot;city&quot;,
+                &quot;displayName&quot; : &quot;City&quot;,
+                &quot;dataType&quot; : &quot;string&quot;,
+                &quot;filter&quot; : true,
+                &quot;popup&quot; : true,
+                &quot;list&quot; : true ,
+                &quot;sortOrder&quot; : 4,
+                &quot;groupBy&quot; : true
+                            },
+                {
+                &quot;id&quot; : &quot;bio&quot;,
+                &quot;displayName&quot; : &quot;Bio&quot;,
+                &quot;dataType&quot; : &quot;string&quot;,
+                &quot;sortOrder&quot; : 5
+                            },
+                 {
+                &quot;id&quot; : &quot;hashtags&quot;,
+                &quot;displayName&quot; : &quot;Hashtags&quot;,
+                &quot;dataType&quot; : &quot;string&quot;,
+                &quot;sortOrder&quot; : 6
+                            },
+                 {
+                &quot;id&quot; : &quot;lat&quot;,
+                &quot;displayName&quot; : &quot;Latitude&quot;,
+                &quot;dataType&quot; : &quot;float&quot;,
+                &quot;list&quot; : true ,
+                &quot;sortOrder&quot; : 7
+                            },
+                  {
+                &quot;id&quot; : &quot;long&quot;,
+                &quot;displayName&quot; : &quot;Longitude&quot;,
+                &quot;dataType&quot; : &quot;float&quot;,
+                &quot;list&quot; : true,
+                &quot;sortOrder&quot; : 8
+                            }
+            ]
+    }
+</code></pre>
+
+<h4>New in 1.4.0</h4>
+
+<p>Two new column properties were introduced as part of the 1.4.0 release:
+<ul>
+<li><b>array</b> - a flag to indicate that the column contains array-type values</li>
+<li><b>dotSizer</b> - an object specifying how the dot size will be calculated dynamically. </li>
+</ul>
+For example, a value like below will calculate the dot size using the given formula depending on the value of this column as represented by the @v token:<br>
+"dotSizer" : {
+    "calculator" : "(Math.sqrt(@v) * 2.5) + 2"
+}
+<h2>1.1.9 /datasets/{dataset_id}/query</h2></p>
+<p><strong>Method</strong>
+<p><b>GET</b>/datasets/{dataset_id}/query</p></p>
+<p>Execute a query against a specific dataset.</p>
+
+<p><b>Request Query Parameters</b></p>
+
+<p><html>
+<table>
+<tr>
+<th align="left">Parameter</th>
+<th>Value</th>
+<th>Description</th>
+</tr></p>
+<tr>
+<td>
+q
+</td>
+<td>String</td>
+<td>
+<p>
+Filter expression to use to against the specified dataset Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.
+</p>
+<p>
+The query filter must follow the MongoDB query syntax, as with all other API calls that has a query filter parameter.<br> 
+It is recommended that this value be URL encoded.
+</p>
+</td>
+</tr>
+
+<tr>
+<td>n</td>
+<td>Integer</td>
+<td><p>The maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0)</p>
+</td>
+</tr>
+
+<tr>
+<td>opts</td>
+<td>JSON string</td>
+<td><p>Optional parameters that can be passed depending on service capabilities. This value needs to be encoded for the call to work as expected. "geoFilter" is an attribute supported as of Release 1.1.0 and should be a valid geoJson geometry value.</p>
+</td>
+</tr>
+
+<p></table>
+</html></p>
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/datasets/twitter/query?q={&quot;$and&quot;:[{&quot;text&quot;:{&quot;$regex&quot;:&quot;happy&quot;}}]}&amp;n=1&amp;opts={&quot;geoFilter&quot;:{&quot;type&quot;:&quot;MultiPolygon&quot;,&quot;coordinates&quot;:[[[[-87.63304710388184,41.89278978584501],[-87.61206150054932,41.89278978584501],[-87.61206150054932,41.88140002416609],[-87.63304710388184,41.88140002416609],[-87.63304710388184,41.89278978584501]]]]}}
+</code></pre>
+
+<p><b><small>Or when URL encoded:</small></b></p>
+
+<pre><code>&lt;Service URL&gt;/datasets/twitter/query?q=%7B%22$and%22:%5B%7B%22text%22:%7B%22$regex%22:%22happy%22%7D%7D%5D%7D&amp;n=6000&amp;opts=%7B%22geoFilter%22:%7B%22type%22:%22MultiPolygon%22,%22coordinates%22:%5B%5B%5B%5B-87.63304710388184,41.89278978584501%5D,%5B-87.61206150054932,41.89278978584501%5D,%5B-87.61206150054932,41.88140002416609%5D,%5B-87.63304710388184,41.88140002416609%5D,%5B-87.63304710388184,41.89278978584501%5D%5D%5D%5D%7D%7D
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>{
+    &quot;type&quot; : &quot;FeatureCollection&quot;, 
+    &quot;features&quot; :
+            [
+                {
+                    &quot;type&quot;: &quot;Feature&quot;, 
+                    &quot;properties&quot;: 
+                            {
+                                &quot;_id&quot; : {&quot;$oid&quot; : &quot;556e6f18aef407e1dc98685e&quot;},
+                                &quot;date&quot; : &quot;05/02/2012 8:24 AM&quot;,
+                                &quot;screenName&quot; : &quot;DeeeEmmm&quot;,
+                                &quot;text&quot; : &quot;Just talked to bleep last nyt.... Felt happy, but sad in a lot of ways....&quot;,
+                                &quot;city&quot; : &quot;Chicago, IL&quot;,
+                                &quot;bio&quot; : &quot;I'm the female version of Ari Gold!&quot;,
+                                &quot;lat&quot; : 41.84770456,
+                                &quot;long&quot; : -87.8521837,
+                                &quot;hashtags&quot; : &quot;&quot;
+                                            },
+                    &quot;geometry&quot;:
+                            {
+                                &quot;type&quot;: &quot;Point&quot;,
+                                &quot;coordinates&quot;: [-87.8521837,41.84770456]
+                                        },
+                    &quot;autoPopup&quot;: false
+                    }   
+                ],
+    &quot;meta&quot;:
+        { 
+            &quot;view&quot;:
+                     {
+                    &quot;id&quot; : &quot;twitter&quot;,
+                    &quot;displayName&quot; : &quot;Twitter&quot;,
+                    &quot;options&quot;:
+                               {&quot;rendition&quot; :
+                                      {
+                                    &quot;icon&quot; : &quot;default&quot;,
+                                    &quot;color&quot; : &quot;#001F7A&quot;,
+                                    &quot;fillColor&quot; : &quot;#00FFFF&quot;,
+                                    &quot;opacity&quot; : 85,
+                                    &quot;size&quot; : 6
+                                                }
+                            },
+            &quot;columns&quot; : 
+                    [
+                       {
+                        &quot;id&quot; : &quot;_id&quot;, 
+                        &quot;displayName&quot; : &quot;ID&quot;, 
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;filter&quot; : false,
+                        &quot;popup&quot; : false,
+                        &quot;list&quot; : false
+                                    },
+                       {
+                        &quot;id&quot; : &quot;date&quot;,
+                        &quot;displayName&quot; : &quot;Date&quot;,
+                        &quot;dataType&quot; : &quot;date&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 1
+                                    },
+                       {
+                        &quot;id&quot; : &quot;screenName&quot;,
+                        &quot;displayName&quot; : &quot;Screen Name&quot;,
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 2,
+                        &quot;groupBy&quot; : true
+                                    },
+                       {
+                        &quot;id&quot; : &quot;text&quot;,
+                        &quot;displayName&quot; : &quot;Text&quot;,
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 3
+                                    },
+                       {    
+                        &quot;id&quot; : &quot;city&quot;,
+                        &quot;displayName&quot; : &quot;City&quot;,
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;filter&quot; : true,
+                        &quot;popup&quot; : true,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 4,
+                            &quot;groupBy&quot; : true
+                                     },
+                       {
+                        &quot;id&quot; : &quot;bio&quot;,
+                        &quot;displayName&quot; : &quot;Bio&quot;,
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;sortOrder&quot; : 5
+                                    },
+                       {
+                        &quot;id&quot; : &quot;hashtags&quot;,
+                        &quot;displayName&quot; : &quot;Hashtags&quot;,
+                        &quot;dataType&quot; : &quot;string&quot;,
+                        &quot;sortOrder&quot; : 6
+                                    },
+                       {
+                        &quot;id&quot; : &quot;lat&quot;,
+                        &quot;displayName&quot; : &quot;Latitude&quot;,
+                        &quot;dataType&quot; : &quot;float&quot;,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 7
+                                    },
+                       {        
+                        &quot;id&quot; : &quot;long&quot;,
+                        &quot;displayName&quot; : &quot;Longitude&quot;,
+                        &quot;dataType&quot; : &quot;float&quot;,
+                        &quot;list&quot; : true,
+                        &quot;sortOrder&quot; : 8
+                                    }
+                    ]
+                } 
+        }
+    }
+</code></pre>
+
+<p><b>Method</b></p>
+
+<p><b>POST</b>/datasets/{dataset_id}/query</p>
+
+<p>Execute a query against a specific dataset. The POST method is now supported to accomodate bigger request payloads primarily due to geo-spatial filters (for OpenGrid services that support geo-spatial filtering)</p>
+
+<p><b>Request Parameters</b></p>
+
+<p>The parameter names are the same as the ones on the GET method above except that they should be passed as form data. See Sample request payload below.</p>
+
+<p><b>Sample Request Payload</b></p>
+
+<pre><code>------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name=&quot;q&quot;
+
+{}
+------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name=&quot;n&quot;
+
+6000
+------WebKitFormBoundaryOvluSdchMLVGg7rd
+Content-Disposition: form-data; name=&quot;opts&quot;
+
+    {
+        &quot;geoFilter&quot;:
+                {&quot;type&quot;:
+                    &quot;MultiPolygon&quot;,
+                    &quot;coordinates&quot;:[
+                            [
+                               [
+                                [-87.65630722045898,41.89850786255543], 
+                                [-87.60510921478273,41.89850786255543],
+                                [-87.60510921478273,41.87588812018588], 
+                                [-87.65630722045898,41.87588812018588],
+                                [-87.65630722045898,41.89850786255543]
+                              ]
+                            ]
+                            ]
+                 }
+     }
+------WebKitFormBoundaryOvluSdchMLVGg7rd--
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<p>See sample response for the GET method above.</p>
+
+<h2>1.1.10 /queries</h2>
+
+<p><b>Method</b></p>
+
+<p><b>GET</b> /queries</p>
+
+<p>Return list of all queries that user has access to. A user has access to all queries he or she has created and those shared with his groups or shared with him directly by other users.</p>
+
+<p><b>Request Query Parameters</b></p>
+
+<p><html>
+<table>
+<tr>
+<th align="left">Parameter</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>
+q</td>
+<td>
+String
+</td>
+<td>
+<p>
+Filter expression to use. Pass ‘{}’ (empty object) to specify ‘no filter’ or leave out this parameter altogether.
+<br>
+It is recommended that this value be URL encoded.
+</p>
+</td>
+</tr>
+<tr>
+<td>n
+</td>
+<td>
+Integer
+</td>
+<td>
+<p>
+maximum number of records to return; If this parameter is not specified, no records are returned (i.e. default value of 0).
+</p>
+</td>
+</tr>
+</table>
+</html></p>
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/queries?n=1
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>[
+    {&quot;_id&quot; :
+            {&quot;$oid&quot; : &quot;5582f831a3db5f4190e4707a&quot;},
+     &quot;name&quot; : &quot;Weather Records for 60601&quot;,
+     &quot;owner&quot; : &quot;jsmith&quot;,
+     &quot;spec&quot; :
+           [
+            {
+                   &quot;dataSetId&quot; : &quot;weather&quot;,
+               &quot;filters&quot; : {
+                          &quot;condition&quot; : &quot;AND&quot;,
+                      &quot;rules&quot; :  [
+                            {
+                                &quot;id&quot; : &quot;zipcode&quot;,
+                                &quot;field&quot; : &quot;zipcode&quot;,
+                                &quot;type&quot; : &quot;string&quot;,
+                                &quot;input&quot; : &quot;text&quot;,
+                                &quot;operator&quot; : &quot;equal&quot;,
+                                &quot;value&quot; : &quot;60601&quot;
+                                              }
+                                                        ]
+                         },
+               &quot;rendition&quot; : {
+                            &quot;color&quot; : &quot;#DC143C&quot;,
+                        &quot;opacity&quot; : 85,
+                        &quot;size&quot; : 6
+                                }
+                }
+             ],
+        &quot;sharedWith&quot; :
+                    {
+                &quot;users&quot; : [ ],
+                &quot;groups&quot; : [ ]
+                        },
+        &quot;isCommon&quot; : true
+      }
+]
+
+</code></pre>
+
+<p><b>POST</b>/queries</p>
+
+<p>Create a new query. Returns object for newly created query, if successful.</p>
+
+<p><b>Sample Request</b></p>
+
+<p><b><small>Request Payload</small></b></p>
+
+<pre><code>{
+       &quot;o&quot;:{
+        &quot;name&quot;:&quot;Tweets By Bud&quot;,
+        &quot;owner&quot;:&quot;user1&quot;,
+            &quot;spec&quot;:[
+                           {
+                      &quot;dataSetId&quot;:&quot;twitter&quot;,
+                      &quot;filters&quot;:{
+                            &quot;condition&quot;:&quot;AND&quot;,
+                            &quot;rules&quot;:[
+                                        {
+                                    &quot;id&quot;:&quot;screenName&quot;,
+                                    &quot;field&quot;:&quot;screenName&quot;,
+                                    &quot;type&quot;:&quot;string&quot;,
+                                    &quot;input&quot;:&quot;text&quot;,
+                                    &quot;operator&quot;:&quot;contains&quot;,
+                                    &quot;value&quot;:&quot;bud&quot;
+                                                }
+                                    ]
+                             },
+                    &quot;rendition&quot;:{
+                            &quot;color&quot;:&quot;#DC143C&quot;,
+                            &quot;opacity&quot;:&quot;85&quot;,
+                            &quot;size&quot;:&quot;6&quot;
+                                    }
+                    }
+                  ],
+          &quot;sharedWith&quot;:{
+                    &quot;users&quot;:[],
+                    &quot;groups&quot;:[]
+                            },
+          &quot;isCommon&quot;:false,
+          &quot;autoRefresh&quot;:false,
+          &quot;refreshInterval&quot;:&quot;30&quot;,
+          &quot;geoFilter&quot;:{
+                    &quot;boundaryType&quot;:&quot;within&quot;,
+                    &quot;boundary&quot;: &quot;&quot;
+                            }
+    }
+}
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>    {
+        &quot;name&quot; : &quot;Tweets By Bud&quot;,
+        &quot;owner&quot; : &quot;user1&quot;,
+        &quot;spec&quot; : [{
+                &quot;dataSetId&quot; : &quot;twitter&quot;,
+                 &quot;filters&quot; : {
+                        &quot;condition&quot; : &quot;AND&quot;,
+                        &quot;rules&quot; : [ {
+                                &quot;id&quot; : &quot;screenName&quot;,
+                                &quot;field&quot; : &quot;screenName&quot;,
+                                &quot;type&quot; : &quot;string&quot;,
+                                &quot;input&quot; : &quot;text&quot;,
+                                &quot;operator&quot; : &quot;contains&quot;,
+                                &quot;value&quot; : &quot;bud&quot;
+                                   } ]
+                        },
+                &quot;rendition&quot; : {
+                            &quot;color&quot; : &quot;#DC143C&quot;,
+                            &quot;opacity&quot; : &quot;85&quot;,
+                            &quot;size&quot; : &quot;6&quot;
+                            }
+             }],
+         &quot;sharedWith&quot; : {
+                    &quot;users&quot; : [ ],
+                    &quot;groups&quot; : [ ]
+                        },
+        &quot;isCommon&quot; : false,
+        &quot;autoRefresh&quot; : false,
+        &quot;refreshInterval&quot; : &quot;30&quot;,
+        &quot;geoFilter&quot; : 
+                { 
+                    &quot;boundaryType&quot; : &quot;within&quot;,
+                    &quot;boundary&quot; : &quot;&quot;
+                            },
+        &quot;_id&quot; : { &quot;$oid&quot; : &quot;55df5ec39900ec81a481b0f6&quot;}
+    }
+
+</code></pre>
+
+<h2> 1.1.11 /queries/{query_id}</h2>
+
+<p><b>Method</b></p>
+
+<p><b>GET</b> /queries/{query_id}</p>
+
+<p>Return a single query given a query’s internal id.</p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/queries/{&quot;$oid&quot;:&quot;5582f831a3db5f4190e4707a&quot;} 
+</code></pre>
+
+<p><b>or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/queries/%7B%22$oid%22:%5582f831a3db5f4190e4707a%22%7D
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>    [
+        {&quot;_id&quot;:
+                 { &quot;$oid&quot; : &quot;5582f831a3db5f4190e4707a&quot;},
+          &quot;name&quot; : &quot;Weather Records for 60601&quot;,
+          &quot;owner&quot; : &quot;jsmith&quot;, 
+          &quot;spec&quot; : [{
+                    &quot;dataSetId&quot; : &quot;weather&quot;,
+                &quot;filters&quot; : { 
+                        &quot;condition&quot; : &quot;AND&quot;,
+                        &quot;rules&quot; : 
+                                [{
+                                    &quot;id&quot; : &quot;zipcode&quot;,
+                                    &quot;field&quot; : &quot;zipcode&quot;,
+                                    &quot;type&quot; : &quot;string&quot;,
+                                    &quot;input&quot; : &quot;text&quot;,
+                                    &quot;operator&quot; : &quot;equal&quot;,
+                                    &quot;value&quot; : &quot;60601&quot;
+                                                }]
+                           },
+                &quot;rendition&quot;: {
+                        &quot;color&quot; : &quot;#DC143C&quot;,
+                        &quot;opacity&quot; : 85,
+                        &quot;size&quot; : 6
+                                }
+              }],
+        &quot;sharedWith&quot; : {
+                    &quot;users&quot; : [ ],
+                    &quot;groups&quot; : [ ]
+                            },
+        &quot;isCommon&quot; : true}
+    ]
+</code></pre>
+
+<p><b>PUT</b> /queries/{query_id}</p>
+
+<p>Update a query. Returns the updated query object, if successful.</p>
+
+<p><b>Sample Request</b></p>
+
+<p><b>URL:</b></p>
+
+<pre><code>&lt;Service URL&gt;/queries/{&quot;$oid&quot;:&quot;55c52cf6c4aa31b24b04d620&quot;} 
+</code></pre>
+
+<p><b><small>or when URL encoded:</b></small></p>
+
+<pre><code>&lt;Service URL&gt;/queries/%7B%22$oid%22:%2255c52cf6c4aa31b24b04d620%22%7D
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<pre><code>    {
+        &quot;name&quot; : &quot;Tweets on coupon&quot;,
+        &quot;owner&quot; : &quot;user1&quot;, 
+        &quot;spec&quot; : [{ 
+                &quot;dataSetId&quot; : &quot;twitter&quot;,
+                &quot;filters&quot;: {
+                        &quot;condition&quot; : &quot;AND&quot;,
+                        &quot;rules&quot; : [{
+                                &quot;id&quot; : &quot;text&quot;,
+                                &quot;field&quot; : &quot;text&quot;,
+                                &quot;type&quot; : &quot;string&quot;,
+                                &quot;input&quot; : &quot;text&quot;,
+                                &quot;operator&quot; : &quot;contains&quot;,
+                                &quot;value&quot; : &quot;coupon&quot;
+                                                }]
+                    },
+                &quot;rendition&quot; : {
+                            &quot;color&quot; : &quot;#DC143C&quot;,
+                            &quot;opacity&quot; : &quot;85&quot;,
+                            &quot;size&quot; : &quot;6&quot;
+                                        }
+             }],
+        &quot;sharedWith&quot; : {
+                    &quot;users&quot; : [ ],
+                    &quot;groups&quot; : [ ]
+                                },
+        &quot;isCommon&quot; : false,
+        &quot;autoRefresh&quot; : false,
+        &quot;refreshInterval&quot; : &quot;30&quot;,
+        &quot;_id&quot; : {&quot;$oid&quot; : &quot;55c52cf6c4aa31b24b04d620&quot;},
+        &quot;geoFilter&quot; : {
+                &quot;boundaryType&quot; : &quot;within&quot;,
+                &quot;boundary&quot; : &quot;&quot;
+                                }
+    }
+</code></pre>
+
+<p><b>DELETE</b> /queries/{query_id}</p>
+
+<p>Delete a query given the query’s internal Id on the URL path.</p>
+
+<p><b>Sample Request</b></p>
+
+<pre><code>&lt;Service URL&gt;/queries/{&quot;$oid&quot;:&quot;55cb6362c4aa475d78d4bc40&quot;}
+</code></pre>
+
+<p><b>or when URL encoded:</b></p>
+
+<pre><code>&lt;Service URL&gt;/queries/%7B%22%24oid%22%3A%2255cb6362c4aa475d78d4bc40%22%7D 
+</code></pre>
+
+<p><b>Sample Response</b></p>
+
+<p>No response is returned when a query is deleted.</p>
+
+<p><br>
+<a href="#top">Back to top</a></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../architecture/" class="btn btn-neutral float-right" title="App Architecture">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../../measure-distances/" class="btn btn-neutral" title="Measure Distance"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright &copy; 2015-2016 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.</p>
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/Chicago/opengrid" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../../measure-distances/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../architecture/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../../js/theme.js"></script>
+
+</body>
+</html>
