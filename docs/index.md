@@ -12,6 +12,8 @@ OpenGrid can be used for real-time data analysis, refreshing frequently to provi
 
 OpenGrid is designed to be flexible with different types of data sources. Whether it's MongoDB, a RESTful API, or other data sources, programmers can use [OpenGrid's API](./system-administration/opengrid-api/#rest-service-resources) and [Service Layer](./system-administration/installation-and-setup/#service-layer) to program it to work with other data sources.
 
+OpenGrid is designed to be flexible with different types of data sources. Whether it's MongoDB, a RESTful API, or other data sources, programmers can use [OpenGrid's API](system-administration/opengrid-api#rest-service-resources) and [Service Layer](system-administration/installation-and-setup#service-layer) to program it to work with other data sources.
+
 ### Open Source
 Open source gives "OpenGrid" its name. Feel free to use it, contribute to it, or change it. Just please take a look at the project's <a href="https://github.com/Chicago/opengrid/blob/master/LICENSE.md">license</a>.
 
