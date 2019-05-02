@@ -7,42 +7,39 @@ repo_url: https://github.com/Chicago/opengrid
 theme: readthedocs
 
 pages:
-- 'Home': 'index.md'
+- Home: index.md
 #- User Guide:
 #   - End-user documentation: User Documentation.md
-- 'OpenGrid Layout': 'layout/launch-screen.md'
-- 'Table Grid': 'layout/table-grid.md'
-- 'Quick Search': 'quick-search/quick-search.md'
-- 'Finding Data':
-        - 'Getting Started': 'finding-data/getting-started.md'
-        - 'Advanced Filtering': 'finding-data/advanced-filtering.md'
-        - 'Automatically Refresh Searches': 'finding-data/auto-refresh-search.md'
-        - 'Commonly Used Queries': 'finding-data/commonly-used-queries.md'
-        - 'Searching With Relative Time': 'finding-data/relative-time-searches.md'
-- 'Search by Location': 
-        - 'Within An Area': 'search-location/within-geospatial-filter.md'
-        - 'Near A Location': 'search-location/near-geospatial-filter.md'
-- 'Customize the Look': 'customize-look/index.md'
-- 'Charts and Heatmaps':
-        - 'Heatmaps': 'charts-heatmaps/heatmaps.md'
-        - 'Tile map': 'charts-heatmaps/tile-map.md'
-- 'Map Layers': 'map-layers/index.md'
-- 'Measure Distance': 'measure-distances/index.md'
+- OpenGrid Layout:
+        - Launch Screen: layout/launch-screen.md
+        - Table Grid: layout/table-grid.md
+- Finding Data:
+        - Getting Started: finding-data/getting-started.md
+        - Advanced Filtering: finding-data/advanced-filtering.md
+        - Automatically Refresh Searches: finding-data/auto-refresh-search.md
+        - Commonly Used Queries: finding-data/commonly-used-queries.md
+        - Searching With Relative Time: finding-data/relative-time-searches.md
+- Search by Location:
+        - Within An Area: search-location/within-geospatial-filter.md
+        - Near A Location: search-location/near-geospatial-filter.md
+- Customize the Look: customize-look/index.md
+- Charts and Heatmaps:
+        - Heatmaps: charts-heatmaps/heatmaps.md
+        - Tile map: charts-heatmaps/tile-map.md
+- Map Layers: map-layers/index.md
+- Measure Distance: measure-distances/index.md
 #- Developers:
 # - API: opengrid-api.md
-- 'System Administration': 
-    - 'API': 'system-administration/opengrid-api.md'
-    - 'App Architecture': 'system-administration/architecture.md'
-    - 'Installation and Setup': 'system-administration/installation-and-setup.md'
-    - 'Build Procedures': 'system-administration/build-procedures.md'
-    - 'Configuration': 'system-administration/opengrid-configuration.md'
-
-extra:
-  collapse_toc: true      
+- System Administration:
+    - API: system-administration/opengrid-api.md
+    - App Architecture: system-administration/architecture.md
+    - Installation and Setup: system-administration/installation-and-setup.md
+    - Build Procedures: system-administration/build-procedures.md
+    - Configuration: system-administration/opengrid-configuration.md
 
 markdown_extensions:
-    - toc: 
-       permalink: 
-    - admonition: 
+    - toc:
+        permalink: 
+    - admonition:
 
 copyright: Copyright &copy; 2015-2016 <a href="http://www.cityofchicago.org">City of Chicago</a> and licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International</a>.
