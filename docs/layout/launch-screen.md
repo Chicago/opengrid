@@ -22,84 +22,84 @@ n-->
 
 
 <table>
-	<tr>
-		<th><b> Element No.</b></th>
-		<th><b>Element Name/Description</b></th>
-	</tr>
+  <tr>
+    <th><b> Element No.</b></th>
+    <th><b>Element Name/Description</b></th>
+  </tr>
         <tr>
-		<td>
-			1.
-		</td>
-		<td>
-		   	Quick Search box is used to perform basic searches on datasets. The question mark icon within the Quick Search 				box displays a cheat sheet for quick search syntax.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			2.
-		</td>
-		<td>
-			<ul>
-				<li>Find Data Button displays the advanced search panel utilize to create more defined searches.</li>
-				<li>Clear Data Button, resets the map.</li>
-			</ul>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			3.
-		</td>
-		<td>
-			User Manual Link 
-				<ul>
-					<li>Link to accessing the OpenGrid user manual.</li>
-			</ul>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			4.
-		</td>
-		<td>
-			Zoom In and Zoom Out Icon <img alt src = ".././media/image34.jpg">
-		</td>
-    	</tr>
-    	<tr>
-        	<td>
-            		5.
-        	</td>
-      		<td>
-            		Reset Map View and Area Zoom Icon <img alt src=".././media/rest.jpg">
-        	</td>
+    <td>
+      1.
+    </td>
+    <td>
+        Quick Search box is used to perform basic searches on datasets. The question mark icon within the Quick Search        box displays a cheat sheet for quick search syntax.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      2.
+    </td>
+    <td>
+      <ul>
+        <li>Find Data Button displays the advanced search panel utilize to create more defined searches.</li>
+        <li>Clear Data Button, resets the map.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      3.
+    </td>
+    <td>
+      User Manual Link 
+        <ul>
+          <li>Link to accessing the OpenGrid user manual.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      4.
+    </td>
+    <td>
+      Zoom In and Zoom Out Icon <img alt src = ".././media/image34.jpg">
+    </td>
+      </tr>
+      <tr>
+          <td>
+                5.
+          </td>
+          <td>
+                Reset Map View and Area Zoom Icon <img alt src=".././media/rest.jpg">
+          </td>
       </tr>
     <tr>
-        	<td>
-            		6.
-        	</td>	
-        	<td>
-            		Zoom Specification Icon <img alt src=".././media/image37.jpg">
+          <td>
+                6.
+          </td> 
+          <td>
+                Zoom Specification Icon <img alt src=".././media/image37.jpg">
         <br> <br>
-            		Full-Screen Icon <img alt src=".././media/image38.jpg"> 
+                Full-Screen Icon <img alt src=".././media/image38.jpg"> 
         <br> <br>
-           		Geo-Location Icon <img alt src=".././media/image36.jpg">
-        	</td>
+              Geo-Location Icon <img alt src=".././media/image36.jpg">
+          </td>
     </tr>
-   	 <tr>
-        	<td>
-           		 7.
-         	</td>
-	    	<td>
-			Measurement Tool <img alt src=".././media/Measure.jpg">
-		</td>
-	   </tr>	
-	<tr>
-		<td>
-			8.
-		</td>
-	    	<td>
-            		Layers Icon <img alt src=".././media/image39.jpg"> 
+     <tr>
+          <td>
+               7.
+          </td>
+        <td>
+      Measurement Tool <img alt src=".././media/Measure.jpg">
+    </td>
+     </tr>  
+  <tr>
+    <td>
+      8.
+    </td>
+        <td>
+                Layers Icon <img alt src=".././media/image39.jpg"> 
         <br> 
-			Consist of list of grid views and weather layers.
+      Consist of list of grid views and weather layers.
         <br>
             <b>Base Layers Views:</b>
                     <ul> <ul> <ul>
@@ -114,8 +114,8 @@ n-->
                             <li>Sea Level Pressure</li>
                             <li>Temperature</li>
                     </ul></ul></ul>
-        	</td>
-    	</tr>
+          </td>
+      </tr>
       <tr>
         <td>
             9.
