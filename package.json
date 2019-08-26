@@ -3,12 +3,10 @@
   "version": "0.1.0",
   "description": "OpenGrid Client - a visualization tool for useful data",
   "main": "js/app.js",
-  "dependencies": {
-    "gulp": "^3.9.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "chai": "^3.2.0",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-flatten": "^0.1.1",
     "gulp-inject": "^1.5.0",
