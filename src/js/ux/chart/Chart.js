@@ -363,7 +363,7 @@ ogrid.Chart = ogrid.Class.extend({
                         unitStepSize: stepSize || 1
                     },
                     ticks: { callback: function( tick, index, ticks ){
-                        if(!(index % parseInt(ticks.length / 15))) { //15 max ticks regardless of unit
+                        if(!(index % parseInt(ticks.length / 15))) { // jshint ignore:line
                             return tick;
                         }
                         return null;

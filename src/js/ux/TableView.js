@@ -445,7 +445,7 @@ ogrid.TableView = ogrid.Class.extend({
                         o[v.field] = row[flatName];
                     }
                 });
-            });
+            });  // jshint ignore:line
             if (!$.isEmptyObject(o))
                 a.push(o);
         }

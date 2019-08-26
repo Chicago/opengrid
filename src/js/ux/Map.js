@@ -387,7 +387,7 @@ ogrid.Map = ogrid.Class.extend({
             if (n!==null) {
                 //replace token with actual value, and evaluate expression
                 try {
-                    var v = eval(sz.calculator.replace("@v", n));
+                    var v = eval(sz.calculator.replace("@v", n)); // jshint ignore:line
                     return v;
                 } catch (ex) {
                     console.log("dot size evaluation error: "+ ex.message);

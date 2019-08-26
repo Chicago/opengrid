@@ -4,7 +4,6 @@ var gulp = require('gulp'),
 // Gulp plugins
     rimraf = require('rimraf'),
     jshint = require('gulp-jshint'),
-    sass = require('gulp-sass'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     flatten = require('gulp-flatten'),
@@ -341,14 +340,6 @@ gulp.task('lint', function() {
     return gulp.src('src/js/**/*.js')
         .pipe(jshint({ laxcomma: true, laxbreak: true }))
         .pipe(jshint.reporter('default'));
-});
-
-// sass
-//no sass files currently
-gulp.task('sass', function() {
-    return gulp.src('src/scss/*.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('dist/css'))
 });
 
 
